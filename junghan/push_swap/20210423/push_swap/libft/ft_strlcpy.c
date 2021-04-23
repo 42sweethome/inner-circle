@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/04/23 14:10:10 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 19:41:55 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 10:53:02 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "libft.h"
 
-void push_swap(int ac, char **av)
+size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	i;
-	int	len;
+	size_t	i;
+	size_t	src_len;
 
+	if (!dest || !src)
+		return (0);
+	src_len = ft_strlen(src);
+	if (dest_size == 0)
+		return (src_len);
 	i = 0;
-	len = 0;
-	stack_a = 0;
-	stack_b = 0;
-	while (av[++i])
+	while (src[i] && i < src_len && i + 1 < dest_size)
 	{
-		stack_a = input_int(stack_a, &len, av[i], ' ');
+		dest[i] = src[i];
+		i++;
 	}
-	quick_sort(stack_a, stack_b, 0, len - 1);
-	
-	i = 0;
-	while (i < 10)
-		printf("%d\n", stack_a[i++]);
-}
-
-int	main(int ac, char **av)
-{
-	push_swap(ac, av);
-	return (0);
+	dest[i] = '\0';
+	return (src_len);
 }

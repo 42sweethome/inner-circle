@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/04/23 14:10:10 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 23:59:41 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 01:52:23 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "libft.h"
 
-void push_swap(int ac, char **av)
+char	*ft_strchr(const char *s, int c)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	i;
-	int	len;
+	char	target;
+	char	*tmp;
 
-	i = 0;
-	len = 0;
-	stack_a = 0;
-	stack_b = 0;
-	while (av[++i])
+	target = (char)c;
+	tmp = (char *)s;
+	while (*tmp)
 	{
-		stack_a = input_int(stack_a, &len, av[i], ' ');
+		if (*tmp == target)
+			return (tmp);
+		tmp++;
 	}
-	quick_sort(stack_a, stack_b, 0, len - 1);
-	
-	i = 0;
-	while (i < 10)
-		printf("%d\n", stack_a[i++]);
-}
-
-int	main(int ac, char **av)
-{
-	push_swap(ac, av);
+	if (*tmp == target)
+		return (tmp);
 	return (0);
 }

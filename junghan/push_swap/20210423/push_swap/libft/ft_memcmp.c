@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/04/23 14:10:10 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 18:48:19 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/28 17:40:10 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "libft.h"
 
-void push_swap(int ac, char **av)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	i;
-	int	len;
+	unsigned char *tmp_s1;
+	unsigned char *tmp_s2;
 
-	i = 0;
-	len = 0;
-	stack_a = 0;
-	stack_b = 0;
-	while (av[++i])
+	tmp_s1 = (unsigned char *)s1;
+	tmp_s2 = (unsigned char *)s2;
+	while (n--)
 	{
-		stack_a = input_int(stack_a, &len, av[i], ' ');
+		if (*tmp_s1 != *tmp_s2)
+		{
+			return (*tmp_s1 - *tmp_s2);
+		}
+		tmp_s1++;
+		tmp_s2++;
 	}
-	quick_sort(stack_a, stack_b, 0, len - 1);
-	
-	i = 0;
-	while (i < 10)
-		printf("%d\n", stack_a[i++]);
-}
-
-int	main(int ac, char **av)
-{
-	push_swap(ac, av);
 	return (0);
 }

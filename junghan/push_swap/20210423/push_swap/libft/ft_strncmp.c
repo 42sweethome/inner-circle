@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/04/23 14:10:10 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/24 02:10:42 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 02:10:46 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "libft.h"
 
-void push_swap(int ac, char **av)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	i;
-	int	len;
+	size_t			i;
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
 
+	tmp1 = (unsigned char *)s1;
+	tmp2 = (unsigned char *)s2;
 	i = 0;
-	len = 0;
-	stack_a = 0;
-	stack_b = 0;
-	while (av[++i])
+	while ((tmp1[i] || tmp2[i]) && i < n)
 	{
-		stack_a = input_int(stack_a, &len, av[i], ' ');
+		if (tmp1[i] != tmp2[i])
+			return (tmp1[i] - tmp2[i]);
+		i++;
 	}
-	quick_sort(stack_a, stack_b, 0, len - 1);
-	
-	i = 0;
-	while (i < 10)
-		printf("%d\n", stack_a[i++]);
-}
-
-int	main(int ac, char **av)
-{
-	push_swap(ac, av);
 	return (0);
 }

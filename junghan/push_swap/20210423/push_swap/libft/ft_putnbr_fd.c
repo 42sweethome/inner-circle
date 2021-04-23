@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/04/23 14:10:10 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/27 23:06:40 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/29 11:38:01 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "libft.h"
 
-void push_swap(int ac, char **av)
+void	print_nbr(int n, int fd)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	stack_a = 0;
-	stack_b = 0;
-	while (av[++i])
-	{
-		stack_a = input_int(stack_a, &len, av[i], ' ');
-	}
-	quick_sort(stack_a, stack_b, 0, len - 1);
-	
-	i = 0;
-	while (i < 10)
-		printf("%d\n", stack_a[i++]);
+	if (n >= 10)
+		print_nbr(n / 10, fd);
+	write(fd, &"0123456789"[n % 10], 1);
 }
 
-int	main(int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
-	push_swap(ac, av);
-	return (0);
+	if (fd < 0)
+		return ;
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n *= -1;
+	}
+	print_nbr(n, fd);
 }
