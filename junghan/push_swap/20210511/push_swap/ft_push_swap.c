@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/11 21:50:25 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/13 16:21:25 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,23 @@ int	push_swap(int ac, char **av)
 	int		ret;
 	int		i;
 
-	if (ac < 2)//???
+	if (ac == 1)
 		;
 	i = 0;
 	init_stack(&stack_a, &stack_b, &info);
 	while (av[++i])
 	{
 		ret = input_int(&stack_a, av[i], ' ', &info.len_a);
-		if (!ret)
-			return (0);
+		if (ret == -1)
+			break ;
 	}
-	ret = check_sort(&stack_a, &info);
+	if (ret != -1)
+		ret = check_sort(&stack_a, &stack_b, &info);
 	if (ret == 0)
 		sort_st(&stack_a, &stack_b, &info);
-	else if (ret == -1)
-		return (0);
-	return (1);
+	lstclear(&stack_a.head, &stack_a.tail);
+	lstclear(&stack_b.head, &stack_b.tail);
+	return (ret);
 }
 
 int	main(int ac, char **av)
@@ -43,9 +44,9 @@ int	main(int ac, char **av)
 	int		err;
 
 	err = push_swap(ac, av);
-	if (!err)
+	if (err == -1)
 	{
-		printf("Error\n");
+		write(2, "Error\n", 6);
 		return (0);
 	}
 	return (0);

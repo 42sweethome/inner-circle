@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:34:54 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/11 17:43:32 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/13 17:28:00 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,59 @@ static void		under_3(t_link *st_a, t_link *st_b, t_info *info)
 		exit_a(st_a, 2, info);
 	}
 }
+/*
+static int		under_4(t_link *st_a, t_link *st_b, t_info *info)
+{
+	int		a;
+	int		b;
+	int		c;
+	int		d;
+
+	a = st_a->head->value;
+	b = st_a->head->next->value;
+	c = st_a->head->next->next->value;
+	d = st_a->head->next->next->next->value;
+	if (a > b && a > c && a > d)
+	{
+		func_pa(st_a, st_b, info);
+		under_3(st_a, st_b, info);
+		return (1);
+	}
+	if (b > a && b > c && b > d)
+	{
+		func_sb(st_b, *info);
+		func_pa(st_a, st_b, info);
+		under_3(st_a, st_b, info);
+		return (1);
+	}
+	return (0);
+}
+*/
+int				check_reorder(t_link *st_a, t_link *st_b, int range, t_info *info)
+{
+	t_circle *tmp;
+
+	tmp = st_b->head;
+	while (tmp->next)
+	{
+		if (tmp->value < tmp->next->value)
+			return (0);
+		tmp = tmp->next;
+	}
+	while (range--)
+		func_pa(st_a, st_b, info);
+	return (1);
+}
 
 int				exit_b(t_link *st_a, t_link *st_b, int range, t_info *info)
 {
+	int ret;
+
+	ret = check_reorder(st_a, st_b, range, info);
+	if (ret)
+		return (1);
+	if (range == 1)
+		func_pa(st_a, st_b, info);
 	if (range == 2)
 	{
 		info->len_b = 2;
@@ -62,5 +112,12 @@ int				exit_b(t_link *st_a, t_link *st_b, int range, t_info *info)
 		under_3(st_a, st_b, info);
 		return (1);
 	}
+/*	else if (range == 4)
+	{
+		info->len_a = 4;
+		ret = under_4(st_a, st_b, info);
+		if (ret)
+			return (1);
+	}*/
 	return (0);
 }
