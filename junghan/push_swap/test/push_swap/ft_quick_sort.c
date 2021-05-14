@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_quick_sort.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/12 19:36:26 by junghan           #+#    #+#             */
+/*   Updated: 2021/05/13 13:43:05 by junghan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void	conquer(int *st_a, int i, int j, int pivot)
+{
+	int	tmp;
+
+	if (i >= j)
+	{
+		tmp = st_a[j];
+		st_a[j] = st_a[pivot];
+		st_a[pivot] = tmp;
+		i++;
+	}
+	else
+	{
+		tmp = st_a[i];
+		st_a[i] = st_a[j];
+		st_a[j] = tmp;
+	}
+}
+
+void	quick_sort(int *st_a, int start, int end)
+{
+	int	pivot;
+	int	i;
+	int	j;
+
+	if (start >= end)
+		return ;
+	pivot = start;
+	i = start + 1;
+	j = end;
+	while (i <= j)
+	{
+		while (st_a[i] <= st_a[pivot] && i < end)
+			i++;
+		while (st_a[j] >= st_a[pivot] && j > start)
+			j--;
+		conquer(st_a, i, j, pivot);
+	}
+	quick_sort(st_a, start, j - 1);
+	quick_sort(st_a, j + 1, end);
+}

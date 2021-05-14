@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:05:08 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/14 16:49:02 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/14 17:37:24 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void				quick_sort(int *st_a, int start, int end);
 void				first_pivot(int *num, int pivot[3], int size);
 void				first_div(t_link *st_a, t_link *st_b, int pivot[3],
 					t_info *info);
-int					sort_a(t_link *st_a, t_link *st_b, int range, t_info *reinfo);
-int					sort_b(t_link *st_a, t_link *st_b, int range, t_info *reinfo);
+int					sort_a(t_link *st_a, t_link *st_b, int range);
+int					sort_b(t_link *st_a, t_link *st_b, int range);
 int					quick_a(t_link *st_a, t_link *st_b, t_info *info);
 int					quick_b(t_link *st_a, t_link *st_b, t_info *info);
 void				rerot_a(t_link *st_a, t_info info);
