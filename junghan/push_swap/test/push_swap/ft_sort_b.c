@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:25:51 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/14 17:37:54 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:17:15 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int			sort_b(t_link *st_a, t_link *st_b, int range)
 	first_pivot(num, pivot, range);
 	pivot[LAST] = last_large(st_b, pivot[SMALL]);
 	info = div_b(st_a, st_b, pivot, range);
-	sort_a(st_a, info.pa);
-	rerot_a(st_a, st_b, info);
+	sort_a(st_a, st_b, info.pa);
+	rerot_a(st_a, info);
 	sort_a(st_a, st_b, info.ra);
 	rerot_b(st_b, info);
 	sort_b(st_a, st_b, info.rb);

@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:24:55 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/11 16:24:57 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:25:21 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			sort_st(t_link *st_a, t_link *st_b, t_info *info)
 
 	size = input_arr(st_a, &num);
 	if (size == 0)
-		return (0);
+		return (-1);
 	quick_sort(num, 0, size - 1);
 	first_pivot(num, pivot, size);
 	first_div(st_a, st_b, pivot, info);

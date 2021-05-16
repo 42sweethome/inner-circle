@@ -6,9 +6,11 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 19:36:26 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/13 13:43:05 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:19:18 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "ft_push_swap.h"
 
 void	conquer(int *st_a, int i, int j, int pivot)
 {

@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:31:12 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/12 19:42:41 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:29:35 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void	first_div(t_link *st_a, t_link *st_b, int pivot[3], t_info *info)
 	int		i;
 	int		tmp_len;
 
-	i = pre_div_st(st_a, &tmp_len, info->len_a, info);
-	if (i == 1)
+	i = -1;
+	tmp_len = info->len_a;
+	if (tmp_len <= 3)
 		return ;
 	while (++i < tmp_len)
 	{

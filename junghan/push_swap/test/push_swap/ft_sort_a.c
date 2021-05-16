@@ -6,22 +6,11 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:20:48 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/14 17:37:44 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:32:14 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-int			pre_div_a(t_link *st_a, int range, t_info *info)
-{
-	init_info(info);
-	if (range <= 3)
-	{
-		exit_a(st_a, range, info);
-		return (1);
-	}
-	return (0);
-}
 
 t_info		div_a(t_link *st_a, t_link *st_b, int pivot[3], int range)
 {

@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 16:38:45 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/13 16:21:25 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:25:16 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	push_swap(int ac, char **av)
 	if (ret != -1)
 		ret = check_sort(&stack_a, &stack_b, &info);
 	if (ret == 0)
-		sort_st(&stack_a, &stack_b, &info);
+		ret = sort_st(&stack_a, &stack_b, &info);
 	lstclear(&stack_a.head, &stack_a.tail);
 	lstclear(&stack_b.head, &stack_b.tail);
 	return (ret);

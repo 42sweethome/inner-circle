@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 18:53:08 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/12 16:54:14 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/16 11:21:55 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,14 @@ ssize_t		ft_setword(char *s, char *num, int start, int end)
 	int		i;
 	ssize_t	result;
 
-	if (start < end)
+	i = 0;
+	while (start < end)
 	{
-		i = 0;
-		while (start < end)
-		{
-			num[i] = s[start];
-			i++;
-			start++;
-		}
-		num[i] = '\0';
+		num[i] = s[start];
+		i++;
+		start++;
 	}
+	num[i] = '\0';
 	result = ft_atoi(num);
 	return (result);
 }
