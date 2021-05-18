@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:37:49 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/17 15:31:45 by daekim           ###   ########.fr       */
+/*   Updated: 2021/05/18 13:35:07 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		under_3(t_link *st_a, t_info *info, int *ret)
 	*ret = 1;
 }
 
-static void		under_4(t_link *st_a, t_link *st_b, t_info *info, int *ret)
+static void		under_4(t_link *st_a, t_link *st_b, t_info *info, int *ret)// ㅎㅐ결 필요. 
 {
 	int		a;
 	int		b;
@@ -58,7 +58,7 @@ static void		under_4(t_link *st_a, t_link *st_b, t_info *info, int *ret)
 	b = st_a->head->next->value;
 	c = st_a->head->next->next->value;
 	d = st_a->head->next->next->next->value;
-	if (a < b && a < c && a < d)
+	if (a < b && a < c && a< d)
 	{
 		func_pb(st_a, st_b, info);
 		under_3(st_a, info, ret);
@@ -68,6 +68,14 @@ static void		under_4(t_link *st_a, t_link *st_b, t_info *info, int *ret)
 	else if (b < a && a < c && c < d)
 	{
 		func_sa(st_a, *info);
+		*ret = 1;
+	}
+	if (a > b && a > c && a > d)
+	{
+		func_pb(st_a, st_b, info);
+		under_3(st_a, info, ret);
+		func_pa(st_a, st_b, info);
+		func_ra(st_a, info);
 		*ret = 1;
 	}
 }
