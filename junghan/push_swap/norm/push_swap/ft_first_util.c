@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:31:12 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/16 11:37:48 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:03:55 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ void	first_div(t_link *st_a, t_link *st_b, int pivot[3], t_info *info)
 		return ;
 	while (tmp_len-- > 0)
 	{
+		printf("pivot L %d\n", pivot[LARGE]);
 		if (st_a->head->value < pivot[LARGE])
 		{
 			func_pb(st_a, st_b, info);
+			printf("pivot S %d\n", pivot[SMALL]);
+
 			if (st_b->head->value < pivot[SMALL])
 			{
 				func_rb(st_b, info);

@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:37:49 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/18 13:31:17 by junghan          ###   ########.fr       */
+/*   Updated: 2021/05/18 16:19:22 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			under_5(t_link *st_a, t_link *st_b, t_info *info, int *ret)
 		func_pb(st_a, st_b, info);
 		*ret = check_sort(st_a, st_b, info);
 		if (*ret == 0)
-			*ret = sort_st(st_a, st_b, info);
+			*ret = sort_a(st_a, st_b, 4);
 		//sort_a(st_a, st_b, 4);
 		func_pa(st_a, st_b, info);
 		func_ra(st_a, info);

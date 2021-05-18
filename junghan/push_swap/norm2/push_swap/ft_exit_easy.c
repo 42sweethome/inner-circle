@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:37:49 by junghan           #+#    #+#             */
-/*   Updated: 2021/05/17 15:31:45 by daekim           ###   ########.fr       */
+/*   Updated: 2021/05/18 16:33:17 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,14 @@ static void		under_4(t_link *st_a, t_link *st_b, t_info *info, int *ret)
 	else if (b < a && a < c && c < d)
 	{
 		func_sa(st_a, *info);
+		*ret = 1;
+	}
+	else if (a > b && a > c && a > d)
+	{
+		func_pb(st_a, st_b, info);
+		under_3(st_a, info, ret);
+		func_pa(st_a, st_b, info);
+		func_ra(st_a, info);
 		*ret = 1;
 	}
 }
