@@ -6,7 +6,7 @@
 #    By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/11 15:39:52 by junghan           #+#    #+#              #
-#    Updated: 2021/05/18 17:54:07 by junghan          ###   ########.fr        #
+#    Updated: 2021/05/18 20:08:10 by junghan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ LIBFT_LIB = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 RM = rm -f
 
