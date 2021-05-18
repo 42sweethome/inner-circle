@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit_a.c                                        :+:      :+:    :+:   */
+/*   ft_exit_easy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:37:49 by junghan           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/05/18 15:56:21 by daekim           ###   ########.fr       */
-=======
-/*   Updated: 2021/05/18 13:25:00 by junghan          ###   ########.fr       */
->>>>>>> c3b98883abf6791ced4a7d200e82c9e092bb4ce5
+/*   Updated: 2021/05/18 17:06:58 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +28,71 @@ static void		under_3(t_link *st_a, t_info *info, int *ret)
 	a = st_a->head->value;
 	b = st_a->head->next->value;
 	c = st_a->head->next->next->value;
-	if (a > b && a > c)
+	if ((b > a && b > c) && c > a)
+	{
+		func_rra(st_a, info);
 		func_sa(st_a, *info);
-	if (!(c > a && c > b))
+	}
+	else if (a > b && b > c)
 	{
 		func_ra(st_a, info);
 		func_sa(st_a, *info);
-		func_rra(st_a, info);
 	}
-	if ((a > c && a < b) || (a < c && a > b) || (a > b && b > c))
+	else if ((c > a && c > b) && a > b)
 		func_sa(st_a, *info);
+	else if ((b > a && b > c) && a > c)
+		func_rra(st_a, info);
+	else if ((a > b && a > c) && c > b)
+		func_ra(st_a, info);
 	*ret = 1;
 }
 
-static void		under_4a(t_link *st_a, t_info *info, int *ret)
+static void		under_4_util(t_link *st_a, t_link *st_b, t_info *info, int *ret)
 {
-	int		a;
+	func_pb(st_a, st_b, info);
+	under_3(st_a, info, ret);
+	func_pa(st_a, st_b, info);
+	func_ra(st_a, info);
+	*ret = 1;
+}
+
+void			under_4(t_link *st_a, t_link *st_b, t_info *info, int *ret)
+{
 	int		b;
 	int		c;
 	int		d;
 
-	a = st_a->head->value;
 	b = st_a->head->next->value;
 	c = st_a->head->next->next->value;
 	d = st_a->head->next->next->next->value;
-	if (a < b && a < c && a < d)
-	{
-		func_ra(st_a, info);
-		under_3(st_a, info, ret);
-		func_rra(st_a, info);
-		*ret = 1;
-	}
-	else if (b < a && a < c && c < d)
+	if (st_a->head->value > b && st_a->head->value > c && st_a->head->value > d)
+		under_4_util(st_a, st_b, info, ret);
+	else if (b > st_a->head->value && b > c && b > d)
 	{
 		func_sa(st_a, *info);
-		*ret = 1;
+		under_4_util(st_a, st_b, info, ret);
+	}
+	else if (c > st_a->head->value && c > b && c > d)
+	{
+		func_rra(st_a, info);
+		func_rra(st_a, info);
+		under_4_util(st_a, st_b, info, ret);
+	}
+	else if (d > st_a->head->value && d > b && d > c)
+	{
+		func_rra(st_a, info);
+		under_4_util(st_a, st_b, info, ret);
 	}
 }
 
-int				exit_a(t_link *st_a, int range, t_info *info)
+int				exit_easy(t_link *st_a, t_link *st_b, int range, t_info *info)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
-	if (range == 2)
+	if (range == 1)
+		ret = 1;
+	else if (range == 2)
 	{
 		info->len_a = 2;
 		under_2(st_a, info, &ret);
@@ -88,7 +105,9 @@ int				exit_a(t_link *st_a, int range, t_info *info)
 	else if (range == 4)
 	{
 		info->len_a = 4;
-		under_4a(st_a, info, &ret);
+		under_4(st_a, st_b, info, &ret);
 	}
+	else if (range == 5)
+		under_5(st_a, st_b, info, &ret);
 	return (ret);
 }
