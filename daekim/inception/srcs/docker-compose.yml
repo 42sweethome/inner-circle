@@ -1,0 +1,31 @@
+version: "3"
+   
+networks: 
+    laravel:
+
+services: 
+    nginx:
+        build: 
+            context: ./requirements/nginx/
+            dockerfile: Dockerfile
+        container_name: nginx
+        ports: 
+            - "8088:80"
+        volumes:
+            - ./requirements/:/var/www/html
+            - ./requirements/nginx/tools/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on: 
+            - php
+        networks: 
+            - laravel
+    php: 
+        build: 
+            context: ./requirements/wordpress
+            dockerfile: Dockerfile
+        container_name: php
+        volumes: 
+            - ./requirements/wordpress:/var/www/html
+        ports:
+            - "9000:9000"
+        networks: 
+            - laravel
