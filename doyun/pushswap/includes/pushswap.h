@@ -21,8 +21,9 @@ typedef struct		s_deq
 
 void			ft_deq_init(t_deq *a, t_deq *b);
 void			ft_create_deq(int value, t_deq *deq);
-char			*ft_get_pivot(int argc, char **argv, int count);
+int				*ft_get_pivot(char **argv, int count);
 int				ft_count_arg(char **s, char c);
+void			ft_quick_sort(int *stack, int start, int end);
 
 void			sa(t_deq *a);
 void			sb(t_deq *b);

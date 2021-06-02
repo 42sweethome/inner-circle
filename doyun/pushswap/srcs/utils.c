@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 20:05:21 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/01 12:30:30 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/01 17:26:40 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_is_num(char num)
 		return (0);
 }
 
-int		count_arg(char **s, char c)
+int		ft_count_arg(char **s, char c)
 {
 	int			count;
 	int			idx;

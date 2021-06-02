@@ -5,10 +5,16 @@ int		main(int argc, char **argv)
 	if (argc == 0)
 		return (-1);
 	int count;
-	int	pivot;
+	int *pivot;
+	int i = 0;
 	
 	count = ft_count_arg(argv, ' ');
 	pivot = ft_get_pivot(argv, count);
+	while (pivot[i])
+	{
+		printf("pivot : %d\n", pivot[i]);
+		i++;
+	}
 /*	t_deq a;
 	t_deq b;
 	int	i;
