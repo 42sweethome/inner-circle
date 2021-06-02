@@ -14,6 +14,10 @@ void		pa(t_deq *a, t_deq *b)
 	b->head->next = a->head;
 	a->head = b->head;
 	b->head = temp;
+	if (temp == NULL)
+		b->tail = b->head;
+	if (a->tail == NULL)
+		a->tail = a->head;
 	write(1, "pa\n", 3);
 }
 
@@ -31,5 +35,9 @@ void		pb(t_deq *b, t_deq *a)
 	a->head->next = b->head;
 	b->head = a->head;
 	a->head = temp;
+	if (temp == NULL)
+		a->tail = a->head;
+	if (b->tail == NULL)
+		b->tail = b->head;
 	write(1, "pb\n", 3);
 }

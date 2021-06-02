@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 20:05:21 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/01 17:26:40 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:55:28 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ int		ft_is_num(char num)
 		return (1);
 	else
 		return (0);
+}
+
+void	ft_get_pivot(int *stack, t_pivot *pv, int count)
+{
+	ft_quick_sort(stack, 0, count - 1);
+	pv->p1 = stack[count/3];
+	pv->p2 = stack[2 * count / 3];
+	free(stack);
+	stack = NULL;	
 }
 
 int		ft_count_arg(char **s, char c)

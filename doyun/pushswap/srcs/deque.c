@@ -6,44 +6,49 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 17:39:11 by doyun             #+#    #+#             */
-/*   Updated: 2021/05/31 14:54:19 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/02 21:57:32 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-void	ft_deq_init(t_deq *A, t_deq *B)
+void	ft_init(t_deq *a, t_deq *b)
 {
-	A->head = NULL;
-	A->tail = NULL;
-	B->head = NULL;
-	B->tail = NULL;
+	a->head = NULL;
+	a->tail = NULL;
+	b->head = NULL;
+	b->tail = NULL;
 }
 
-void	ft_create_deq(int value, t_deq *deq)
+void	ft_create_deq(int *stack, t_deq *deq, int count)
 {
 	t_node	*new_node;
+	int		i;
 
-	new_node = (t_node *)malloc(sizeof(t_node));
-	new_node->prev = deq->tail;
-	new_node->value = value;
-	new_node->next = NULL;
-	if (deq->head == NULL)
+	i = -1;
+	while (++i < count)
 	{
-		deq->head = new_node;
-		printf("crate head : %d\n", new_node->value);
+		new_node = (t_node *)malloc(sizeof(t_node));
+		new_node->prev = deq->tail;
+		new_node->value = stack[i];
+		new_node->next = NULL;
+		if (deq->head == NULL)
+		{
+			deq->head = new_node;
+//			printf("crate head : %d\n", new_node->value);
+		}
+		else if (deq->head->next == NULL)
+		{
+			deq->head->next = new_node;
+			new_node->prev = deq->head;
+		}
+		else
+		{
+			deq->tail->next = new_node;
+		}
+		deq->tail = new_node;
+//		printf("create tail : %d\n", deq->tail->value);
 	}
-	else if (deq->head->next == NULL)
-	{
-		deq->head->next = new_node;
-		new_node->prev = deq->head;
-	}
-	else
-	{
-		deq->tail->next = new_node;
-	}
-	deq->tail = new_node;
-	printf("create tail : %d\n", deq->tail->value);
 }
 
 int		ft_deqlen(t_deq deq)

@@ -19,11 +19,33 @@ typedef struct		s_deq
 	t_node			*tail; //마지막 노드
 }					t_deq;
 
-void			ft_deq_init(t_deq *a, t_deq *b);
-void			ft_create_deq(int value, t_deq *deq);
-int				*ft_get_pivot(char **argv, int count);
-int				ft_count_arg(char **s, char c);
+typedef struct		s_pivot
+{
+	int				p1;
+	int				p2;
+}					t_pivot;
+
+typedef struct		s_dsp
+{
+	int				ra;
+	int				rb;
+	int				pb;	
+}					t_dsp;
+
+//deque.c
+void			ft_init(t_deq *a, t_deq *b);
+void			ft_create_deq(int *stack, t_deq *deq, int count);
+
+//qsort.c
+int				*ft_get_sortstack(int argc, char **argv, int count);
 void			ft_quick_sort(int *stack, int start, int end);
+
+//sort.c
+void			divide_a(t_deq *a, t_deq *b, t_pivot pv, int count);
+
+//ustils.c
+void			ft_get_pivot(int *stack, t_pivot *pv, int count);
+int				ft_count_arg(char **s, char c);
 
 void			sa(t_deq *a);
 void			sb(t_deq *b);
