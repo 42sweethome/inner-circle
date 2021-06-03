@@ -45,7 +45,7 @@ void			ft_quick_sort(int *stack, int start, int end);
 //sort.c
 void			divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count);
-
+void			divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count);
 //ustils.c
 void			ft_get_pivot(int *stack, t_pivot *pv, int count);
 int				ft_count_arg(char **s, char c);
