@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:37:19 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/03 20:39:27 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/03 22:01:11 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,12 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	dsp.ra = 0;
 	dsp.rb = 0;
 	dsp.pb = 0;
+	if (count == 0)
+		return ;
+	else if (count == 1)
+		rra(a);
+	else if (count == 2)
+		last_sort_ra(a, count);
 	while(i < count)
 	{
 		if (a->head->value >= pv.p2)
@@ -155,12 +161,15 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	if (dsp.ra <= 2)
 	{
 		last_sort_ra(a, dsp.ra);
-		ft_get_pivot(stack, &pv, dsp.pb);
+	//	ft_get_pivot(stack, &pv, dsp.pb);
 		while (b->head != NULL)
 		{	
 			divide_pb(a, b, pv, dsp.pb);
-			printf(" dsp.rb : %d\n", dsp.rb);
-			divide_rb(a, b, pv, dsp.rb);
+//			if (dsp.pb == 0)
+//			{
+//			printf(" dsp.rb : %d\n", dsp.rb);
+//			divide_rb(a, b, pv, dsp.rb);
+//			}
 		}
 			return ;
 	}
@@ -190,7 +199,7 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 			pa(a, b);
 			ra(a);
 			dsp.ra++;
-		
+		}
 		else if (a->head->value <= pv.p1)
 		{
 			rb(b);
@@ -201,12 +210,8 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 			pa(a, b);
 			dsp.pa++;
 		}
-		while (dsp.pa--)
-		{
-			pb(b, a);
-			dsp.pb++;
-		}
 		i++;
+	
 		printf("divide a : ");
 		t_node *temp = a->head;
 		while (temp != NULL)
@@ -224,8 +229,14 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 		printf("\n");
 		printf("disposal : %d %d %d\n",dsp.ra, dsp.pb, dsp.rb);
 	}
-	printf("args : %d %d %d %d %d",pv.p1, pv.p2, dsp.ra, dsp.pb ,dsp.rb);
+	while (dsp.pa--)
+	{
+		pb(b, a);
+		dsp.pb++;
+	}
 	divide_ra(a, b, pv, dsp.ra);
+//	divide_pb(a, b, pv, dsp.pb);
+//	divide_rb(a, b, pv, dsp.rb);
 }
 
 void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
@@ -241,7 +252,6 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	dsp.pb = 0;
 	if (count <= 2)
 	{
-		printf("rb : %d\n", dsp.rb);
 		return(last_sort_rb(a, b, count));
 	}
 	while(i < count)
@@ -262,11 +272,7 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 			pa(a, b);
 			dsp.pa++;
 		}
-		while (dsp.pa--)
-		{
-			pb(b, a);
-			dsp.pb++;
-		}
+	
 		i++;
 		printf("divide a : ");
 		t_node *temp = a->head;
@@ -285,6 +291,14 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 		printf("\n");
 		printf("disposal : %d %d %d\n",dsp.ra, dsp.pb, dsp.rb);
 	}
+	while (dsp.pa--)
+	{
+		pb(b, a);
+		dsp.pb++;
+	}
 	printf("%d %d %d %d %d",pv.p1, pv.p2, dsp.ra, dsp.pb ,dsp.rb);
 	divide_ra(a, b, pv, dsp.ra);
+//	divide_pb(a, b, pv, dsp.pb);
+//	divide_rb(a, b, pv, dsp.rb);
+
 }
