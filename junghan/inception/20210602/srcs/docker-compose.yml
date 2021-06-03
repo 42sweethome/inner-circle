@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+    mysql:
+        ports:
+            - "3306:3306"
+              #       restart: always
+        build: ./requirements/mariadb
+
+    wordpress:
+        depends_on:
+            - mysql
+        ports:
+            - "9000:9000"
+              #restart: always
+        build: ./requirements/wordpress
+
+    nginx:
+        depends_on:
+            - wordpress
+              #restart: always
+        build: ./requirements/nginx
+        volumes:
+            - ./requirements/nginx/tools/website:/usr/share/nginx/html
+        ports:
+            - "443:443"

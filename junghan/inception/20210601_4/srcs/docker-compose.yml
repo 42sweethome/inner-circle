@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+    wordpress:
+        depends_on:
+            - mysql
+        build: ./requirements/wordpress
+
+    mysql:
+        build: ./requirements/mariadb
+
+    nginx:
+        depends_on:
+            - wordpress
+        build: ./requirements/nginx
+        volumes:
+            - ./requirements/nginx/tools/website:/usr/share/nginx/html
+        ports:
+            - "5000:443"
