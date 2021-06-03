@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 typedef struct		s_node
 {
 	int				value;
@@ -29,7 +30,8 @@ typedef struct		s_dsp
 {
 	int				ra;
 	int				rb;
-	int				pb;	
+	int				pb;
+	int				pa;
 }					t_dsp;
 
 //deque.c
@@ -41,7 +43,8 @@ int				*ft_get_sortstack(int argc, char **argv, int count);
 void			ft_quick_sort(int *stack, int start, int end);
 
 //sort.c
-void			divide_a(t_deq *a, t_deq *b, t_pivot pv, int count);
+void			divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count);
+void			divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count);
 
 //ustils.c
 void			ft_get_pivot(int *stack, t_pivot *pv, int count);
@@ -59,5 +62,6 @@ void			rra(t_deq *a);
 void			rrb(t_deq *b);
 void			rrr(t_deq *a, t_deq *b);
 
+void			show(int *stack, int count);
 
 #endif

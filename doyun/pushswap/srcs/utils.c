@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 20:05:21 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:55:28 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/03 16:14:43 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ int		ft_is_num(char num)
 
 void	ft_get_pivot(int *stack, t_pivot *pv, int count)
 {
-	ft_quick_sort(stack, 0, count - 1);
-	pv->p1 = stack[count/3];
-	pv->p2 = stack[2 * count / 3];
+	if (count > 2)
+	{
+		ft_quick_sort(stack, 0, count - 1);
+		pv->p1 = stack[count/3];
+		pv->p2 = stack[2 * count / 3];
+		printf("pivot : %d %d\n",pv->p1, pv->p2);
+	}
 	free(stack);
-	stack = NULL;	
+	stack = NULL;
+	
 }
 
 int		ft_count_arg(char **s, char c)
