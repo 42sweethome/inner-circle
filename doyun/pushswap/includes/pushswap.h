@@ -32,6 +32,8 @@ typedef struct		s_dsp
 	int				rb;
 	int				pb;
 	int				pa;
+	int				rrb;
+	int				rra;
 }					t_dsp;
 
 //deque.c
@@ -46,9 +48,17 @@ void			ft_quick_sort(int *stack, int start, int end);
 void			divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count);
+void			divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count);
+
 //ustils.c
 void			ft_get_pivot(int *stack, t_pivot *pv, int count);
 int				ft_count_arg(char **s, char c);
+int				*put_stack(t_node *deq, int count);
+int				*put_stack2(t_node *deq, int count);
+void			show(int *stack, int count);
+void			dsp_init(t_dsp *dsp);
+void			print_deq(t_deq *a, t_deq *b, t_dsp dsp);
+
 
 void			sa(t_deq *a);
 void			sb(t_deq *b);

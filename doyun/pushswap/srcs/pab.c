@@ -3,7 +3,7 @@
 void		pa(t_deq *a, t_deq *b)
 {
 	t_node *temp;
-
+	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	if (b->head == NULL)
 		return ;
 	temp = b->head->next;
@@ -11,13 +11,16 @@ void		pa(t_deq *a, t_deq *b)
 		temp->prev = NULL;
 	if (a->head != NULL)
 		a->head->prev = b->head;
-	b->head->next = a->head;
-	a->head = b->head;
+	b->head->next = a->head;	
+	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+	a->head = b->head;	
+	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	b->head = temp;
 	if (temp == NULL)
 		b->tail = b->head;
 	if (a->tail == NULL)
-		a->tail = a->head;
+		a->tail = a->head;	
+	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	write(1, "pa\n", 3);
 }
 
