@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:04:56 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/08 15:54:36 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/08 18:26:22 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,25 @@ void		last_sort_rb(t_deq *a, t_deq *b, int count)
 {
 	t_node *temp;
 
-//	if (b->tail != NULL)
-//		temp = b->head->next;
-	if (a->head != NULL)
-		temp = a->head->next;
+	temp = NULL;
 	if (count == 0)
 		return ;
 	else if (count == 1)
 	{
-		return ;
-	//	rrb(b);
-	//	pa(a, b);
+		rrb(b);
+		pa(a, b);
 	}
 	else
 	{
-		if (a->head->value > temp->value)
-			sa(a);
-	/*	if (b->head->value < temp->value)
-			sb(b);
 		while (count--)
 		{
 			rrb(b);
 			pa(a, b);
-		}	*/
+		}
+		if (a->head != NULL)
+			temp = a->head->next;
+		if (a->head->value > temp->value)
+			sa(a);
 	}
 	t_dsp dsp;
 	dsp_init(&dsp);
@@ -56,7 +52,19 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 
 	i = 0;
 	dsp_init(&dsp);	
-	printf("rb 범인 %d %d\n", pv.p1, pv.p2);
+/*	t_node *tmp;
+
+	tmp = a->head;
+	while (i++ < count && (tmp != NULL && tmp->next != NULL))
+	{
+		if (tmp->value < tmp->next->value)
+			break;
+		tmp = tmp->next;
+		if (tmp == NULL || i == count)
+			return ;
+	}
+	i = 0;*/
+	printf("rb 범인 %d %d count : %d\n", pv.p1, pv.p2, count);
 	if (count <= 2)
 	{
 		return(last_sort_rb(a, b, count));
@@ -99,5 +107,6 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	show(stack, dsp.rrb);//
 	ft_get_pivot(stack, &pv, dsp.rrb);
 	divide_pb(a, b, pv, dsp.rrb);
-
+	
+	printf("end rb\n");
 }

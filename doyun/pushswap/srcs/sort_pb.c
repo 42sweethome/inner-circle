@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:57 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/04 20:34:55 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/08 18:27:11 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	t_dsp dsp;
 	int i;
 	int	*stack;
+/*	t_node *tmp;
 
+	i = 0;
+	tmp = b->head;
+	while (i++ < count && (tmp != NULL && tmp->next != NULL))
+	{
+		if (tmp->value < tmp->next->value)
+			break;
+		tmp = tmp->next;
+		if (tmp == NULL || i == count)
+			return ;
+	}*/
 	i = 0;
 	dsp_init(&dsp);
 	printf("pb 범인 : %d %d %d\n",pv.p1, pv.p2, count);
@@ -57,14 +68,20 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 		}
 		else if (b->head->value <= pv.p1)
 		{
-			pa(a, b);
-			ra(a);
-			dsp.ra++;
+		//	pa(a, b);
+		//	ra(a);
+		//	dsp.ra++;
+			rb(b);
+			dsp.rb++;
+
 		}
 		else
 		{
-			rb(b);
-			dsp.rb++;
+			pa(a, b);
+			ra(a);
+			dsp.ra++;
+		//	rb(b);
+		//	dsp.rb++;
 		}
 		i++;
 		printf("pivot : %d %d\n",pv.p1, pv.p2);
@@ -79,14 +96,17 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	show(stack, dsp.ra);
 	ft_get_pivot(stack, &pv, dsp.ra);
 	divide_pbra(a, b, pv, dsp.ra);
-
+/*
 	stack = put_stack2(a->tail, dsp.ra);
 	show(stack, dsp.ra);
 	ft_get_pivot(stack, &pv, dsp.ra);	
+	printf("--count %d\n", dsp.ra);
 	divide_pb(a, b, pv, dsp.ra);
+*/
+	stack = put_stack2(b->tail, dsp.rb);
+	show(stack, dsp.rb);
+	ft_get_pivot(stack, &pv, dsp.rb);
+	divide_rb(a, b, pv, dsp.rb);
 
-	stack = put_stack(b->head, dsp.pb);
-	show(stack, dsp.pb);
-	ft_get_pivot(stack, &pv, dsp.pb);
-	divide_rb(a, b, pv, dsp.pb);
+	printf("end pb\n");
 }

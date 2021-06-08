@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_new.c                                         :+:      :+:    :+:   */
+/*   sort_pbra.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 18:52:26 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/04 20:39:15 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/08 18:26:12 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		last_sort_pbra(t_deq *a, int count)
 		if (a->head->value > temp->value)
 			sa(a);
 	}
+	printf("pbra fin\n");
 }
 
 void		divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count)
@@ -38,6 +39,22 @@ void		divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	int *stack;
 
 	i = 0;
+/*	t_node *tmp;
+
+	tmp = a->tail;
+	while (i++ < count && (tmp != NULL && tmp->prev != NULL))//
+	{
+		if (tmp->value < tmp->prev->value)
+			break;
+		tmp = tmp->prev;
+		if (tmp == NULL || i == count)
+		{
+			while (i--)
+				rra(a);
+			return ;
+		}
+	}
+	i = 0;*/
 	dsp_init(&dsp);
 	printf("pbra 범인 : %d %d %d\n", pv.p1, pv.p2, count);
 	if(count <= 2)
@@ -69,7 +86,7 @@ void		divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	stack = put_stack(a->head, dsp.rra);
 	show(stack, dsp.rra);
 	ft_get_pivot(stack, &pv, dsp.rra);
-	divide_rb(a, b, pv, dsp.rra);
+	divide_ra(a, b, pv, dsp.rra);
 
 	stack = put_stack(b->head, dsp.pb);
 	show(stack, dsp.pb);
@@ -80,4 +97,5 @@ void		divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	show(stack, dsp.rb);
 	ft_get_pivot(stack, &pv, dsp.rb);
 	divide_rb(a, b, pv, dsp.rb);
+	printf("pbra fin\n");
 }
