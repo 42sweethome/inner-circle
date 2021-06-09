@@ -18,6 +18,6 @@ int		main(int argc, char **argv)
 	ft_get_pivot(stack, &pv, count);
 	divide_ra(&a, &b, pv, count);
 	dsp_init(&dsp);
-	print_deq(&a, &b, dsp);
+//	print_deq(&a, &b, dsp);
 	return (0);
 }

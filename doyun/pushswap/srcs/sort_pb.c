@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:57 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/08 18:27:11 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/09 17:06:09 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 		}
 		else if (b->head->value <= pv.p1)
 		{
-		//	pa(a, b);
-		//	ra(a);
-		//	dsp.ra++;
+		/*	pa(a, b);
+			ra(a);
+			dsp.ra++;*/
 			rb(b);
 			dsp.rb++;
 
@@ -80,8 +80,8 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 			pa(a, b);
 			ra(a);
 			dsp.ra++;
-		//	rb(b);
-		//	dsp.rb++;
+		/*	rb(b);
+			dsp.rb++;*/
 		}
 		i++;
 		printf("pivot : %d %d\n",pv.p1, pv.p2);

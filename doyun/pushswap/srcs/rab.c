@@ -3,7 +3,7 @@
 
 void		ra(t_deq *a)
 {
-	printf("first int ra head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("first int ra head : %d, tail : %d\n", a->head->value, a->tail->value);
 	t_node	*temp;
 
 	if (a->head == NULL || a->head->next == NULL)
@@ -11,15 +11,15 @@ void		ra(t_deq *a)
 	temp = a->head->next;
 	temp->prev = NULL;
 	a->tail->next = a->head;
-	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	a->head->prev = a->tail;
-	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	a->tail = a->head;
-	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	a->tail->next = NULL;
-	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	a->head = temp;
-	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	write(1, "ra\n", 3);
 }
 

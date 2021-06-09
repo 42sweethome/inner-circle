@@ -3,7 +3,7 @@
 void		sa(t_deq *a)
 {
 	t_node	*temp;
-	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	if (a->head != NULL && a->head->next != NULL)
 	{
 		temp = a->head->next;	

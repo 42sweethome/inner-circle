@@ -6,34 +6,87 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:10 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/08 18:36:13 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/09 17:24:32 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-void		last_sort_ra(t_deq *deq, int count)
+void		last_sort_ra(t_deq *a, t_deq *b, int count)
 {
 	t_node	*temp;
+	t_node	*temp_next;
 	int		i;
 
-	temp = deq->head->next;
+	temp = a->head->next;
+	temp_next = temp->next;
 	i = 0;
-//	while (i++ < count)
-//		rra(deq);
-	if (count > 1)
+/*	while (i++ < count)
+		rra(a);*/
+	if (count == 2)
 	{
-		if (deq->head->value > temp->value)
+		if (a->head->value > temp->value)
 		{
-			sa(deq);
+			sa(a);
 		}
+	}
+	else if (count == 3)
+	{
+		printf("before :%d %d %d\n", a->head->value, temp->value, temp_next->value);
+		if (a->head->value > temp->value)
+		{
+			if (a->head->value > temp_next->value)
+			{
+				if (temp->value > temp_next->value)
+				{
+					pb(b, a);
+					ra(a);
+					pa(a, b);
+					sa(a);
+					rra(a);
+					sa(a);
+				}
+				else if (temp->value < temp_next->value)
+				{
+					pb(b, a);
+					ra(a);
+					pa(a, b);
+					sa(a);
+					rra(a);
+				}
+			}
+			else if (a->head->value < temp_next->value)
+			{
+				sa(a);	
+			}
+		}
+		else if (a->head->value < temp->value)
+		{
+			if (a->head->value > temp_next->value)
+			{
+				if (temp->value > temp_next->value)
+				{
+					pb(b, a);
+					sa(a);
+					pa(a, b);
+					sa(a);
+				}
+			}
+			else if (a->head->value < temp_next->value)
+			{
+				if (temp->value > temp_next->value)
+				{
+					pb(b, a);
+					sa(a);
+					pa(a, b);
+					
+				}
+			}
+		}
+		printf("after :%d %d %d\n", a->head->value, temp->value, temp_next->value);
 	}
 }
 
-//void		case_count(int count, t_deq *a, t_deq *b, t_dsp dsp, t_pivot pv)
-//{
-	
-//}
 
 void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count)
 {
@@ -58,9 +111,9 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count)
 		return ;
 	else if (count == 1)
 		return ;
-	else if (count == 2)
+	else if (count <= 3)
 	{
-		last_sort_ra(a, count);
+		last_sort_ra(a, b, count);
 		dsp_init(&dsp);
 		print_deq(a, b, dsp);
 		printf("ra out\n");
@@ -69,25 +122,25 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	dsp_init(&dsp);
 	while(i < count)
 	{
-		if (a->head->value >= pv.p2) //큰 숫자 ra
+		if (a->head->value >= pv.p2) 	
 		{
 			ra(a);
 			dsp.ra++;
 		}
-		else if (a->head->value <= pv.p1) //작은 숫자 rb
+		else if (a->head->value <= pv.p1) 
 		{
 			pb(b, a);
 			rb(b);
 			dsp.rb++;
 		}
-		else //중간 숫자 pb
+		else 
 		{
 			pb(b, a);
 			dsp.pb++;
 		}
 		i++;
 		printf("pivot : %d %d\n",pv.p1, pv.p2);
-		print_deq(a, b, dsp);	
+		print_deq(a, b, dsp);
 	}
 /*	i = 0;
 	while (i++ < dsp.ra)
