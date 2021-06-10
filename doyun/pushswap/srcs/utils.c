@@ -6,11 +6,92 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 20:05:21 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/08 18:47:27 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 16:54:22 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
+
+int		ft_check_ahead(t_deq *deq, int count)
+{
+	t_node	*temp;
+	t_node	*temp_next;
+
+	temp = deq->head;
+	temp_next = temp->next;
+	while (--count)
+	{
+		if (temp->value < temp_next->value)
+		{
+			temp = temp_next;
+			temp_next = temp_next->next;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int		ft_check_atail(t_deq *deq, int count)
+{
+	t_node	*temp;
+	t_node	*temp_prev;	
+
+	temp = deq->tail;
+	temp_prev = temp->prev;
+	while (--count > 0)
+	{
+		if (temp->value > temp_prev->value && temp != NULL && temp_prev != NULL)
+		{
+			temp = temp_prev;
+			temp_prev = temp_prev->prev;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int		ft_check_bhead(t_deq *deq, int count)
+{
+	t_node	*temp;
+	t_node	*temp_next;
+
+	temp = deq->head;
+	temp_next = temp->next;
+	while (--count)
+	{
+		if (temp->value > temp_next->value)
+		{
+			temp = temp_next;
+			temp_next = temp_next->next;
+		}
+		else
+			return (0);
+	}
+	return (1);
+
+}
+
+int		ft_check_btail(t_deq *deq, int count)
+{
+	t_node	*temp;
+	t_node	*temp_prev;
+
+	temp = deq->tail;
+	temp_prev = temp->prev;
+	while (--count)
+	{
+		if (temp->value < temp_prev->value)
+		{
+			temp = temp_prev;
+			temp_prev = temp_prev->prev;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
 
 void	print_deq(t_deq *a, t_deq *b, t_dsp dsp)
 {
@@ -61,7 +142,15 @@ void	ft_get_pivot(int *stack, t_pivot *pv, int count)
 	}
 	free(stack);
 	stack = NULL;
+}
 
+int		ft_get_5pivot(int *stack)
+{
+	int	pivot;
+
+	ft_quick_sort(stack, 0, 4);
+	pivot = stack[2];
+	return (pivot);
 }
 
 int		ft_count_arg(char **s, char c)

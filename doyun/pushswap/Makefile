@@ -10,6 +10,7 @@ SRCS_NAME =				main.c\
 						deque.c\
 						sab.c pab.c rab.c rrab.c\
 						qsort.c sort_ra.c sort_pb.c sort_rb.c sort_pbra.c\
+						last_sort_case.c sort_case4.c sort_case5.c\
 						utils.c\
 						error.c\
 

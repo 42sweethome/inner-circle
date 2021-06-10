@@ -50,15 +50,29 @@ void			divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count);
 
+//last_sort_case.c
+int				sort_case(t_deq *a, t_deq *b, int count);
+int				sort_case3(t_deq *a, t_deq *b);
+
+//sort_case4.c
+int				sort_case4(t_deq *a, t_deq *b);
+
+//sort_case5.c
+int				sort_case5(t_deq *a, t_deq *b);
+
 //ustils.c
 void			ft_get_pivot(int *stack, t_pivot *pv, int count);
+int				ft_get_5pivot(int *stack);
 int				ft_count_arg(char **s, char c);
 int				*put_stack(t_node *deq, int count);
 int				*put_stack2(t_node *deq, int count);
 void			show(int *stack, int count);
 void			dsp_init(t_dsp *dsp);
 void			print_deq(t_deq *a, t_deq *b, t_dsp dsp);
-
+int				ft_check_ahead(t_deq *deq, int count);
+int				ft_check_atail(t_deq *deq, int count);
+int				ft_check_bhead(t_deq *deq, int count);
+int				ft_check_btail(t_deq *deq, int count);
 
 void			sa(t_deq *a);
 void			sb(t_deq *b);

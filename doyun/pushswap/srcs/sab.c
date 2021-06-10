@@ -40,17 +40,21 @@ void		ss(t_deq *a, t_deq *b)
 {
 	t_node	*temp;
 
-	if ((a->head == NULL || a->head->next == NULL) && 
-			(b->head == NULL || b->head->next == NULL))
+	if ((a->head != NULL || a->head->next != NULL) && 
+			(b->head != NULL || b->head->next != NULL))
 	{
-		temp = a->head->next;
+		temp = a->head->next;	
 		a->head->next = temp->next;
-		temp->next = a->head;
-		a->head->prev = temp;
-		temp->prev = NULL;
-		a->head = temp;
+		if (temp->next == NULL)
+			a->tail = a->head;
+		temp->next = a->head;	
+		a->head->prev = temp;	
+		temp->prev = NULL;	
+		a->head = temp;	
 		temp = b->head->next;
 		b->head->next = temp->next;
+		if (temp->next == NULL)
+			b->tail = b->head;
 		temp->next = b->head;
 		b->head->prev = temp;
 		temp->prev = NULL;

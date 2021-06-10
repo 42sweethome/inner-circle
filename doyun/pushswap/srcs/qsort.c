@@ -6,17 +6,11 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:51:28 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/02 20:51:52 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 15:11:53 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
-
-void		ft_changespot()
-{
-
-}
-
 
 int			*ft_get_sortstack(int argc, char **argv, int count)
 {

@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:57 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/09 17:06:09 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 16:56:11 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		last_sort_pb(t_deq *a, t_deq *b, int count)
 
 void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 {
-	printf("\nstart pb\n");
+//	printf("\nstart pb\n");
 	t_dsp dsp;
 	int i;
 	int	*stack;
@@ -50,12 +50,18 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	}*/
 	i = 0;
 	dsp_init(&dsp);
-	printf("pb 범인 : %d %d %d\n",pv.p1, pv.p2, count);
+/*	if (ft_check_bhead(b, count))
+	{
+		while (count--)
+			pa(a, b);
+		return ;
+	}*/
+	//printf("pb 범인 : %d %d %d\n",pv.p1, pv.p2, count);
 	if (count <= 2)
 	{
 		last_sort_pb(a, b, count);
-		print_deq(a, b, dsp);
-		printf("pb out\n");
+	//	print_deq(a, b, dsp);
+//		printf("pb out\n");
 		return ;
 
 	}
@@ -84,29 +90,29 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 			dsp.rb++;*/
 		}
 		i++;
-		printf("pivot : %d %d\n",pv.p1, pv.p2);
-		print_deq(a, b, dsp);
+		//printf("pivot : %d %d\n",pv.p1, pv.p2);
+//		print_deq(a, b, dsp);
 	}
 	stack = put_stack(a->head, dsp.pa);
-	show(stack, dsp.pa);
+//	show(stack, dsp.pa);
 	ft_get_pivot(stack, &pv, dsp.pa);
 	divide_ra(a, b, pv, dsp.pa);
 
 	stack = put_stack2(a->tail, dsp.ra);
-	show(stack, dsp.ra);
+//	show(stack, dsp.ra);
 	ft_get_pivot(stack, &pv, dsp.ra);
 	divide_pbra(a, b, pv, dsp.ra);
 /*
 	stack = put_stack2(a->tail, dsp.ra);
 	show(stack, dsp.ra);
 	ft_get_pivot(stack, &pv, dsp.ra);	
-	printf("--count %d\n", dsp.ra);
+	//printf("--count %d\n", dsp.ra);
 	divide_pb(a, b, pv, dsp.ra);
 */
 	stack = put_stack2(b->tail, dsp.rb);
-	show(stack, dsp.rb);
+//	show(stack, dsp.rb);
 	ft_get_pivot(stack, &pv, dsp.rb);
 	divide_rb(a, b, pv, dsp.rb);
 
-	printf("end pb\n");
+	//printf("end pb\n");
 }
