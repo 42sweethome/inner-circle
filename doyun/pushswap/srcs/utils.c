@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 20:05:21 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:54:22 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 18:55:45 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int		ft_check_ahead(t_deq *deq, int count)
 	t_node	*temp_next;
 
 	temp = deq->head;
-	temp_next = temp->next;
-	while (--count)
+	if (temp != NULL)
+		temp_next = temp->next;
+	while (--count > 0)
 	{
 		if (temp->value < temp_next->value)
 		{
@@ -37,8 +38,9 @@ int		ft_check_atail(t_deq *deq, int count)
 	t_node	*temp;
 	t_node	*temp_prev;	
 
-	temp = deq->tail;
-	temp_prev = temp->prev;
+	temp = deq->tail;	
+	if (temp != NULL)
+		temp_prev = temp->prev;
 	while (--count > 0)
 	{
 		if (temp->value > temp_prev->value && temp != NULL && temp_prev != NULL)
@@ -58,7 +60,8 @@ int		ft_check_bhead(t_deq *deq, int count)
 	t_node	*temp_next;
 
 	temp = deq->head;
-	temp_next = temp->next;
+	if (temp != NULL)
+		temp_next = temp->next;
 	while (--count)
 	{
 		if (temp->value > temp_next->value)
@@ -79,10 +82,11 @@ int		ft_check_btail(t_deq *deq, int count)
 	t_node	*temp_prev;
 
 	temp = deq->tail;
-	temp_prev = temp->prev;
+	if (temp != NULL)
+		temp_prev = temp->prev;
 	while (--count)
 	{
-		if (temp->value < temp_prev->value)
+		if (temp->value > temp_prev->value)
 		{
 			temp = temp_prev;
 			temp_prev = temp_prev->prev;

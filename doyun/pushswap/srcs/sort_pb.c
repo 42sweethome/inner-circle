@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:57 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:56:11 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 17:04:09 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	}*/
 	i = 0;
 	dsp_init(&dsp);
-/*	if (ft_check_bhead(b, count))
+	if (ft_check_bhead(b, count))
 	{
 		while (count--)
 			pa(a, b);
 		return ;
-	}*/
+	}
 	//printf("pb 범인 : %d %d %d\n",pv.p1, pv.p2, count);
 	if (count <= 2)
 	{

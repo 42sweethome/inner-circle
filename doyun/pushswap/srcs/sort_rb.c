@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:04:56 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:56:21 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 19:03:08 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 
 	i = 0;
 	dsp_init(&dsp);	
-/*	if (ft_check_btail(b, count))
+	if (ft_check_btail(b, count))
 	{
 		while (count--)
 		{
@@ -60,7 +60,7 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 			pa(a, b);
 		}
 		return ;
-	}*/
+	}
 /*	t_node *tmp;
 
 	tmp = a->head;

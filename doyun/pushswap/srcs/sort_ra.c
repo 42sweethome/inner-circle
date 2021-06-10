@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:10 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 16:56:19 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 16:59:49 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count)
 
 	i = 0;
 	check = 0;
-//	if (ft_check_sort(a, count))
-//		return ;
+	if (ft_check_ahead(a, count))
+		return ;
 	if (count <= 5)
 	{
 		check = sort_case(a, b, count);
