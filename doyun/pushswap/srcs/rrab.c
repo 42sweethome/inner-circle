@@ -13,7 +13,7 @@ void		rra(t_deq *a)
 		a->tail->prev = NULL;
 		a->head = a->tail;
 		a->tail = temp;
-		write(1, "rra\n", 4);
+//		write(1, "rra\n", 4);
 	}
 }
 
@@ -30,7 +30,7 @@ void		rrb(t_deq *b)
 		b->tail->prev = NULL;
 		b->head = b->tail;
 		b->tail = temp;
-		write(1, "rrb\n", 4);
+//		write(1, "rrb\n", 4);
 	}
 }
 
@@ -55,6 +55,6 @@ void		rrr(t_deq *a, t_deq *b)
 		b->tail->prev = NULL;
 		b->head = b->tail;
 		b->tail = temp;
-		write(1, "rrr\n", 4);
+	//	write(1, "rrr\n", 4);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:51:28 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 15:11:53 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/10 20:12:46 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,28 @@ int			*ft_get_sortstack(int argc, char **argv, int count)
 {
 	int		*stack;
 	char	**split;
-	int		i;
-	int		j;
-	int		idx;
+	int		idx[3];
+	int		flag;
 
-	i = 1;
-	idx = 0;
+	idx[0] = 1;
+	idx[2] = 0;
+	flag = 1;
 	stack = (int *)ft_calloc(sizeof(int), count);
-	while (i < argc && (split = ft_split(argv[i], ' ')) != NULL)
+	while (idx[0] < argc && (split = ft_split(argv[idx[0]], ' ')) != NULL)
 	{
-		j = 0;
-		while (idx < count && split[j])
+		idx[1] = 0;
+		while (idx[2] < count && split[idx[1]])
 		{
-			stack[idx++] = ft_atoi(split[j]);
-			j++;
+			stack[idx[2]++] = ft_atoi(split[idx[1]], &flag);
+			if (flag == 0)
+			{
+				free(stack);
+				stack = NULL;
+				return (NULL);
+			}
+			idx[1]++;
 		}
-		i++;
+		idx[0]++;
 	}
 	return (stack);
 }

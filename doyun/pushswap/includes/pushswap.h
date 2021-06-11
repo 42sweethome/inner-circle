@@ -2,9 +2,11 @@
 # define PUSHSWAP_H
 
 #include "../Libft/libft.h"
+#include "./get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 
 
 typedef struct		s_node
@@ -35,6 +37,13 @@ typedef struct		s_dsp
 	int				rrb;
 	int				rra;
 }					t_dsp;
+
+//gnl
+int				get_next_line(int fd, char **line);
+char			*str_dup(char *s1);
+char			*sub_str(char *s, int start, size_t len);
+char			*str_join(char *s1, char *s2);
+int				str_len(char *s);
 
 //deque.c
 void			ft_init(t_deq *a, t_deq *b);

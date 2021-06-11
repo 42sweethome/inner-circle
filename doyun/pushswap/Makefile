@@ -1,5 +1,7 @@
 NAME =					push_swap
 
+CHECK_NAME =			checker
+
 CC =					gcc -fsanitize=address -g
 
 CFLAGS =				-Wall -Wextra -Werror
@@ -18,7 +20,16 @@ SRCS_PATH =				./srcs/
 
 SRCS =					$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
+CHECK_SRCS_NAME =		checker.c\
+						get_next_line.c get_next_line_utils.c\
+						sab.c pab.c rab.c rrab.c\
+						qsort.c utils.c deque.c\
+
+CHECK_SRCS =			$(addprefix $(SRCS_PATH), $(CHECK_SRCS_NAME))
+
 OBJS =					$(SRCS:.c=.o)
+
+CHECK_OBJS =			$(CHECK_SRCS:.c=.o)
 
 INC =					-I.
 
@@ -31,9 +42,13 @@ LIBFT_A =				libft.a
 all :
 						make all -C $(LIBFT)
 						make $(NAME)
+						make $(CHECK_NAME)
 
 $(NAME) : 				$(OBJS)
 						$(CC) $(CFLAGS) $(OBJS) -o $@ -L$(LIBFT) -lft
+
+$(CHECK_NAME) :			$(CHECK_OBJS)
+						$(CC) $(CFLAGS) $(CHECK_OBJS) -o $(CHECK_NAME) -L$(LIBFT) -lft
 
 clean :					
 						rm -f *.o
@@ -41,6 +56,7 @@ clean :
 
 fclean :				clean
 						rm -f $(NAME) $(OBJS)
+						rm -f $(CHECK_NAME) $(CHECK_OBJS)
 						make fclean -C $(LIBFT)
 
 re :
