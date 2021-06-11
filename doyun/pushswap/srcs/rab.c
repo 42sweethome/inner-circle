@@ -20,7 +20,7 @@ void		ra(t_deq *a)
 //	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
 	a->head = temp;
 //	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
-//	write(1, "ra\n", 3);
+	write(1, "ra\n", 3);
 }
 
 void		rb(t_deq *b)
@@ -36,7 +36,7 @@ void		rb(t_deq *b)
 	b->tail = b->head;
 	b->tail->next = NULL;
 	b->head = temp;
-//	write(1, "rb\n", 3);
+	write(1, "rb\n", 3);
 }
 
 void		rr(t_deq *a, t_deq *b)
@@ -60,6 +60,6 @@ void		rr(t_deq *a, t_deq *b)
 		b->tail = b->head;
 		b->tail->next = NULL;
 		b->head = temp;
-	//	write(1, "rr\n", 3);
+		write(1, "rr\n", 3);
 	}
 }

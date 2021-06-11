@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:18:32 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 22:09:12 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/11 16:46:47 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int		apply_stdin(t_deq *a, t_deq *b, char *line)
 		ra(a);
 	else if (ft_strncmp(line, "rb", 2))
 		rb(b);
-	else if (ft_strncmp(line, "rr", 2))
-		rr(a, b);
 	else if (ft_strncmp(line, "rra", 3))
 		rra(a);
 	else if (ft_strncmp(line, "rrb", 3))
 		rrb(b);
 	else if (ft_strncmp(line, "rrr", 3))
 		rrr(a, b);
+	else if (ft_strncmp(line, "rr", 2))
+		rr(a, b);
 	else
 		return (1);
 	return (0);
@@ -55,7 +55,7 @@ int		check_sort(t_deq *a, t_deq *b)
 		temp = temp_next;
 		temp_next = temp_next->next;
 	}
-	if (b != NULL)
+	if (b->head != NULL)
 		return (1);
 	return (0);
 }

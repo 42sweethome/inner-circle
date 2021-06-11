@@ -21,7 +21,7 @@ void		pa(t_deq *a, t_deq *b)
 	if (a->tail == NULL)
 		a->tail = a->head;	
 //	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
-//	write(1, "pa\n", 3);
+	write(1, "pa\n", 3);
 }
 
 void		pb(t_deq *b, t_deq *a)
@@ -42,5 +42,5 @@ void		pb(t_deq *b, t_deq *a)
 		a->tail = a->head;
 	if (b->tail == NULL)
 		b->tail = b->head;
-//	write(1, "pb\n", 3);
+	write(1, "pb\n", 3);
 }

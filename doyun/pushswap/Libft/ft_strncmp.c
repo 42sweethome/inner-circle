@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 03:26:52 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/01 22:25:12 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/11 16:50:13 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n)
 			idx++;
 		}
 		else
-			return (temp_s1[idx] - temp_s2[idx]);
+			return (0);
 	}
-	return (0);
+	return (1);
 }

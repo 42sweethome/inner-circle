@@ -14,7 +14,7 @@ void		sa(t_deq *a)
 		a->head->prev = temp;	
 		temp->prev = NULL;	
 		a->head = temp;	
-	//	write(1, "sa\n", 3);
+		write(1, "sa\n", 3);
 	}
 }
 
@@ -32,7 +32,7 @@ void		sb(t_deq *b)
 		b->head->prev = temp;
 		temp->prev = NULL;
 		b->head = temp;
-	//	write(1, "sb\n", 3);
+		write(1, "sb\n", 3);
 	}
 }
 
@@ -59,6 +59,6 @@ void		ss(t_deq *a, t_deq *b)
 		b->head->prev = temp;
 		temp->prev = NULL;
 		b->head = temp;
-	//	write(1, "ss\n", 3);
+		write(1, "ss\n", 3);
 	}
 }
