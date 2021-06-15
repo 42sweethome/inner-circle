@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:34:41 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/01 21:53:01 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/11 20:39:48 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	low = count_char((char *)s, c);
+	if (low == 0)
+		return (0);
 	if (!(split_s = (char**)malloc(sizeof(char *) * (low + 1))))
 		return (0);
 	allocate(split_s, (char *)s, c);

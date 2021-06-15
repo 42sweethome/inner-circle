@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:04:56 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 19:03:08 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/14 15:53:09 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,38 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	}
 	while(i < count)
 	{
-		if (b->tail->value >= pv.p2)
+		if (b->head->value >= pv.p2)
 		{
-			rrb(b);
+			//rrb(b);
 			pa(a, b);
 			dsp.pa++;
 		}
-		else if (b->tail->value <= pv.p1)
+		else if (b->head->value <= pv.p1)
 		{
-			rrb(b);
-			dsp.rrb++;
+			rb(b);
+			dsp.rb++;
+
+			//rrb(b);
+		//	dsp.rrb++;
 		}
 		else
 		{
-			rrb(b);
 			pa(a, b);
 			ra(a);
 			dsp.ra++;
+		//	rrb(b);
+		//	pa(a, b);
+		//	ra(a);
+		//	dsp.ra++;
 		}
 		i++;
 		//printf("pivot : %d %d\n",pv.p1, pv.p2);
 //		print_deq(a, b, dsp);
+	}
+	while (dsp.rb--)
+	{
+		rrb(b);
+		dsp.rrb++;
 	}
 	stack = put_stack(a->head, dsp.pa);
 //	show(stack, dsp.pa);//
@@ -115,7 +126,7 @@ void	divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count)
 	stack = put_stack(b->head, dsp.rrb);
 //	show(stack, dsp.rrb);//
 	ft_get_pivot(stack, &pv, dsp.rrb);
-	divide_pb(a, b, pv, dsp.rrb);
+	divide_rb(a, b, pv, dsp.rrb);
 	
 	//printf("end rb\n");
 }

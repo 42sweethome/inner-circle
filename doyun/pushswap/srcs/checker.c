@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:18:32 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/11 16:46:47 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/11 20:53:08 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 int		apply_stdin(t_deq *a, t_deq *b, char *line)
 {
 	if (ft_strncmp(line, "sa", 2))
-		sa(a);
+		csa(a);
 	else if (ft_strncmp(line, "sb", 2))
-		sb(b);
+		csb(b);
 	else if (ft_strncmp(line, "ss", 2))
-		ss(a, b);
+		css(a, b);
 	else if (ft_strncmp(line, "pa", 2))
-		pa(a, b);
+		cpa(a, b);
 	else if (ft_strncmp(line, "pb", 2))
-		pb(b, a);
+		cpb(b, a);
 	else if (ft_strncmp(line, "ra", 2))
-		ra(a);
+		cra(a);
 	else if (ft_strncmp(line, "rb", 2))
-		rb(b);
+		crb(b);
 	else if (ft_strncmp(line, "rra", 3))
-		rra(a);
+		crra(a);
 	else if (ft_strncmp(line, "rrb", 3))
-		rrb(b);
+		crrb(b);
 	else if (ft_strncmp(line, "rrr", 3))
-		rrr(a, b);
+		crrr(a, b);
 	else if (ft_strncmp(line, "rr", 2))
-		rr(a, b);
+		crr(a, b);
 	else
 		return (1);
 	return (0);
@@ -43,6 +43,7 @@ int		apply_stdin(t_deq *a, t_deq *b, char *line)
 
 int		check_sort(t_deq *a, t_deq *b)
 {
+
 	t_node *temp;
 	t_node *temp_next;
 
@@ -62,19 +63,23 @@ int		check_sort(t_deq *a, t_deq *b)
 
 int		main(int argc, char **argv)
 {
-	if (argc == 0)
-		return (-1);
+	if (argc <= 1)
+		return (0);
 	int count;
 	int	*stack;
 	t_deq	a;
 	t_deq	b;
 	char	*line;
 
-	count = ft_count_arg(argv, ' ');
+	if ((count = ft_count_arg(argv, ' ')) == 0)
+	{
+		write(2, "Error\n", 6);
+			return (0);
+		}
 	stack = ft_get_sortstack(argc, argv, count);
 	if (stack == NULL)
 	{
-		write(1, "ERROR\n", 6);
+		write(2, "Error\n", 6);
 		return(0);
 	}
 	ft_init(&a, &b);
@@ -83,7 +88,7 @@ int		main(int argc, char **argv)
 	{
 		if (apply_stdin(&a, &b, line))
 		{
-			write(1, "ERROR\n", 6);
+			write(2, "Error\n", 6);
 			return (0);
 		}
 	}
@@ -93,9 +98,5 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	write(1, "OK\n", 3);
-	//	ft_get_pivot(stack, &pv, count);
-	//	divide_ra(&a, &b, pv, count);
-	//	dsp_init(&dsp);
-	//	print_deq(&a, &b, dsp);
 	return (0);
 }

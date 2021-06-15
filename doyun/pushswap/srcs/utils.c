@@ -6,11 +6,27 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 20:05:21 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 18:55:45 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/14 16:12:48 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
+
+int		*ft_check_dup(int *stack, int count)
+{
+	int		*temp;
+
+	temp = stack;
+	while (--count)
+	{
+		if (ft_memchr(temp, *temp, count))
+		{
+			return (NULL);
+		}
+		temp++;
+	}
+	return (stack);
+}
 
 int		ft_check_ahead(t_deq *deq, int count)
 {
@@ -62,7 +78,7 @@ int		ft_check_bhead(t_deq *deq, int count)
 	temp = deq->head;
 	if (temp != NULL)
 		temp_next = temp->next;
-	while (--count)
+	while (--count && count > 0)
 	{
 		if (temp->value > temp_next->value)
 		{
@@ -148,12 +164,12 @@ void	ft_get_pivot(int *stack, t_pivot *pv, int count)
 	stack = NULL;
 }
 
-int		ft_get_5pivot(int *stack)
+int		ft_get_npivot(int *stack, int count)
 {
 	int	pivot;
 
-	ft_quick_sort(stack, 0, 4);
-	pivot = stack[2];
+	ft_quick_sort(stack, 0, count);
+	pivot = stack[count / 2];
 	return (pivot);
 }
 

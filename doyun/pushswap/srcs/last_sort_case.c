@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 18:07:39 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 15:06:36 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/11 21:32:36 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,9 @@ int		sort_case(t_deq *a, t_deq *b, int count)
 		check = sort_case4(a, b);
 	else if (count == 5)
 		check = sort_case5(a, b);
+	else if (count == 6)
+		check = sort_case6(a, b);
+//	else if (count == 10)
+//		check = sort_case10(a, b);
 	return (check);
 }

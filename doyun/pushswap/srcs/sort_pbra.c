@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 18:52:26 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 17:03:36 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/14 15:56:51 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,39 +53,51 @@ void		divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count)
 	}
 	while (i < count)
 	{
-		if (a->tail->value >= pv.p2)
+		if (a->head->value >= pv.p2)
 		{
-			rra(a);
-			dsp.rra++;
+			ra(a);
+			dsp.ra++;
 		}
-		else if (a->tail->value <= pv.p1)
+		else if (a->head->value <= pv.p1)
 		{
-			rra(a);
+			//rra(a);
+			pb(b, a);
+		//	rb(b);
+			dsp.pb++;
+		}
+		else
+		{
+			//rra(a);
 			pb(b, a);
 			rb(b);
 			dsp.rb++;
 		}
-		else
-		{
-			rra(a);
-			pb(b, a);
-			dsp.pb++;
-		}
 		i++;
 	}
+	while (dsp.ra--)
+	{
+		rra(a);
+		dsp.rra++;
+	}
+
 	stack = put_stack(a->head, dsp.rra);
 //	show(stack, dsp.rra);
 	ft_get_pivot(stack, &pv, dsp.rra);
 	divide_ra(a, b, pv, dsp.rra);
 
+/*	stack = put_stack(b->head, dsp.pb);
+//	show(stack, dsp.pb);
+	ft_get_pivot(stack, &pv, dsp.pb);
+	divide_pb(a, b, pv, dsp.pb);
+*/
+	stack = put_stack(b->head, dsp.rb);
+//	show(stack, dsp.rb);
+	ft_get_pivot(stack, &pv, dsp.rb);
+	divide_rb(a, b, pv, dsp.rb);
+
 	stack = put_stack(b->head, dsp.pb);
 //	show(stack, dsp.pb);
 	ft_get_pivot(stack, &pv, dsp.pb);
 	divide_pb(a, b, pv, dsp.pb);
-
-	stack = put_stack2(b->tail, dsp.rb);
-//	show(stack, dsp.rb);
-	ft_get_pivot(stack, &pv, dsp.rb);
-	divide_rb(a, b, pv, dsp.rb);
 	//printf("pbra fin\n");
 }

@@ -54,10 +54,11 @@ int				*ft_get_sortstack(int argc, char **argv, int count);
 void			ft_quick_sort(int *stack, int start, int end);
 
 //sort.c
-void			divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count);
+void			divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp);
 void			divide_pb(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count);
+void			divide_rrr(t_deq *a, t_deq *b, t_dsp dsp);
 
 //last_sort_case.c
 int				sort_case(t_deq *a, t_deq *b, int count);
@@ -69,9 +70,16 @@ int				sort_case4(t_deq *a, t_deq *b);
 //sort_case5.c
 int				sort_case5(t_deq *a, t_deq *b);
 
+//sort_case6.c
+int				sort_case6(t_deq *a, t_deq *b);
+
+//sort_case10.c
+int				sort_case10(t_deq *a, t_deq *b);
+
 //ustils.c
+int				*ft_check_dup(int *stack, int count);
 void			ft_get_pivot(int *stack, t_pivot *pv, int count);
-int				ft_get_5pivot(int *stack);
+int				ft_get_npivot(int *stack, int count);
 int				ft_count_arg(char **s, char c);
 int				*put_stack(t_node *deq, int count);
 int				*put_stack2(t_node *deq, int count);
@@ -95,6 +103,18 @@ void			rra(t_deq *a);
 void			rrb(t_deq *b);
 void			rrr(t_deq *a, t_deq *b);
 
+
+void			csa(t_deq *a);
+void			csb(t_deq *b);
+void			css(t_deq *a, t_deq *b);
+void			cpa(t_deq *a, t_deq *b);
+void			cpb(t_deq *b, t_deq *a);
+void			cra(t_deq *a);
+void			crb(t_deq *b);
+void			crr(t_deq *a, t_deq *b);
+void			crra(t_deq *a);
+void			crrb(t_deq *b);
+void			crrr(t_deq *a, t_deq *b);
 void			show(int *stack, int count);
 
 #endif
