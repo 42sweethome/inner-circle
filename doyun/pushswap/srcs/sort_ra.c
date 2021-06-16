@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:10 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/16 13:54:38 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/16 14:26:46 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 {
-	printf("\nstart ra\n");
 	t_dsp dsp;
 	int i;
 	int	*stack;
@@ -23,43 +22,13 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 	i = 0;
 	check = 0;
 	if (ft_check_ahead(a, count))
-	{
-		//pb에서 pa 한거 정렬 끝나면 ra한것 올려서 정렬
-		//if (pdsp.ra || pdsp.rb)
-	//	{
-	//		divide_rrr(a, b, pdsp);
-	//		if (ft_check_ahead(a, pdsp.ra))
-					return ;
-//		}
-	//	else
-	//		return ;
-	//	if (pdsp.ra)
-	//		divide_ra(a, b, pv, pdsp.ra, pdsp);
-
-	}
+		return ;
 	if (count <= 6)
 	{
 		check = sort_case(a, b, count);
-//		printf("******************dsp.ra : %d\n",pdsp.ra);
-	/*	while(pdsp.ra--)
-			rra(a);*/		
 		if (check == 0)
-		{
-	//		if (pdsp.ra || pdsp.rb)
-	//			divide_rrr(a, b, pdsp);
-	//		else
-				return ;
-	//		if (pdsp.ra <= 6)
-	//		{
-	//			check = sort_case(a, b, pdsp.ra);
-	//			return ;
-	//		}
-	//		if (pdsp.ra)
-	//			divide_ra(a, b, pv, pdsp.ra, pdsp);
-		}
-		//pb에서 pa 한거 정렬 끝나면 ra한것 올려서 정렬
+			return ;
 	}
-
 	dsp_init(&dsp);
 	while(i < count)
 	{
@@ -72,41 +41,26 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 		{
 			pb(b, a);
 			dsp.pb++;	
-		//	pb(b, a);
-		//	rb(b);
-		//	dsp.rb++;
 		}
 		else 
 		{
-		//	pb(b, a);
-		//	dsp.pb++;	
 			pb(b, a);
 			rb(b);
 			dsp.rb++;
 		}
 		i++;
-//		printf("pivot : %d %d\n",pv.p1, pv.p2);
-		print_deq(a, b, dsp);
 	}
-	printf("----------------------------finish ra\n");
-//		printf("@@@@@@@@@@@@@@@@@@@@@@@@@dsp.ra : %d dsp.rb : %d count %d\n", dsp.ra, dsp.rb , count);
-
 	if (dsp.ra || dsp.rb)
-	{
 			divide_rrr(a, b, dsp);
-	}
 	stack = put_stack(a->head, dsp.ra);
-	show(stack, dsp.ra);//
 	ft_get_pivot(stack, &pv, dsp.ra);
-	divide_ra(a, b, pv, dsp.ra, dsp);
+	divide_ra(a, b, pv, dsp.ra, pdsp);
 
 	stack = put_stack(b->head, dsp.rb);
-	show(stack, dsp.rb);//
 	ft_get_pivot(stack, &pv, dsp.rb);
 	divide_pb(a, b, pv, dsp.rb);
 	
 	stack = put_stack(b->head, dsp.pb);
-	show(stack, dsp.pb);//
 	ft_get_pivot(stack, &pv, dsp.pb);
 	divide_pb(a, b, pv, dsp.pb);
 }

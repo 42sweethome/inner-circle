@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 20:53:27 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/15 21:52:31 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/16 14:12:11 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,18 @@ int		rs_case3(t_deq *a, t_deq *b)
 
 	temp = b->head->next;
 	temp_next = temp->next;
-	if (temp_next->next != NULL)
+/*	if (temp_next->next == NULL)
 	{
+		
+	}
+	else if (temp_next->next != NULL)
+	{*/
 		if (b->head->value > temp->value)
 			rs3_big_head(a, b);		
 		else if (b->head->value < temp->value)
 			rs3_big_temp(a, b);
-	}
+	//}
+
 	return (0);
 
 }

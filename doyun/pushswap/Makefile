@@ -4,6 +4,7 @@ CHECK_NAME =			checker
 
 CC =					gcc -fsanitize=address -g
 
+CFLAGS =				-Wall -Wextra -Werror
 
 AR =					ar rcs
 
@@ -16,8 +17,7 @@ SRCS_NAME =				main.c\
 						rs_case3.c\
 						utils.c\
 						error.c\
-						#sort_rb.c sort_pbra.c 
-
+				
 SRCS_PATH =				./srcs/
 
 SRCS =					$(addprefix $(SRCS_PATH), $(SRCS_NAME))
@@ -47,10 +47,10 @@ all :
 						make $(CHECK_NAME)
 
 $(NAME) : 				$(OBJS)
-						$(CC)  $(OBJS) -o $@ -L$(LIBFT) -lft
+						$(CC) $(CFLAGS) $(OBJS) -o $@ -L$(LIBFT) -lft
 
 $(CHECK_NAME) :			$(CHECK_OBJS)
-						$(CC)  $(CHECK_OBJS) -o $(CHECK_NAME) -L$(LIBFT) -lft
+						$(CC) $(CFLAGS) $(CHECK_OBJS) -o $(CHECK_NAME) -L$(LIBFT) -lft
 
 clean :					
 						rm -f *.o
