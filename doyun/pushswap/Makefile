@@ -13,7 +13,7 @@ SRCS_NAME =				main.c\
 						qsort.c sort_ra.c sort_pb.c \
 						sort_rrr.c\
 						last_sort_case.c sort_case4.c sort_case5.c sort_case6.c\
-						sort_case10.c\
+						rs_case3.c\
 						utils.c\
 						error.c\
 						#sort_rb.c sort_pbra.c 

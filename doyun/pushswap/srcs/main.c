@@ -30,7 +30,7 @@ int		main(int argc, char **argv)
 	divide_ra(&a, &b, pv, count, dsp);
 	
 //write(1, "main\n", 5);
-//	dsp_init(&dsp);
-//	print_deq(&a, &b, dsp);
+	dsp_init(&dsp);
+	print_deq(&a, &b, dsp);
 	return (0);
 }

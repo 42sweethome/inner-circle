@@ -60,6 +60,9 @@ void			divide_rb(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_pbra(t_deq *a, t_deq *b, t_pivot pv, int count);
 void			divide_rrr(t_deq *a, t_deq *b, t_dsp dsp);
 
+//rs_case3.c
+int				rs_case3(t_deq *a, t_deq *b);
+
 //last_sort_case.c
 int				sort_case(t_deq *a, t_deq *b, int count);
 int				sort_case3(t_deq *a, t_deq *b);

@@ -6,11 +6,12 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 18:07:39 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/11 21:32:36 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/06/15 20:56:42 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
+
 void	only3_big_head(t_deq *a)
 {
 	t_node	*temp;

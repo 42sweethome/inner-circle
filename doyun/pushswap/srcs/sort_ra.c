@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:03:10 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/15 20:19:39 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/16 13:54:38 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 {
-//	printf("\nstart ra\n");
+	printf("\nstart ra\n");
 	t_dsp dsp;
 	int i;
 	int	*stack;
@@ -68,7 +68,7 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 			ra(a);
 			dsp.ra++;
 		}
-		else if (a->head->value < pv.p1) 
+		else if (a->head->value <= pv.p1) 
 		{
 			pb(b, a);
 			dsp.pb++;	
@@ -86,9 +86,9 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 		}
 		i++;
 //		printf("pivot : %d %d\n",pv.p1, pv.p2);
-//		print_deq(a, b, dsp);
+		print_deq(a, b, dsp);
 	}
-//	printf("----------------------------finish ra\n");
+	printf("----------------------------finish ra\n");
 //		printf("@@@@@@@@@@@@@@@@@@@@@@@@@dsp.ra : %d dsp.rb : %d count %d\n", dsp.ra, dsp.rb , count);
 
 	if (dsp.ra || dsp.rb)
@@ -96,17 +96,17 @@ void		divide_ra(t_deq *a, t_deq *b, t_pivot pv, int count, t_dsp pdsp)
 			divide_rrr(a, b, dsp);
 	}
 	stack = put_stack(a->head, dsp.ra);
-//	show(stack, dsp.ra);//
+	show(stack, dsp.ra);//
 	ft_get_pivot(stack, &pv, dsp.ra);
 	divide_ra(a, b, pv, dsp.ra, dsp);
 
 	stack = put_stack(b->head, dsp.rb);
-//	show(stack, dsp.rb);//
+	show(stack, dsp.rb);//
 	ft_get_pivot(stack, &pv, dsp.rb);
 	divide_pb(a, b, pv, dsp.rb);
 	
 	stack = put_stack(b->head, dsp.pb);
-//	show(stack, dsp.pb);//
+	show(stack, dsp.pb);//
 	ft_get_pivot(stack, &pv, dsp.pb);
 	divide_pb(a, b, pv, dsp.pb);
 }
