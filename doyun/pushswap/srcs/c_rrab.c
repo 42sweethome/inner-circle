@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   c_rrab.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/16 18:02:37 by doyun             #+#    #+#             */
+/*   Updated: 2021/06/16 18:02:38 by doyun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
 void		crra(t_deq *a)
@@ -37,7 +49,7 @@ void		crrr(t_deq *a, t_deq *b)
 	t_node	*temp;
 
 	if (a->head != NULL && a->head->next != NULL)
-	{	
+	{
 		temp = a->tail->prev;
 		temp->next = NULL;
 		a->tail->next = a->head;

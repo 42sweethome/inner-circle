@@ -6,13 +6,13 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 17:39:11 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/02 21:57:32 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/16 18:03:35 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-void	ft_init(t_deq *a, t_deq *b)
+void		ft_init(t_deq *a, t_deq *b)
 {
 	a->head = NULL;
 	a->tail = NULL;
@@ -20,7 +20,7 @@ void	ft_init(t_deq *a, t_deq *b)
 	b->tail = NULL;
 }
 
-void	ft_create_deq(int *stack, t_deq *deq, int count)
+void		ft_create_deq(int *stack, t_deq *deq, int count)
 {
 	t_node	*new_node;
 	int		i;
@@ -33,27 +33,21 @@ void	ft_create_deq(int *stack, t_deq *deq, int count)
 		new_node->value = stack[i];
 		new_node->next = NULL;
 		if (deq->head == NULL)
-		{
 			deq->head = new_node;
-//			printf("crate head : %d\n", new_node->value);
-		}
 		else if (deq->head->next == NULL)
 		{
 			deq->head->next = new_node;
 			new_node->prev = deq->head;
 		}
 		else
-		{
 			deq->tail->next = new_node;
-		}
 		deq->tail = new_node;
-//		printf("create tail : %d\n", deq->tail->value);
 	}
 }
 
-int		ft_deqlen(t_deq deq)
+int			ft_deqlen(t_deq deq)
 {
-	int	len;
+	int		len;
 
 	len = 0;
 	while (deq.head != NULL)
@@ -63,4 +57,3 @@ int		ft_deqlen(t_deq deq)
 	}
 	return (len);
 }
-

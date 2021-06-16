@@ -13,10 +13,10 @@ SRCS_NAME =				main.c\
 						sab.c pab.c rab.c rrab.c\
 						qsort.c sort_ra.c sort_pb.c \
 						sort_rrr.c\
-						last_sort_case.c sort_case4.c sort_case5.c sort_case6.c\
+						last_sort_case.c sort_case3.c sort_case4.c sort_case5.c sort_case6.c\
 						rs_case3.c\
-						utils.c\
-						error.c\
+						utils.c check_utils.c\
+						c_sab.c c_pab.c c_rab.c c_rrab.c\
 				
 SRCS_PATH =				./srcs/
 
@@ -25,7 +25,7 @@ SRCS =					$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 CHECK_SRCS_NAME =		checker.c\
 						get_next_line.c get_next_line_utils.c\
 						c_sab.c c_pab.c c_rab.c c_rrab.c\
-						qsort.c utils.c deque.c\
+						qsort.c utils.c deque.c check_utils.c\
 
 CHECK_SRCS =			$(addprefix $(SRCS_PATH), $(CHECK_SRCS_NAME))
 

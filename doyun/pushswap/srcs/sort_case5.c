@@ -6,24 +6,22 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:33:02 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/11 17:29:19 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:12:05 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-int		only5(t_deq *a, t_deq *b, int *value)
+void		sub_only5(t_deq *a, t_deq *b, int pivot)
 {
-	int		pivot;
 	int		idx;
-	t_node	*temp;
 	t_dsp	dsp;
 
 	idx = 5;
-	pivot =	ft_get_npivot(value, 4);
-	while(idx--)
+	dsp_init(&dsp);
+	while (idx--)
 	{
-		if ( a->head->value < pivot)
+		if (a->head->value < pivot)
 		{
 			pb(b, a);
 			dsp.pb++;
@@ -31,8 +29,17 @@ int		only5(t_deq *a, t_deq *b, int *value)
 		else
 			ra(a);
 		if (dsp.pb == 2)
-			break;
+			break ;
 	}
+}
+
+int			only5(t_deq *a, t_deq *b, int *value)
+{
+	int		pivot;
+	t_node	*temp;
+
+	pivot = ft_get_npivot(value, 4);
+	sub_only5(a, b, pivot);
 	sort_case3(a, b);
 	pa(a, b);
 	pa(a, b);
@@ -42,31 +49,37 @@ int		only5(t_deq *a, t_deq *b, int *value)
 	return (0);
 }
 
-int		noly5(t_deq *a, t_deq *b, int *value)
+void		sub_noly5(t_deq *a, t_deq *b, int pivot, t_dsp *dsp)
 {
-	int		pivot;
 	int		idx;
-	t_node	*temp;
-	t_dsp	dsp;
 
 	idx = 5;
-	dsp_init(&dsp);
-	pivot =	ft_get_npivot(value, 4);
-	while(idx--)
+	while (idx--)
 	{
-		if ( a->head->value < pivot)
+		if (a->head->value < pivot)
 		{
 			pb(b, a);
-			dsp.pb++;
+			dsp->pb++;
 		}
 		else
 		{
 			ra(a);
-			dsp.ra++;
+			dsp->ra++;
 		}
-		if (dsp.pb == 2)
-			break;
+		if (dsp->pb == 2)
+			break ;
 	}
+}
+
+int			noly5(t_deq *a, t_deq *b, int *value)
+{
+	int		pivot;
+	t_node	*temp;
+	t_dsp	dsp;
+
+	dsp_init(&dsp);
+	pivot = ft_get_npivot(value, 4);
+	sub_noly5(a, b, pivot, &dsp);
 	while (dsp.ra--)
 		rra(a);
 	sort_case3(a, b);
@@ -78,8 +91,7 @@ int		noly5(t_deq *a, t_deq *b, int *value)
 	return (0);
 }
 
-
-int		sort_case5(t_deq *a, t_deq *b)
+int			sort_case5(t_deq *a, t_deq *b)
 {
 	t_node	*temp;
 	int		value[5];
@@ -93,12 +105,8 @@ int		sort_case5(t_deq *a, t_deq *b)
 		temp = temp->next;
 	}
 	if (temp == NULL)
-	{
 		return (only5(a, b, value));
-	}
 	else if (temp != NULL)
-	{
 		return (noly5(a, b, value));
-	}
 	return (0);
 }

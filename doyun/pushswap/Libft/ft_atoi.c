@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 20:59:08 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 20:01:03 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/16 16:12:58 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ int					ft_atoi(const char *str, int *flag)
 	idx = 0;
 	miner = 1;
 	num = 0;
-//	while (str[idx] != '\0' && ((str[idx] >= 9 && str[idx] <= 13)
-//	|| str[idx] == 32))
-//		idx++;
 	if (str[idx] == 43 || str[idx] == 45)
 	{
 		if (str[idx] == 45)

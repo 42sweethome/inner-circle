@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   c_pab.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/16 18:04:33 by doyun             #+#    #+#             */
+/*   Updated: 2021/06/16 18:04:34 by doyun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
 void		cpa(t_deq *a, t_deq *b)
 {
 	t_node *temp;
+
 	if (b->head == NULL)
 		return ;
 	temp = b->head->next;
@@ -10,13 +23,13 @@ void		cpa(t_deq *a, t_deq *b)
 		temp->prev = NULL;
 	if (a->head != NULL)
 		a->head->prev = b->head;
-	b->head->next = a->head;	
-	a->head = b->head;	
+	b->head->next = a->head;
+	a->head = b->head;
 	b->head = temp;
 	if (temp == NULL)
 		b->tail = b->head;
 	if (a->tail == NULL)
-		a->tail = a->head;	
+		a->tail = a->head;
 }
 
 void		cpb(t_deq *b, t_deq *a)

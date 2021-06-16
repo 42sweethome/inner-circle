@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:51:28 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/11 21:05:59 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:58:43 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			*ft_get_sortstack(int argc, char **argv, int count)
 			if (flag == 0)
 			{
 				free(stack);
-				stack = NULL;
 				return (NULL);
 			}
 			idx[1]++;
@@ -42,18 +41,35 @@ int			*ft_get_sortstack(int argc, char **argv, int count)
 	return (stack);
 }
 
-void			ft_quick_sort(int *stack, int start, int end)
+void		change_var(int i, int j, int *stack, int pivot)
 {
-	int pivot;
-	int i;
-	int j;
-	int temp;
+	int		temp;
+
+	if (i > j)
+	{
+		temp = stack[pivot];
+		stack[pivot] = stack[j];
+		stack[j] = temp;
+	}
+	else
+	{
+		temp = stack[i];
+		stack[i] = stack[j];
+		stack[j] = temp;
+	}
+}
+
+void		ft_quick_sort(int *stack, int start, int end)
+{
+	int		pivot;
+	int		i;
+	int		j;
 
 	pivot = start;
 	i = pivot + 1;
 	j = end;
 	if (start >= end)
-		return ;	
+		return ;
 	i = 0;
 	while (i <= j)
 	{
@@ -61,22 +77,8 @@ void			ft_quick_sort(int *stack, int start, int end)
 			i++;
 		while (j > start && stack[j] >= stack[pivot])
 			j--;
-		if (i > j)
-		{
-			temp = stack[pivot];
-			stack[pivot] = stack[j];
-			stack[j] = temp;
-		}
-		else
-		{
-			temp = stack[i];
-			stack[i] = stack[j];
-			stack[j] = temp;
-		}
+		change_var(i, j, stack, pivot);
 	}
 	ft_quick_sort(stack, start, j - 1);
 	ft_quick_sort(stack, j + 1, end);
 }
-
-
-

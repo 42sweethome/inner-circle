@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 17:27:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/06/11 19:49:33 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/06/16 17:59:47 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,36 @@
 void		csa(t_deq *a)
 {
 	t_node	*temp;
+	t_node	*temp_next;
+
 	if (a->head != NULL && a->head->next != NULL)
 	{
-		temp = a->head->next;	
-		a->head->next = temp->next;
+		temp = a->head->next;
+		temp_next = temp->next;
+		a->head->next = temp_next;
+		if (temp_next != NULL)
+			temp_next->prev = a->head;
 		if (temp->next == NULL)
 			a->tail = a->head;
-		temp->next = a->head;	
-		a->head->prev = temp;	
-		temp->prev = NULL;	
-		a->head = temp;	
+		temp->next = a->head;
+		a->head->prev = temp;
+		temp->prev = NULL;
+		a->head = temp;
 	}
 }
 
 void		csb(t_deq *b)
 {
 	t_node	*temp;
+	t_node	*temp_next;
 
 	if (b->head != NULL && b->head->next != NULL)
 	{
 		temp = b->head->next;
-		b->head->next = temp->next;
+		temp_next = temp->next;
+		b->head->next = temp_next;
+		if (temp_next != NULL)
+			temp_next->prev = b->head;
 		if (temp->next == NULL)
 			b->tail = b->head;
 		temp->next = b->head;
@@ -47,28 +56,10 @@ void		csb(t_deq *b)
 
 void		css(t_deq *a, t_deq *b)
 {
-	t_node	*temp;
-
-	if (a->head != NULL && a->head->next != NULL)
+	if ((a->head != NULL && a->head->next != NULL) ||
+			(b->head != NULL && b->head->next != NULL))
 	{
-		temp = a->head->next;	
-		a->head->next = temp->next;
-		if (temp->next == NULL)
-			a->tail = a->head;
-		temp->next = a->head;	
-		a->head->prev = temp;	
-		temp->prev = NULL;	
-		a->head = temp;	
-	}
-	if (b->head != NULL && b->head->next != NULL)
-	{
-		temp = b->head->next;
-		b->head->next = temp->next;
-		if (temp->next == NULL)
-			b->tail = b->head;
-		temp->next = b->head;
-		b->head->prev = temp;
-		temp->prev = NULL;
-		b->head = temp;
+		csa(a);
+		csb(b);
 	}
 }

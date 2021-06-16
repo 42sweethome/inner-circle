@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:18:32 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/11 20:53:08 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/06/16 18:00:51 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		apply_stdin(t_deq *a, t_deq *b, char *line)
 
 int		check_sort(t_deq *a, t_deq *b)
 {
-
 	t_node *temp;
 	t_node *temp_next;
 
@@ -61,42 +60,49 @@ int		check_sort(t_deq *a, t_deq *b)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+void		check_stdin(t_deq a, t_deq b)
 {
-	if (argc <= 1)
-		return (0);
-	int count;
-	int	*stack;
-	t_deq	a;
-	t_deq	b;
 	char	*line;
 
-	if ((count = ft_count_arg(argv, ' ')) == 0)
-	{
-		write(2, "Error\n", 6);
-			return (0);
-		}
-	stack = ft_get_sortstack(argc, argv, count);
-	if (stack == NULL)
-	{
-		write(2, "Error\n", 6);
-		return(0);
-	}
-	ft_init(&a, &b);
-	ft_create_deq(stack, &a, count);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (apply_stdin(&a, &b, line))
 		{
 			write(2, "Error\n", 6);
-			return (0);
+			return ;
 		}
 	}
 	if (check_sort(&a, &b))
 	{
 		write(1, "KO\n", 3);
-		return (0);
+		return ;
 	}
 	write(1, "OK\n", 3);
+}
+
+int			main(int argc, char **argv)
+{
+	int		count;
+	int		*stack;
+	t_deq	a;
+	t_deq	b;
+
+	if (argc <= 1)
+		return (0);
+	if ((count = ft_count_arg(argv, ' ')) == 0)
+	{
+		write(2, "Error\n", 6);
+		return (0);
+	}
+	stack = ft_get_sortstack(argc, argv, count);
+	stack = ft_check_dup(stack, count);
+	if (stack == NULL)
+	{
+		write(2, "Error\n", 6);
+		return (0);
+	}
+	ft_init(&a, &b);
+	ft_create_deq(stack, &a, count);
+	check_stdin(a, b);
 	return (0);
 }

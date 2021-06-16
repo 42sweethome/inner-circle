@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pab.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/16 17:26:53 by doyun             #+#    #+#             */
+/*   Updated: 2021/06/16 17:26:54 by doyun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
 void		pa(t_deq *a, t_deq *b)
 {
-	t_node *temp;
-//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+	t_node	*temp;
+
 	if (b->head == NULL)
 		return ;
 	temp = b->head->next;
@@ -11,22 +23,19 @@ void		pa(t_deq *a, t_deq *b)
 		temp->prev = NULL;
 	if (a->head != NULL)
 		a->head->prev = b->head;
-	b->head->next = a->head;	
-//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
-	a->head = b->head;	
-//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+	b->head->next = a->head;
+	a->head = b->head;
 	b->head = temp;
 	if (temp == NULL)
 		b->tail = b->head;
 	if (a->tail == NULL)
-		a->tail = a->head;	
-//	printf("head : %d, tail : %d\n", a->head->value, a->tail->value);
+		a->tail = a->head;
 	write(1, "pa\n", 3);
 }
 
 void		pb(t_deq *b, t_deq *a)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (a->head == NULL)
 		return ;

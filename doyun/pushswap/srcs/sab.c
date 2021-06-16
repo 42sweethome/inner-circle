@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sab.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/16 16:36:11 by doyun             #+#    #+#             */
+/*   Updated: 2021/06/16 16:41:00 by doyun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/pushswap.h"
 
 void		sa(t_deq *a)
@@ -14,10 +26,10 @@ void		sa(t_deq *a)
 			temp_next->prev = a->head;
 		if (temp->next == NULL)
 			a->tail = a->head;
-		temp->next = a->head;	
-		a->head->prev = temp;	
-		temp->prev = NULL;	
-		a->head = temp;	
+		temp->next = a->head;
+		a->head->prev = temp;
+		temp->prev = NULL;
+		a->head = temp;
 		write(1, "sa\n", 3);
 	}
 }
@@ -46,40 +58,11 @@ void		sb(t_deq *b)
 
 void		ss(t_deq *a, t_deq *b)
 {
-	t_node	*temp;
-	t_node	*temp_next;
-
-	if ((a->head != NULL && a->head->next != NULL) || 
+	if ((a->head != NULL && a->head->next != NULL) ||
 			(b->head != NULL && b->head->next != NULL))
 	{
-		if (a->head != NULL && a->head->next != NULL)
-		{
-			temp = a->head->next;
-			temp_next = temp->next;
-			a->head->next = temp_next;
-			if (temp_next != NULL)
-				temp_next->prev = a->head;
-			if (temp->next == NULL)
-				a->tail = a->head;
-			temp->next = a->head;	
-			a->head->prev = temp;	
-			temp->prev = NULL;	
-			a->head = temp;	
-		}
-		if (b->head != NULL && b->head->next != NULL)
-		{
-			temp = b->head->next;
-			temp_next = temp->next;
-			b->head->next = temp_next;
-			if (temp_next != NULL)
-				temp_next->prev = b->head;	
-			if (temp->next == NULL)
-				b->tail = b->head;
-			temp->next = b->head;
-			b->head->prev = temp;
-			temp->prev = NULL;
-			b->head = temp;
-		}
+		csa(a);
+		csb(b);
 		write(1, "ss\n", 3);
 	}
 }

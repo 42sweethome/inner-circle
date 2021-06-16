@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:13:43 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/10 14:15:39 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/16 16:41:32 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		only4(t_deq *a, t_deq *b, int *value)
 
 void	only4_exception(t_deq *a, t_deq *b, int *value)
 {
-	if (value[0] > value[1] && value[2] > value[3] && value[0] < value[3])//2143
+	if (value[0] > value[1] && value[2] > value[3] && value[0] < value[3])
 	{
 		pb(b, a);
 		pb(b, a);
@@ -51,13 +51,13 @@ void	only4_exception(t_deq *a, t_deq *b, int *value)
 		pa(a, b);
 		pa(a, b);
 	}
-	else if (value[0] > value [2] && value[1] > value[3] && value[0] < value[3])
+	else if (value[0] > value[2] && value[1] > value[3] && value[0] < value[3])
 	{
 		rra(a);
 		sa(a);
 		rra(a);
 	}
-	else if (value[0] < value[2] && value [1] < value[3] && value[0] > value [3])
+	else if (value[0] < value[2] && value[1] < value[3] && value[0] > value[3])
 	{
 		ra(a);
 		sa(a);
@@ -85,8 +85,8 @@ void	noly4(t_deq *a, t_deq *b)
 int		noly4_exception(t_deq *a, t_deq *b, int *value)
 {
 	if ((value[0] > value[1] && value[0] < value[2] && value[0] < value[3])
-			|| (value[0] < value[1] && value[0] > value[2] && value[0] < value[3])
-			|| (value[0] < value[1] && value[0] < value[2] && value[0] > value[3]))
+		|| (value[0] < value[1] && value[0] > value[2] && value[0] < value[3])
+		|| (value[0] < value[1] && value[0] < value[2] && value[0] > value[3]))
 	{
 		pb(b, a);
 		sort_case3(a, b);
@@ -100,14 +100,12 @@ int		noly4_exception(t_deq *a, t_deq *b, int *value)
 	return (0);
 }
 
-int		sort_case4(t_deq *a, t_deq *b)
+int		sort_case4(t_deq *a, t_deq *b, int idx)
 {
 	t_node	*temp;
 	int		value[4];
-	int		idx;
 
 	temp = a->head;
-	idx = 0;
 	while (idx < 4)
 	{
 		value[idx++] = temp->value;

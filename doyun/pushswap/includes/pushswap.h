@@ -18,9 +18,15 @@ typedef struct		s_node
 
 typedef struct		s_deq
 {
-	t_node			*head; //처음 노드
-	t_node			*tail; //마지막 노드
+	t_node			*head;
+	t_node			*tail;
 }					t_deq;
+
+typedef struct		s_buf
+{
+	t_deq			*a;
+	t_deq			*b;
+}					t_buf;
 
 typedef struct		s_pivot
 {
@@ -67,8 +73,11 @@ int				rs_case3(t_deq *a, t_deq *b);
 int				sort_case(t_deq *a, t_deq *b, int count);
 int				sort_case3(t_deq *a, t_deq *b);
 
+//sort_case3.c
+
+int				sort_case3(t_deq *a, t_deq *b);
 //sort_case4.c
-int				sort_case4(t_deq *a, t_deq *b);
+int				sort_case4(t_deq *a, t_deq *b, int idx);
 
 //sort_case5.c
 int				sort_case5(t_deq *a, t_deq *b);
