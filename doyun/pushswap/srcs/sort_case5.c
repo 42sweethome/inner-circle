@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:33:02 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/16 17:12:05 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/17 11:20:07 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		sub_only5(t_deq *a, t_deq *b, int pivot)
 	int		idx;
 	t_dsp	dsp;
 
-	idx = 5;
 	dsp_init(&dsp);
+	idx = 5;
 	while (idx--)
 	{
 		if (a->head->value < pivot)

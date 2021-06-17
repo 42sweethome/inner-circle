@@ -6,32 +6,30 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 15:44:11 by sonkang           #+#    #+#             */
-/*   Updated: 2021/06/16 17:57:55 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/17 11:04:38 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-void		sub_only6(t_deq *a, t_deq *b, int pivot)
+void		sub_only6(t_deq *a, t_deq *b, int pivot, t_dsp *dsp)
 {
 	int		idx;
-	t_dsp	dsp;
 
 	idx = 6;
-	dsp_init(&dsp);
 	while (idx--)
 	{
 		if (a->head->value <= pivot)
 		{
 			pb(b, a);
-			dsp.pb++;
+			dsp->pb++;
 		}
 		else
 		{
 			ra(a);
-			dsp.ra++;
+			dsp->ra++;
 		}
-		if (dsp.pb == 3)
+		if (dsp->pb == 3)
 			break ;
 	}
 }
@@ -44,7 +42,7 @@ int			noly6(t_deq *a, t_deq *b, int *value)
 
 	dsp_init(&dsp);
 	pivot = ft_get_npivot(value, 5);
-	sub_only6(a, b, pivot);
+	sub_only6(a, b, pivot, &dsp);
 	while (dsp.ra--)
 		rra(a);
 	sort_case3(a, b);

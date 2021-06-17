@@ -6,13 +6,13 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:18:32 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/16 18:00:51 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/17 11:26:53 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-int		apply_stdin(t_deq *a, t_deq *b, char *line)
+int			apply_stdin(t_deq *a, t_deq *b, char *line)
 {
 	if (ft_strncmp(line, "sa", 2))
 		csa(a);
@@ -41,10 +41,10 @@ int		apply_stdin(t_deq *a, t_deq *b, char *line)
 	return (0);
 }
 
-int		check_sort(t_deq *a, t_deq *b)
+int			check_sort(t_deq *a, t_deq *b)
 {
-	t_node *temp;
-	t_node *temp_next;
+	t_node	*temp;
+	t_node	*temp_next;
 
 	temp = a->head;
 	temp_next = a->head->next;
@@ -60,19 +60,19 @@ int		check_sort(t_deq *a, t_deq *b)
 	return (0);
 }
 
-void		check_stdin(t_deq a, t_deq b)
+void		check_stdin(t_deq *a, t_deq *b)
 {
 	char	*line;
 
 	while (get_next_line(0, &line) > 0)
 	{
-		if (apply_stdin(&a, &b, line))
+		if (apply_stdin(a, b, line))
 		{
 			write(2, "Error\n", 6);
 			return ;
 		}
 	}
-	if (check_sort(&a, &b))
+	if (check_sort(a, b))
 	{
 		write(1, "KO\n", 3);
 		return ;
@@ -84,8 +84,7 @@ int			main(int argc, char **argv)
 {
 	int		count;
 	int		*stack;
-	t_deq	a;
-	t_deq	b;
+	t_buf	buf;
 
 	if (argc <= 1)
 		return (0);
@@ -101,8 +100,8 @@ int			main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	ft_init(&a, &b);
-	ft_create_deq(stack, &a, count);
-	check_stdin(a, b);
+	ft_init(&buf);
+	ft_create_deq(stack, buf.a, count);
+	check_stdin(buf.a, buf.b);
 	return (0);
 }

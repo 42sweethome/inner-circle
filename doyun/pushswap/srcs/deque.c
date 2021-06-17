@@ -6,18 +6,34 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 17:39:11 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/16 18:03:35 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/17 11:24:03 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
 
-void		ft_init(t_deq *a, t_deq *b)
+void		ft_create_buf(t_buf *buf)
 {
-	a->head = NULL;
-	a->tail = NULL;
-	b->head = NULL;
-	b->tail = NULL;
+	t_deq	*a;
+	t_deq	*b;
+
+	a = (t_deq *)malloc(sizeof(t_deq));
+	b = (t_deq *)malloc(sizeof(t_deq));
+	if (a != NULL)
+		buf->a = a;
+	if (b != NULL)
+		buf->b = b;
+}
+
+void		ft_init(t_buf *buf)
+{
+	buf->a = NULL;
+	buf->b = NULL;
+	ft_create_buf(buf);
+	buf->a->head = NULL;
+	buf->a->tail = NULL;
+	buf->b->head = NULL;
+	buf->b->tail = NULL;
 }
 
 void		ft_create_deq(int *stack, t_deq *deq, int count)
@@ -43,17 +59,4 @@ void		ft_create_deq(int *stack, t_deq *deq, int count)
 			deq->tail->next = new_node;
 		deq->tail = new_node;
 	}
-}
-
-int			ft_deqlen(t_deq deq)
-{
-	int		len;
-
-	len = 0;
-	while (deq.head != NULL)
-	{
-		deq.head = deq.head->next;
-		len++;
-	}
-	return (len);
 }

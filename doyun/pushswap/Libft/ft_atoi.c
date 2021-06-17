@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 20:59:08 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/16 16:12:58 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/17 11:28:57 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int					ft_atoi(const char *str, int *flag)
 			return (*flag = 0);
 	}
 	if (str[idx] != '\0')
-		return(*flag = 0);
+		return (*flag = 0);
 	return (num * miner);
 }

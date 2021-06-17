@@ -6,15 +6,15 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 22:49:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/11 20:28:47 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/06/17 11:28:41 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-int				ft_memchr(int *s, int c, size_t n)
+
+int			ft_memchr(int *s, int c, size_t n)
 {
-	int	*temp_s;
+	int		*temp_s;
 
 	temp_s = s;
 	while (n)
