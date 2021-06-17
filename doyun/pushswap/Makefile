@@ -44,8 +44,13 @@ LIBFT_A =				libft.a
 all :
 						make all -C $(LIBFT)
 						make $(NAME)
+
+bonus :					
+						make all -C $(LIBFT)
+						make $(NAME)
 						make $(CHECK_NAME)
 
+	
 $(NAME) : 				$(OBJS)
 						$(CC) $(CFLAGS) $(OBJS) -o $@ -L$(LIBFT) -lft
 
@@ -62,9 +67,10 @@ fclean :				clean
 						make fclean -C $(LIBFT)
 
 re :
-						make fclean all
+						make fclean all				
 
-.PHONY :				all clean fclean re
+
+.PHONY :				all clean fclean re bonus
 				
 						
 						
