@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:18:32 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/17 11:26:53 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/22 14:21:58 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,18 @@ void		check_stdin(t_deq *a, t_deq *b)
 		if (apply_stdin(a, b, line))
 		{
 			write(2, "Error\n", 6);
+			free(line);
 			return ;
 		}
+		free(line);
 	}
 	if (check_sort(a, b))
 	{
 		write(1, "KO\n", 3);
+		free(line);
 		return ;
 	}
+	free(line);
 	write(1, "OK\n", 3);
 }
 
@@ -103,5 +107,6 @@ int			main(int argc, char **argv)
 	ft_init(&buf);
 	ft_create_deq(stack, buf.a, count);
 	check_stdin(buf.a, buf.b);
+	checker_free(&buf);
 	return (0);
 }

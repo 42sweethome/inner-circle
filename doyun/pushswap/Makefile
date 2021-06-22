@@ -2,7 +2,7 @@ NAME =					push_swap
 
 CHECK_NAME =			checker
 
-CC =					gcc -fsanitize=address -g
+CC =					gcc
 
 CFLAGS =				-Wall -Wextra -Werror
 
@@ -22,7 +22,7 @@ SRCS_PATH =				./srcs/
 
 SRCS =					$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
-CHECK_SRCS_NAME =		checker.c\
+CHECK_SRCS_NAME =		checker.c checker_free.c\
 						get_next_line.c get_next_line_utils.c\
 						c_sab.c c_pab.c c_rab.c c_rrab.c\
 						qsort.c utils.c deque.c check_utils.c\

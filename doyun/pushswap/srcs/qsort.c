@@ -6,11 +6,34 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 14:51:28 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/16 17:58:43 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/22 12:45:19 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pushswap.h"
+
+void		ft_free_split(char **split, int idx)
+{
+	if (split == NULL)
+		return ;
+	else if (*split == NULL)
+		return ;
+	while (idx > 0)
+	{
+		idx--;
+		free(split[idx]);
+		split[idx] = 0;
+	}
+	free(split);
+	split = 0;
+}
+
+void		ft_var_init(int *idx, int *flag)
+{
+	idx[0] = 1;
+	idx[2] = 0;
+	*flag = 1;
+}
 
 int			*ft_get_sortstack(int argc, char **argv, int count)
 {
@@ -19,9 +42,7 @@ int			*ft_get_sortstack(int argc, char **argv, int count)
 	int		idx[3];
 	int		flag;
 
-	idx[0] = 1;
-	idx[2] = 0;
-	flag = 1;
+	ft_var_init(idx, &flag);
 	stack = (int *)ft_calloc(sizeof(int), count);
 	while (idx[0] < argc && (split = ft_split(argv[idx[0]], ' ')) != NULL)
 	{
@@ -31,12 +52,14 @@ int			*ft_get_sortstack(int argc, char **argv, int count)
 			stack[idx[2]++] = ft_atoi(split[idx[1]], &flag);
 			if (flag == 0)
 			{
+				ft_free_split(split, idx[1]);
 				free(stack);
 				return (NULL);
 			}
 			idx[1]++;
 		}
 		idx[0]++;
+		ft_free_split(split, idx[1]);
 	}
 	return (stack);
 }

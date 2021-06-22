@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 11:24:23 by doyun             #+#    #+#             */
-/*   Updated: 2021/06/17 11:27:52 by doyun            ###   ########.fr       */
+/*   Updated: 2021/06/22 12:50:45 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int					str_len(char *s);
 
 void				ft_init(t_buf *buf);
 void				ft_create_deq(int *stack, t_deq *deq, int count);
+void				ft_deqclear(t_node *node);
 
 int					*ft_get_sortstack(int argc, char **argv, int count);
 void				ft_quick_sort(int *stack, int start, int end);
@@ -92,6 +93,7 @@ int					ft_check_ahead(t_deq *deq, int count);
 int					ft_check_atail(t_deq *deq, int count);
 int					ft_check_bhead(t_deq *deq, int count);
 int					ft_check_btail(t_deq *deq, int count);
+void				checker_free(t_buf *buf);
 
 void				sa(t_deq *a);
 void				sb(t_deq *b);
