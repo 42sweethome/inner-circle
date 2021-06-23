@@ -6,7 +6,7 @@ services:
             - mysql
         build: ./requirements/wordpress
         ports:
-            - "5050:5050"
+            - "9000:9000"
 
     mysql:
         build: ./requirements/mariadb
@@ -21,3 +21,6 @@ services:
             - ./requirements/nginx/tools:/usr/share/nginx/html
         ports:
             - "443:443"
+        extra_hosts:
+            - "junghan.42.fr:127.0.0.1"
+

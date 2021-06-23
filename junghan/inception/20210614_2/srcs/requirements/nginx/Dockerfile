@@ -7,22 +7,27 @@ RUN apk add nginx
 
 # set ssl
 RUN apk add openssl
+RUN apk add openrc
 RUN openssl req -newkey rsa:2048 \
 			-x509 \
 			-sha256 \
 			-days 3650 \
 			-nodes \
-			-out /etc/ssl/certs/nginx-selfsigned.crt \
-			-keyout /etc/ssl/private/nginx-selfsigned.key \
-			-subj "/C=KR/ST=Seoul/L=Seoul/O=42seoul/OU=inception/CN=localhost" && \
-			chmod 600 /etc/ssl/certs/nginx-selfsigned.crt /etc/ssl/private/nginx-selfsigned.key
-COPY ./conf/nginx.conf /etc/nginx/conf.d/nginx_service.conf
+			-out /etc/ssl/certs/www.junghan.42.fr.crt \
+			-keyout /etc/ssl/private/www.junghan.42.fr.key \
+			-subj "/C=KR/ST=Seoul/L=Seoul/O=42seoul/OU=inception/CN=www.junghan.42.fr" && \
+			chmod 600 /etc/ssl/certs/www.junghan.42.fr.crt /etc/ssl/private/www.junghan.42.fr.key
+COPY ./tools/hosts /etc/
+COPY ./conf/nginx.conf /etc/nginx/conf.d/www.junghan.42.fr.conf
 RUN rm -f /etc/nginx/conf.d/default.conf
 COPY ./tools/index.html /var/www/html/
+RUN mkdir /var/www/junghan.42.fr/
+COPY ./tools/index.html /var/www/junghan.42.fr/
 RUN mkdir /run/nginx
-RUN mkdir /var/www/html/junghan.42.fr
+
+RUN rc-update add nginx default
 
 # expose ports
-EXPOSE 80 443
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]

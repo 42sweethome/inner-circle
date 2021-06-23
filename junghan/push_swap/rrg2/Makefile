@@ -6,7 +6,7 @@
 #    By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/11 15:39:52 by junghan           #+#    #+#              #
-#    Updated: 2021/05/24 21:02:22 by junghan          ###   ########.fr        #
+#    Updated: 2021/06/21 13:18:55 by junghan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ all :
 	make $(PUSH_NAME)
 
 $(PUSH_NAME): $(PUSH_OBJS)
-	$(CC) $(CFLAGS) -o $(PUSH_NAME) $(PUSH_OBJS) -L$(LIBFT) -l libft.a
+	$(CC) $(CFLAGS) -o $(PUSH_NAME) $(PUSH_OBJS) -L $(LIBFT) -lft
 
 bonus:
 	make -C $(LIBFT)
