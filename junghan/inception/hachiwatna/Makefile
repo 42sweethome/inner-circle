@@ -4,7 +4,7 @@ START_PATH = ./srcs/
 all: purge setup reload
 
 setup:
-	@ cd $(START_PATH)/requirements/tools &&  sh launchpad.sh
+	@ cd $(START_PATH)/requirements/tools && sudo sh launchpad.sh
 	
 stop:
 	@ cd $(START_PATH) && docker-compose down; 
