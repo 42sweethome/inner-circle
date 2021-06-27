@@ -5,6 +5,9 @@ services:
         volumes:
             - ~/data/maria:/var/lib/mysql
         restart: always
+        environment:
+            MARIA_ID: "{MARIA_ID}"
+            MARIA_PW: "{MARIA_PW}"
         ports: 
             - "3306:3306"
         build:
@@ -12,8 +15,7 @@ services:
             dockerfile: Dockerfile 
         networks:
             inception:
-        env_file: .env
-               
+        env_file: .env 
 
     wordpress:
         depends_on:
@@ -22,6 +24,13 @@ services:
         volumes:
             - ~/data/wordpress:/var/www/wordpress
         restart: always
+        environment:
+            WP_ID: "${WP_ID}"
+            WP_PW: "${WP_PW}"
+            WP_USER_ID: "${WP_USER_ID}"
+            WP_USER_PW: "${WP_USER_PW}"
+            MARIA_ID: "{MARIA_ID}"
+            MARIA_PW: "{MARIA_PW}"
         ports:
             - "9000:9000"
         build:
@@ -60,7 +69,6 @@ volumes:
             o: bind
             type: none
             device: ~/data/wordpress
-
 
 networks:
     inception:
