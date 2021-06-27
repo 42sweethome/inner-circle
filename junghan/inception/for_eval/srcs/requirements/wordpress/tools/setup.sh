@@ -1,13 +1,13 @@
 #!/bin/bash
 
-for ((i=100000; i>=0; i--))
+for ((i=10000; i>=0; i--))
 do
 	echo -e "\e[31mloading...\e[0m\n"
 done
 
 if  [ ! -f /var/www/wordpress/wp-config.php ]; then 
     
-	for ((i=100000; i>=0; i--))
+	for ((i=10000; i>=0; i--))
 	do
 		echo -e "\e[31mloading...\e[0m\n"
 	done

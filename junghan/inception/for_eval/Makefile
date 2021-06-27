@@ -20,4 +20,4 @@ clean: stop
 fclean: clean
 	sudo rm -Rf ~/data/;
 
-.PHONY: setup stop clean fclean build all 
+.PHONY: setup build stop volrm clean fclean all
