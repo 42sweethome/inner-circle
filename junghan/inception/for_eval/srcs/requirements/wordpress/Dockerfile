@@ -36,5 +36,5 @@ COPY tools/setup.sh /
 RUN chmod 777 /setup.sh
 WORKDIR /var/www/wordpress
 EXPOSE 9000
-ENTRYPOINT ["sh", "/setup.sh"]
+ENTRYPOINT ["bash", "/setup.sh"]
 

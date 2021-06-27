@@ -1,17 +1,16 @@
-i ="100000"
-while ["$i" >= 0]; do
-	echo "loading...\n"
-	i = $i - 1;
-done
+#!/bin/bash
 
+for ((i=100000; i>=0; i--))
+do
+	echo "\e[31mloading...\e[0m\n"
+done
 
 if  [ ! -f /var/www/wordpress/wp-config.php ]; then 
     
-	i ="100000"
-while ["$i" >= 0]; do
-	echo "loading...\n"
-	i = $i - 1;
-done
+	for ((i=100000; i>=0; i--))
+	do
+		echo "\e[31mloading...\e[0m\n"
+	done
 
     wp core --allow-root download --locale=ko_KR --force 
     while  [ ! -f /var/www/wordpress/wp-config.php ]; do

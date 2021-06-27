@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ ! -d "/var/lib/mysql/wordpress" ]; then 
     
     mysql_install_db
