@@ -3,7 +3,7 @@ FROM debian:buster
 MAINTAINER junghan <junghan@student.42seoul.kr>
 
 RUN apt-get update
-RUN apt-get install -y mariadb-server vim ; 
+RUN apt-get install -y mariadb-server vim procps; 
 
 COPY tools/setup.sh . 
 RUN chmod +x setup.sh 

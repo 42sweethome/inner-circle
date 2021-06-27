@@ -22,7 +22,8 @@ RUN apt-get install -y php7.3-fpm \
     curl \
     openssl \
     mariadb-client \
-    vim ;  
+    vim \
+    procps;  
 RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN	chmod +x wp-cli.phar
 RUN	mv wp-cli.phar /usr/local/bin/wp 
