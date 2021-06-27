@@ -1,7 +1,5 @@
 FROM debian:buster 
 
-VOLUME ["/var/www/wordpress"]
-
 MAINTAINER junghan <junghan@student.42seoul.kr>
 
 RUN apt-get update
