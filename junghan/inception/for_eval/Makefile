@@ -3,10 +3,10 @@ NAME = inception
 all: clean setup build
 
 setup:
-	cd ./srcs/requirements/tools && sh pre_work.sh
+	cd ./srcs/requirements/tools && sudo bash pre_work.sh
 
 build: 
-	cd ./srcs/ &&  docker-compose up --build ; 
+	cd ./srcs/ && docker-compose up --build ; 
 	
 stop:
 	cd ./srcs/ && docker-compose down; 
@@ -18,6 +18,6 @@ clean: stop
 	cd ./srcs/ && docker system prune -a; 
 
 fclean: clean
-	  rm -Rf ~/data/;
+	sudo rm -Rf ~/data/;
 
 .PHONY: setup stop clean fclean build all 
