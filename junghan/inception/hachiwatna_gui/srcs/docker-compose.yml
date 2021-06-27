@@ -1,7 +1,7 @@
 version: '2'
 services:
     mariadb:
-        image: mariadb
+        image: mariadb:inc
         volumes:
             - ~/data/maria:/var/lib/mysql
         restart: always
@@ -18,7 +18,7 @@ services:
     wordpress:
         depends_on:
             - mariadb
-        image: wordpress
+        image: wordpress:inc
         volumes:
             - ~/data/wp:/var/www/wordpress
         restart: always
@@ -32,7 +32,7 @@ services:
         env_file: .env
 
     nginx:
-        image: nginx
+        image: nginx:inc
         restart: always
         depends_on:
             - wordpress
@@ -45,6 +45,8 @@ services:
             dockerfile: Dockerfile
         networks:
             inception:
+        extra_hosts:
+            - "junghan.42.fr:127.0.0.1"
         env_file: .env
 
 networks:

@@ -21,6 +21,7 @@ RUN apt-get install -y php7.3-fpm \
     wget \
     curl \
     openssl \
+    sendmail \ 
     mariadb-client \
     vim \
     procps;  

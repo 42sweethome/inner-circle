@@ -1,23 +1,20 @@
 NAME = inception
-START_PATH = ./srcs/
 
-all: purge setup reload
+all: clean setup build
 
 setup:
-	@ cd $(START_PATH)/requirements/tools && sudo sh launchpad.sh
+	cd ./srcs/requirements/tools && sh pre_work.sh
+
+build: 
+	cd ./srcs/ &&  docker-compose up --build ; 
 	
 stop:
-	@ cd $(START_PATH) && docker-compose down; 
+	cd ./srcs/ && docker-compose down; 
 
 clean: stop
-	@ cd $(START_PATH) && docker system prune; 
+	cd ./srcs/ && docker system prune -a; 
 
-purge: clean
-	@  rm -Rf ~/data/;
+fclean: clean
+	  rm -Rf ~/data/;
 
-reload: 
-	@ cd $(START_PATH) &&  docker-compose up --build ; 
-
- 
-
-.PHONY: setup stop clean purge reload all 
+.PHONY: setup stop clean fclean build all 
