@@ -14,4 +14,6 @@ if [ ! -d "/var/lib/mysql/wordpress" ]; then
     service mysql stop 
 fi
 
+sleep 3
+
 mysqld
