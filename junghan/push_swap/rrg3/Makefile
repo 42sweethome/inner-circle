@@ -6,7 +6,7 @@
 #    By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/11 15:39:52 by junghan           #+#    #+#              #
-#    Updated: 2021/06/21 13:13:07 by junghan          ###   ########.fr        #
+#    Updated: 2021/07/07 17:29:27 by junghan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CHECK_SRCS = ft_checker.c ft_check.c ft_input_int.c ft_func_p.c ft_func_s.c \
 
 CHECK_OBJS = $(CHECK_SRCS:.c=.o)
 
-IBFT = ./libft
+LIBFT = ./libft
 
 LIBFT_LIB = libft.a
 
