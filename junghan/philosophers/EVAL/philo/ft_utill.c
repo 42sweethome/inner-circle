@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:02:26 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/07 14:37:46 by junghan          ###   ########.fr       */
+/*   Updated: 2021/07/08 11:52:01 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ft_atoi(char *str)
 		else if (sign > 0 && result > 2147483647)
 			return (-1);
 		i++;
+		if (str[i] != 0 && ('0' > str[i] || str[i] > '9'))
+			return (-1);
 	}
 	return ((int)(sign * result));
 }

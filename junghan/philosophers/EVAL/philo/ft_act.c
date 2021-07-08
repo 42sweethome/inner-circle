@@ -6,79 +6,79 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 16:18:29 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/07 18:51:27 by junghan          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:01:04 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_philo.h"
 
-int	eat_to_survive(t_philos *philo)
+int	eat_to_survive(t_philos *philo, t_info *info)
 {
 	unsigned long	present;
 	int				check;
 	int				ret;
 
-	ret = NONE;
-	if ((prst_mili_sec() - philo->starving_time) > g_info.time_to_die)
+	ret = 3;
+	if ((prst_mili_sec() - philo->starving_time) > info->time_to_die)
 	{
 		philo->die = 1;
-		return (FAIL);
+		return (-1);
 	}
-	check = pick_up_fork(philo);
+	check = pick_up_fork(philo, info);
 	present = prst_mili_sec();
-	if (check == LEFT || check == RIGHT)
-		one_hand_operation(philo, check, present);
-	else if (check == BOTH)
-		ret = two_hand_operation(philo, present);
-	if (ret == FAIL)
+	if (check == 1 || check == 2)
+		one_hand_operation(philo, check, present, info);
+	else if (check == 0)
+		ret = two_hand_operation(philo, present, info);
+	if (ret == -1)
 	{
 		philo->die = 1;
-		return (FAIL);
+		return (-1);
 	}
-	else if (ret == SUCCESS)
-		return (SUCCESS);
+	else if (ret == 0)
+		return (0);
 	else
-		return (NONE);
+		return (3);
 }
 
-int	sleep_after_eat(t_philos *philo, int check)
+int	sleep_after_eat(t_philos *philo, int check, t_info *info)
 {
-	if (g_info.limit != 0 && g_info.limit == philo->eat_time)
-		return (FULL);
-	if ((prst_mili_sec() - philo->starving_time) > g_info.time_to_die)
+	if (info->limit != 0 && info->limit == philo->eat_time)
+		return (-1);
+	if ((prst_mili_sec() - philo->starving_time) > info->time_to_die)
 	{
 		philo->die = 1;
-		return (FAIL);
+		return (-1);
 	}
-	if (check == NONE)
-		return (NONE);
+	if (check == 3)
+		return (3);
 	printf("[%lu]	|	philo[%d]	|	sleeping...		|\n", \
-			(prst_mili_sec() - g_info.std_time), philo->id);
-	if (g_info.die_flag == 0)
+			(prst_mili_sec() - info->std_time), philo->id);
+	if (info->die_flag == 0)
 	{
 		philo->die = 1;
-		return (FAIL);
+		return (-1);
 	}
-	for_pause(g_info.time_to_sleep);
-	if ((prst_mili_sec() - philo->starving_time) > g_info.time_to_die)
+	for_pause(info->time_to_sleep);
+	if ((prst_mili_sec() - philo->starving_time) > info->time_to_die)
 	{
 		philo->die = 1;
-		return (FAIL);
+		return (-1);
 	}
-	return (SUCCESS);
+	return (0);
 }
 
-int	think_before_eat(t_philos *philo, int check)
+int	think_before_eat(t_philos *philo, int check, t_info *info)
 {
 	unsigned long	present;
 
 	present = prst_mili_sec();
-	if ((present - philo->starving_time) > g_info.time_to_die)
+	if ((present - philo->starving_time) > info->time_to_die)
 	{
 		philo->die = 1;
-		return (FAIL);
+		return (-1);
 	}
 	printf("[%lu]	|	philo[%d]	|	thinking...		|\n", \
-			(prst_mili_sec() - g_info.std_time), philo->id);
-	return (SUCCESS);
+			(prst_mili_sec() - info->std_time), philo->id);
+	return (0);
 }
