@@ -6,19 +6,16 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:23:13 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 15:05:09 by junghan          ###   ########.fr       */
+/*   Updated: 2021/07/15 14:49:06 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sercli.h"
 
-//void	reply()
-
-void	sig_usr(int signo)
+void sig_usr(int signo)
 {
 	static char	arr[8];
 	static int	i;
-	static int	end;
 	char		set;
 
 	if (signo == 30)
@@ -26,17 +23,14 @@ void	sig_usr(int signo)
 	else if (signo == 31)
 		arr[i] = '0';
 	i++;
-	if (i == 8 && end == 0)
+	if (i == 8)
 	{
 		set = (char)ft_atoi_base(arr, "01");
+		write(1, &set, 1);
 		if (set == 0)
-		{
 			write(1, "\n", 1);
-			end = 1;
-		}
 		i = 0;
 	}
-//	reply();
 }
 
 int	main()
