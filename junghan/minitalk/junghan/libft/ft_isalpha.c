@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/22 13:03:10 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/22 13:14:50 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
-
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+int	ft_isalpha(int c)
+{
+	return ((65 <= c && c <= 90) || (97 <= c && c <= 122));
+}

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/28 12:30:41 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/28 14:48:24 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
+int	ft_lstsize(t_list *lst)
+{
+	t_list	*tmp;
+	int		size;
 
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+	size = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	return (size);
+}

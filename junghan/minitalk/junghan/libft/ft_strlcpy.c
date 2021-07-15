@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 19:41:55 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 10:53:02 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
+size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size)
+{
+	size_t	i;
+	size_t	src_len;
 
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+	if (!dest || !src)
+		return (0);
+	src_len = ft_strlen(src);
+	if (dest_size == 0)
+		return (src_len);
+	i = 0;
+	while (src[i] && i < src_len && i + 1 < dest_size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (src_len);
+}

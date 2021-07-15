@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/27 23:02:52 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/29 11:38:17 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
-
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+void	ft_putendl_fd(char *s, int fd)
+{
+	if (!s || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
+}

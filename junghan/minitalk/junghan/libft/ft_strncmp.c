@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/24 02:10:42 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 02:10:46 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*tmp1;
+	unsigned char	*tmp2;
 
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+	tmp1 = (unsigned char *)s1;
+	tmp2 = (unsigned char *)s2;
+	i = 0;
+	while ((tmp1[i] || tmp2[i]) && i < n)
+	{
+		if (tmp1[i] != tmp2[i])
+			return (tmp1[i] - tmp2[i]);
+		i++;
+	}
+	return (0);
+}

@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 17:47:04 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 01:53:01 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	unsigned char	*tmp_dest;
+	unsigned char	*tmp_src;
 
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+	if (dest == src || n == 0)
+		return (dest);
+	tmp_dest = (unsigned char *)dest;
+	tmp_src = (unsigned char *)src;
+	if (dest < src)
+	{
+		while (n--)
+			*(tmp_dest++) = *(tmp_src++);
+	}
+	else
+	{
+		while (n--)
+			*(tmp_dest + n) = *(tmp_src + n);
+	}
+	return (dest);
+}

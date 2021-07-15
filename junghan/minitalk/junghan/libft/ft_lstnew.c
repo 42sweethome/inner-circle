@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/28 00:23:22 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/28 14:28:45 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <signal.h>
-# include "./libft/libft.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*node;
 
-# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+	if (!(node = (t_list *)malloc(sizeof(t_list))))
+		return (0);
+	node->content = content;
+	node->next = NULL;
+	return (node);
+}
