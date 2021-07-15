@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/22 13:47:15 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 14:43:59 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+void	*ft_calloc(size_t count, size_t size)
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
-	return (0);
+	void	*tmp;
+
+	if (!(tmp = malloc(count * size)))
+		return (0);
+	ft_bzero(tmp, (count * size));
+	return (tmp);
 }

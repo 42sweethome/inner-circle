@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/22 23:24:58 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/27 17:17:22 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
-	return (0);
+	char	*result;
+	size_t	s1_len;
+	size_t	s2_len;
+
+	if (!s1 || !s2)
+		return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	if (!(result = (char *)malloc(sizeof(char) * s1_len + s2_len + 1)))
+		return (0);
+	ft_strlcpy(result, s1, s1_len + s2_len + 1);
+	ft_strlcat(result, s2, s1_len + s2_len + 1);
+	return (result);
 }

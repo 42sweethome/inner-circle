@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/27 23:02:52 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/29 11:38:17 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+void	ft_putendl_fd(char *s, int fd)
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
-	return (0);
+	if (!s || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }

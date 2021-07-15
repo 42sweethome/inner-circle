@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/28 13:47:42 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/28 14:56:20 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
-	return (0);
+	t_list	*tmp;
+
+	if (!lst || !del)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		(*lst) = tmp;
+	}
 }

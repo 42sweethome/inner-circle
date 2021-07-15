@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/28 12:30:41 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/28 14:48:24 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+int	ft_lstsize(t_list *lst)
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
-	return (0);
+	t_list	*tmp;
+	int		size;
+
+	size = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	return (size);
 }

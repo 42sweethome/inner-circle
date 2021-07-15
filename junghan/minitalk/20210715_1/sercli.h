@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   sercli.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/15 12:10:53 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#ifndef SERCLI_H
+# define SERCLI_H
 
-int	main()
-{
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
-	return (0);
-}
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <signal.h>
+# include "./libft/libft.h"
+
+int		ft_atoi_base(char *str, char *base);
+
+#endif

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 23:59:41 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/24 01:52:23 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+char	*ft_strchr(const char *s, int c)
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
+	char	target;
+	char	*tmp;
+
+	target = (char)c;
+	tmp = (char *)s;
+	while (*tmp)
+	{
+		if (*tmp == target)
+			return (tmp);
+		tmp++;
+	}
+	if (*tmp == target)
+		return (tmp);
 	return (0);
 }

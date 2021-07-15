@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getpid.c                                           :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 09:27:15 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 10:18:39 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 18:48:19 by junghan           #+#    #+#             */
+/*   Updated: 2020/12/28 17:40:10 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "libft.h"
 
-int	main()
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	int pid;
-	
-	pid = getpid();
-	printf("%d\n",pid);
+	unsigned char *tmp_s1;
+	unsigned char *tmp_s2;
+
+	tmp_s1 = (unsigned char *)s1;
+	tmp_s2 = (unsigned char *)s2;
+	while (n--)
+	{
+		if (*tmp_s1 != *tmp_s2)
+		{
+			return (*tmp_s1 - *tmp_s2);
+		}
+		tmp_s1++;
+		tmp_s2++;
+	}
 	return (0);
 }
