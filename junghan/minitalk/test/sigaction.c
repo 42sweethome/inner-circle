@@ -21,6 +21,7 @@ int main(void)
 
 	//SIGINT를 지정하면서 act_old에 이전 정보를 구합니다.
 	sigaction(SIGINT, &act_new, &act_old);
+
 	i = 0;
 	while(1)
 	{
