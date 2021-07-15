@@ -6,13 +6,13 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:23:13 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/15 12:40:59 by junghan          ###   ########.fr       */
+/*   Updated: 2021/07/15 13:52:59 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sercli.h"
 
-void sig_usr1(int signo)
+void sig_usr(int signo)
 {
 	static char	arr[8];
 	static int	i;
@@ -33,13 +33,13 @@ void sig_usr1(int signo)
 
 int	main()
 {
-	struct sigaction new_tmp1;
+	struct sigaction new_tmp;
 	int i;
 
-	new_tmp1.sa_handler = sig_usr1;
+	new_tmp.sa_handler = sig_usr;
 
-	sigaction(SIGUSR1, &new_tmp1, 0);
-	sigaction(SIGUSR2, &new_tmp1, 0);
+	sigaction(SIGUSR1, &new_tmp, 0);
+	sigaction(SIGUSR2, &new_tmp, 0);
 
 	i = 0;
 	while (1)
