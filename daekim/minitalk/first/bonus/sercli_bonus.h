@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   sercli_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 20:01:30 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/27 21:09:35 by junghan          ###   ########.fr       */
+/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/16 15:27:06 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SERCLI_BONUS_H
+# define SERCLI_BONUS_H
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
-{
-	char			*result;
-	unsigned int	len;
-	unsigned int	i;
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <signal.h>
+# include "../libft/libft.h"
 
-	if (!s || !f)
-		return (0);
-	len = ft_strlen(s);
-	if (!(result = (char *)malloc(sizeof(char) * len + 1)))
-		return (0);
-	i = 0;
-	while (s[i])
-	{
-		result[i] = f(i, s[i]);
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
-}
+int		ft_atoi_base(char *str, char *base);
+
+#endif

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   sercli.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 23:01:44 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/29 11:30:53 by junghan          ###   ########.fr       */
+/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/15 17:43:28 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SERCLI_H
+# define SERCLI_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <signal.h>
+# include "./libft/libft.h"
 
-	if (!s || fd < 0)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
+# include <sys/time.h>
+
+int		ft_atoi_base(char *str, char *base);
+
+#endif

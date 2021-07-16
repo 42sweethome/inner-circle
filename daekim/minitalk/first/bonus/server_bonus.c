@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:23:13 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/16 14:55:07 by daekim           ###   ########.fr       */
+/*   Updated: 2021/07/16 16:21:26 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	reply(int *end, int signo)
 			*end = 0;
 		if (pid == 0)
 			pid = ft_strdup("");
-		pid = ft_strjoin((char const *)pid, (char const *)&set);
+		pid = ft_strjoin(pid, &set);
 		i = 0;
 	}
 	if (*end == 0 && set == 0)
@@ -99,6 +99,8 @@ int	main(void)
 	write(1, "PID: [", 6);
 	write(1, pid, num);
 	write(1, "] : \n", 5);
+	free(pid);
+	pid = 0;
 	while (42)
 	{
 		sigaction(SIGUSR1, &new_tmp, 0);

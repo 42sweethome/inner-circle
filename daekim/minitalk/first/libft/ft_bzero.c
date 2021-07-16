@@ -6,7 +6,7 @@
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 13:21:38 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/24 01:47:31 by junghan          ###   ########.fr       */
+/*   Updated: 2021/07/16 15:51:26 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char *tmp;
+	unsigned char	*tmp;
 
 	tmp = (unsigned char *)s;
 	while (n > 0)

@@ -1,18 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:23:13 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/16 16:21:43 by daekim           ###   ########.fr       */
+/*   Updated: 2021/07/16 16:21:26 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sercli.h"
+#include "sercli_bonus.h"
 
-void	output(char *arr, int *i)
+void	send_cli(char **pid)
+{
+	static int	cli_pid;
+
+	cli_pid = ft_atoi(*pid);
+	kill(cli_pid, SIGUSR1);
+	free(*pid);
+	*pid = 0;
+	cli_pid = 0;
+}
+
+void	reply(int *end, int signo)
+{
+	static char	arr[8];
+	static int	i;
+	static char	*pid;
+	char		set;
+
+	if (signo == 30)
+		arr[i] = '1';
+	else if (signo == 31)
+		arr[i] = '0';
+	i++;
+	if (i == 8 && *end == 1)
+	{
+		set = (char)ft_atoi_base(arr, "01");
+		if (set == 0)
+			*end = 0;
+		if (pid == 0)
+			pid = ft_strdup("");
+		pid = ft_strjoin(pid, &set);
+		i = 0;
+	}
+	if (*end == 0 && set == 0)
+		send_cli(&pid);
+}
+
+void	output(char *arr, int *i, int *end)
 {
 	char	set;
 
@@ -24,6 +61,7 @@ void	output(char *arr, int *i)
 		*i = -1;
 		while (++*i < 8)
 			arr[*i] = 0;
+		*end = 1;
 	}
 	*i = 0;
 }
@@ -32,14 +70,20 @@ void	sig_usr(int signo)
 {
 	static char	arr[8];
 	static int	i;
+	static int	end;
 
-	if (signo == 30)
-		arr[i] = '1';
-	else if (signo == 31)
-		arr[i] = '0';
-	i++;
-	if (i == 8)
-		output(arr, &i);
+	if (end == 0)
+	{
+		if (signo == 30)
+			arr[i] = '1';
+		else if (signo == 31)
+			arr[i] = '0';
+		i++;
+		if (i == 8)
+			output(arr, &i, &end);
+	}
+	else
+		reply(&end, signo);
 }
 
 int	main(void)

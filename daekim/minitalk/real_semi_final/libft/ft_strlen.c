@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 23:02:52 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/29 11:38:17 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 19:38:34 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/16 16:00:06 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+size_t	ft_strlen(char *s)
 {
-	if (!s || fd < 0)
-		return ;
-	write(fd, s, ft_strlen(s));
-	write(fd, "\n", 1);
+	size_t		i;
+
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }

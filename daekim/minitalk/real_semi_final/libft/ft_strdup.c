@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 17:54:02 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/27 17:17:15 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/22 15:05:29 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/16 16:00:52 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strdup(char *s1)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	str_len;
-	char			*result;
+	char	*tmp;
+	int		len;
 
-	if (!s)
+	len = ft_strlen(s1);
+	tmp = (char *)malloc(sizeof(char) * len + 1);
+	if (tmp == 0)
 		return (0);
-	str_len = ft_strlen(s);
-	if (!(result = (char *)malloc(sizeof(char) * len + 1)))
-		return (0);
-	i = 0;
-	j = start;
-	if (start < str_len)
-	{
-		while (j < start + len && s[j])
-		{
-			result[i] = s[j];
-			i++;
-			j++;
-		}
-	}
-	result[i] = '\0';
-	return (result);
+	ft_strlcpy(tmp, s1, len + 1);
+	return (tmp);
 }

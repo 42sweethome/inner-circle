@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 23:06:40 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/29 11:38:01 by junghan          ###   ########.fr       */
+/*   Created: 2020/10/22 02:42:50 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/16 16:00:38 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_nbr(int n, int fd)
+size_t	ft_strlcat(char *dest, char *src, size_t size)
 {
-	if (n >= 10)
-		print_nbr(n / 10, fd);
-	write(fd, &"0123456789"[n % 10], 1);
-}
+	size_t	i;
+	size_t	j;
+	size_t	dest_len;
+	size_t	src_len;
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	if (fd < 0)
-		return ;
-	if (n == -2147483648)
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	if (size <= dest_len)
+		return (src_len + size);
+	i = 0;
+	j = dest_len;
+	while (src[i] && (i + dest_len + 1) < size)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		dest[j] = src[i];
+		i++;
+		j++;
 	}
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		n *= -1;
-	}
-	print_nbr(n, fd);
+	dest[j] = '\0';
+	return (src_len + dest_len);
 }

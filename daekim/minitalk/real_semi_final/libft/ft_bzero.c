@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/27 21:26:14 by junghan           #+#    #+#             */
-/*   Updated: 2020/12/29 11:25:59 by junghan          ###   ########.fr       */
+/*   Created: 2020/12/21 13:21:38 by junghan           #+#    #+#             */
+/*   Updated: 2021/07/16 15:51:26 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_bzero(void *s, size_t n)
 {
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
+	unsigned char	*tmp;
+
+	tmp = (unsigned char *)s;
+	while (n > 0)
+	{
+		*tmp = 0;
+		tmp++;
+		n--;
+	}
+	return ;
 }

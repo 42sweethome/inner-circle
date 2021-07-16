@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:23:13 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/16 16:25:02 by daekim           ###   ########.fr       */
+/*   Updated: 2021/07/16 16:17:28 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sercli.h"
+#include "sercli_bonus.h"
 
 void	change_base(int pid, int ch)
 {
@@ -30,6 +30,12 @@ void	change_base(int pid, int ch)
 	}
 }
 
+void	check(int signo)
+{
+	if (signo == SIGUSR1)
+		write(1, "GOT IT\n", 7);
+}
+
 void	send_sig(int pid, unsigned char *str)
 {
 	int	idx;
@@ -43,12 +49,21 @@ void	send_sig(int pid, unsigned char *str)
 int	main(int argc, char **argv)
 {
 	int					pid;
+	int					my;
 	unsigned char		*str;
+	struct sigaction	new_tmp;
 
+	new_tmp.sa_handler = check;
+	sigaction(SIGUSR1, &new_tmp, 0);
 	if (argc == 3)
 	{
 		pid = ft_atoi(argv[1]);
 		str = (unsigned char *)ft_strdup(argv[2]);
+		send_sig(pid, str);
+		free(str);
+		str = 0;
+		my = getpid();
+		str = (unsigned char *)ft_itoa(my);
 		send_sig(pid, str);
 		free(str);
 		str = 0;
