@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sercli.h                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junghan <junghan@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by junghan           #+#    #+#             */
-/*   Updated: 2021/07/19 02:49:06 by doyun            ###   ########.fr       */
+/*   Created: 2021/07/19 14:20:37 by doyun             #+#    #+#             */
+/*   Updated: 2021/07/19 14:47:27 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
-# define SERCLI_H
+#include "./so_long.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include "./libft/libft.h"
-
-//# include <sys/time.h>
-
-int		ft_atoi_base(char *str, char *base);
-
-#endif
+int		print_error(void)
+{
+	write(1, "Error\n", 6);
+	return (-1);
+}
