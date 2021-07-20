@@ -52,7 +52,7 @@ int	main(void)
 	num = getpid();
 	pid = ft_itoa(num);
 	num = ft_strlen(pid);
-	write(1, "PID: [", 6);
+	write(1, "PID[", 4);
 	write(1, pid, num);
 	write(1, "] : \n", 5);
 	free(pid);

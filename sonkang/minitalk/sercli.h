@@ -13,7 +13,6 @@
 #ifndef SERCLI_H
 # define SERCLI_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
 # include "./libft/libft.h"
