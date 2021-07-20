@@ -48,11 +48,11 @@ static int	ft_atoi2(char *str, char *base, int *sign, int len)
 	i = 0;
 	while (str[i])
 	{
+		if (!(is_inbase(base, str[i])))
+			return (sum);
 		j = 0;
 		while (base[j])
 		{
-			if (!(is_inbase(base, str[i])))
-				return (sum);
 			if (base[j] == str[i])
 				sum = sum * len + j;
 			j++;

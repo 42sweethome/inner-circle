@@ -41,7 +41,7 @@ typedef struct	s_data {
 }				t_parm;*/
 typedef	struct	s_info
 {
-	t_map		map;
+	t_map		map_info;
 }				t_info;
 
 int	print_error();
