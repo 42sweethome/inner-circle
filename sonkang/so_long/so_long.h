@@ -27,21 +27,29 @@ typedef struct	s_map
 	int			temp_col;
 }				t_map;
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+typedef struct	s_data
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			img_width;
+	int			img_height;
 }				t_data;
 
-/*typedef	struct	s_parm
+typedef	struct	s_win
 {
-	int			
-}				t_parm;*/
+	void		*mlx;
+	void		*mlx_win;
+	t_data		img;
+}				t_win;
+
 typedef	struct	s_info
 {
-	t_map		map_info;
+	t_map		map;
+	t_data		data;
+	t_win		win;
 }				t_info;
 
 int	print_error();

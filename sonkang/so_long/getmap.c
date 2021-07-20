@@ -28,7 +28,7 @@ int	get_newline(char *argv, t_map *map_info)
 	while (ret)
 	{
 		if (buf == '\n')
-			map_info->row++;		
+			map_info->row++;	
 		ret = read(fd, &buf, 1);
 	}
 	close(fd);
@@ -66,45 +66,52 @@ char		**map_parser(t_map *map_info, char *argv)
 		return (NULL);
 	return (map_info->map);
 }
-void	parsing(t_map *map_info, char *argv)
+int		parsing(t_map *map_info, char *argv)
 {
-	//t_map	map_info;
 	int		check;
 	
 	check = check_extention(argv);
 		if (check == -1)
-			print_error();
+			return (print_error());
 		map_info->map = map_parser(map_info, argv);
 		if (!map_info->map)
-			print_error();
+			return (print_error());
 		check = check_map_valid(map_info);
 		if (check == -1)
-			print_error();
+			return (print_error());
 		check = check_parm_valid(map_info);
 		if (check == -1)
-			print_error();
+			return (print_error());
+		return (0);
+}
+
+int		show_snoop(t_info *info)
+{
+	info->data.img = mlx_xpm_file_to_image(info->win.mlx, "./snoopy.xpm", &(info->data.img_width), &(info->data.img_height));
+	info->data.addr = mlx_get_data_addr(info->data.img, &(info->data.bits_per_pixel), &(info->data.line_length), &(info->data.endian));
+	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, info->data.img, 0, 0);
+	return (0);
+}
+
+void	show_win(t_info *info)
+{
+	info->win.mlx = mlx_init();
+	info->win.mlx_win = mlx_new_window(info->win.mlx, 1024, 768, "Hello world!");
+	mlx_loop_hook(info->win.mlx, show_snoop, info);
+	mlx_loop(info->win.mlx);
 }
 
 int	main(int argc, char **argv)
 {
 	t_info		info;
-	//int		check;
-
+	int			check;
+	
 	if (argc == 2)
 	{
-		parsing(&info.map_info, argv[1]);
-		/*check = check_extention(argv[1]);
+		check = parsing(&info.map, argv[1]);
 		if (check == -1)
-			return (print_error());
-		map_info.map = map_parser(&map_info, argv[1]);
-		if (!map_info.map)
-			return (print_error());
-		check = check_map_valid(&map_info);
-		if (check == -1)
-			return (print_error());
-		check = check_parm_valid(&map_info);
-		if (check == -1)
-			return (print_error());		*/		
+			return (-1);
+		show_win(&info);
 	}
 	else
 		return (print_error());
