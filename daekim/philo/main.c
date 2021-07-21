@@ -57,7 +57,7 @@ int	main(int ac, char **av)
 {
 	t_info	info;
 	t_philo	*ph;
-	
+
 	if (!(ac == 5 || ac == 6) || !(get_info(av, &info)))
 		return (printf("Arguments Error!"));
 	ph = malloc(sizeof(t_philo) * info.num_phi);

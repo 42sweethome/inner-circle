@@ -12,28 +12,26 @@
 
 #include "philo.h"
 
-
-
 int	eat(t_philo *ph)
 {
-	unsigned int	now;
-	int				id;
+	int	id;
 
 	if (ph->info->die == 1)
 		return (1);
 	id = ph->id;
 	pthread_mutex_lock(&ph->info->fork[ph->fork1]);
 	pthread_mutex_lock(&ph->info->fork[ph->fork2]);
-	now = now_t();
-	printf("%u : philo[%d] has taken forks\n", now - ph->info->start, id);
-	printf("%u : philo[%d] eating! total : %d\n", now - ph->info->start, id, ph->eat + 1);
+	printf("%u : philo[%d] has taken forks\n", now_t() - ph->info->st, id);
+	printf("%u : philo[%d] eating! total : %d\n", \
+		now_t() - ph->info->st, id, ph->eat + 1);
 	waiting(ph->info->time_eat, ph);
 	pthread_mutex_unlock(&ph->info->fork[ph->fork1]);
 	pthread_mutex_unlock(&ph->info->fork[ph->fork2]);
 	if (ph->info->time_die < now_t() - ph->last_eat || ph->info->die == 1)
 	{
 		ph->info->die = 1;
-		printf("%u : philo[%d] is died\n", now_t() - ph->info->start, ph->id);
+		printf("%u : philo[%d] is died\n", \
+			now_t() - ph->info->st, ph->id);
 		return (1);
 	}
 	ph->last_eat = now_t();
@@ -47,7 +45,6 @@ void	*action(void *phi)
 {
 	t_philo			*ph;
 	pthread_t		th;
-	unsigned int	now;
 
 	ph = (t_philo *)phi;
 	if (ph->id % 2 == 0)
@@ -58,19 +55,22 @@ void	*action(void *phi)
 			break ;
 		if (eat(ph))
 			break ;
-if (now - ph->info->start > 1 && ph->info->die == 0)
-		printf("%u : philo[%d] sleeping\n", now_t() - ph->info->start, ph->id);
+		if (now - ph->info->st > 1 && ph->info->die == 0)
+			printf("%u : philo[%d] sleeping\n", \
+				now_t() - ph->info->st, ph->id);
 		waiting(ph->info->time_sleep, ph);
-	if (ph->info->time_die < now_t() - ph->last_eat)
+		if (ph->info->time_die < now_t() - ph->last_eat)
 		{
 			ph->info->die = 1;
-			printf("%u : philo[%d] is died\n", now_t() - ph->info->start, ph->id);
+			printf("%u : philo[%d] is died\n", \
+				now_t() - ph->info->st, ph->id);
 			return (NULL);
 		}
 
-if (now - ph->info->start > 1 && ph->info->die == 0)
-		printf("%u : philo[%d] thinking\n", now_t() - ph->info->start, ph->id);
-}
+		if (now - ph->info->st > 1 && ph->info->die == 0)
+			printf("%u : philo[%d] thinking\n", \
+				now_t() - ph->info->st, ph->id);
+	}
 	return (NULL);
 }
 

@@ -28,7 +28,7 @@ typedef struct	s_info
 	int				num_eat;
 
 	int				die;
-	unsigned int	start;
+	unsigned int	st;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
 }				t_info;
