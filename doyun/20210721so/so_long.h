@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/21 17:37:50 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/21 15:07:40 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef	struct	s_win
 typedef	struct	s_info
 {
 	t_map		map;
-	t_data		fimg;
-	t_data		tex;
+	t_data		data;
+	t_data		n_data;
 	t_block		block;
 	t_win		win;
 }				t_info;

@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/21 18:07:37 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/21 16:09:46 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		parsing(t_info *info, char *argv)
 		return (0);
 }
 
-int		draw(t_info *info, int i, int j, t_data tex)
+int		draw(t_info *info, int i, int j, unsigned int color)
 {
 	int		width;
 	int		height;
@@ -96,7 +96,6 @@ int		draw(t_info *info, int i, int j, t_data tex)
 	{
 		while (++width < info->block.width)
 		{
-			info->fimg.addr = 
 			mlx_pixel_put(info->win.mlx, info->win.mlx_win, info->block.width * j + width, info->block.height * i + height, color);
 		}
 		width = -1;
@@ -119,16 +118,16 @@ int		img_conv(t_info *info)
 		while (++j < info->map.col)
 		{
 //			printf("map : %c\n", info->map.map[i][j]);
-			if (info->map.map[i][j] == '0')
-				draw(info, i, j, info->tex[0]);
-			else if (info->map.map[i][j] == '1')
-				draw(info, i, j, info->tex[1]);
-			else if (info->map.map[i][j] == 'C')
-				draw(info, i, j, info->tex[2]);
+			if (info->map.map[i][j] == '1')
+				draw(info, i, j, 0xC0C0C0);
+			else if (info->map.map[i][j] == '0')
+				draw(info, i, j, 0x00FF00);
 			else if (info->map.map[i][j] == 'E')
-				draw(info, i, j, info->tex[3]);
+				draw(info, i, j, 0xFFFF00);
+			else if (info->map.map[i][j] == 'C')
+				draw(info, i, j, 0x0000FF);
 			else if (info->map.map[i][j] == 'P')
-				draw(info, i, j, info->tex[4]);
+				draw(info, i, j, 0xFF0000);
 		}
 		j = -1;
 	}
@@ -188,27 +187,10 @@ int	check_keypress(int key, t_info *info)
 	return (0);	
 }
 
-void	get_texture(t_info *info)
-{
-	info->tex[0].img = mlx_xpm_file_to_image(info->mlx, "./texture/grass.xpm", &info->tex[0].image_width, &info->tex[0].image_height);
-	info->tex[1].img = mlx_xpm_file_to_image(info->mlx, "./texture/grass.xpm", &info->tex[1].image_width, &info->tex[1].image_height);
-	info->tex[2].img = mlx_xpm_file_to_image(info->mlx, "./texture/mush.xpm", &info->tex[2].image_width, &info->tex[2].image_height);
-	info->tex[3].img = mlx_xpm_file_to_image(info->mlx, "./texture/grass.xpm", &info->tex[3].image_width, &info->tex[3].image_height);
-	info->tex[4].img = mlx_xpm_file_to_image(info->mlx, "./texture/grass.xpm", &info->tex[4].image_width, &info->tex[4].image_height);
-	info->tex[0].addr = mlx_get_data_addr(info->tex[0].img, &info->tex[0].bit_per_pixel, &info->tex[0].line_lengh, &info->tex[0].endian);
-	info->tex[1].addr = mlx_get_data_addr(info->tex[1].img, &info->tex[1].bit_per_pixel, &info->tex[1].line_lengh, &info->tex[1].endian);
-	info->tex[2].addr = mlx_get_data_addr(info->tex[2].img, &info->tex[2].bit_per_pixel, &info->tex[2].line_lengh, &info->tex[2].endian);
-	info->tex[3].addr = mlx_get_data_addr(info->tex[3].img, &info->tex[3].bit_per_pixel, &info->tex[3].line_lengh, &info->tex[3].endian);
-	info->tex[4].addr = mlx_get_data_addr(info->tex[4].img, &info->tex[4].bit_per_pixel, &info->tex[4].line_lengh, &info->tex[4].endian);
-}
-
 void	show_win(t_info *info)
 {
 	info->win.mlx = mlx_init();
 	info->win.mlx_win = mlx_new_window(info->win.mlx, 1024, 768, "Hello world!");
-	info->fimg.img = mlx_new_image(info->mlx, 1024, 768);
-	info->fimg.addr = mlx_get_data_addr(info->fimg.img, &info->fimg.bit_per_pixel, &info->fimg.line_lengh, &info->fimg.endian);
-	get_texture(info);
 	mlx_loop_hook(info->win.mlx, show_snoop, info);
 	mlx_hook(info->win.mlx_win, 2, 1, check_keypress, info);
 	mlx_loop(info->win.mlx);
