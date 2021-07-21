@@ -29,8 +29,6 @@ typedef struct	s_info
 
 	int				die;
 	unsigned int	start;
-	int				eat;
-	int				dead;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	print;
 }				t_info;
@@ -44,14 +42,14 @@ typedef struct	s_philo
 	unsigned int	last_eat;
 	int				id;
 	pthread_t		th;
-	t_info			info;
+	t_info			*info;
 }				t_philo;
 
 int				ft_atoi(char *str);
 unsigned int	now_t(void);
 void			start_philo(t_info *info, t_philo *ph);
 void			*check_die(void *phi);
-void			waiting(unsigned int t);
+void			waiting(unsigned int t, t_philo *ph);
 void			free_all(t_philo *ph);
 
 #endif

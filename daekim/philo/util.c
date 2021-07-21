@@ -17,20 +17,21 @@ void	free_all(t_philo *ph)
 	int	i;
 
 	i = -1;
-	while (++i < ph->info.num_phi)
-		pthread_mutex_destroy(&ph->info.fork[i]);
-	free(ph->info.fork);
+	while (++i < ph->info->num_phi)
+		pthread_mutex_destroy(&ph->info->fork[i]);
+	free(ph->info->fork);
 	free(ph);
 }
 
-void	waiting(unsigned int t)
+void	waiting(unsigned int t, t_philo *ph)
 {
 	unsigned int	st;
 	unsigned int	now;
 
 	st = now_t();
 	while (now_t() - st < t)
-		usleep(100);
+		if (ph->info->die == 1 || ph->eat == ph->info->num_eat)
+			return ;
 	return ;
 }
 

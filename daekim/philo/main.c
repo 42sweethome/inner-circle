@@ -37,8 +37,6 @@ void	init(t_info *info, t_philo *ph)
 	int	i;
 
 	i = -1;
-	info->eat = 0;
-	info->dead = 0;
 	info->die = 0;
 	info->start = now_t();
 	while (++i < info->num_phi)
@@ -51,7 +49,7 @@ void	init(t_info *info, t_philo *ph)
 			ph[i].fork1 = i - 1;
 		ph[i].fork2 = i;
 		ph[i].eat = 0;
-		ph[i].info = *info;
+		ph[i].info = info;
 	}
 }
 
