@@ -27,6 +27,7 @@ typedef struct	s_info
 	unsigned int	time_sleep;
 	int				num_eat;
 
+	int				die;
 	unsigned int	start;
 	int				eat;
 	int				dead;
@@ -42,7 +43,6 @@ typedef struct	s_philo
 	int				eat;
 	unsigned int	last_eat;
 	int				id;
-	int				die;
 	pthread_t		th;
 	t_info			info;
 }				t_philo;

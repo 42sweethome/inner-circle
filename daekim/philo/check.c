@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-
+/*
 void	*check_die(void *phi)
 {
 	t_philo			*ph;
@@ -33,4 +33,4 @@ void	*check_die(void *phi)
 		}
 	}
 	return (NULL);
-}
+}*/

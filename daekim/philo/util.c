@@ -29,13 +29,9 @@ void	waiting(unsigned int t)
 	unsigned int	now;
 
 	st = now_t();
-	while (42)
-	{
-		now = now_t();
-		if (t < now - st)
-			return ;
+	while (now_t() - st < t)
 		usleep(100);
-	}
+	return ;
 }
 
 unsigned int	now_t(void)

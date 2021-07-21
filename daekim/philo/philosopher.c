@@ -12,11 +12,15 @@
 
 #include "philo.h"
 
+
+
 int	eat(t_philo *ph)
 {
 	unsigned int	now;
 	int				id;
 
+	if (ph->info.die == 1)
+		return (1);
 	id = ph->id;
 	pthread_mutex_lock(&ph->info.fork[ph->fork1]);
 	pthread_mutex_lock(&ph->info.fork[ph->fork2]);
@@ -26,6 +30,12 @@ int	eat(t_philo *ph)
 	waiting(ph->info.time_eat);
 	pthread_mutex_unlock(&ph->info.fork[ph->fork1]);
 	pthread_mutex_unlock(&ph->info.fork[ph->fork2]);
+	if (ph->info.time_die < now_t() - ph->last_eat)
+	{
+		ph->info.die = 1;
+		printf("%u : philo[%d] is died\n", now_t() - ph->info.start, ph->id);
+		return (1);
+	}
 	ph->last_eat = now_t();
 	ph->eat++;
 	if (ph->eat == ph->info.num_eat)
@@ -43,28 +53,27 @@ void	*action(void *phi)
 	unsigned int	now;
 
 	ph = (t_philo *)phi;
-//	if (ph->id % 2 == 0)
-//		usleep(100);
-//	pthread_create(&th, NULL, check_die, ph);
-	while (ph->die)
+	if (ph->id % 2 == 0)
+		usleep(100);
+	while (!ph->info.die)
 	{
-		if (ph->eat == ph->info.num_eat || ph->die == 1)
+		if (ph->eat == ph->info.num_eat || ph->info.die == 1)
 			break ;
 		if (eat(ph))
 			break ;
-		now = now_t();
-		if (ph->info.time_die < now - ph->last_eat)
+if (now - ph->info.start > 1 && ph->info.die == 0)
+		printf("%u : philo[%d] sleeping\n", now_t() - ph->info.start, ph->id);
+		waiting(ph->info.time_sleep);
+	if (ph->info.time_die < now_t() - ph->last_eat)
 		{
-			ph->die = 1;
-			printf("%u : philo[%d] is died\n", now - ph->info.start, ph->id);
+			ph->info.die = 1;
+			printf("%u : philo[%d] is died\n", now_t() - ph->info.start, ph->id);
 			return (NULL);
 		}
-		printf("%u : philo[%d] sleeping\n", now - ph->info.start, ph->id);
-		waiting(ph->info.time_sleep);
-		now = now_t();
-		printf("%u : philo[%d] thinking\n", now - ph->info.start, ph->id);
-	}
-//	pthread_join(th, NULL);
+
+if (now - ph->info.start > 1 && ph->info.die == 0)
+		printf("%u : philo[%d] thinking\n", now_t() - ph->info.start, ph->id);
+}
 	return (NULL);
 }
 
@@ -77,7 +86,8 @@ void	start_philo(t_info *info, t_philo *ph)
 	{
 		ph[i].last_eat = now_t();
 		ph[i].id = i + 1;
-		pthread_create(&ph[i].th, NULL, action, &ph[i]);
+		if (0 < pthread_create(&ph[i].th, NULL, action, &ph[i]))
+			return ;
 	}
 	i = -1;
 	while (++i < info->num_phi)
