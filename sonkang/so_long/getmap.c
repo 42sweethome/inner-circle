@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-
+#include <stdio.h>
 int	get_newline(char *argv, t_map *map_info)
 {
 	int		ret;
@@ -85,11 +85,61 @@ int		parsing(t_map *map_info, char *argv)
 		return (0);
 }
 
+int		draw(t_info *info, int i, int j, unsigned int color)
+{
+	int		width;
+	int		height;
+
+	width = -1;
+	height = -1;
+	while (++height < info->block.height)
+	{
+		while (++width < info->block.width)
+		{
+			mlx_pixel_put(info->win.mlx, info->win.mlx_win, info->block.width * j + width, info->block.height * i + height, color);
+		}
+		width = -1;
+	}
+	return (0);
+}
+
+int		img_conv(t_info *info)
+{
+	int		i;
+	int		j;
+
+	info->block.width = 1024 / info->map.col;
+	info->block.height = 768 / info->map.row;
+	i = -1;
+	j = -1;
+	printf("row : %d, col :%d\n", info->map.row, info->map.col);
+	while (++i < info->map.row)
+	{
+		while (++j < info->map.col)
+		{
+			printf("map : %c\n", info->map.map[i][j]);
+			if (info->map.map[i][j] == '1')
+				draw(info, i, j, 0xC0C0C0);
+			else if (info->map.map[i][j] == '0')
+				draw(info, i, j, 0x00FF00);
+			else if (info->map.map[i][j] == 'E')
+				draw(info, i, j, 0xFFFF00);
+			else if (info->map.map[i][j] == 'C')
+				draw(info, i, j, 0x0000FF);
+			else if (info->map.map[i][j] == 'P')
+				draw(info, i, j, 0xFF0000);
+		}
+		j = -1;
+	}
+	return (0);
+}
+
 int		show_snoop(t_info *info)
 {
-	info->data.img = mlx_xpm_file_to_image(info->win.mlx, "./snoopy.xpm", &(info->data.img_width), &(info->data.img_height));
-	info->data.addr = mlx_get_data_addr(info->data.img, &(info->data.bits_per_pixel), &(info->data.line_length), &(info->data.endian));
-	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, info->data.img, 0, 0);
+	img_conv(info);
+	/*info->data.img = mlx_xpm_file_to_image(info->win.mlx, "./snoopy.xpm", &(info->data.img_width), &(info->data.img_height));
+	info->data.addr = mlx_get_data_addr(info->data.img, &(info->data.bits_per_pixel),&(info->data.line_length), &(info->data.endian));
+	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, info->data.img, 0, 0);*/
 	return (0);
 }
 

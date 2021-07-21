@@ -38,6 +38,12 @@ typedef struct	s_data
 	int			img_height;
 }				t_data;
 
+typedef struct	s_block
+{
+	int			width;
+	int			height;
+}				t_block;
+
 typedef	struct	s_win
 {
 	void		*mlx;
@@ -49,6 +55,8 @@ typedef	struct	s_info
 {
 	t_map		map;
 	t_data		data;
+	t_data		n_data;
+	t_block		block;
 	t_win		win;
 }				t_info;
 
