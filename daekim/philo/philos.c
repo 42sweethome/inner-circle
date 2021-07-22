@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.c                                      :+:      :+:    :+:   */
+/*   philos.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,23 @@
 
 #include "philo.h"
 
+int	die_check(t_philo *ph)
+{
+	if (ph->info->time_die < now_t() - ph->last_eat || ph->info->die == 1)
+	{
+		ph->info->die = 1;
+		printf("%u : philo[%d] is died\n", \
+			now_t() - ph->info->st, ph->id);
+		return (1);
+	}
+	return (0);
+}
+
 int	eat(t_philo *ph)
 {
 	int	id;
 
-	if (ph->info->die == 1)
+	if (die_check(ph))
 		return (1);
 	id = ph->id;
 	pthread_mutex_lock(&ph->info->fork[ph->fork1]);
@@ -27,13 +39,8 @@ int	eat(t_philo *ph)
 	waiting(ph->info->time_eat, ph);
 	pthread_mutex_unlock(&ph->info->fork[ph->fork1]);
 	pthread_mutex_unlock(&ph->info->fork[ph->fork2]);
-	if (ph->info->time_die < now_t() - ph->last_eat || ph->info->die == 1)
-	{
-		ph->info->die = 1;
-		printf("%u : philo[%d] is died\n", \
-			now_t() - ph->info->st, ph->id);
+	if (die_check(ph))
 		return (1);
-	}
 	ph->last_eat = now_t();
 	ph->eat++;
 	if (ph->eat == ph->info->num_eat || ph->info->die == 1)
@@ -43,31 +50,24 @@ int	eat(t_philo *ph)
 
 void	*action(void *phi)
 {
-	t_philo			*ph;
-	pthread_t		th;
+	t_philo	*ph;
 
 	ph = (t_philo *)phi;
 	if (ph->id % 2 == 0)
 		usleep(100);
-	while (!ph->info->die)
+	while (!die_check(ph))
 	{
-		if (ph->eat == ph->info->num_eat || ph->info->die == 1)
+		if (ph->eat == ph->info->num_eat)
 			break ;
 		if (eat(ph))
 			break ;
-		if (now - ph->info->st > 1 && ph->info->die == 0)
+		if (now_t() - ph->info->st > 1 && ph->info->die == 0)
 			printf("%u : philo[%d] sleeping\n", \
 				now_t() - ph->info->st, ph->id);
 		waiting(ph->info->time_sleep, ph);
-		if (ph->info->time_die < now_t() - ph->last_eat)
-		{
-			ph->info->die = 1;
-			printf("%u : philo[%d] is died\n", \
-				now_t() - ph->info->st, ph->id);
+		if (die_check(ph))
 			return (NULL);
-		}
-
-		if (now - ph->info->st > 1 && ph->info->die == 0)
+		if (now_t() - ph->info->st > 1 && ph->info->die == 0)
 			printf("%u : philo[%d] thinking\n", \
 				now_t() - ph->info->st, ph->id);
 	}

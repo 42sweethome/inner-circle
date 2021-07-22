@@ -26,12 +26,14 @@ void	free_all(t_philo *ph)
 void	waiting(unsigned int t, t_philo *ph)
 {
 	unsigned int	st;
-	unsigned int	now;
 
 	st = now_t();
 	while (now_t() - st < t)
+	{
 		if (ph->info->die == 1 || ph->eat == ph->info->num_eat)
 			return ;
+		usleep(200);
+	}
 	return ;
 }
 

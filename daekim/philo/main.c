@@ -38,7 +38,7 @@ void	init(t_info *info, t_philo *ph)
 
 	i = -1;
 	info->die = 0;
-	info->start = now_t();
+	info->st = now_t();
 	while (++i < info->num_phi)
 	{
 		pthread_mutex_init(&info->fork[i], NULL);
