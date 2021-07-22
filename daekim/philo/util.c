@@ -6,7 +6,7 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 19:15:09 by daekim            #+#    #+#             */
-/*   Updated: 2021/07/21 19:38:00 by daekim           ###   ########.fr       */
+/*   Updated: 2021/07/22 13:24:58 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ int	ft_atoi(char *str)
 	result = 0;
 	if ((check_atoi(str, &i) % 2) != 0)
 		sign = -sign;
-	if (str[i] < '0' || str[i] > '9')
-		return (0);
-	while (str[i] >= '0' && str[i] <= '9')
+	while (str[i])
+		if (str[i] < '0' || str[i++] > '9')
+			return (0);
+	i = -1;
+	while (str[++i] >= '0' && str[i] <= '9')
 	{
 		result = (result * 10) + (str[i] - 48);
-		i++;
-		if (sign < 0 && result > 2147483648)
+		if ((sign < 0 && result > 2147483648) || \
+			(sign > 0 && result > 2147483647))
 			return (0);
-		else if (sign > 0 && result > 2147483647)
-			return (-1);
 	}
 	result = result * sign;
 	return ((int)result);

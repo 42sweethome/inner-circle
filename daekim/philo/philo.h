@@ -6,7 +6,7 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 18:10:50 by daekim            #+#    #+#             */
-/*   Updated: 2021/07/21 19:56:41 by daekim           ###   ########.fr       */
+/*   Updated: 2021/07/22 13:29:57 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-typedef struct	s_info
+typedef struct s_info
 {
 	int				num_phi;
 	unsigned int	time_die;
@@ -33,7 +33,7 @@ typedef struct	s_info
 	pthread_mutex_t	print;
 }				t_info;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				num;
 	int				fork1;
