@@ -47,7 +47,7 @@ typedef struct	s_map
 typedef struct	s_data
 {
 	void		*img;
-	char		*addr;
+	int			*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -70,6 +70,7 @@ typedef	struct	s_win
 
 typedef	struct	s_info
 {
+	char		tmp[4096];
 	t_map		map;
 	t_data		fimg;
 	t_data		tex[5];
