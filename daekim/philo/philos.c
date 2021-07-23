@@ -6,7 +6,11 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:23:33 by daekim            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/07/22 10:12:46 by junghan          ###   ########.fr       */
+=======
+/*   Updated: 2021/07/22 13:38:16 by daekim           ###   ########.fr       */
+>>>>>>> 0c68d2c9939f79eb87d0bd57ce766c2c11104be1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +38,7 @@ int	eat(t_philo *ph)
 	pthread_mutex_lock(&ph->info->fork[ph->fork1]);
 	pthread_mutex_lock(&ph->info->fork[ph->fork2]);
 	printf("%u : philo[%d] has taken forks\n", now_t() - ph->info->st, id);
-	printf("%u : philo[%d] eating! total : %d\n", \
+	printf("%u : philo[%d] eating!    total eat : %d\n", \
 		now_t() - ph->info->st, id, ph->eat + 1);
 	waiting(ph->info->time_eat, ph);
 	pthread_mutex_unlock(&ph->info->fork[ph->fork1]);
