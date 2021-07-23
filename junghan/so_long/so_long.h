@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/21 17:37:50 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/23 15:52:33 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 # ifndef KEY_D
 # define KEY_D 124
 # endif
-
+# ifndef KEY_ESC
+# define KEY_ESC 53
+# endif
 
 typedef struct	s_map
 {
@@ -42,6 +44,7 @@ typedef struct	s_map
 	int			player_x;
 	int			player_y;
 	int			collect;
+	int			walk;
 }				t_map;
 
 typedef struct	s_data

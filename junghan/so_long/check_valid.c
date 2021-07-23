@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 14:58:39 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/21 15:27:50 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/23 16:31:36 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	get_player_position(int *count, t_map *map, int row, int col)
 	*count += 1;
 	map->player_x = col;
 	map->player_y = row;
+	printf("%d %d\n",col, row);
 }
 
 void	get_collect_ea(int	*count, t_map *map)
