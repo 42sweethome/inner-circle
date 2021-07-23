@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/23 16:40:59 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/23 17:41:56 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int		parsing(t_info *info, char *argv)
 	if (check == -1)
 		return (print_error());
 	info->map.walk = 0;
-	printf("how many walk : 0\n");
 	return (0);
 }
 
@@ -98,10 +97,8 @@ int		draw(t_info *info, int y, int x, t_data tex)
 		width = -1;
 		while (++width < tex.img_width)
 		{
-			//printf("%d\n",tex.img_width * (x + info->map.col * (height + tex.img_height * y)) + width);
-			info->fimg.addr[/*tex.img_width * tex.img_height * (x + info->map.col * y) + (height * tex.img_width+ width)*/tex.img_width * (x + info->map.col * (height + tex.img_height * y)) + width] = tex.addr[height * tex.img_width * 4 + width]; //+ (height * tex.img_width + width * (tex.bits_per_pixel / 8));
+			info->fimg.addr[tex.img_width * (x + info->map.col * (height + tex.img_height * y)) + width] = tex.addr[height * tex.img_width * 4 + width];
 		}
-		//printf("%d %d\n", width, height);
 	}
 	return (0);
 }
@@ -197,7 +194,6 @@ int	check_keypress(int key, t_info *info)
 		move(info, 1, 0);
 	else if (key == KEY_ESC)
 		exit(0);
-	printf("%d\n",key);
 	return (0);	
 }
 
@@ -208,12 +204,16 @@ int	check_button()
 }
 void	show_win(t_info *info)
 {
-	info->win.mlx = mlx_init();
+	int	user_win[2];
 
-	info->win.mlx_win = mlx_new_window(info->win.mlx, 16 * info->map.col, 16 * info->map.row, "Hello world!");
+	info->win.mlx = mlx_init();
+	mlx_get_screen_size(info->win.mlx, &user_win[0], &user_win[1]);
+	if (!(user_win[0] >= 16 * info->map.col && user_win[1] >= 16 * info->map.row && info->map.col % 4 == 0))
+		print_error();
+	info->win.mlx_win = mlx_new_window(info->win.mlx, 16 * info->map.col, 16 * info->map.row, "Noleogaza!");
+	printf("how many walk : 0\n");
 	info->fimg.img = mlx_new_image(info->win.mlx, 16 * info->map.col, 16 * info->map.row);
 	info->fimg.addr = (int *)mlx_get_data_addr(info->fimg.img, &info->fimg.bits_per_pixel, &info->fimg.line_length, &info->fimg.endian);
-	//get_texture(info);
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
 	mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
 	mlx_loop_hook(info->win.mlx, show_snoop, info);
