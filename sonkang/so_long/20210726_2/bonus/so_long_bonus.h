@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 11:49:17 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 14:32:02 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
-# include "./GNL/get_next_line.h"
-# include "./Libft/libft.h"
+# include "../GNL/get_next_line.h"
+# include "../Libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
-# include "./mlx/mlx.h"
+# include "../mlx/mlx.h"
 
 typedef struct s_map
 {
@@ -60,7 +60,7 @@ typedef struct s_info
 	char		tmp[4096];
 	t_map		map;
 	t_data		fimg;
-	t_data		tex[5];
+	t_data		tex[6];
 	t_block		block;
 	t_win		win;
 }				t_info;
@@ -78,5 +78,6 @@ void	ft_exit(t_info *info);
 void	move(t_info *info, int x, int y);
 int		check_keypress(int key, t_info *info);
 int		check_button(void);
+void		villain(void);
 
 #endif

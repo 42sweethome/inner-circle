@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_valid.c                                      :+:      :+:    :+:   */
+/*   check_valid_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 14:58:39 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 11:41:07 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 13:44:55 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	check_extention(char *argv)
 {
@@ -52,7 +52,7 @@ int	check_parm_valid(t_map *m_info)
 		col = -1;
 		while (m_info->map[row][++col])
 		{
-			if (m_info->map[row][col] == '0' || m_info->map[row][col] == '1')
+			if (m_info->map[row][col] == '0' || m_info->map[row][col] == '1' || m_info->map[row][col] == 'V')
 				continue ;
 			else if (m_info->map[row][col] == 'C')
 				get_collect_ea(&count[0], m_info);
