@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 14:38:51 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 16:26:32 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	img_conv(t_info *info)
 	}
 	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, \
 	info->fimg.img, 0, 0);
-	villain(info);
+	if (info->map.v == 1)
+		villain(info);
 	return (0);
 }

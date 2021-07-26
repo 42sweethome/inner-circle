@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 11:55:47 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 16:26:51 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int	parsing(t_info *info, char *argv)
 	if (check == -1)
 		return (print_error());
 	info->map.walk = 0;
+	info->map.v = 0;
 	return (0);
 }

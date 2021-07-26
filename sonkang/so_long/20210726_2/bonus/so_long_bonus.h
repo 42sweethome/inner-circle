@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 14:32:02 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 16:27:43 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ typedef struct s_map
 	int			temp_col;
 	int			player_x;
 	int			player_y;
+	int			v;
+	int			v_x;
+	int			v_y;
 	int			collect;
 	int			walk;
 }				t_map;
@@ -42,12 +45,6 @@ typedef struct s_data
 	int			img_height;
 }				t_data;
 
-typedef struct s_block
-{
-	int			width;
-	int			height;
-}				t_block;
-
 typedef struct s_win
 {
 	void		*mlx;
@@ -61,7 +58,6 @@ typedef struct s_info
 	t_map		map;
 	t_data		fimg;
 	t_data		tex[6];
-	t_block		block;
 	t_win		win;
 }				t_info;
 
@@ -78,6 +74,7 @@ void	ft_exit(t_info *info);
 void	move(t_info *info, int x, int y);
 int		check_keypress(int key, t_info *info);
 int		check_button(void);
-void		villain(void);
+void	villain(t_info *info);
+void	patrol(t_info *info, int i, int l);
 
 #endif
