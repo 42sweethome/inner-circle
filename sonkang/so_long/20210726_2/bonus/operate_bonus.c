@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 15:39:53 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 17:44:18 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,25 @@ void	move(t_info *info, int x, int y)
 int	check_keypress(int key, t_info *info)
 {
 	if (key == 126)
+	{
 		move(info, 0, -1);
+		info->map.way = 5;
+	}
 	else if (key == 125)
+	{
 		move(info, 0, 1);
+		info->map.way = 6;
+	}
 	else if (key == 123)
+	{
 		move(info, -1, 0);
+		info->map.way = 7;
+	}
 	else if (key == 124)
+	{
 		move(info, 1, 0);
+		info->map.way = 4;
+	}
 	else if (key == 53)
 		exit(0);
 	return (0);

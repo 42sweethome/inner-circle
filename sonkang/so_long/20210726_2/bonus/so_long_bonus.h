@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 16:27:43 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/26 17:36:17 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_map
 	int			temp_col;
 	int			player_x;
 	int			player_y;
+	int			way;
 	int			v;
 	int			v_x;
 	int			v_y;
@@ -57,7 +58,7 @@ typedef struct s_info
 	char		tmp[4096];
 	t_map		map;
 	t_data		fimg;
-	t_data		tex[6];
+	t_data		tex[20];
 	t_win		win;
 }				t_info;
 
