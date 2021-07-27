@@ -1,11 +1,12 @@
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   image_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/27 12:22:11 by doyun            ###   ########.fr       */
+/*   Created: 2021/07/27 14:26:29 by doyun             #+#    #+#             */
+/*   Updated: 2021/07/27 15:29:05 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +49,19 @@ void	get_texture2(t_info *info)
 	tex[6].bits_per_pixel, &info->tex[6].line_length, &info->tex[6].endian);
 	info->tex[7].addr = (int *)mlx_get_data_addr(info->tex[7].img, &info->\
 	tex[7].bits_per_pixel, &info->tex[7].line_length, &info->tex[7].endian);
+	info->tex[8].addr = (int *)mlx_get_data_addr(info->tex[8].img, &info->\
+	tex[8].bits_per_pixel, &info->tex[8].line_length, &info->tex[8].endian);
+	info->tex[9].addr = (int *)mlx_get_data_addr(info->tex[9].img, &info->\
+	tex[9].bits_per_pixel, &info->tex[9].line_length, &info->tex[9].endian);
+	info->tex[10].addr = (int *)mlx_get_data_addr(info->tex[10].img, &info->\
+	tex[10].bits_per_pixel, &info->tex[10].line_length, &info->tex[10].endian);
+	info->tex[11].addr = (int *)mlx_get_data_addr(info->tex[11].img, &info->\
+	tex[11].bits_per_pixel, &info->tex[11].line_length, &info->tex[11].endian);
+	info->tex[12].addr = (int *)mlx_get_data_addr(info->tex[12].img, &info->\
+	tex[12].bits_per_pixel, &info->tex[12].line_length, &info->tex[12].endian);
+	info->tex[13].addr = (int *)mlx_get_data_addr(info->tex[13].img, &info->\
+	tex[13].bits_per_pixel, &info->tex[13].line_length, &info->tex[13].endian);
+
 }
 
 void	get_texture(t_info *info)
@@ -55,19 +69,31 @@ void	get_texture(t_info *info)
 	info->tex[0].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/dfloor.xpm", &info->tex[0].img_width, &info->tex[0].img_height);
 	info->tex[1].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
+	"./texture/wall.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
 	info->tex[2].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
+	"./texture/collect.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/dend.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dchar.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
+	"./texture/left1.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
 	info->tex[5].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[5].img_width, &info->tex[5].img_height);
+	"./texture/left2.xpm", &info->tex[5].img_width, &info->tex[5].img_height);
 	info->tex[6].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dend.xpm", &info->tex[6].img_width, &info->tex[6].img_height);
+	"./texture/right1.xpm", &info->tex[6].img_width, &info->tex[6].img_height);
 	info->tex[7].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/denemy.xpm", &info->tex[7].img_width, &info->tex[7].img_height);
+	"./texture/right2.xpm", &info->tex[7].img_width, &info->tex[7].img_height);
+	info->tex[8].img = mlx_xpm_file_to_image(info->win.mlx, \
+	"./texture/back1.xpm", &info->tex[8].img_width, &info->tex[8].img_height);
+	info->tex[9].img = mlx_xpm_file_to_image(info->win.mlx, \
+	"./texture/back2.xpm", &info->tex[9].img_width, &info->tex[9].img_height);
+	info->tex[10].img = mlx_xpm_file_to_image(info->win.mlx, \
+	"./texture/front_left.xpm", &info->tex[10].img_width, &info->tex[10].img_height);
+	info->tex[11].img = mlx_xpm_file_to_image(info->win.mlx, \
+	"./texture/front_right.xpm", &info->tex[11].img_width, &info->tex[11].img_height);
+	info->tex[12].img = mlx_xpm_file_to_image(info->win.mlx, \
+	"./texture/ghost.xpm", &info->tex[12].img_width, &info->tex[12].img_height);
+	info->tex[13].img = mlx_xpm_file_to_image(info->win.mlx, \
+	"./texture/ghost_right.xpm", &info->tex[13].img_width, &info->tex[13].img_height);
 	get_texture2(info);
 }
 
