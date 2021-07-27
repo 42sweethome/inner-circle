@@ -22,7 +22,6 @@ int	draw(t_info *info, int y, int x, t_data tex)
 		width = -1;
 		while (++width < tex.img_width)
 		{
-//			printf("%d %d\n", width, height);
 			info->fimg.addr[tex.img_width * (x + info->map.col * (height + \
 			tex.img_height * y)) + width] = tex.addr[height * \
 			tex.img_width * 2 + width];
@@ -54,21 +53,21 @@ void	get_texture2(t_info *info)
 void	get_texture(t_info *info)
 {
 	info->tex[0].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[0].img_width, &info->tex[0].img_height);
+	"./texture/dfloor.xpm", &info->tex[0].img_width, &info->tex[0].img_height);
 	info->tex[1].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/dheart.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
 	info->tex[2].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/dheart.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
+	"./texture/dend.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
+	"./texture/dchar.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
 	info->tex[5].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/dheart.xpm", &info->tex[5].img_width, &info->tex[5].img_height);
 	info->tex[6].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[6].img_width, &info->tex[6].img_height);
+	"./texture/dend.xpm", &info->tex[6].img_width, &info->tex[6].img_height);
 	info->tex[7].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/dheart.xpm", &info->tex[7].img_width, &info->tex[7].img_height);
+	"./texture/denemy.xpm", &info->tex[7].img_width, &info->tex[7].img_height);
 	get_texture2(info);
 }
 
