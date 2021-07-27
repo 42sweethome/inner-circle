@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/27 11:07:30 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/27 12:35:06 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	villain(t_info *info)
 {
 	static int	i;
 	static int	check;
-	i++;
-	if (i >= 100)
+	
+	if (i++ >= 100)
 	{
 		if (check == 0)
 		{
