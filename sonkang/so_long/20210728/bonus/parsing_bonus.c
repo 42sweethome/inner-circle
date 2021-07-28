@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 17:43:38 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/28 13:59:55 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**map_parser(t_map *map_info, char *argv, int fd)
 	int		ret;
 
 	map_info->row = get_newline(argv, map_info);
+	printf("1\n");
 	map_info->map = (char **)ft_calloc(map_info->row + 1, sizeof(char *));
 	if (!map_info->map)
 		return (NULL);

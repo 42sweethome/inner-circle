@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 14:26:29 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/27 15:29:05 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/28 14:14:45 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int	img_conv(t_info *info)
 {
 	int		y;
 	int		x;
+	char	*c;
 
 	y = -1;
-	get_texture(info);
 	while (++y < info->map.row)
 	{
 		x = -1;
@@ -137,13 +137,11 @@ int	img_conv(t_info *info)
 
 	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, \
 	info->fimg.img, 0, 0);
-	x = -1;
-	
-	mlx_string_put(info->win.mlx, info->win.mlx_win, 0, 12, 0xFFFFFF, ft_itoa(info->map.walk));
+	c = ft_itoa(info->map.walk);
+	mlx_string_put(info->win.mlx, info->win.mlx_win, 0, 12, 0xFFFFFF, c);
+	free(c);
 	collectible(info);
 	if (info->map.v == 1)
 		villain(info);
-	/*while (++x < 17)
-		mlx_destroy_window(info->win.mlx, info->tex[x].img);*/
 	return (0);
 }
