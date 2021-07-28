@@ -16,7 +16,7 @@ BONUS = so_long_bonus
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3 
 
 MLXFLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit
 

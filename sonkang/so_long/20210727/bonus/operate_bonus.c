@@ -55,22 +55,22 @@ void	move(t_info *info, int x, int y)
 
 int	check_keypress(int key, t_info *info)
 {
-	if (key == 126)
+	if (key == 13)
 	{
 		move(info, 0, -1);
 		info->map.way = 8 + (info->map.walk % 2);
 	}
-	else if (key == 125)
+	else if (key == 1)
 	{
 		move(info, 0, 1);
 		info->map.way = 10 + (info->map.walk % 2);
 	}
-	else if (key == 123)
+	else if (key == 0)
 	{
 		move(info, -1, 0);
 		info->map.way = 6 + (info->map.walk % 2);
 	}
-	else if (key == 124)
+	else if (key == 2)
 	{
 		move(info, 1, 0);
 		info->map.way = 4 + (info->map.walk % 2);
