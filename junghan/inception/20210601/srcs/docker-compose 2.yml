@@ -1,0 +1,6 @@
+nginx:
+  build: ./requirements/nginx
+  volumes:
+   - ./requirements/nginx/tools/website:/usr/share/nginx/html
+  ports:
+   - "5000:443"
