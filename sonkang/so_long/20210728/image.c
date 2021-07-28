@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/27 12:42:47 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/28 14:22:42 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	img_conv(t_info *info)
 	int		x;
 
 	y = -1;
-	get_texture(info);
 	while (++y < info->map.row)
 	{
 		x = -1;

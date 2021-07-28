@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/27 10:55:54 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/28 18:51:29 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef struct s_map
 	int			player_y;
 	int			way;
 	int			c;
-	int			v;
 	int			v_x;
 	int			v_y;
 	int			v_d;
+	int			v_f;
 	int			collect;
 	int			walk;
 }				t_map;
@@ -80,5 +80,6 @@ void	villain(t_info *info);
 void	collectible(t_info *info);
 void	patrol(t_info *info, int i, int l);
 void	get_texture(t_info *info);
+void	get_villian_position(t_map *map, int row, int col);
 
 #endif

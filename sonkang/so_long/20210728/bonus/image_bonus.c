@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 14:26:29 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 14:14:45 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/28 18:44:50 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,11 @@ int	img_conv(t_info *info)
 		x = -1;
 		while (++x < info->map.col)
 		{
+			if (x == info->map.v_x && y == info->map.v_y && info->map.map[y][x] != 'P' && info->map.v_f >= 0)
+			{
+				info->map.map[y][x] = 'V';
+				info->map.v_f = -2;
+			}
 			if (info->map.map[y][x] == '0')
 				draw(info, y, x, info->tex[0]);
 			else if (info->map.map[y][x] == '1')
@@ -141,7 +146,7 @@ int	img_conv(t_info *info)
 	mlx_string_put(info->win.mlx, info->win.mlx_win, 0, 12, 0xFFFFFF, c);
 	free(c);
 	collectible(info);
-	if (info->map.v == 1)
+	if (info->map.v_f == -2)
 		villain(info);
 	return (0);
 }

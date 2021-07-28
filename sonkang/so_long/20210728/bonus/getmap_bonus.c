@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 14:08:03 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/28 17:11:37 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	show_win(t_info *info)
 	x = -1;
 	while (++x < 17)
 		mlx_destroy_window(info->win.mlx, info->tex[x].img);
-
-	//mlx_destroy_window(info->win.mlx, info->fimg.img);
 }
 
 int	main(int argc, char **argv)

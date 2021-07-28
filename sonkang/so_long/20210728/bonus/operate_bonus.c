@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/27 14:40:39 by doyun            ###   ########.fr       */
+/*   Updated: 2021/07/28 18:51:59 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void	move(t_info *info, int x, int y)
 			ft_exit(info);
 		if (info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'C')
+		{
 			info->map.collect -= 1;
+			if (info->map.collect == info->map.v_f - 1)
+				get_villian_position(&info->map, info->map.player_x + x, info->map.player_y + y);
+		}
 		if (!(info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'E' && info->map.collect != 0))
 		{
