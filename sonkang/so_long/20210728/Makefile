@@ -6,7 +6,7 @@
 #    By: doyun <doyun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 10:13:13 by doyun             #+#    #+#              #
-#    Updated: 2021/07/26 12:06:41 by sonkang          ###   ########.fr        #
+#    Updated: 2021/07/28 13:38:11 by sonkang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS = so_long_bonus
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3 
 
 MLXFLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
