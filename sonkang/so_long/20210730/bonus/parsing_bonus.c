@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/30 11:04:03 by doyun            ###   ########.fr       */
+/*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
+/*   Updated: 2021/07/31 02:37:27 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	parsing(t_info *info, char *argv)
 	int		fd;
 
 	info->map.walk = 0;
-	info->map.way = 4;
+	info->map.way = 8;
 	info->map.c = 2;
 	info->map.v_f = -1;
 	check = check_extention(argv);

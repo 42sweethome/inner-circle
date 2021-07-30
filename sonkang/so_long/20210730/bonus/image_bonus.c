@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonkang <sonkang@student.42.fr>                +#+  +:+       +#+    */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/27 14:26:29 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/30 10:43:04 by doyun            ###   ########.fr       */
+/*   Created: 2021/07/27 14:26:29 by sonkang             #+#    #+#           */
+/*   Updated: 2021/07/30 10:43:04 by sonkang            ###   ########.fr     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	draw(t_info *info, int y, int x, t_data tex)
 		{
 			info->fimg.addr[tex.img_width * (x + info->map.col * (height + \
 						tex.img_height * y)) + width] = tex.addr[height * \
-				tex.img_width * 2 + width];
+				tex.img_width + width];
 		}
 	}
 	return (0);

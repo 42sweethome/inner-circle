@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   position.c                                         :+:      :+:    :+:   */
+/*   position_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 14:58:39 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/30 10:25:47 by doyun            ###   ########.fr       */
+/*   Created: 2021/07/19 14:58:39 by sonkang           #+#    #+#             */
+/*   Updated: 2021/07/31 02:32:26 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	get_villian_position(t_map *map, int row, int col)
 {
 	map->v_x = col;
 	map->v_y = row;
+	printf("v_x %d v_y %d\n", map->v_x, map->v_y);
 }
