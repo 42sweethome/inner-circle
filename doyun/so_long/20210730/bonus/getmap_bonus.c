@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 17:11:37 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 10:27:08 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,9 @@
 int	print_error(void)
 {
 	write(1, "Error\n", 6);
-	//ft_free(info);
 	exit(1);
 	return (-1);
 }
-
-/*void	ft_free(t_info *info)
-{
-	int	i;
-
-	i = -1;
-	while (++i < info->map.row + 1)
-		free(info->map[i]);
-	free(info->map);	
-}*/
 
 void	show_win(t_info *info)
 {

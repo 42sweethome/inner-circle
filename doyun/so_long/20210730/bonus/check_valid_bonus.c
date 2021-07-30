@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 14:58:39 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 18:48:10 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 10:26:01 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,7 @@ int	check_extention(char *argv)
 	return (0);
 }
 
-void	get_player_position(int *count, t_map *map, int row, int col)
-{
-	*count += 1;
-	map->player_x = col;
-	map->player_y = row;
-}
-
-void	get_villian_position(t_map *map, int row, int col)
-{
-	map->v_x = col;
-	map->v_y = row;
-}
-
-void	get_collect_ea(int *count, t_map *map/*,int row, int col*/)
+void	get_collect_ea(int *count, t_map *map)
 {
 	*count += 1;
 	map->collect = *count;
@@ -62,13 +49,11 @@ int	check_parm_valid(t_map *m_info)
 			if (m_info->map[row][col] == '0' || m_info->map[row][col] == '1')
 				continue ;
 			else if (m_info->map[row][col] == 'C')
-				get_collect_ea(&count[0], m_info/*, row, col*/);
+				get_collect_ea(&count[0], m_info);
 			else if (m_info->map[row][col] == 'E')
 				count[1]++;
 			else if (m_info->map[row][col] == 'P')
 				get_player_position(&count[2], m_info, row, col);
-		//	else if (m_info->map[row][col] == 'V')
-		//		get_villian_position(&count[3], m_info, row, col);
 			else
 				return (-1);
 		}

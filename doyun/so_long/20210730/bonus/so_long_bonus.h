@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 18:51:29 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 11:06:06 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ void	collectible(t_info *info);
 void	patrol(t_info *info, int i, int l);
 void	get_texture(t_info *info);
 void	get_villian_position(t_map *map, int row, int col);
+void	get_player_position(int *count, t_map *map, int row, int col);
+void	die(void);
 
 #endif

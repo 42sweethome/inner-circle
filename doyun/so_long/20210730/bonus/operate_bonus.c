@@ -6,28 +6,11 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 18:51:59 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 11:01:37 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-void	ft_exit(t_info *info)
-{
-	if (info->map.collect == 0)
-	{
-		printf("well done\n");
-		exit(0);
-	}
-	else
-		printf("keep going!\n");
-}
-
-void	die(void)
-{
-	printf("you die...\n");
-	exit(0);
-}
 
 void	move(t_info *info, int x, int y)
 {
@@ -44,7 +27,8 @@ void	move(t_info *info, int x, int y)
 		{
 			info->map.collect -= 1;
 			if (info->map.collect == info->map.v_f - 1)
-				get_villian_position(&info->map, info->map.player_y + y, info->map.player_x + x);
+				get_villian_position(&info->map, info->map.player_y + y, \
+				info->map.player_x + x);
 		}
 		if (!(info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'E' && info->map.collect != 0))
@@ -84,16 +68,11 @@ int	check_keypress(int key, t_info *info)
 	return (0);
 }
 
-int	check_button(void)
-{
-	exit(0);
-	return (0);
-}
-
 void	patrol(t_info *info, int i, int l)
 {
 	info->map.map[info->map.v_y][info->map.v_x] = '0';
-	info->map.map[info->map.v_y][info->map.v_x += i] = 'V';
+	info->map.map[info->map.v_y][info->map.v_x + i] = 'V';
+	info->map.v_x += i;
 	info->map.v_d = 0;
 	if (l == 1)
 		die();
@@ -116,29 +95,27 @@ void	collectible(t_info *info)
 void	villain(t_info *info)
 {
 	static int	i;
-	static int	check;
 
 	if (i++ >= 100)
 	{
-		if (check == 0)
+		if (info->map.v_d == 0)
 		{
 			if (info->map.map[info->map.v_y][info->map.v_x + 1] == '0')
-				patrol(info ,1 ,0);
+				patrol(info, 1, 0);
 			else if (info->map.map[info->map.v_y][info->map.v_x + 1] == 'P')
 				patrol(info, 1, 1);
 			else
-				check = 1;
+				info->map.v_d = 1;
 		}
-		if (check == 1)
+		if (info->map.v_d == 1)
 		{
 			if (info->map.map[info->map.v_y][info->map.v_x - 1] == '0')
 				patrol(info, -1, 0);
 			else if (info->map.map[info->map.v_y][info->map.v_x - 1] == 'P')
 				patrol(info, -1, 1);
 			else
-				check = 0;
+				info->map.v_d = 0;
 		}
 		i = 0;
-		info->map.v_d = check;
 	}
 }

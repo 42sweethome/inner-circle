@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 14:22:18 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 10:21:38 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	show_win(t_info *info)
 	info->win.mlx = mlx_init();
 	mlx_get_screen_size(info->win.mlx, &user_win[0], &user_win[1]);
 	if (!(user_win[0] >= 32 * info->map.col && user_win[1] >= \
-		32 * info->map.row/* && info->map.col % 4 == 0*/))
+		32 * info->map.row))
 		print_error();
 	info->win.mlx_win = mlx_new_window(info->win.mlx, 32 * info->map.col, \
 	32 * info->map.row, "Bubble Bobble");
