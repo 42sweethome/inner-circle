@@ -6,7 +6,7 @@
 #    By: doyun <doyun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/23 10:13:13 by doyun             #+#    #+#              #
-#    Updated: 2021/07/28 13:38:11 by sonkang          ###   ########.fr        #
+#    Updated: 2021/07/30 11:08:48 by doyun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS = so_long_bonus
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
 
 MLXFLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
@@ -27,7 +27,8 @@ SRCS = GNL/get_next_line.c GNL/get_next_line_utils.c\
 SRCS_BONUS = GNL/get_next_line.c GNL/get_next_line_utils.c\
 			 bonus/getmap_bonus.c bonus/check_valid_bonus.c\
 			 bonus/parsing_bonus.c bonus/image_bonus.c\
-			 bonus/operate_bonus.c
+			 bonus/operate_bonus.c bonus/get_texture_bonus.c\
+			 bonus/position_bonus.c bonus/utils_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

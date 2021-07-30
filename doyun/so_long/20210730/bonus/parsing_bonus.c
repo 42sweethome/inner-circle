@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 18:39:11 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 11:04:03 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	parsing(t_info *info, char *argv)
 
 	info->map.walk = 0;
 	info->map.way = 4;
-	info->map.c= 2;
+	info->map.c = 2;
 	info->map.v_f = -1;
 	check = check_extention(argv);
 	if (check == -1)

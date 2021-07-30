@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/26 16:28:02 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 10:22:30 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int		check_extention(char *argv);
 int		check_map_valid(t_map *map_info);
 int		check_parm_valid(t_map *map_info);
 int		get_newline(char *argv, t_map *map_info);
-void		get_texture(t_info *info);
-char		**map_parser(t_map *map_info, char *argv, int fd);
+void	get_texture(t_info *info);
+char	**map_parser(t_map *map_info, char *argv, int fd);
 int		parsing(t_info *info, char *argv);
 int		draw(t_info *info, int y, int x, t_data tex);
 int		img_conv(t_info *info);
-void		ft_exit(t_info *info);
-void		move(t_info *info, int x, int y);
+void	ft_exit(t_info *info);
+void	move(t_info *info, int x, int y);
 int		check_keypress(int key, t_info *info);
 int		check_button(void);
 

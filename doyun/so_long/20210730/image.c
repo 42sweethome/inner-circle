@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/28 14:22:42 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/30 11:11:20 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_texture(t_info *info)
 	info->tex[1].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/wall.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
 	info->tex[2].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/collect.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
+	"./texture/collect1.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/exit.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
