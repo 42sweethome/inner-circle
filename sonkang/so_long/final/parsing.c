@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 16:11:29 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/31 20:49:39 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ int	get_newline(char *argv, t_map *map_info)
 	char	buf;
 	int		fd;
 
-	fd = open(argv, O_RDONLY);
+	fd = open("abc", O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	map_info->row = 0;
+	while (argv != NULL)//
+		continue;
 	ret = read(fd, &buf, 1);
 	if (buf == '\n')
 		map_info->row++;
@@ -43,6 +45,8 @@ char	**map_parser(t_map *map_info, char *argv, int fd)
 	int		ret;
 
 	map_info->row = get_newline(argv, map_info);
+	if (map_info->row == -1)
+		print_error(2);
 	map_info->map = (char **)ft_calloc(map_info->row + 1, sizeof(char *));
 	if (!map_info->map)
 		return (NULL);
@@ -71,10 +75,11 @@ int	parsing(t_info *info, char *argv)
 	check = check_extention(argv);
 	if (check == -1)
 		return (print_error(1));
-	fd = open(argv, O_RDONLY);
+	fd = open("abc", O_RDONLY);
 	if (fd == -1)
 		return (print_error(2));
 	info->map.map = map_parser(&info->map, argv, fd);
+	close(fd);
 	if (!info->map.map)
 		return (print_error(3));
 	check = check_map_valid(&info->map);

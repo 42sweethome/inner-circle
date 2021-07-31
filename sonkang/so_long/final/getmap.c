@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 16:10:38 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/31 20:43:19 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@ int	print_error(int i)
 {
 	printf("Error\n");
 	if (i == 0)
-		printf("number of arguments isn't right!\n");
+//		printf("number of arguments isn't right!\n");
+		perror("number of arguments isn't right!");
 	if (i == 1)
-		printf("The name of the map does not end with '.ber'!\n");
+		//printf("The name of the map does not end with '.ber'!\n");
+		perror(NULL);
 	if (i == 2)
-		printf("The file didn't open!\n");
+		//printf("The file didn't open or read!\n");
+		perror(NULL);
 	if (i == 3)
 		printf("Map parsing was not done properly!\n");
 	if (i == 4)
 		printf("The map is not surrounded by walls!\n");
 	if (i == 5)
-		printf("The map must be composed of only 5 possible characters.\nAnd map must have at least one exit, one collectible, and one starting position!\n");
+	{
+		printf("The map must be composed of only 5 possible characters.\n");
+		printf("And map must have at least one exit, one collectible, ");
+		printf("and one starting position!\n");
+	}
 	if (i == 6)
 		printf("size of map is too big!\n");
 	exit(1);

@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 16:06:47 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/31 16:40:15 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int	print_error(int i)
 	if (i == 4)
 		printf("The map is not surrounded by walls!\n");
 	if (i == 5)
-		printf("The map must be composed of only 5 possible characters.\nAnd map must have at least one exit, one collectible, and one starting position!\n");
+	{
+		printf("The map must be composed of only 5 possible characters.\n");
+		printf("And map must have at least one exit, one collectible, ");
+		printf("and one starting position!\n");
+	}
 	if (i == 6)
 		printf("size of map is too big!\n");
 	exit(1);
