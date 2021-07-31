@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 02:50:06 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/31 15:22:06 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	patrol(t_info *info, int i, int l)
 	info->map.map[info->map.v_y][info->map.v_x] = '0';
 	info->map.map[info->map.v_y][info->map.v_x + i] = 'V';
 	info->map.v_x += i;
-	info->map.v_d = 0;
 	if (l == 1)
 		die();
 }

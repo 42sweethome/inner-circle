@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42.fr>                +#+  +:+       +#+    */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 10:58:24 by sonkang             #+#    #+#           */
-/*   Updated: 2021/07/30 11:11:20 by sonkang            ###   ########.fr     */
+/*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
+/*   Updated: 2021/07/31 14:29:43 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	draw(t_info *info, int y, int x, t_data tex)
 		{
 			info->fimg.addr[tex.img_width * (x + info->map.col * (height + \
 			tex.img_height * y)) + width] = tex.addr[height * \
-			tex.img_width * 2 + width];
+			tex.img_width + width];
 		}
 	}
 	return (0);
@@ -38,11 +38,11 @@ void	get_texture(t_info *info)
 	info->tex[1].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/wall.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
 	info->tex[2].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/collect1.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
+	"./texture/col1.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/exit.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/front_left.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
+	"./texture/fro_l.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
 	info->tex[0].addr = (int *)mlx_get_data_addr(info->tex[0].img, &info->\
 	tex[0].bits_per_pixel, &info->tex[0].line_length, &info->tex[0].endian);
 	info->tex[1].addr = (int *)mlx_get_data_addr(info->tex[1].img, &info->\

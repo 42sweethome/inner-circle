@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 02:37:27 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/07/31 15:04:17 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	parsing(t_info *info, char *argv)
 	int		fd;
 
 	info->map.walk = 0;
-	info->map.way = 8;
+	info->map.way = 13;
 	info->map.c = 2;
 	info->map.v_f = -1;
 	check = check_extention(argv);
@@ -88,5 +88,7 @@ int	parsing(t_info *info, char *argv)
 	if (check == -1)
 		return (print_error());
 	info->map.v_d = 0;
+	info->map.v_x = -1;
+	info->map.v_y = -1;
 	return (0);
 }
