@@ -6,17 +6,17 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:19:33 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/02 22:55:51 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 17:49:01 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*temp;
 
-	temp = (unsigned char*)s;
+	temp = (unsigned char *)s;
 	while (n)
 	{
 		*temp = '\0';

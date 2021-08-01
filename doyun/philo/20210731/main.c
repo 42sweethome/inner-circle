@@ -11,13 +11,13 @@ int	print_error(void)
 
 }
 */
+
 void	*ph_life(void *info)
 {
 	t_ph *ph = info;
 	printf("start thread %d %d\n",ph->thrd, ((t_ph *)info)->thrd);
 	gettimeofday(&ph->born, NULL);
 	ph->born_t = ph->born.tv_sec * 1000 + ph->born.tv_usec / 1000;
-
 	usleep(200 * 1000);
 	printf("%u %ld\n", ph->born_t, ph->die.tv_sec * 1000 + ph->die.tv_usec / 1000);
 	gettimeofday(&ph->die, NULL);

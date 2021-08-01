@@ -6,13 +6,13 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:34:41 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/01 21:53:01 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 18:07:14 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		count_char(char *s, char c)
+static int	count_char(char *s, char c)
 {
 	int			count;
 	int			idx;
@@ -33,7 +33,7 @@ static int		count_char(char *s, char c)
 	return (count);
 }
 
-static int		check_start(char *s, char c, int start)
+static int	check_start(char *s, char c, int start)
 {
 	int			idx;
 
@@ -45,7 +45,7 @@ static int		check_start(char *s, char c, int start)
 	return (-1);
 }
 
-static int		check_end(char *s, char c)
+static int	check_end(char *s, char c)
 {
 	int			idx;
 
@@ -55,36 +55,37 @@ static int		check_end(char *s, char c)
 	return (idx);
 }
 
-static void		allocate(char **split_s, char *s, char c)
+static void	allocate(char **split_s, char *s, char c)
 {
 	int			idx;
 	int			start;
 	int			end;
 
-	idx = 0;
+	idx = -1;
 	start = 0;
-	while (0 <= (start = check_start(s, c, start)))
+	start = check_start(s, c, start);
+	while (0 <= start)
 	{
+		start = check_start(s, c, start);
 		end = check_end(&s[start], c);
-		if (!(split_s[idx] = ft_substr(s, start, end)))
+		split_s[++idx] = ft_substr(s, start, end);
+		if (!(split_s[idx]))
 		{
 			while (idx > 0)
 			{
-				idx--;
-				free(split_s[idx]);
+				free(split_s[--idx]);
 				split_s[idx] = 0;
 			}
 			free(split_s);
 			split_s = 0;
 			return ;
 		}
-		idx++;
 		start = start + end;
 	}
 	split_s[idx] = 0;
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char		**split_s;
 	int			low;
@@ -92,7 +93,8 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	low = count_char((char *)s, c);
-	if (!(split_s = (char**)malloc(sizeof(char *) * (low + 1))))
+	split_s = (char **)malloc(sizeof(char *) * (low + 1));
+	if (!split_s)
 		return (0);
 	allocate(split_s, (char *)s, c);
 	return (split_s);

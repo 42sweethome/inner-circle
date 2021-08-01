@@ -1,6 +1,6 @@
 PHILO = philo
 
-CC = gcc -fsanitize=address -g3
+CC = gcc #-fsanitize=address -g3
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -8,20 +8,27 @@ SRCS = main.c
 
 OBJS = $(SRCS:.c=.o)
 
-LIBFT = ./Libft/
+LIBFT = ./Libft
 
-LIBFT_A = $(addprefix $(LIBFT), $(LIBFT_A))
-
-$(PHILO) : $(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -l$(LIBFT_A)
+LIBFT_A = $(addprefix $(LIBFT)/, libft.a)
 
 all : $(PHILO)
 
-clean :
+$(PHILO) : $(OBJS) $(LIBFT_A)
+			$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -o $@
 
-fclean :
+$(LIBFT_A) : 
+				make -C $(LIBFT)
 
-re :
+clean : 
+			rm -f $(OBJS)
+			make clean -C $(LIBFT)
+
+fclean : clean
+			rm $(PHILO)
+			make fclean -C $(LIBFT)
+			
+re :	fclean all
 
 .PHONY : all clean fclean re 
 
