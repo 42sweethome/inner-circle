@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 20:43:19 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/01 23:34:22 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	print_error(int i)
 {
 	printf("Error\n");
 	if (i == 0)
-//		printf("number of arguments isn't right!\n");
 		perror("number of arguments isn't right!");
 	if (i == 1)
-		//printf("The name of the map does not end with '.ber'!\n");
 		perror(NULL);
 	if (i == 2)
 		//printf("The file didn't open or read!\n");

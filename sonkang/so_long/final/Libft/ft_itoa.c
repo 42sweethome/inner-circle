@@ -6,13 +6,13 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 00:58:00 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/02 00:35:15 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 23:23:04 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			intlen(long long int n)
+static int	intlen(long long int n)
 {
 	long long int	len;
 
@@ -30,27 +30,31 @@ static int			intlen(long long int n)
 	return (len);
 }
 
-char				*ft_itoa(int n)
+void	miner_int(int *n, int *len, char **num)
+{
+	(*num)[0] = '-';
+	if (*n == -2147483648)
+	{
+		(*num)[--(*len)] = '8';
+		*n = -214748364;
+	}
+	*n *= -1;
+}
+
+char	*ft_itoa(int n)
 {
 	char			*num;
 	int				len;
 
 	len = intlen(n);
-	if (!(num = (char *)malloc(sizeof(char) * len + 1)))
+	num = (char *)malloc(sizeof(char) * len + 1);
+	if (!num)
 		return (0);
 	num[len] = '\0';
 	if (!n)
 		num[0] = '0';
 	if (n < 0)
-	{
-		num[0] = '-';
-		if (n == -2147483648)
-		{
-			num[--len] = '8';
-			n = -214748364;
-		}
-		n *= -1;
-	}
+		miner_int(&n, &len, &num);
 	while (n)
 	{
 		num[--len] = ((n % 10) + '0');

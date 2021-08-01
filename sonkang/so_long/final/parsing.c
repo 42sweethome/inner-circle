@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 20:49:39 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/01 23:32:55 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ int	get_newline(char *argv, t_map *map_info)
 	char	buf;
 	int		fd;
 
-	fd = open("abc", O_RDONLY);
+	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	map_info->row = 0;
-	while (argv != NULL)//
-		continue;
 	ret = read(fd, &buf, 1);
 	if (buf == '\n')
 		map_info->row++;
@@ -75,7 +73,7 @@ int	parsing(t_info *info, char *argv)
 	check = check_extention(argv);
 	if (check == -1)
 		return (print_error(1));
-	fd = open("abc", O_RDONLY);
+	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		return (print_error(2));
 	info->map.map = map_parser(&info->map, argv, fd);

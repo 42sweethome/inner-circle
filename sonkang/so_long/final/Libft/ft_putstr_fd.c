@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	if (!s)
