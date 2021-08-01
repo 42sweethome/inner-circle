@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		count_char(char *s, char c)
+static int	count_char(char *s, char c)
 {
 	int			count;
 	int			idx;
@@ -33,7 +33,7 @@ static int		count_char(char *s, char c)
 	return (count);
 }
 
-static int		check_start(char *s, char c, int start)
+static int	check_start(char *s, char c, int start)
 {
 	int			idx;
 
@@ -45,7 +45,7 @@ static int		check_start(char *s, char c, int start)
 	return (-1);
 }
 
-static int		check_end(char *s, char c)
+static int	check_end(char *s, char c)
 {
 	int			idx;
 
@@ -55,7 +55,7 @@ static int		check_end(char *s, char c)
 	return (idx);
 }
 
-static void		allocate(char **split_s, char *s, char c)
+static void	allocate(char **split_s, char *s, char c)
 {
 	int			idx;
 	int			start;
@@ -84,7 +84,7 @@ static void		allocate(char **split_s, char *s, char c)
 	split_s[idx] = 0;
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char		**split_s;
 	int			low;

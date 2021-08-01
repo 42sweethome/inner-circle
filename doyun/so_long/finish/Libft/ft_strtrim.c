@@ -23,7 +23,7 @@ static size_t	check(char s1, char *set)
 	return (0);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char		*temp_s1;
 	size_t		check_f;

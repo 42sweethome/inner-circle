@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/30 11:11:20 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 15:43:39 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	get_texture(t_info *info)
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/exit.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/front1.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
+	"./texture/fr1.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
 	info->tex[0].addr = (int *)mlx_get_data_addr(info->tex[0].img, &info->\
 	tex[0].bits_per_pixel, &info->tex[0].line_length, &info->tex[0].endian);
 	info->tex[1].addr = (int *)mlx_get_data_addr(info->tex[1].img, &info->\

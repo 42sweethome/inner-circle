@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 14:26:29 by doyun             #+#    #+#             */
-/*   Updated: 2021/07/30 10:37:05 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 15:43:20 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	get_texture2(t_info *info)
 	info->tex[12].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/back2.xpm", &info->tex[12].img_width, &info->tex[12].img_height);
 	info->tex[13].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/front1.xpm", &info->tex[13].img_width, &info->tex[13].img_height);
+	"./texture/fr1.xpm", &info->tex[13].img_width, &info->tex[13].img_height);
 	info->tex[14].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/front2.xpm", &info->tex[14].img_width, &info->tex[14].img_height);
+	"./texture/fr2.xpm", &info->tex[14].img_width, &info->tex[14].img_height);
 	info->tex[15].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/enemy1.xpm", &info->tex[15].img_width, &info->tex[15].img_height);
+	"./texture/ene1.xpm", &info->tex[15].img_width, &info->tex[15].img_height);
 	info->tex[16].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/enemy2.xpm", &info->tex[16].img_width, &info->tex[16].img_height);
+	"./texture/ene2.xpm", &info->tex[16].img_width, &info->tex[16].img_height);
 	get_texture3(info);
 }
 

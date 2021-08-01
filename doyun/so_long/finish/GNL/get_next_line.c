@@ -6,15 +6,15 @@
 /*   By: doyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 02:48:00 by doyun             #+#    #+#             */
-/*   Updated: 2021/03/10 04:52:39 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 15:53:10 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int					find_nl(char *str)
+int	find_nl(char *str)
 {
-	int				idx;
+	int	idx;
 
 	idx = 0;
 	if (!str)
@@ -28,9 +28,9 @@ int					find_nl(char *str)
 	return (-1);
 }
 
-void				put_line(char **line, char **stc_line, int nlidx)
+void	put_line(char **line, char **stc_line, int nlidx)
 {
-	char			*temp;
+	char	*temp;
 
 	temp = *stc_line;
 	*line = sub_str(temp, 0, nlidx);
@@ -41,10 +41,10 @@ void				put_line(char **line, char **stc_line, int nlidx)
 	free(temp);
 }
 
-int					not_read(int rdlen, char **line, char **stc_line)
+int	not_read(int rdlen, char **line, char **stc_line)
 {
-	int				nlidx;
-	char			*temp;
+	int		nlidx;
+	char	*temp;
 
 	if (rdlen < 0)
 		return (-1);
@@ -66,9 +66,9 @@ int					not_read(int rdlen, char **line, char **stc_line)
 	return (0);
 }
 
-int					read_and_nl(char **line, char **stc_line)
+int	read_and_nl(char **line, char **stc_line)
 {
-	int				nlidx;
+	int	nlidx;
 
 	nlidx = find_nl(*stc_line);
 	if (nlidx >= 0)
@@ -79,13 +79,13 @@ int					read_and_nl(char **line, char **stc_line)
 	return (0);
 }
 
-int					get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char		*stc_line[OPEN_MAX];
-	char			buff[BUFFER_SIZE + 1];
-	char			*temp;
-	int				rdlen;
-	int				rdchk;
+	static char	*stc_line[OPEN_MAX];
+	char		buff[BUFFER_SIZE + 1];
+	char		*temp;
+	int			rdlen;
+	int			rdchk;
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);

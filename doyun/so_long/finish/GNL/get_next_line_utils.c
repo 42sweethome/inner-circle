@@ -6,15 +6,15 @@
 /*   By: doyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 03:26:19 by doyun             #+#    #+#             */
-/*   Updated: 2021/03/09 03:30:04 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 15:58:20 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int					str_len(char *s)
+int	str_len(char *s)
 {
-	int				len;
+	int	len;
 
 	len = 0;
 	if (!s)
@@ -24,13 +24,13 @@ int					str_len(char *s)
 	return (len);
 }
 
-char				*str_join(char *s1, char *s2)
+char	*str_join(char *s1, char *s2)
 {
-	char			*str_j;
-	int				len;
-	int				idx;
-	int				len_s1;
-	int				len_s2;
+	char	*str_j;
+	int		len;
+	int		idx;
+	int		len_s1;
+	int		len_s2;
 
 	len_s1 = str_len(s1);
 	len_s2 = str_len(s2);
@@ -50,15 +50,14 @@ char				*str_join(char *s1, char *s2)
 	return ((char *)str_j);
 }
 
-char				*sub_str(char *s, int start, size_t len)
+char	*sub_str(char *s, int start, size_t len)
 {
 	char			*dest;
 	char			*src;
 	unsigned int	idx;
 
 	src = s;
-	if (!(dest = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
+	dest = (char *)malloc(sizeof(char) * (len + 1))
 	if (!dest || !s)
 		return (NULL);
 	idx = 0;
@@ -72,11 +71,11 @@ char				*sub_str(char *s, int start, size_t len)
 	return (dest);
 }
 
-char				*str_dup(char *s1)
+char	*str_dup(char *s1)
 {
-	char			*temp_s1;
-	int				len;
-	int				idx;
+	char	*temp_s1;
+	int		len;
+	int		idx;
 
 	if (!s1)
 		return (NULL);
