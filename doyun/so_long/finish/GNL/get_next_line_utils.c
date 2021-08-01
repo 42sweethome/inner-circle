@@ -6,7 +6,7 @@
 /*   By: doyun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 03:26:19 by doyun             #+#    #+#             */
-/*   Updated: 2021/08/01 15:58:20 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 18:05:39 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*sub_str(char *s, int start, size_t len)
 	unsigned int	idx;
 
 	src = s;
-	dest = (char *)malloc(sizeof(char) * (len + 1))
+	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (!dest || !s)
 		return (NULL);
 	idx = 0;

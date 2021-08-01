@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/20 16:12:26 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/04 23:29:31 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 17:21:53 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	check_f = 0;
 	while (check((char)s1[check_f], (char *)set))
-	{
 		check_f++;
-	}
 	check_l = ft_strlen(s1) - 1;
 	while (check((char)s1[check_l], (char *)set))
 	{
@@ -47,7 +45,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 			return (ft_strdup(""));
 	}
 	len = check_l - check_f + 1;
-	if (!(temp_s1 = (char *)ft_substr((char *)s1, (int)check_f, len)))
+	temp_s1 = (char *)ft_substr((char *)s1, (int)check_f, len);
+	if (!temp_s1)
 		return (0);
 	return ((char *)temp_s1);
 }

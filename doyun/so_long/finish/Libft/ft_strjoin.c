@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 22:31:28 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/01 22:32:18 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 17:36:18 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	len = len_s1 + len_s2;
-	if (!(str_j = (unsigned char *)malloc(sizeof(char) * (len + 1))))
+	str_j = (unsigned char *)malloc(sizeof(char) * (len + 1));
+	if (!str_j)
 		return (NULL);
 	idx = 0;
 	while (idx < len)

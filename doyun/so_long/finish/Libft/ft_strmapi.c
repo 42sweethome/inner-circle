@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 22:25:42 by doyun             #+#    #+#             */
-/*   Updated: 2021/02/01 22:28:42 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 17:35:38 by doyun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (!s || !f)
 		return (NULL);
 	len = ft_strlen(s);
-	if (!(temp_s = (unsigned char *)malloc(sizeof(char) * len + 1)))
+	temp_s = (unsigned char *)malloc(sizeof(char) * len + 1);
+	if (!temp_s)
 		return (NULL);
 	idx = 0;
 	while (idx < len)
