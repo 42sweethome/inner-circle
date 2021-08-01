@@ -27,8 +27,8 @@ void	move(t_info *info, int x, int y)
 		{
 			info->map.collect -= 1;
 			if (info->map.collect == info->map.v_f - 1)
-				get_villian_position(&info->map, info->map.player_y + y, \
-				info->map.player_x + x);
+				get_villian_position(&info->map, info->map.player_x + x, \
+				info->map.player_y + y);
 		}
 		if (!(info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'E' && info->map.collect != 0))
@@ -73,7 +73,6 @@ void	patrol(t_info *info, int i, int l)
 	info->map.map[info->map.v_y][info->map.v_x] = '0';
 	info->map.map[info->map.v_y][info->map.v_x + i] = 'V';
 	info->map.v_x += i;
-	info->map.v_d = 0;
 	if (l == 1)
 		die();
 }
@@ -96,7 +95,7 @@ void	villain(t_info *info)
 {
 	static int	i;
 
-	if (i++ >= 100)
+	if (i++ >= 50)
 	{
 		if (info->map.v_d == 0)
 		{
@@ -107,7 +106,7 @@ void	villain(t_info *info)
 			else
 				info->map.v_d = 1;
 		}
-		if (info->map.v_d == 1)
+		else if (info->map.v_d == 1)
 		{
 			if (info->map.map[info->map.v_y][info->map.v_x - 1] == '0')
 				patrol(info, -1, 0);

@@ -66,30 +66,30 @@ void	get_texture2(t_info *info)
 	info->tex[12].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/back2.xpm", &info->tex[12].img_width, &info->tex[12].img_height);
 	info->tex[13].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/front_left.xpm", &info->tex[13].img_width, &info->tex[13].img_height);
+	"./texture/front1.xpm", &info->tex[13].img_width, &info->tex[13].img_height);
 	info->tex[14].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/front_right.xpm", &info->tex[14].img_width, &info->tex[14].img_height);
+	"./texture/front2.xpm", &info->tex[14].img_width, &info->tex[14].img_height);
 	info->tex[15].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/ghost_right.xpm", &info->tex[15].img_width, &info->tex[15].img_height);
+	"./texture/enemy1.xpm", &info->tex[15].img_width, &info->tex[15].img_height);
 	info->tex[16].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/ghost_left.xpm", &info->tex[16].img_width, &info->tex[16].img_height);
+	"./texture/enemy2.xpm", &info->tex[16].img_width, &info->tex[16].img_height);
 	get_texture3(info);
 }
 
 void	get_texture(t_info *info)
 {
 	info->tex[0].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/grass.xpm", &info->tex[0].img_width, &info->tex[0].img_height);
+	"./texture/floor.xpm", &info->tex[0].img_width, &info->tex[0].img_height);
 	info->tex[1].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/wall.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
 	info->tex[2].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/collect1.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
+	"./texture/c1.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/collect2.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
+	"./texture/c2.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/collect3.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
+	"./texture/c3.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
 	info->tex[5].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/collect4.xpm", &info->tex[5].img_width, &info->tex[5].img_height);
+	"./texture/c4.xpm", &info->tex[5].img_width, &info->tex[5].img_height);
 	info->tex[6].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/exit.xpm", &info->tex[6].img_width, &info->tex[6].img_height);
 	info->tex[7].img = mlx_xpm_file_to_image(info->win.mlx, \

@@ -25,7 +25,7 @@ int	draw(t_info *info, int y, int x, t_data tex)
 		{
 			info->fimg.addr[tex.img_width * (x + info->map.col * (height + \
 						tex.img_height * y)) + width] = tex.addr[height * \
-				tex.img_width * 2 + width];
+				tex.img_width + width];
 		}
 	}
 	return (0);
