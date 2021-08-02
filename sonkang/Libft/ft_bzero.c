@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 22:04:22 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/12 17:09:28 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:29:38 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_bzero(void *s, size_t n)
 {
 	while (n > 0)
 	{
-		*(unsigned char*)s = 0;
+		*(unsigned char *)s = 0;
 		s++;
 		n--;
 	}

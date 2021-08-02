@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 15:29:41 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/12 16:57:56 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:15:02 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s1 == 0 || s2 == 0)
 		return (0);
 	str_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(str = (char *)malloc(str_len * sizeof(char))))
+	str = (char *)malloc(str_len * sizeof(char));
+	if (!str)
 		return (NULL);
 	i = 0;
 	while (*(s1 + i) != '\0')

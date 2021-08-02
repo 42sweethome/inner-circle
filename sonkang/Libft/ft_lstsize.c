@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 19:24:04 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/08 19:24:05 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:18:36 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int lst_size;
+	int		lst_size;
 
 	lst_size = 0;
 	while (lst)

@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 15:28:28 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/13 15:19:12 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:10:55 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (s == 0)
 		return (0);
 	size = ft_strlen(s);
-	if (!(str = (char *)malloc((len + 1) * sizeof(char))))
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (!str)
 		return (0);
 	if (size <= start)
 	{

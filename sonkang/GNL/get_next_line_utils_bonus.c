@@ -6,13 +6,13 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:59:03 by sonkang           #+#    #+#             */
-/*   Updated: 2021/03/17 18:59:05 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 22:58:30 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t				ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	unsigned int	i;
 
@@ -25,14 +25,15 @@ size_t				ft_strlen(const char *s)
 	return (i);
 }
 
-char				*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	int		len;
 	int		i;
 	char	*ptr;
 
 	len = ft_strlen(s1);
-	if (!(ptr = malloc((len + 1) * sizeof(char))))
+	ptr = malloc((len + 1) * sizeof(char));
+	if (!ptr)
 		return (NULL);
 	i = 0;
 	while (i <= len)
@@ -43,7 +44,7 @@ char				*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-char				*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
 	int		str_len;
@@ -51,23 +52,20 @@ char				*ft_strjoin(char const *s1, char const *s2)
 
 	if (!(s1) && !(s2))
 		return (NULL);
-	else if (!(s1) || !(s2))
-		return (!(s1) ? ft_strdup(s2) : ft_strdup(s1));
+	else if (!s1)
+		return (ft_strdup(s2));
+	else if (!s2)
+		return (ft_strdup(s1));
 	str_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(str = (char *)malloc(str_len * sizeof(char))))
+	str = (char *)malloc(str_len * sizeof(char));
+	if (!str)
 		return (NULL);
-	i = 0;
-	while (*(s1 + i) != '\0')
-	{
+	i = -1;
+	while (*(s1 + ++i) != '\0')
 		*(str + i) = *(s1 + i);
-		i++;
-	}
-	i = 0;
-	while (*(s2 + i) != '\0')
-	{
+	i = -1;
+	while (*(s2 + ++i) != '\0')
 		*(str + ft_strlen(s1) + i) = *(s2 + i);
-		i++;
-	}
 	*(str + str_len - 1) = '\0';
 	return (str);
 }

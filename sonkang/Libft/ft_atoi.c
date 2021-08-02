@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 17:24:45 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/14 15:06:05 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:29:59 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	long long int flag;
-	long long int result;
+	long long int	flag;
+	long long int	result;
 
 	while ((9 <= *str && *str <= 13) || (*str == ' '))
 		str++;

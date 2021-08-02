@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 21:05:39 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/12 16:59:58 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:17:52 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		i = 0;
 		while (i < n)
 		{
-			*(unsigned char*)(dest + i) = *(unsigned char*)(src + i);
+			*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
 			i++;
 		}
 	}
@@ -30,7 +30,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		i = 1;
 		while (i <= n)
 		{
-			*(unsigned char*)(dest + n - i) = *(unsigned char*)(src + n - i);
+			*(unsigned char *)(dest + n - i) = *(unsigned char *)(src + n - i);
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 15:29:53 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/13 15:20:14 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:11:56 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	find_end(char const *s1, char const *set, int len)
 	return (len);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;
 	int		end;
@@ -70,7 +70,8 @@ char		*ft_strtrim(char const *s1, char const *set)
 	len = end - start + 1;
 	if (start >= end)
 		return (ft_strdup(""));
-	if (!(str = (char *)malloc((len + 1) * sizeof(char))))
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (!str)
 		return (0);
 	ft_strlcpy(str, s1 + start, len + 1);
 	return (str);

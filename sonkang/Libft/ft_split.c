@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 21:22:58 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/15 21:00:12 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:39:15 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	free_str(char **str, int j)
 
 	i = 0;
 	while (i < j)
-		free(str[j++]);
+		free(str[i++]);
 	free(str);
 }
 
@@ -66,7 +66,8 @@ static void	ft_str(char **str, char const *s, char c)
 		start = i;
 		while (s[i] && s[i] != c)
 			i++;
-		if (!(str[j] = (char *)ft_calloc((i - start + 1), sizeof(char))))
+		str[j] = (char *)ft_calloc((i - start + 1), sizeof(char));
+		if (!str[j])
 		{
 			free_str(str, j);
 			return ;
@@ -78,7 +79,7 @@ static void	ft_str(char **str, char const *s, char c)
 	}
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		count;
 	char	**str;
@@ -86,7 +87,8 @@ char		**ft_split(char const *s, char c)
 	if (s == 0)
 		return (0);
 	count = ft_count(s, c);
-	if (!(str = (char **)ft_calloc((count + 1), sizeof(char *))))
+	str = (char **)ft_calloc((count + 1), sizeof(char *));
+	if (!str)
 		return (NULL);
 	ft_str(str, s, c);
 	return (str);

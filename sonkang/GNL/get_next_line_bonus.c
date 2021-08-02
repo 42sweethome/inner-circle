@@ -6,15 +6,15 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:58:19 by sonkang           #+#    #+#             */
-/*   Updated: 2021/03/21 21:07:55 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:05:34 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int				check_newline(char *content)
+int	check_newline(char *content)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (content[i])
@@ -26,7 +26,7 @@ int				check_newline(char *content)
 	return (-1);
 }
 
-int				split_line(char **content, int i, char **line)
+int	split_line(char **content, int i, char **line)
 {
 	char	*temp;
 
@@ -44,13 +44,14 @@ int				split_line(char **content, int i, char **line)
 	return (1);
 }
 
-int				return_all(char **content, char **line, int rd_size)
+int	return_all(char **content, char **line, int rd_size)
 {
-	int cut_idx;
+	int		cut_idx;
 
 	if (rd_size < 0)
 		return (-1);
-	if (*content && 0 <= (cut_idx = check_newline(*content)))
+	cut_idx = check_newline(*content);
+	if (*content && 0 <= cut_idx)
 		return (split_line(content, cut_idx, line));
 	if (*content)
 	{
@@ -63,7 +64,7 @@ int				return_all(char **content, char **line, int rd_size)
 	return (0);
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	int			rd_size;
 	int			cut_idx;
@@ -73,13 +74,15 @@ int				get_next_line(int fd, char **line)
 
 	if (BUFFER_SIZE <= 0 || line == 0 || fd < 0)
 		return (-1);
-	while (0 < (rd_size = read(fd, buf, BUFFER_SIZE)))
+	rd_size = read(fd, buf, BUFFER_SIZE);
+	while (0 < rd_size)
 	{
 		buf[rd_size] = '\0';
 		temp = ft_strjoin(content[fd], buf);
 		free(content[fd]);
 		content[fd] = temp;
-		if (0 <= (cut_idx = check_newline(content[fd])))
+		cut_idx = check_newline(content[fd]);
+		if (0 <= cut_idx)
 			return (split_line(&content[fd], cut_idx, line));
 	}
 	return (return_all(&content[fd], line, rd_size));

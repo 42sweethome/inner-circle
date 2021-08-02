@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 20:11:38 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/13 13:55:38 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:17:06 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	if (fd < 0)
 		return ;

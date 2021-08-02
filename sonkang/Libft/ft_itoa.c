@@ -6,13 +6,13 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:22:40 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/14 15:05:40 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:28:56 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		itoa_count(int n)
+static int	itoa_count(int n)
 {
 	int			count;
 	long long	i;
@@ -32,7 +32,7 @@ static int		itoa_count(int n)
 	return (count);
 }
 
-static void		fill_str(char *str, int n, int count)
+static void	fill_str(char *str, int n, int count)
 {
 	int			flag;
 	long long	i;
@@ -54,7 +54,7 @@ static void		fill_str(char *str, int n, int count)
 		str[count] = '-';
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		count;
 	char	*str;
@@ -62,7 +62,8 @@ char			*ft_itoa(int n)
 	if (n == 0)
 		return (ft_strdup("0"));
 	count = itoa_count(n);
-	if (!(str = (char *)ft_calloc((count + 1), sizeof(char))))
+	str = (char *)ft_calloc((count + 1), sizeof(char));
+	if (!str)
 		return (NULL);
 	fill_str(str, n, count);
 	return (str);

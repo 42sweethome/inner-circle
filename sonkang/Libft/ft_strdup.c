@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:10:46 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/12 17:00:19 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/02 23:15:36 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_strdup(const char *s1)
 	char	*ptr;
 
 	len = ft_strlen(s1);
-	if (!(ptr = malloc((len + 1) * sizeof(char))))
+	ptr = malloc((len + 1) * sizeof(char));
+	if (!ptr)
 		return (NULL);
 	i = 0;
 	while (i <= len)
