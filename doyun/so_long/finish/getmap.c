@@ -60,5 +60,7 @@ int	main(int argc, char **argv)
 	}
 	else
 		return (print_error());
+	while (1)
+		;
 	return (0);
 }

@@ -28,6 +28,7 @@ typedef struct s_ph
 	unsigned int	sl_st;
 	int				id;
 	int				eat;
+	int				die;
 	t_info			*in;
 }		t_ph;
 

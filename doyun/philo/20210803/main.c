@@ -18,32 +18,40 @@ int	ph_die(t_ph *ph)
 {
 	if (present(ph) - ph->last_eat >= ph->in->die_t)
 	{
-		printf("%d die at %u\n", ph->id, present(ph));
+		printf("time : %u, philo%d is died\n", present(ph), ph->id);
+		ph->die = 1;
 		return (1);
 	}
 	return (0);
 }
 
-int	doing(t_ph *ph, unsigned int num, unsigned int st)
+void	doing(t_ph *ph, unsigned int num, unsigned int st)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (42)
 	{
-		if (ph_die(ph))
-			return (1);
+		if (present(ph) - ph->last_eat >= ph->in->die_t)
+			return ;
 		if (st + num <= present(ph))
-			return (0);
+			return ;
 	}
+}
+
+int	ph_think(t_ph *ph)
+{
+	printf("time : %u, philo%d is thinking\n", present(ph), ph->id);
 	return (0);
 }
 
 int	ph_sleep(t_ph *ph)
 {
-	printf("%d sleep at %u\n", ph->id, present(ph));
+	printf("time : %u, philo%d is sleeping\n", present(ph), ph->id);
 	ph->sl_st = present(ph);
 	doing(ph, ph->in->sleep_t, ph->sl_st);
+	if (ph_die(ph))
+		return (1);
 	return (0);
 }
 
@@ -55,21 +63,30 @@ int	ph_eat(t_ph *ph)
 		fork = 0;
 	else
 		fork = ph->id;
-	if (ph->in->ph_num == 1)
+	while (ph->in->ph_num == 1)
 	{
 		doing(ph, ph->in->die_t, ph->last_eat);
-//		printf("%d die at %u\n", ph->id, present(ph));
-		return (1);
+		if (ph_die(ph))
+			return (1);
 	}
 	pthread_mutex_lock(&(ph->in->fork[ph->id - 1]));
 	pthread_mutex_lock(&(ph->in->fork[fork]));
-	printf("%d eat at %u\n",ph->id, present(ph));
+	printf("time : %u, philo%d has taken a fork\n", present(ph), ph->id);
+	if (ph_die(ph))
+	{
+		pthread_mutex_unlock(&(ph->in->fork[fork]));
+		pthread_mutex_unlock(&(ph->in->fork[ph->id - 1]));
+		return (1);
+	}
+	printf("time : %u, philo%d is %d eating\n", present(ph), ph->id, ++ph->eat);
 	ph->eat_st = present(ph);
 	doing(ph, ph->in->eat_t, ph->eat_st);
 	pthread_mutex_unlock(&(ph->in->fork[fork]));
 	pthread_mutex_unlock(&(ph->in->fork[ph->id - 1]));
+	if (ph_die(ph))
+		return (1);
 	ph->last_eat = present(ph);
-	if (++ph->eat == ph->in->eat_c)
+	if (ph->eat == ph->in->eat_c)
 		return (1);
 	return (0);
 }
@@ -83,9 +100,12 @@ void	*ph_life(void *ph_info)
 	{
 		if (ph_eat(ph))
 			break ;
-		ph_sleep(ph);
-		if (ph_die(ph))
+		if (ph_sleep(ph))
 			break ;
+		if (ph_think(ph))
+			break ;
+	//	if (ph_die(ph))
+	//		break ;
 	}
 	return (NULL);
 }
@@ -95,7 +115,7 @@ int	ph_init(int argc, char **argv, t_info **info, t_ph **ph)
 	*info = (t_info *)malloc(sizeof(t_info));
 	if ((*info) == NULL)
 		return (-1);
-	(*info)->ph_num = ft_atoi(argv[1]);//atoi 에서 리턴 값 확인하고 들어오는값 확인하여 예외처리
+	(*info)->ph_num = ft_atoi(argv[1]);
 	(*info)->die_t = ft_atoi(argv[2]);
 	(*info)->eat_t = ft_atoi(argv[3]);
 	(*info)->sleep_t = ft_atoi(argv[4]);
@@ -116,7 +136,22 @@ int	ph_init(int argc, char **argv, t_info **info, t_ph **ph)
 	return (0);
 }
 
-int	main(int argc, char **argv)//철학자 수, 죽는시간, 먹는시간, 자는시간, 먹는 횟수
+int	check_eatcount(t_ph *ph)
+{
+	int idx;
+
+	idx = -1;
+	while (++idx < ph->in->ph_num)
+	{
+		if (ph[idx].eat == ph->in->eat_c)
+			continue ;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv)
 {
 	int			idx;
 	int			check;
@@ -138,20 +173,30 @@ int	main(int argc, char **argv)//철학자 수, 죽는시간, 먹는시간, 자�
 	gettimeofday(&info->st, NULL);
 	info->st_t = info->st.tv_sec * 1000 + info->st.tv_usec / 1000; 
 	idx = -1;
-	while (++idx < info->ph_num) //철학자 수만큼 thread 생성
+	while (++idx < info->ph_num)
 	{
 		ph[idx].in = info;
 		ph[idx].id = idx + 1;
 		ph[idx].eat = 0;
+		ph[idx].die = 0;
 		check = pthread_create(&ph[idx].thrd, 0, ph_life, &ph[idx]);
+		pthread_detach(ph[idx].thrd);
 		if (check != 0)
 		{
+			idx = -1;
 			free(info);
+			while(++idx < ft_atoi(argv[1]))
+				free(&ph[idx]);
 			return (print_error());
 		}
 	}
 	idx = -1;
-	while (++idx < info->ph_num)
-		pthread_join(ph[idx].thrd, NULL);
+	while (1)
+	{
+//		if (ph[++idx].die == 1 || check_eatcount(ph))
+//			return (0);
+//		 (idx == info->ph_num - 1)
+//			idx = -1;
+	}
 	return (0);
 }
