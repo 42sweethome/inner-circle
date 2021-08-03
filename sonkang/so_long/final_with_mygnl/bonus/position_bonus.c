@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   position_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 18:56:51 by sonkang           #+#    #+#             */
-/*   Updated: 2021/03/17 19:15:27 by sonkang          ###   ########.fr       */
+/*   Created: 2021/07/19 14:58:39 by sonkang           #+#    #+#             */
+/*   Updated: 2021/07/31 16:42:14 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "so_long_bonus.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
+void	get_player_position(int *count, t_map *map, int row, int col)
+{
+	*count += 1;
+	map->player_x = col;
+	map->player_y = row;
+}
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 4096
-# endif
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
-# endif
-
-int		get_next_line(int fd, char **line);
-
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1);
-
-#endif
+void	get_villian_position(t_map *map, int row, int col)
+{
+	map->v_x = col;
+	map->v_y = row;
+}
