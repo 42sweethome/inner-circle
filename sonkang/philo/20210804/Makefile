@@ -1,10 +1,10 @@
 PHILO = philo
 
-CC = gcc -fsanitize=address -g3
+CC = gcc #-fsanitize=address -g3
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c
+SRCS = main.c action.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 
