@@ -37,6 +37,7 @@ void	doing(t_ph *ph, unsigned int num, unsigned int st)
 			return ;
 		if (st + num <= present(ph))
 			return ;
+		usleep(250);
 	}
 }
 
