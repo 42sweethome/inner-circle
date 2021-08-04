@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/04 11:47:39 by sonkang           #+#    #+#             */
+/*   Updated: 2021/08/04 11:49:01 by sonkang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./philo.h"
 
 int	print_error(void)
@@ -8,10 +20,10 @@ int	print_error(void)
 
 unsigned int	present(t_ph *ph)
 {
-	struct timeval now;
+	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	return(now.tv_sec * 1000 + now.tv_usec / 1000 - ph->in->st_t);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000 - ph->in->st_t);
 }
 
 void	doing(t_ph *ph, unsigned int num, unsigned int st)
@@ -45,9 +57,11 @@ int	ph_init(int argc, char **argv, t_info **info, t_ph **ph)
 	}
 	else
 		(*info)->eat_c = -1;
-	if ((*info)->ph_num <= 0 || (*info)->die_t <= 0 || (*info)->eat_t <= 0 || (*info)->sleep_t <= 0)
+	if ((*info)->ph_num <= 0 || (*info)->die_t <= 0 || \
+		(*info)->eat_t <= 0 || (*info)->sleep_t <= 0)
 		return (-1);
-	(*info)->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * (*info)->ph_num);
+	(*info)->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) \
+		* (*info)->ph_num);
 	*ph = (t_ph *)malloc(sizeof(t_ph) * (*info)->ph_num);
 	if ((*info)->fork == NULL || *ph == NULL)
 		return (-1);
@@ -56,7 +70,7 @@ int	ph_init(int argc, char **argv, t_info **info, t_ph **ph)
 
 int	check_eatcount(t_ph *ph)
 {
-	int idx;
+	int		idx;
 
 	idx = -1;
 	while (++idx < ph->in->ph_num)

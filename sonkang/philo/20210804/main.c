@@ -39,11 +39,28 @@ int	birth_philo(t_ph *ph, t_info **info, char *argv)
 		{
 			idx = -1;
 			free(*info);
-			while(++idx < ft_atoi(argv))
+			while (++idx < ft_atoi(argv))
 				free(&ph[idx]);
 			return (print_error());
 		}
 	}
+	return (0);
+}
+
+int	info_parsing(t_info **info)
+{
+	int		check;
+	int		idx;
+
+	idx = -1;
+	while (++idx < (*info)->ph_num)
+	{
+		check = pthread_mutex_init(&(*info)->fork[idx], NULL);
+		if (check != 0)
+			return (print_error());
+	}
+	gettimeofday(&(*info)->st, NULL);
+	(*info)->st_t = (*info)->st.tv_sec * 1000 + (*info)->st.tv_usec / 1000;
 	return (0);
 }
 
@@ -59,16 +76,9 @@ int	main(int argc, char **argv)
 	check = ph_init(argc, argv, &info, &ph);
 	if (check == -1)
 		return (print_error());
-	idx = -1;
-	while (++idx < info->ph_num)
-	{
-		check = pthread_mutex_init(&info->fork[idx], NULL);
-		if (check != 0)
-			return (print_error());
-	}
-	gettimeofday(&info->st, NULL);
-	info->st_t = info->st.tv_sec * 1000 + info->st.tv_usec / 1000; 
-if (birth_philo(ph, &info, argv[1]))
+	if (info_parsing(&info))
+		return (-1);
+	if (birth_philo(ph, &info, argv[1]))
 		return (-1);
 	idx = -1;
 	while (1)
@@ -78,5 +88,5 @@ if (birth_philo(ph, &info, argv[1]))
 		if (idx == info->ph_num - 1)
 			idx = -1;
 	}
-		return (0);
+	return (0);
 }

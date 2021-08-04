@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 21:34:41 by doyun             #+#    #+#             */
-/*   Updated: 2021/08/01 18:07:14 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 23:31:33 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ static int	check_end(char *s, char c)
 	return (idx);
 }
 
-static void	allocate(char **split_s, char *s, char c)
+static void	allocate(char **split_s, char *s, char c, int idx)
 {
-	int			idx;
 	int			start;
 	int			end;
 
-	idx = -1;
 	start = 0;
 	start = check_start(s, c, start);
 	while (0 <= start)
@@ -89,6 +87,7 @@ char	**ft_split(char const *s, char c)
 {
 	char		**split_s;
 	int			low;
+	int			idx;
 
 	if (!s)
 		return (0);
@@ -96,6 +95,7 @@ char	**ft_split(char const *s, char c)
 	split_s = (char **)malloc(sizeof(char *) * (low + 1));
 	if (!split_s)
 		return (0);
-	allocate(split_s, (char *)s, c);
+	idx = -1;
+	allocate(split_s, (char *)s, c, idx);
 	return (split_s);
 }

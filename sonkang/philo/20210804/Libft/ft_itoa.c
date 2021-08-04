@@ -6,7 +6,7 @@
 /*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 00:58:00 by doyun             #+#    #+#             */
-/*   Updated: 2021/08/01 18:11:38 by doyun            ###   ########.fr       */
+/*   Updated: 2021/08/01 23:23:04 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	intlen(long long int n)
 	return (len);
 }
 
-void	miner_int(int *n, int *len,char **num)
+void	miner_int(int *n, int *len, char **num)
 {
 	(*num)[0] = '-';
 	if (*n == -2147483648)

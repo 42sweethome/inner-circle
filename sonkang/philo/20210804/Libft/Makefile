@@ -35,7 +35,7 @@ bonus : 				$(OBJS) $(OBJS_BONUS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-						rm -f $(OBJS) $(OBJS_BONUS)
+						rm -f *.o
 
 fclean : 				clean
 						rm -f $(NAME)
