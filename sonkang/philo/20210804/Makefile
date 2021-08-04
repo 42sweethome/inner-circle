@@ -1,6 +1,6 @@
 PHILO = philo
 
-CC = gcc #-fsanitize=address -g3
+CC = gcc -fsanitize=address -g3
 
 CFLAGS = -Wall -Wextra -Werror
 

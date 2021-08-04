@@ -20,7 +20,7 @@ void	*ph_life(void *ph_info)
 	return (NULL);
 }
 
-int	birth_philo(t_ph *ph, t_info **info, char *argv)
+int	birth_philo(t_ph *ph, t_info **info)
 {
 	int		idx;
 	int		check;
@@ -34,15 +34,13 @@ int	birth_philo(t_ph *ph, t_info **info, char *argv)
 		ph[idx].eat = 0;
 		ph[idx].die = 0;
 		check = pthread_create(&ph[idx].thrd, 0, ph_life, &ph[idx]);
-		pthread_detach(ph[idx].thrd);
 		if (check != 0)
 		{
-			idx = -1;
 			free(*info);
-			while (++idx < ft_atoi(argv))
-				free(&ph[idx]);
+			free(ph);
 			return (print_error());
 		}
+		pthread_detach(ph[idx].thrd);
 	}
 	return (0);
 }
@@ -78,7 +76,7 @@ int	main(int argc, char **argv)
 		return (print_error());
 	if (info_parsing(&info))
 		return (-1);
-	if (birth_philo(ph, &info, argv[1]))
+	if (birth_philo(ph, &info))
 		return (-1);
 	idx = -1;
 	while (1)
