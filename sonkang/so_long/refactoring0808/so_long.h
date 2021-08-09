@@ -34,7 +34,7 @@ typedef struct s_map
 typedef struct s_data
 {
 	void		*img;
-	int			*addr;
+	unsigned int*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;

@@ -51,7 +51,7 @@ void	show_win(t_info *info)
 	printf("how many walk : 0\n");
 	info->fimg.img = mlx_new_image(info->win.mlx, 64 * info->map.col, \
 	64 * info->map.row);
-	info->fimg.addr = (int *)mlx_get_data_addr(info->fimg.img, \
+	info->fimg.addr = (unsigned int *)mlx_get_data_addr(info->fimg.img, \
 	&info->fimg.bits_per_pixel, &info->fimg.line_length, &info->fimg.endian);
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
 	mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
