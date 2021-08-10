@@ -53,14 +53,16 @@ void	show_win(t_info *info)
 	64 * info->map.row);
 	info->fimg.addr = (unsigned int *)mlx_get_data_addr(info->fimg.img, \
 	&info->fimg.bits_per_pixel, &info->fimg.line_length, &info->fimg.endian);
+	get_texture(info);
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
 	mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
-	get_texture(info);
 	mlx_loop_hook(info->win.mlx, img_conv, info);
 	mlx_loop(info->win.mlx);
+	mlx_destroy_window(info->win.mlx, info->win.mlx_win);
+	mlx_destroy_image(info->win.mlx, info->fimg.img);
 	x = -1;
 	while (++x < 5)
-		mlx_destroy_image(info->win.mlx, info->fimg.img);
+		mlx_destroy_image(info->win.mlx, info->tex[x].img);
 }
 
 int	main(int argc, char **argv)
