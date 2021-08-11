@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42.fr>                +#+  +:+       +#+    */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 10:58:24 by sonkang             #+#    #+#           */
-/*   Updated: 2021/07/26 11:49:06 by sonkang          ###   ########.fr       */
+/*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
+/*   Updated: 2021/08/11 22:53:38 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 void	ft_exit(t_info *info)
 {
+	int		x;
+
+	mlx_destroy_window(info->win.mlx, info->win.mlx_win);
+	mlx_destroy_image(info->win.mlx, info->fimg.img);
+	x = -1;
+	while (++x < 5)
+		mlx_destroy_image(info->win.mlx, info->tex[x].img);
+	exit(0);
+}
+
+void	message(t_info *info)
+{
 	if (info->map.collect == 0)
 	{
 		printf("well done\n");
-		exit(0);
+		ft_exit(info);
 	}
 	else
 		printf("keep going!\n");
@@ -29,7 +41,7 @@ void	move(t_info *info, int x, int y)
 	{
 		if (info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'E')
-			ft_exit(info);
+			message(info);
 		if (info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'C')
 			info->map.collect -= 1;
@@ -55,12 +67,12 @@ int	check_keypress(int key, t_info *info)
 	else if (key == 2)
 		move(info, 1, 0);
 	else if (key == 53)
-		exit(0);
+		ft_exit(info);
 	return (0);
 }
 
-int	check_button(void)
+int	check_button(t_info *info)
 {
-	exit(0);
+	ft_exit(info);
 	return (0);
 }

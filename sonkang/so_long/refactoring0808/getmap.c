@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/01 23:34:22 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/11 22:53:32 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_error(int i)
 void	show_win(t_info *info)
 {
 	int	user_win[2];
-	int	x;
+	//int	x;
 
 	info->win.mlx = mlx_init();
 	mlx_get_screen_size(info->win.mlx, &user_win[0], &user_win[1]);
@@ -58,11 +58,6 @@ void	show_win(t_info *info)
 	mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
 	mlx_loop_hook(info->win.mlx, img_conv, info);
 	mlx_loop(info->win.mlx);
-	mlx_destroy_window(info->win.mlx, info->win.mlx_win);
-	mlx_destroy_image(info->win.mlx, info->fimg.img);
-	x = -1;
-	while (++x < 5)
-		mlx_destroy_image(info->win.mlx, info->tex[x].img);
 }
 
 int	main(int argc, char **argv)

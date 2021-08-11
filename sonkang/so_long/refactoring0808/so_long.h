@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 16:10:08 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/11 22:52:03 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ void	parsing(t_info *info, char *argv);
 int		draw(t_info *info, int y, int x, t_data tex);
 int		img_conv(t_info *info);
 void	ft_exit(t_info *info);
+void	message(t_info *info);
 void	move(t_info *info, int x, int y);
 int		check_keypress(int key, t_info *info);
-int		check_button(void);
+int		check_button(t_info *info);
 
 #endif
