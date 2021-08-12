@@ -2,12 +2,12 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
 READ = -lreadline
 
 SRCS = start.c\
-	   ch_space1.c ch_space2.c\
+	   ch_space1.c ch_space2.c util.c check.c\
 
 OBJS = $(SRCS:.c=.o)
 

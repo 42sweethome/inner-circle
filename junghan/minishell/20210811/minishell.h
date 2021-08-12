@@ -18,11 +18,14 @@ typedef struct s_mini
 	//int			rvs
 	int			cnt_quo;
 	int			cnt_rvslash;
+	int			odd_quo;
 }			t_mini;
 
-char	**space_split(char *s, char c, t_mini *mini);
+int		space_split(char *s, char c, t_mini *mini);
 int		check_quo(char *s, char c, int i, t_mini *mini);
 int		quo_while(char *s, char c, t_mini *mini, int i);
 int		case_quo(char *str, int *idx, t_mini *mini);
-
+int		print_err(char *err_str);
+int		cmd_err(char *cmd);
+int		check_cmd(char *cmd);
 #endif
