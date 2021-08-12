@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 15:41:17 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/12 23:56:31 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	void		*img;
-	int			*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			img_width;
-	int			img_height;
+	void			*img;
+	unsigned int	*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				img_width;
+	int				img_height;
 }				t_data;
 
 typedef struct s_win
@@ -59,7 +59,7 @@ typedef struct s_info
 {
 	t_map		map;
 	t_data		fimg;
-	t_data		tex[20];
+	t_data		tex[17];
 	t_win		win;
 }				t_info;
 
@@ -73,15 +73,16 @@ void	parsing(t_info *info, char *argv);
 int		draw(t_info *info, int y, int x, t_data tex);
 int		img_conv(t_info *info);
 void	ft_exit(t_info *info);
+void	message(t_info *info);
 void	move(t_info *info, int x, int y);
 int		check_keypress(int key, t_info *info);
-int		check_button(void);
+int		check_button(t_info *info);
 void	villain(t_info *info);
 void	collectible(t_info *info);
 void	patrol(t_info *info, int i, int l);
 void	get_texture(t_info *info);
 void	get_villian_position(t_map *map, int row, int col);
 void	get_player_position(int *count, t_map *map, int row, int col);
-void	die(void);
+void	die(t_info *info);
 
 #endif

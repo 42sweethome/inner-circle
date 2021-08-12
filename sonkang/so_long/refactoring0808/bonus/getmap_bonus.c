@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 16:40:15 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/12 23:57:05 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	print_error(int i)
 void	show_win(t_info *info)
 {
 	int	user_win[2];
-	int	x;
 
 	info->win.mlx = mlx_init();
 	mlx_get_screen_size(info->win.mlx, &user_win[0], &user_win[1]);
@@ -50,16 +49,13 @@ void	show_win(t_info *info)
 	64 * info->map.row, "Bubble Bobble");
 	info->fimg.img = mlx_new_image(info->win.mlx, 64 * info->map.col, \
 	64 * info->map.row);
-	info->fimg.addr = (int *)mlx_get_data_addr(info->fimg.img, \
+	info->fimg.addr = (unsigned int *)mlx_get_data_addr(info->fimg.img, \
 	&info->fimg.bits_per_pixel, &info->fimg.line_length, &info->fimg.endian);
+	get_texture(info);
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
 	mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
-	get_texture(info);
 	mlx_loop_hook(info->win.mlx, img_conv, info);
 	mlx_loop(info->win.mlx);
-	x = -1;
-	while (++x < 17)
-		mlx_destroy_window(info->win.mlx, info->tex[x].img);
 }
 
 int	main(int argc, char **argv)

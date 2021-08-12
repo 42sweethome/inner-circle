@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42.fr>                +#+  +:+       +#+    */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 10:58:24 by sonkang             #+#    #+#           */
-/*   Updated: 2021/07/30 10:58:52 by sonkang            ###   ########.fr     */
+/*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
+/*   Updated: 2021/08/12 23:54:47 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	ft_exit(t_info *info)
+void	message(t_info *info)
 {
 	if (info->map.collect == 0)
 	{
 		printf("well done\n");
-		exit(0);
+		ft_exit(info);
 	}
 	else
 		printf("keep going!\n");
 }
 
-void	die(void)
+void	die(t_info *info)
 {
 	printf("you die...\n");
-	exit(0);
+	ft_exit(info);
 }
 
-int	check_button(void)
+int	check_button(t_info *info)
 {
-	exit(0);
+	ft_exit(info);
 	return (0);
 }

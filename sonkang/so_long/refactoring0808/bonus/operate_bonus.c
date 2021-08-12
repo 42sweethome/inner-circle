@@ -12,16 +12,28 @@
 
 #include "so_long_bonus.h"
 
+void	ft_exit(t_info *info)
+{
+	int		x;
+
+	mlx_destroy_window(info->win.mlx, info->win.mlx_win);
+	mlx_destroy_image(info->win.mlx, info->fimg.img);
+	x = -1;
+	while (++x < 17)
+		mlx_destroy_image(info->win.mlx, info->tex[x].img);
+	exit(0);
+}
+
 void	move(t_info *info, int x, int y)
 {
 	if (info->map.map[info->map.player_y + y][info->map.player_x + x] != '1')
 	{
 		if (info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'V')
-			die();
+			die(info);
 		if (info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'E')
-			ft_exit(info);
+			message(info);
 		if (info->map.map[info->map.player_y + y] \
 			[info->map.player_x + x] == 'C')
 		{
@@ -64,7 +76,7 @@ int	check_keypress(int key, t_info *info)
 		info->map.way = 7 + (info->map.walk % 2);
 	}
 	else if (key == 53)
-		exit(0);
+		ft_exit(0);
 	return (0);
 }
 
@@ -74,7 +86,7 @@ void	patrol(t_info *info, int i, int l)
 	info->map.map[info->map.v_y][info->map.v_x + i] = 'V';
 	info->map.v_x += i;
 	if (l == 1)
-		die();
+		die(info);
 }
 
 void	collectible(t_info *info)
