@@ -36,7 +36,7 @@ int	check_map_valid(t_map *m_info)
 	col = -1;
 	while (++col < m_info->col)
 	{
-		if (m_info->map[row][col] != '1')
+		if (m_info->map[0][col] != '1')
 			return (-1);
 		if (m_info->map[m_info->row - 1][col] != '1')
 			return (-1);

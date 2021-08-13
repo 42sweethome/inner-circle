@@ -43,6 +43,8 @@ char	**map_parser(t_map *map_info, char *argv, int fd)
 	int		ret;
 
 	map_info->row = get_newline(argv, map_info);
+	if (map_info->row == -1)
+		print_error(2);
 	map_info->map = (char **)ft_calloc(map_info->row + 1, sizeof(char *));
 	if (!map_info->map)
 		return (NULL);
