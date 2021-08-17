@@ -45,10 +45,9 @@ int	check_quo(char *s, char c, int i, t_mini *mini) // s: 주어진 문자열 c:
 			i++;
 		}
 		if (c == '"' && s[i] == '$')
-		{
 			i = check_env(s, i, mini);
-			mini->dollar++;
-		}
+		if (i == mini->err.malloc)
+			return (mini->err.malloc);
 	}
 	if (s[i] == c) // 닫는 따옴표가 나온경우
 		mini->cnt_quo += 2;
@@ -66,11 +65,10 @@ int	quo_while(char *s, char space, t_mini *mini, int i)
 		else if (s[i] == '"')
 			i = check_quo(s, '"', i, mini);
 		else if (s[i] == '$')
-		{
 			i = check_env(s, i, mini);
-			mini->dollar++;
-		}
+		if (i == mini->err.malloc)
+			return (mini->err.malloc);
 		i++;
-	}
+	}		
 	return (i);
 }

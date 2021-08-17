@@ -11,6 +11,13 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
+typedef	struct s_err
+{
+	int			malloc;
+	int			cmd;
+	int			quo;
+}			t_err;
+
 typedef struct s_mini
 {
 	char		**buf;
@@ -22,16 +29,18 @@ typedef struct s_mini
 	int			odd_quo;
 	int			env_len;
 	int			dollar;
+	t_err		err;
 }			t_mini;
 
 int		space_split(char *s, char c, t_mini *mini);
 int		check_quo(char *s, char c, int i, t_mini *mini);
 int		quo_while(char *s, char c, t_mini *mini, int i);
 int		case_quo(char *str, int *idx, t_mini *mini);
-int		print_err(char *err_str);
-int		cmd_err(char *cmd, int err_num);
+int		cmd_err(char *cmd, int err_num, t_mini *mini);
 int		check_cmd(char *cmd, t_mini *mini);
+char	ft_free(char **new);
 int		al_num_under(int c);
 int		check_env(char *env_str, int i, t_mini *mini);
-int		copy_env(char *new, char *env_str, int i);
+int		copy_env(char *new, char *env_str, int i, t_mini *mini);
+
 #endif

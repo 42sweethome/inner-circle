@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+char	ft_free(char **new)
+{
+	size_t		i;
+
+	i = 0;
+	while (new[i])
+		free(new[i++]);
+	free(new);
+	return (0);
+}
+
 int	al_num_under(int c)
 {
 	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || c == '_' ||
@@ -8,17 +19,13 @@ int	al_num_under(int c)
 	return (0);
 }
 
-int	print_err(char *err_str)
+int	cmd_err(char *cmd, int err_num, t_mini *mini)
 {
-	printf("%s\n", err_str);
-	return (-2);
-}
-
-int	cmd_err(char *cmd, int err_num)
-{
-	if (err_num == -2)
+	if (err_num == mini->err.malloc)
+		printf("minishell: malloc error\n");
+	else if (err_num == mini->err.cmd)
 		printf("minishell: %s: command not found\n", cmd);
-	else if (err_num == -3)
-		printf("minishell: %s: No such file or directory\n", cmd);
+	else if (err_num == mini->err.quo)
+		printf("minishell: quotes are not closed\n");
 	return (-2);
 }

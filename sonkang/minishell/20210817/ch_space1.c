@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	scpy(char *new, char *str, size_t end, t_mini *mini)
+static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 {
 	size_t		start;
 	int			idx;
@@ -29,27 +29,22 @@ static void	scpy(char *new, char *str, size_t end, t_mini *mini)
 			idx++;
 		if (mini->s_quo == 0 && str[idx] == '$'/* && str[idx - 1] != '\\'*/)
 		{
-			idx = copy_env(&new[start], str, idx);
-			while (new[start])
-				start++;
-			continue ;
+			idx = copy_env(&new[start], str, idx, mini);
+			if (idx == mini->err.malloc)
+				return (mini->err.malloc);
+			if (new[start] != 0)
+			{
+				while (new[start])
+					start++;
+				continue ;
+			}
 		}
 		new[start++] = str[idx++];
 	}
-}
-
-static char	ft_free(char **new, size_t num)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < num)
-		free(new[i++]);
-	free(new);
 	return (0);
 }
 
-static void	spliting(char *s, char space, char **new, t_mini *mini)
+static int	spliting(char *s, char space, char **new, t_mini *mini)
 {
 	size_t		i;
 	size_t		count;
@@ -58,7 +53,7 @@ static void	spliting(char *s, char space, char **new, t_mini *mini)
 	i = 0;
 	count = 0;
 	while (s[i])
-	{
+	{			
 		if (s[i] && s[i] != space)
 		{
 			mini->cnt_rvslash = 0;
@@ -69,20 +64,17 @@ static void	spliting(char *s, char space, char **new, t_mini *mini)
 			i = quo_while(s, space, mini, i); //countc와 동일한 작업
 			new[count] = (char *)ft_calloc((i - start + 1 - mini->cnt_rvslash \
 						- mini->cnt_quo + mini->env_len - mini->dollar), sizeof(char)); //역슬래쉬와 따옴표의 갯수만큼 적게할당
-			if (!new[count])
-			{
-				ft_free(new, count);
-				return ;
-			}
-			printf("len :%lu\n", i - start + 1 - mini->cnt_rvslash \
-						- mini->cnt_quo + mini->env_len - mini->dollar);
-			scpy(new[count], &s[start], (i - start - mini->cnt_rvslash \
-						- mini->cnt_quo + mini->env_len - mini->dollar), mini); //구분된 문자열을 new라는 이중배열에 넣어줌
+			if (!new[count] || i == (size_t)mini->err.malloc)
+				return (mini->err.malloc);
+			if (scpy(new[count], &s[start], (i - start - mini->cnt_rvslash \
+						- mini->cnt_quo + mini->env_len - mini->dollar), mini))//구분된 문자열을 new라는 이중배열에 넣어줌
+				return (mini->err.malloc);
 			count++;
 		}
 		else if (s[i] == space)
 			i++;
 	}
+	return (0);
 }
 
 static size_t	countc(char *s, char space, t_mini *mini) //문자열의 총 길이를 리턴하기 위한 함수
@@ -92,13 +84,15 @@ static size_t	countc(char *s, char space, t_mini *mini) //문자열의 총 길�
 
 	i = 0;
 	count = 0;
-	while (s[i]) 
+	while (s[i])
 	{
 		if (s[i] && s[i] != space) 
 		{
 			count++;
 			i = quo_while(s, space, mini, i); // 내부적으로 큰따옴표와 작은따옴표에 관한 분류작업을함
 			//if ((int)i == -2)		// ex) 따옴표의 갯수, 역슬래시 파악 등
+			if (i == (size_t)mini->err.malloc)
+				return (mini->err.malloc);
 		}
 		else
 			i++;
@@ -111,11 +105,15 @@ int	space_split(char *s, char space, t_mini *mini)
 	size_t		num;
 
 	if (s == 0)
-		return (-1);
+		return (mini->err.malloc);
 	num = countc(s, space, mini);
 	mini->buf = (char **)ft_calloc((num + 1), sizeof(char *));
-	if (!mini->buf)
-		return (-1);
-	spliting(s, space, mini->buf, mini);
+	if (!mini->buf || num == (size_t)mini->err.malloc)
+		return (mini->err.malloc);
+	if (spliting(s, space, mini->buf, mini))
+	{
+		ft_free(mini->buf);
+		return (mini->err.malloc);
+	}
 	return (1);
 }

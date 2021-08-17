@@ -1,21 +1,20 @@
 #include "minishell.h"
 
-int	ft_execve(t_mini *mini)
+void	ft_execve(t_mini *mini)
 {
 	int		pid;
 	int		status;
 
 	pid = fork();
 	if (pid == 0)
-		execve(mini->buf[0], &mini->buf[1], 0);
+	{
+		if (execve(mini->buf[0], mini->buf, 0) == -1)
+			printf("minishell: %s\n", strerror(errno));
+	}
 	else if (pid > 0)
 		wait(&status);
 	else if (pid == -1)
-	{
 		printf("minishell: %s\n", strerror(errno));
-		return (-1);
-	}
-	return (0);
 }
 
 int	check_cmd(char *cmd, t_mini *mini)
@@ -34,12 +33,9 @@ int	check_cmd(char *cmd, t_mini *mini)
 		;
 	else if (!ft_strncmp("exit", cmd, 5) || !ft_strncmp("EXIT", cmd, 5))
 		;
-	else if (ft_strchr(cmd, '/') != 0)
-	{
-		if (ft_execve(mini))
-			return (-3);
-	}
-	else	
+	else if (ft_strchr(mini->buf[0], '/') != 0)
+		ft_execve(mini);
+	else
 		return (-2);
 	return (0);
 }
