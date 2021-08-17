@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/12 23:38:22 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:15:00 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,30 @@ void	print_error(int i)
 {
 	printf("Error\n");
 	if (i == 0)
-		perror("number of arguments isn't right!\n");
+		perror("number of arguments isn't right\n");
 	if (i == 1)
 		perror("Invalid extension\n");
 	if (i == 2)
 		perror(NULL);
 	if (i == 3)
-		printf("Map parsing was not done properly!\n");
+		printf("Map parsing was not done properly\n");
 	if (i == 4)
-		printf("The map is not surrounded by walls!\n");
+		printf("The map is not surrounded by walls\n");
 	if (i == 5)
-	{
-		printf("The map must be composed of only 5 possible characters.\n");
-		printf("And map must have at least one exit, one collectible, ");
-		printf("and one starting position!\n");
-	}
+		printf("The components of the map are wrong\n");
 	if (i == 6)
-		printf("size of map is too big!\n");
+		printf("size of map is too big\n");
 	exit(1);
 }
 
 void	show_win(t_info *info)
 {
-	int	user_win[2];
+	int	win_x;
+	int	win_y;
 
 	info->win.mlx = mlx_init();
-	mlx_get_screen_size(info->win.mlx, &user_win[0], &user_win[1]);
-	if (!(user_win[0] >= 64 * info->map.col && user_win[1] >= \
+	mlx_get_screen_size(info->win.mlx, &win_x, &win_y);
+	if (!(win_x >= 64 * info->map.col && win_y >= \
 		64 * info->map.row))
 		print_error(6);
 	info->win.mlx_win = mlx_new_window(info->win.mlx, 64 * info->map.col, \

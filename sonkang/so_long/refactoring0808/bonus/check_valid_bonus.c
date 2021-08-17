@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 14:58:39 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 16:03:48 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:01:15 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	get_collect_ea(int *count, t_map *map)
 	map->v_f = *count;
 }
 
-int	check_parm_valid(t_map *m_info)
+int	check_comp_valid(t_map *m_info)
 {
 	int			row;
 	int			col;

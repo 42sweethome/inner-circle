@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/11 22:52:03 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 22:59:50 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_info
 void	print_error(int i);
 int		check_extention(char *argv);
 int		check_map_valid(t_map *m_info);
-int		check_parm_valid(t_map *m_info);
+int		check_comp_valid(t_map *m_info);
 int		get_newline(char *argv, t_map *map_info);
 void	get_texture(t_info *info);
 char	**map_parser(t_map *map_info, char *argv, int fd);

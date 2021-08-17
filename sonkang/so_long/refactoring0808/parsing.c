@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/01 23:32:55 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 22:59:37 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	parsing(t_info *info, char *argv)
 	check = check_map_valid(&info->map);
 	if (check == -1)
 		print_error(4);
-	check = check_parm_valid(&info->map);
+	check = check_comp_valid(&info->map);
 	if (check == -1)
 		print_error(5);
 	info->map.walk = 0;

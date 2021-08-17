@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 15:22:06 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:21:29 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	check_keypress(int key, t_info *info)
 		info->map.way = 7 + (info->map.walk % 2);
 	}
 	else if (key == 53)
-		ft_exit(0);
+		ft_exit(info);
 	return (0);
 }
 
