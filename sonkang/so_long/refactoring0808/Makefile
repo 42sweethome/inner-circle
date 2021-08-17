@@ -10,10 +10,10 @@ MLXFLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
 
 SRCS = GNL/get_next_line.c GNL/get_next_line_utils.c\
-	   getmap.c check_valid.c parsing.c image.c operate.c
+	   so_long.c check_valid.c parsing.c image.c operate.c
 
 SRCS_BONUS = GNL/get_next_line.c GNL/get_next_line_utils.c\
-			 bonus/getmap_bonus.c bonus/check_valid_bonus.c\
+			 bonus/so_long_bonus.c bonus/check_valid_bonus.c\
 			 bonus/parsing_bonus.c bonus/image_bonus.c\
 			 bonus/operate_bonus.c bonus/get_texture_bonus.c\
 			 bonus/position_bonus.c bonus/utils_bonus.c

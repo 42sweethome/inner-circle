@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 14:58:39 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/17 23:01:24 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:45:52 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_map_valid(t_map *m_info)
 	{
 		if (m_info->map[row][0] != '1')
 			return (-1);
-		if(m_info->map[row][m_info->col - 1] != '1')
+		if (m_info->map[row][m_info->col - 1] != '1')
 			return (-1);
 	}
 	return (0);

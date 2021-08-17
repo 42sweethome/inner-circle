@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/11 22:54:44 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:45:02 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,21 @@ void	get_texture(t_info *info)
 	"./texture/exit.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/fro_l.xpm", &info->tex[4].img_width, &info->tex[4].img_height);
-	info->tex[0].addr = (unsigned int *)mlx_get_data_addr(info->tex[0].img, &info->\
-	tex[0].bits_per_pixel, &info->tex[0].line_length, &info->tex[0].endian);
-	info->tex[1].addr = (unsigned int *)mlx_get_data_addr(info->tex[1].img, &info->\
-	tex[1].bits_per_pixel, &info->tex[1].line_length, &info->tex[1].endian);
-	info->tex[2].addr = (unsigned int *)mlx_get_data_addr(info->tex[2].img, &info->\
-	tex[2].bits_per_pixel, &info->tex[2].line_length, &info->tex[2].endian);
-	info->tex[3].addr = (unsigned int *)mlx_get_data_addr(info->tex[3].img, &info->\
-	tex[3].bits_per_pixel, &info->tex[3].line_length, &info->tex[3].endian);
-	info->tex[4].addr = (unsigned int *)mlx_get_data_addr(info->tex[4].img, &info->\
-	tex[4].bits_per_pixel, &info->tex[4].line_length, &info->tex[4].endian);
+	info->tex[0].addr = (unsigned int *)mlx_get_data_addr(info->tex[0].img, \
+	&info->tex[0].bits_per_pixel, &info->tex[0].line_length, \
+	&info->tex[0].endian);
+	info->tex[1].addr = (unsigned int *)mlx_get_data_addr(info->tex[1].img, \
+	&info->tex[1].bits_per_pixel, &info->tex[1].line_length, \
+	&info->tex[1].endian);
+	info->tex[2].addr = (unsigned int *)mlx_get_data_addr(info->tex[2].img, \
+	&info->tex[2].bits_per_pixel, &info->tex[2].line_length, \
+	&info->tex[2].endian);
+	info->tex[3].addr = (unsigned int *)mlx_get_data_addr(info->tex[3].img, \
+	&info->tex[3].bits_per_pixel, &info->tex[3].line_length, \
+	&info->tex[3].endian);
+	info->tex[4].addr = (unsigned int *)mlx_get_data_addr(info->tex[4].img, \
+	&info->tex[4].bits_per_pixel, &info->tex[4].line_length, \
+	&info->tex[4].endian);
 }
 
 int	img_conv(t_info *info)

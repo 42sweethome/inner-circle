@@ -6,11 +6,23 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/17 22:58:42 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:50:27 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	ft_exit(t_info *info)
+{
+	int		x;
+
+	mlx_destroy_window(info->win.mlx, info->win.mlx_win);
+	mlx_destroy_image(info->win.mlx, info->fimg.img);
+	x = -1;
+	while (++x < 17)
+		mlx_destroy_image(info->win.mlx, info->tex[x].img);
+	exit(0);
+}
 
 void	message(t_info *info)
 {

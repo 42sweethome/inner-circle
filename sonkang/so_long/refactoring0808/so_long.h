@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 11:09:25 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/17 22:59:50 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/17 23:46:47 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	void		*img;
-	unsigned int*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	int			img_width;
-	int			img_height;
+	void			*img;
+	unsigned int	*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				img_width;
+	int				img_height;
 }				t_data;
 
 typedef struct s_win
