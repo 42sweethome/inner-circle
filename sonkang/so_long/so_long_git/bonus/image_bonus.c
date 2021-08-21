@@ -6,13 +6,13 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 14:26:29 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/31 14:50:07 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/21 12:06:43 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	draw(t_info *info, int y, int x, t_data tex)
+int	draw(t_info *info, int x, int y, t_data tex)
 {
 	int		width;
 	int		height;
@@ -23,8 +23,8 @@ int	draw(t_info *info, int y, int x, t_data tex)
 		width = -1;
 		while (++width < tex.img_width)
 		{
-			info->fimg.addr[tex.img_width * (x + info->map.col * (height + \
-						tex.img_height * y)) + width] = tex.addr[height * \
+			info->fimg.addr[tex.img_width * (y + info->map.col * (height + \
+						tex.img_height * x)) + width] = tex.addr[height * \
 				tex.img_width + width];
 		}
 	}
@@ -34,36 +34,36 @@ int	draw(t_info *info, int y, int x, t_data tex)
 void	draw_conf(t_info *info, int x, int y)
 {
 	if (x == info->map.v_x && y == info->map.v_y \
-		&& info->map.map[y][x] != 'P' && info->map.v_f >= 0)
+		&& info->map.map[x][y] != 'P' && info->map.v_f >= 0)
 	{
-		info->map.map[y][x] = 'V';
+		info->map.map[x][y] = 'V';
 		info->map.v_f = -2;
 	}
-	if (info->map.map[y][x] == '0')
-		draw(info, y, x, info->tex[0]);
-	else if (info->map.map[y][x] == '1')
-		draw(info, y, x, info->tex[1]);
-	else if (info->map.map[y][x] == 'C')
-		draw(info, y, x, info->tex[info->map.c]);
-	else if (info->map.map[y][x] == 'E')
-		draw(info, y, x, info->tex[6]);
-	else if (info->map.map[y][x] == 'P')
-		draw(info, y, x, info->tex[info->map.way]);
-	else if (info->map.map[y][x] == 'V')
-		draw(info, y, x, info->tex[15 + info->map.v_d]);
+	if (info->map.map[x][y] == '0')
+		draw(info, x, y, info->tex[0]);
+	else if (info->map.map[x][y] == '1')
+		draw(info, x, y, info->tex[1]);
+	else if (info->map.map[x][y] == 'C')
+		draw(info, x, y, info->tex[info->map.c]);
+	else if (info->map.map[x][y] == 'E')
+		draw(info, x, y, info->tex[6]);
+	else if (info->map.map[x][y] == 'P')
+		draw(info, x, y, info->tex[info->map.way]);
+	else if (info->map.map[x][y] == 'V')
+		draw(info, x, y, info->tex[15 + info->map.v_d]);
 }
 
 int	img_conv(t_info *info)
 {
-	int		y;
 	int		x;
+	int		y;
 	char	*c;
 
-	y = -1;
-	while (++y < info->map.row)
+	x = -1;
+	while (++x < info->map.row)
 	{
-		x = -1;
-		while (++x < info->map.col)
+		y = -1;
+		while (++y < info->map.col)
 			draw_conf(info, x, y);
 	}
 	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, \

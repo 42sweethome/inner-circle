@@ -6,13 +6,13 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/17 23:45:02 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/21 12:14:12 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	draw(t_info *info, int y, int x, t_data tex)
+int	draw(t_info *info, int x, int y, t_data tex)
 {
 	int		width;
 	int		height;
@@ -23,8 +23,8 @@ int	draw(t_info *info, int y, int x, t_data tex)
 		width = -1;
 		while (++width < tex.img_width)
 		{
-			info->fimg.addr[tex.img_width * (x + info->map.col * (height + \
-			tex.img_height * y)) + width] = tex.addr[height * \
+			info->fimg.addr[tex.img_width * (y + info->map.col * (height + \
+			tex.img_height * x)) + width] = tex.addr[height * \
 			tex.img_width + width];
 		}
 	}
@@ -62,25 +62,25 @@ void	get_texture(t_info *info)
 
 int	img_conv(t_info *info)
 {
-	int		y;
 	int		x;
+	int		y;
 
-	y = -1;
-	while (++y < info->map.row)
+	x = -1;
+	while (++x < info->map.row)
 	{
-		x = -1;
-		while (++x < info->map.col)
+		y = -1;
+		while (++y < info->map.col)
 		{
-			if (info->map.map[y][x] == '0')
-				draw(info, y, x, info->tex[0]);
-			else if (info->map.map[y][x] == '1')
-				draw(info, y, x, info->tex[1]);
-			else if (info->map.map[y][x] == 'C')
-				draw(info, y, x, info->tex[2]);
-			else if (info->map.map[y][x] == 'E')
-				draw(info, y, x, info->tex[3]);
-			else if (info->map.map[y][x] == 'P')
-				draw(info, y, x, info->tex[4]);
+			if (info->map.map[x][y] == '0')
+				draw(info, x, y, info->tex[0]);
+			else if (info->map.map[x][y] == '1')
+				draw(info, x, y, info->tex[1]);
+			else if (info->map.map[x][y] == 'C')
+				draw(info, x, y, info->tex[2]);
+			else if (info->map.map[x][y] == 'E')
+				draw(info, x, y, info->tex[3]);
+			else if (info->map.map[x][y] == 'P')
+				draw(info, x, y, info->tex[4]);
 		}
 	}
 	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, \

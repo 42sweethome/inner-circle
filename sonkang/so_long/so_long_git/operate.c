@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/19 10:58:24 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/11 22:53:38 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/08/21 12:17:01 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ void	message(t_info *info)
 
 void	move(t_info *info, int x, int y)
 {
-	if (info->map.map[info->map.player_y + y][info->map.player_x + x] != '1')
+	if (info->map.map[info->map.player_x + x][info->map.player_y + y] != '1')
 	{
-		if (info->map.map[info->map.player_y + y] \
-			[info->map.player_x + x] == 'E')
+		if (info->map.map[info->map.player_x + x] \
+			[info->map.player_y + y] == 'E')
 			message(info);
-		if (info->map.map[info->map.player_y + y] \
-			[info->map.player_x + x] == 'C')
+		if (info->map.map[info->map.player_x + x] \
+			[info->map.player_y + y] == 'C')
 			info->map.collect -= 1;
-		if (!(info->map.map[info->map.player_y + y] \
-			[info->map.player_x + x] == 'E' && info->map.collect != 0))
+		if (!(info->map.map[info->map.player_x + x] \
+			[info->map.player_y + y] == 'E' && info->map.collect != 0))
 		{
-			info->map.map[info->map.player_y][info->map.player_x] = '0';
-			info->map.map[info->map.player_y += y] \
-			[info->map.player_x += x] = 'P';
+			info->map.map[info->map.player_x][info->map.player_y] = '0';
+			info->map.map[info->map.player_x += x] \
+			[info->map.player_y += y] = 'P';
 			printf("WALK : %d\n", ++info->map.walk);
 		}
 	}
@@ -59,13 +59,13 @@ void	move(t_info *info, int x, int y)
 int	check_keypress(int key, t_info *info)
 {
 	if (key == 13)
-		move(info, 0, -1);
-	else if (key == 1)
-		move(info, 0, 1);
-	else if (key == 0)
 		move(info, -1, 0);
-	else if (key == 2)
+	else if (key == 1)
 		move(info, 1, 0);
+	else if (key == 0)
+		move(info, 0, -1);
+	else if (key == 2)
+		move(info, 0, 1);
 	else if (key == 53)
 		ft_exit(info);
 	return (0);
