@@ -36,7 +36,7 @@ int	check_path(t_mini *mini)
 				exit(1);
 			free(mini->path[idx]);
 			mini->path[idx] = temp;
-			execve(mini->path[idx], mini->buf, 0);
+			execve(mini->path[idx], mini->buf, 0);//실패시 명시적인 free는?
 		}
 		cmd_err(mini->buf[0], mini->err.cmd, mini);
 		exit(0);

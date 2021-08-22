@@ -109,7 +109,7 @@ int	space_split(char *s, char space, t_mini *mini)
 	mini->buf = (char **)ft_calloc((num + 1), sizeof(char *));
 	if (!mini->buf || num == (size_t)mini->err.malloc)
 		return (mini->err.malloc);
-	if (spliting(s, space, mini->buf, mini))
+	if (spliting(s, space, mini->buf, mini))// odd_quo == 1인 경우는?
 	{
 		ft_free(mini->buf);
 		return (mini->err.malloc);

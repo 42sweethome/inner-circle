@@ -32,7 +32,7 @@ int	mini_init(t_mini *mini)
 	mini->odd_quo = 0;
 	mini->err.malloc = -1;
 	mini->err.cmd = -2;
-	mini->err.quo = -3;
+	mini->err.quo = -3;//odd_quo == 1인 경우로 대체 하기로 한 부분
 	if (get_path(mini) == mini->err.malloc)
 		return (mini->err.malloc);
 	return (0);
@@ -54,10 +54,10 @@ int	parsing(char *str, t_mini *mini, char **envp)
 	ret = space_split(&str[i], ' ', mini);
 	if (ret == mini->err.malloc)
 		return (cmd_err("cmd error", mini->err.malloc, mini));
-	if (mini->odd_quo == 1)
+	if (mini->odd_quo == 1)// buf free는? split에서...?
 		return (cmd_err("qou error", mini->err.quo, mini));
-	cmd_ret = check_cmd(mini->buf[0], mini, envp);
-	if (cmd_ret == mini->err.cmd)
+	cmd_ret = check_cmd(mini->buf[0], mini, envp);//err.malloc리턴인 경우 확인
+	if (cmd_ret == mini->err.cmd)// err.cmd로 리턴되는 경우 아직 없음
 		return (cmd_err(mini->buf[0], mini->err.cmd, mini));
 	return (0);
 }
