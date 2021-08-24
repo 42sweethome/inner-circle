@@ -111,10 +111,6 @@ int	space_split(char *s, char space, t_mini *mini)
 	if (!mini->buf || num == (size_t)mini->err.malloc)
 		return (mini->err.malloc);
 	if (spliting(s, space, mini->buf, mini))
-	{
-		ft_free(mini->buf);
-		ft_free(mini->path);
 		return (mini->err.malloc);
-	}
 	return (1);
 }

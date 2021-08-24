@@ -21,10 +21,11 @@ int	al_num_under(int c)
 
 int	cmd_err(char *cmd, int err_num, t_mini *mini)
 {
-	if (err_num == mini->err.malloc)
+	if (err_num == mini->err.malloc || err_num == mini->err.path_malloc || \
+		err_num == mini->err.split_malloc)
 	{
 		printf("minishell: malloc error\n");
-		return (-1);
+		return (err_num);
 	}
 	else if (err_num == mini->err.cmd)
 		printf("minishell: %s: command not found\n", cmd);

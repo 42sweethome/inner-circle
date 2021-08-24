@@ -66,7 +66,10 @@ int	check_cmd(char *cmd, t_mini *mini, char ***envp)
 			return (mini->err.malloc);
 	}
 	else if (!ft_strncmp("unset", cmd, 6) || !ft_strncmp("UNSET", cmd, 6))
-		;
+	{
+		if (ft_unset(mini, envp) == mini->err.malloc)
+			return (mini->err.malloc);
+	}
 	else if (!ft_strncmp("env", cmd, 4) || !ft_strncmp("ENV", cmd, 4))
 		ft_env(mini->envp);
 	else if (!ft_strncmp("exit", cmd, 5) || !ft_strncmp("EXIT", cmd, 5))

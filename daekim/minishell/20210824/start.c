@@ -6,7 +6,7 @@ int	get_path(t_mini *mini)
 	char		*temp;
 	int			idx;
 //	static int	path_flag;
-	
+
 	path = getenv("PATH");
 	mini->path = ft_split(path, ':');
 	idx = -1;
@@ -35,6 +35,9 @@ int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 �
 	mini->err.malloc = -1;
 	mini->err.cmd = -2;
 	mini->err.quo = -3;
+	mini->err.path_malloc = -4;
+	mini->err.split_malloc = -5;
+	mini->err.only_space = -6;
 	if (get_path(mini) == mini->err.malloc)
 		return (mini->err.malloc);
 	return (0);
@@ -48,15 +51,17 @@ int	parsing(char *str, t_mini *mini)
 
 	// 최초 공백 무시 필요
 	if (mini_init(mini) == mini->err.malloc)
-		return (mini->err.malloc);
+		return (cmd_err("path error", mini->err.path_malloc, mini));
 	i = -1;
 	while (str[++i] == ' ')
 		;
 	if (str[i] == 0)
-		return (-2);
+		return (mini->err.only_space);
 	ret = space_split(&str[i], ' ', mini); //주어진 문자열을 공백기준으로 쪼갬
 	if (ret == mini->err.malloc) //누수검사 필요
 		return (cmd_err("daekim zzang", mini->err.malloc, mini));
+	else if (ret == mini->err.split_malloc)
+		return (cmd_err("daekim zzang", mini->err.split_malloc, mini));
 	if (mini->odd_quo == 1)
 		return (cmd_err("doyun ZZANG", mini->err.quo, mini));
 	while (*(mini->buf[mini->first]) == 0)//
@@ -73,12 +78,41 @@ int	parsing(char *str, t_mini *mini)
 	return (0);
 }
 
+int	main_free(t_mini *mini, char *str, int ret)
+{
+	if (ret == mini->err.path_malloc || ret == mini->err.split_malloc || \
+			ret == mini->err.only_space)
+	{
+		ft_free(mini->path);
+		free(str);
+		return (mini->err.malloc);
+	}
+	else if (ret == mini->err.malloc)
+	{
+		ft_free(mini->path);
+		ft_free(mini->buf);
+		free(str);
+		return (mini->err.malloc);
+	}
+	else if (ret == mini->err.cmd)
+	{
+		ft_free(mini->path);
+		ft_free(mini->buf);
+		free(str);
+		return (mini->err.cmd);
+	}
+	ft_free(mini->path);
+	ft_free(mini->buf);	
+	free(str);
+	return (0);
+}
+
 int	main(int argc, char **argv, char **envp) //파싱작업
 {
 	char	*str;
 	t_mini	mini;
 	int	ret;
-	
+
 	if (argc != 1 || argv[1] != 0)
 	{
 		mini.err.argv = -4;
@@ -87,24 +121,17 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 	}
 	while (1)
 	{
- 		str = readline("minishell $ "); //표준입력
+		str = readline("minishell $ "); //표준입력
 		if (str == 0 || *str == 0)
 			continue ;
 		mini.envp = &envp;
 		ret = parsing(str, &mini);
-		if (ret == mini.err.malloc) //문자열 파싱구분
-			return (mini.err.malloc);
 		add_history(str);
+		ret = main_free(&mini, str, ret);
 		if (ret == mini.err.cmd)
-		{
-			ft_free(mini.path);
-			ft_free(mini.buf);
-			free(str);
 			continue ;
-		}
-		ft_free(mini.path);
-		ft_free(mini.buf);	
-		free(str);
+		else if (ret == mini.err.path_malloc || ret == mini.err.split_malloc)
+			return (mini.err.malloc);
 	}
 	return (0);
 }

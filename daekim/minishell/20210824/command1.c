@@ -29,7 +29,6 @@ void	ft_pwd(void)//export구현 후 수정
 	char pwd[1024];
 
 	printf("%s\n", getcwd(pwd, 1024));
-	printf("%s\n", getenv("PWD"));
 }
 
 void	ft_env(char ***envp)
@@ -41,17 +40,49 @@ void	ft_env(char ***envp)
 		printf("%s\n", (*envp)[idx]);
 }
 
-void	ft_chdir(t_mini *mini)
+int	change_pwd(t_mini *mini)
 {
-	int idx;
+	char	pwd[1024];
+	int		idx;
+	int		jdx;
+
+	jdx = -1;
+	while ((*mini->envp)[++jdx])
+		if (!ft_strncmp((*mini->envp)[jdx], "PWD=", 4))
+		{
+			idx = -1;
+			while ((*mini->envp)[++idx])
+				if (!ft_strncmp((*mini->envp)[idx], "OLDPWD=", 7))
+				{
+					(*mini->envp)[idx] = ft_strdup(ft_strjoin("OLD", (*mini->envp)[jdx]));
+					if (!(*mini->envp)[idx])
+						return (mini->err.malloc);
+				}
+			(*mini->envp)[jdx] = ft_strdup(ft_strjoin("PWD=", getcwd(pwd, 1024)));
+			//leak check
+		}
+	return (0);
+}
+
+int	ft_chdir(t_mini *mini)
+{
+	int		idx;
 
 	idx = mini->first;
 	while (mini->buf[++idx] != 0 && *(mini->buf[idx]) == 0)
 		;
-	if (mini->buf[idx] == 0 || !ft_strncmp("~", mini->buf[idx], 2))//
+	if (mini->buf[idx] == 0)
+	{
 		chdir(getenv("HOME"));// 클러스터랑 좀 다른 것 같다고함
+		if (change_pwd(mini))
+			return (mini->err.malloc);
+	}
 	else if (&(mini->buf[idx]) != 0 && chdir(mini->buf[idx]) == 0)
-		;
+	{
+		if (change_pwd(mini))
+			return (mini->err.malloc);
+	}
 	else
 		printf("minishell: %s: %s\n", mini->buf[idx], strerror(errno));
+	return (0);
 }

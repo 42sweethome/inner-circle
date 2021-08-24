@@ -13,7 +13,10 @@
 
 typedef	struct s_err
 {
+	int			path_malloc;
+	int			split_malloc;
 	int			malloc;
+	int			only_space;
 	int			cmd;
 	int			quo;
 	int			argv;
@@ -48,7 +51,8 @@ int		copy_env(char *new, char *env_str, int i, t_mini *mini);
 void	ft_echo(t_mini *mini);
 void	ft_pwd(void);
 void	ft_env(char ***envp);
-void	ft_chdir(t_mini *mini);
+int		ft_chdir(t_mini *mini);
 int		ft_export(t_mini *mini, char ***envp);
+int 	ft_unset(t_mini *mini, char ***envp);
 
 #endif
