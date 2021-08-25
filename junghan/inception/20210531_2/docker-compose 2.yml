@@ -1,6 +1,0 @@
-nginx:
-  build: .
-  volumes:
-   - ./website:/usr/share/nginx/html
-  ports:
-   - "3000:80"
