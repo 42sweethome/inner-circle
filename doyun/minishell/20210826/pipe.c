@@ -1,39 +1,52 @@
 #include "minishell.h"
 
-void	pipe_execve(t_mini *mini)
+int	pipe_execve(t_mini *mini)
 {
 	int		pid;
 	int		status;
 	int		fd[2];
-	int		p_fd[2];
+	//char	*str;
 
-	pid = fork();
 	pipe(fd);
-	if (pid == 0)
-	{
-		if (mini->pipe)
+	/*	if (mini->pipe)
 		{
-			dup2(fd[0], 0);
-			printf("mini->pipe : %d\n", mini->pipe);
-			mini->pipe--;
-			pipe_execve(mini);
-		}
-		exit(0);
+		pid = fork();
+		if (pid == 0)
+		{
+		dup2(fd[1], 1);
+	//		str = strdup("ls");
+	//	ft_execve(mini, mini->buf[0], mini->envp);
+	printf("!!");
+	exit(0);
 	}
 	else if (pid > 0)
-	{
-		pid2 = fork();
-		pipe(p_fd);
-		if (pid2 == 0)
-		{
-			dup2(p_fd[1], fd[1]);
-			execve(cmd);
-		}
-		else if (pid2 > 0)
-			wait();
-		wait(&status);
-		printf("parent : mini->pipe : %d\n", mini->pipe);
+	waitpid(pid, &status, 0);
 	}
-	else if (pid == -1)
-		printf("minishell: %s\n", strerror(errno));
+	 */
+	int initial;
+	char 	buf[1024];
+	initial = mini->pipe++;
+	while (mini->pipe--)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			if (initial != mini->pipe)
+			{
+				dup2(fd[0], 0);
+				read(fd[0], buf, 3);
+				buf[2] = '\0';
+				printf("buf : %s mini->pipe : %d\n", buf, mini->pipe);
+			}
+			if (mini->pipe != 0)
+				dup2(fd[1], 1);
+			printf("??\n");
+			//str = strdup("grep c");
+			//execve(str, mini->buf, *mini->envp);
+			exit(0);
+		}
+		else if (pid > 0)
+			waitpid(pid, &status, 0);
+	}
+	return (mini->err.pipe);
 }
