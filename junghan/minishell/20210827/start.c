@@ -74,9 +74,10 @@ int	parsing(char *str, t_mini *mini)
 		if (mini->buf[mini->first] == 0)
 			return (0);
 	}
-	if (pipe_execve(mini) == mini->err.pipe)
-		return (cmd_err("daekim zzang", mini->err.pipe, mini));
-	cmd_ret = check_cmd(mini->buf[mini->first], mini, mini->envp);
+	if (mini->pipe && pipe_execve(mini) == mini->err.pipe)
+		return (cmd_err("daekim &&  zzang", mini->err.pipe, mini));
+	else
+		cmd_ret = check_cmd(mini->buf[mini->first], mini, mini->envp);
 	if (cmd_ret == mini->err.cmd)
 		return (cmd_err(mini->buf[mini->first], mini->err.cmd, mini));
 	if (cmd_ret == mini->err.malloc)
