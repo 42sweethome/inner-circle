@@ -1,9 +1,0 @@
-#!/bin/bash
-
-#권한 설정
-
-USE mysql;
-CREATE DATABASE IF NOT EXISTS wordpress;
-CREATE USER IF NOT EXISTS 'sonkang'@'localhost' IDENTIFIED BY '';
-GRANT ALL PRIVILEGES ON *.* TO 'sonkang'@'localhost' IDENTIFIED BY '1111' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
