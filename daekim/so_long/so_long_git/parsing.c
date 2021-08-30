@@ -42,18 +42,23 @@ char	**map_parser(t_map *map_info, char *argv, int fd)
 	int		idx;
 	int		ret;
 
+	printf("aa\n");
 	map_info->row = get_newline(argv, map_info);
 	if (map_info->row == -1)
 		print_error(2);
+	printf("bb\n");
 	map_info->map = (char **)ft_calloc(map_info->row + 1, sizeof(char *));
 	if (!map_info->map)
 		return (NULL);
+	printf("cc\n");
 	idx = -1;
 	ret = get_next_line(fd, &(map_info->map[++idx]));
+	printf("ret1 : %d\n", ret);
 	map_info->col = ft_strlen(map_info->map[idx]);
 	while (ret)
 	{
 		ret = get_next_line(fd, &(map_info->map[++idx]));
+		printf("ret2 : %d\n", ret);
 		map_info->temp_col = ft_strlen(map_info->map[idx]);
 		if (idx == map_info->row - 1)
 			break ;
@@ -70,21 +75,29 @@ void	parsing(t_info *info, char *argv)
 	int		check;
 	int		fd;
 
+
+		printf("a\n");
 	check = check_extention(argv);
 	if (check == -1)
 		print_error(1);
+		printf("b\n");
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		print_error(2);
+		printf("c\n");
 	info->map.map = map_parser(&info->map, argv, fd);
+		printf("d\n");
 	close(fd);
 	if (!info->map.map)
 		print_error(3);
+		printf("e\n");
 	check = check_map_valid(&info->map);
 	if (check == -1)
 		print_error(4);
+		printf("f\n");
 	check = check_comp_valid(&info->map);
 	if (check == -1)
 		print_error(5);
+		printf("g\n");
 	info->map.walk = 0;
 }

@@ -36,9 +36,9 @@ void	get_texture(t_info *info)
 	info->tex[0].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/elinia2.xpm", &info->tex[0].img_width, &info->tex[0].img_height);
 	info->tex[1].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/sky1.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
+	"./texture/elinia_sky1.xpm", &info->tex[1].img_width, &info->tex[1].img_height);
 	info->tex[2].img = mlx_xpm_file_to_image(info->win.mlx, \
-	"./texture/.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
+	"./texture/elinia.xpm", &info->tex[2].img_width, &info->tex[2].img_height);
 	info->tex[3].img = mlx_xpm_file_to_image(info->win.mlx, \
 	"./texture/exit.xpm", &info->tex[3].img_width, &info->tex[3].img_height);
 	info->tex[4].img = mlx_xpm_file_to_image(info->win.mlx, \
