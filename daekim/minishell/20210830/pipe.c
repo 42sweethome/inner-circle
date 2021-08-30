@@ -1,14 +1,55 @@
 #include "minishell.h"
 
+int	check_temp(t_mini *mini, t_pipe *pi)
+{
+	int	fd;
+
+	if (ft_strchr(pi->temp[0], '/') != 0)
+	{
+		if (ft_strncmp (pi->temp[0], "/", 2) == 0)
+		{
+			cmd_err(pi->temp[0], mini->err.cmd, mini);
+			return (mini->err.cmd);
+		}
+		fd = open(pi->temp[0], O_RDONLY, S_IRUSR);
+		if (fd == -1)
+		{
+			close(fd);
+			cmd_err(pi->temp[0], mini->err.cmd, mini);
+			return (mini->err.cmd);
+		}
+		mini->pipe_path = 1;
+	}
+	else
+	{
+		pi->jdx = -1;
+		while (mini->path[++(pi->jdx)])
+		{
+			pi->cmd = ft_strjoin(mini->path[pi->jdx], mini->buf[pi->idx]);
+			if (pi->cmd == NULL)
+				cmd_err(pi->temp[0], mini->err.malloc, mini);
+			fd = open(pi->cmd, O_RDONLY, S_IRUSR);
+			if (fd > 0)
+				mini->pipe_path = 1;
+		}
+		if (mini->pipe_path != 1)
+		{
+			close(fd);
+			cmd_err(pi->temp[0], mini->err.cmd, mini);
+			return (mini->err.cmd);
+		}
+	}
+	return (0);
+}
+
 void	oper_pipe(t_mini *mini, t_pipe *pi)
 {
 	if (ft_strchr(pi->temp[0], '/') != 0)
 	{
+		if (ft_strncmp (pi->temp[0], "/", 2) == 0)
+			exit(0);
 		if (execve(pi->temp[0], pi->temp, *mini->envp) == -1)
-		{
-			cmd_err(pi->temp[0], mini->err.cmd, mini);
-			exit(1);
-		}
+			;
 	}
 	else
 	{
@@ -23,13 +64,14 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 			}
 			execve(pi->cmd, pi->temp, 0);
 		}
-		cmd_err(pi->temp[0], mini->err.cmd, mini);
 	}
 	exit(0);
 }
 
 int	fork_pipe(t_mini *mini, t_pipe *pi)
 {
+	if (mini->pipe_path == 0)
+		write(pi->fd[0], "", 1);
 	pi->pid = fork();
 	if (pi->pid == 0)
 	{
@@ -52,8 +94,6 @@ int	fork_pipe(t_mini *mini, t_pipe *pi)
 		close(pi->fd2[1]);
 		pipe(pi->fd2);
 	}
-	if (pi->status)
-		return (mini->err.malloc);
 	return (0);
 }
 
@@ -63,7 +103,7 @@ int	parsing_pipe(t_mini *mini, t_pipe *pi)
 	while (mini->buf[++(pi->count)])
 		if (ft_strncmp(mini->buf[pi->count], "|", 2) == 0)
 			break ;
-	pi->temp = (char **)ft_calloc(pi->count + 1, sizeof(char *));
+	pi->temp = (char **)ft_calloc(pi->count - pi->idx + 1, sizeof(char *));
 	if (pi->temp == 0)
 		return (mini->err.malloc);
 	pi->jdx = -1;
@@ -89,11 +129,13 @@ int	pipe_execve(t_mini *mini, t_pipe *pi)
 	pipe(pi->fd2);
 	pi->idx = -1;
 	pi->count = -1;
-	while (mini->pipe--)
+	while (mini->pipe-- > 0)
 	{
+		mini->pipe_path = 0;
 		ret = parsing_pipe(mini, pi);
 		if (ret)
 			return (ret);
+		check_temp(mini, pi);
 		ret = fork_pipe(mini, pi);
 		if (ret)
 			return (ret);
