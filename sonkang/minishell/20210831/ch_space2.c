@@ -59,7 +59,7 @@ int	check_quo(char *s, char c, int i, t_mini *mini) // s: 주어진 문자열 c:
 int	quo_while(char *s, char space, t_mini *mini, int i)
 {
 	while (s[i] && s[i] != space && s[i] != '|') //중복?
-	{
+	{		
 		if (s[i] == '\'') //최초 열린 따옴표가 작은따옴표인지 큰따옴표인지 구분
 			i = check_quo(s, '\'', i, mini);
 		else if (s[i] == '"')
@@ -69,6 +69,8 @@ int	quo_while(char *s, char space, t_mini *mini, int i)
 		if (i == mini->err.malloc)
 			return (mini->err.malloc);
 		i++;
-	}		
+		if (s[i] && s[i] != space && s[i] != '|' && mini->env_flag == 1)
+			mini->env_flag = 0;
+	}
 	return (i);
 }

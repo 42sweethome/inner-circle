@@ -16,12 +16,14 @@ void	ft_echo(t_mini *mini)
 				!ft_strncmp(mini->buf[option], "-n", 3))
 			idx++;
 		printf("%s", mini->buf[idx]);
-		if (mini->buf[idx + 1] != 0 && *(mini->buf[idx]) != 0)
+		if (mini->buf[idx + 1] != 0 /*&& *(mini->buf[idx]) != 0*/)
 			printf(" ");
 		if (mini->buf[idx + 1] == 0 && \
 				ft_strncmp(mini->buf[option], "-n", 3))
 			printf("\n");
-	}	
+	}
+	if (idx == mini->first + 1)
+		printf("\n");
 }
 
 void	ft_pwd(void)//export구현 후 수정

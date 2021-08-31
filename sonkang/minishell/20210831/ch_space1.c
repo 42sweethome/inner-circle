@@ -21,6 +21,7 @@ static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 	idx = 0;
 	mini->s_quo = 0;
 	mini->d_quo = 0;
+
 	while (start < end)
 	{
 		if (case_quo(str, &idx, mini))
@@ -32,6 +33,8 @@ static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 			idx = copy_env(&new[start], str, idx, mini);
 			if (idx == mini->err.malloc)
 				return (mini->err.malloc);
+			if (new[start] == 0 && mini->d_quo == 0)
+				continue ;
 			if (new[start] != 0)
 			{
 				while (new[start])
@@ -60,6 +63,7 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 			mini->cnt_quo = 0;
 			mini->env_len = 0;
 			mini->dollar = 0;
+			mini->env_flag = 0;
 			start = i;
 			i = quo_while(s, space, mini, i); //countc와 동일한 작업
 			new[count] = (char *)ft_calloc((i - start + 1 - mini->cnt_rvslash \
@@ -69,7 +73,14 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 			if (scpy(new[count], &s[start], (i - start - mini->cnt_rvslash \
 						- mini->cnt_quo + mini->env_len - mini->dollar), mini))//구분된 문자열을 new라는 이중배열에 넣어줌
 				return (mini->err.malloc);
-			count++;
+			if (mini->env_flag == 0)
+				count++;
+			else
+			{
+				free(new[count]);
+				new[count] = 0;
+			}
+
 		}
 		else if (s[i] == space)
 			i++;
@@ -82,6 +93,11 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 			count++;
 		}
 	}
+/*	int j = -1;
+	while (new[++j])
+	{
+		printf("new : %s\n",new[j]);
+	}*/
 	return (0);
 }
 
@@ -96,9 +112,12 @@ static size_t	countc(char *s, char space, t_mini *mini) //문자열의 총 길�
 	{
 		if (s[i] && s[i] != space && s[i] != '|') 
 		{
+			mini->env_flag = 0;
 			count++;
 			i = quo_while(s, space, mini, i); // 내부적으로 큰따옴표와 작은따옴표에 관한 분류작업을함
 			//if ((int)i == -2)		// ex) 따옴표의 갯수, 역슬래시 파악 등
+			if (mini->env_flag == 1)
+				count--;
 			if (i == (size_t)mini->err.malloc)
 				return (mini->err.malloc);
 		}
@@ -120,7 +139,7 @@ int	check_pipe_pos(t_mini *mini)
 	idx = -1;
 	if (!ft_strncmp(mini->buf[0], "|", 2))
 		return (mini->err.pipe);
-	while(mini->buf[++idx])
+	while(mini->buf[++idx] != NULL)
 	{
 		if (!ft_strncmp(mini->buf[idx], "|", 2))
 		{
@@ -140,6 +159,11 @@ int	space_split(char *s, char space, t_mini *mini)
 	if (s == 0)
 		return (mini->err.malloc);
 	num = countc(s, space, mini);
+	if (num == 0) //$abc ""구분
+	{
+		ft_free(mini->path);
+		return (0);
+	}
 	mini->buf = (char **)ft_calloc((num + 1), sizeof(char *));
 	if (!mini->buf || num == (size_t)mini->err.malloc)
 		return (mini->err.malloc);

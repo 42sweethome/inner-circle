@@ -49,6 +49,7 @@ typedef struct s_mini
 	int			cnt_rvslash;
 	int			odd_quo;
 	int			env_len;
+	int			env_flag;
 	int			dollar;
 	int			first;
 	int			pipe;

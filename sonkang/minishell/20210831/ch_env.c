@@ -23,6 +23,8 @@ int	search_env(t_mini *mini, char **env, char *tmp, int len)
 				}
 			}
 		}
+		if ((*mini->envp)[idx] == 0)
+			mini->env_flag = 1;
 	}
 	return (0);
 }
@@ -50,6 +52,8 @@ int	copy_env(char *new, char *env_str, int i, t_mini *mini)
 	if (ret == mini->err.malloc)
 		return (mini->err.malloc);
 	ft_strlcpy(new, env, ft_strlen(env) + 1);
+	if (i != 0 && env_str[i - 1] != ' ' && env_str[i - 1] != '|' && mini->env_flag == 1)
+		mini->env_flag = 0;
 	return (i + len + 1);
 }
 
@@ -76,5 +80,7 @@ int	check_env(char *env_str, int i, t_mini *mini)
 	mini->env_len = mini->env_len + ft_strlen(env) - len;
 	if (len != 0)
 		mini->dollar++;
+	if (i != 0 && env_str[i - 1] != ' ' && env_str[i - 1] != '|' && mini->env_flag == 1)
+			mini->env_flag = 0;
 	return (i + len);
 }

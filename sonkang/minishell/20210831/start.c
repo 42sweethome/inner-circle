@@ -61,6 +61,8 @@ int	parsing(char *str, t_mini *mini)
 	if (str[i] == 0)
 		return (mini->err.only_space);
 	ret = space_split(&str[i], ' ', mini); //주어진 문자열을 공백기준으로 쪼갬
+	if (ret == 0)
+		return (0);
 	if (ret == mini->err.malloc) //누수검사 필요
 		return (cmd_err("junghan zzang", mini->err.malloc, mini));
 	else if (ret == mini->err.split_malloc)
@@ -69,12 +71,12 @@ int	parsing(char *str, t_mini *mini)
 		return (cmd_err("junghan zzang", mini->err.pipe, mini));
 	if (mini->odd_quo == 1)
 		return (cmd_err("junghan ZZANG", mini->err.quo, mini));
-	while (*(mini->buf[mini->first]) == 0)
+/*	while (*(mini->buf[mini->first]) == 0)
 	{
 		mini->first++;
 		if (mini->buf[mini->first] == 0)
 			return (0);
-	}
+	}*/
 	pipe_ret = 0;
 	if (mini->pipe)
 		pipe_ret = pipe_execve(mini, &(mini->pipe_struct));
@@ -141,7 +143,8 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 		mini.envp = &envp;
 		ret = parsing(str, &mini);
 		add_history(str);
-		ret = main_free(&mini, str, ret);
+		if (ret != 0)
+			ret = main_free(&mini, str, ret);
 		if (ret == mini.err.cmd)
 			continue ;
 		else if (ret == mini.err.path_malloc || ret == mini.err.split_malloc)
