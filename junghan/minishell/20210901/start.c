@@ -28,7 +28,6 @@ int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 �
 {
 	mini->s_quo = 0;
 	mini->d_quo = 0;
-	mini->cnt_rvslash = 0;
 	mini->cnt_quo = 0;
 	mini->odd_quo = 0;
 	mini->pipe = 0;
@@ -67,6 +66,8 @@ int	parsing(char *str, t_mini *mini)
 		return (cmd_err("junghan zzang", mini->err.split_malloc, mini));
 	else if (ret == mini->err.pipe)
 		return (cmd_err("junghan zzang", mini->err.pipe, mini));
+	if (mini->buf[0] == NULL)
+		return (0);
 	if (mini->odd_quo == 1)
 		return (cmd_err("junghan ZZANG", mini->err.quo, mini));
 /*	while (*(mini->buf[mini->first]) == 0)
@@ -74,8 +75,8 @@ int	parsing(char *str, t_mini *mini)
 		mini->first++;
 		if (mini->buf[mini->first] == 0)
 			return (0);
-	}*/
-	pipe_ret = 0;
+	}
+*/	pipe_ret = 0;
 	if (mini->pipe)
 		pipe_ret = pipe_execve(mini, &(mini->pipe_struct));
 	if (mini->pipe && pipe_ret == 0)
