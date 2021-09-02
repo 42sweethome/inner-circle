@@ -11,10 +11,20 @@ char	ft_free(char **new)
 	return (0);
 }
 
+int	special_char3(t_mini *mini, int c)
+{
+	if ((c == '"' && mini->d_quo == 1) ||(c == '\'' && mini->s_quo == 1))
+		return (1);
+	if (c == '?' || c == ' ' || c == 0 || c == '>' || c == '<' || \
+			c == '|' || c == '"' || c == '\'' || c == '$')
+		return (0);
+	return (1);
+}
+
 int	special_char2(int c)
 {
-	if (c == '?' || c == ' ' || c == 0 || c == '>' || c == '<' || \
-			c == '|')
+	if (c == '?' || c == '"' || c == '\''|| c == '>' || c == '<' || \
+			c == '|' || c == '$')
 		return (0);
 	return (1);
 }

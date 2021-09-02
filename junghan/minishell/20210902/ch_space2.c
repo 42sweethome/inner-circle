@@ -6,7 +6,7 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/08/12 18:19:01 by junghan          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:20:40 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	case_quo(char *str, int *idx, t_mini *mini)
 
 int	check_quo(char *s, char c, int i, t_mini *mini) // s: 주어진 문자열 c: 큰/작은 따옴표 i:인덱스 mini:정보꾸러미
 {
+	mini->pre_flag = 1;
 	while (s[++i] && s[i] != c) //큰따옴표인 경우 역슬래시를 출력하지 않아야함 r_value 고로 mini꾸러미에 담아줌
 	{				//닫는 따옴표 혹은 null terminated가 되기 전까지 인덱스를 더함
 		if (c == '"' && s[i] == '$')
@@ -68,14 +69,19 @@ int	quo_while(char *s, char space, t_mini *mini, int i)
 		else if (s[i] == '$')
 		{
 			check = i;
-			i = check_env(s, i, mini);	
-			if ((check > 0 && s[check - 1] != 0) || \
-					special_char2(s[i + 1]))
-				mini->env_flag = 0;
-		}
+			i = check_env(s, i, mini);
+			if (mini->env_flag == 0)
+				mini->pre_flag = 1;
+			if ((s[check + 1] == ' ' || s[check + 1] == 0) || (!special_char2(s[i + 1])))
+				mini->env_flag = 0;//할당할겨
+		}//$만 연속적으로 들어오는 부분에서 할당문제가 있음.
+		else
+			mini->pre_flag = 1;
 		if (i == mini->err.malloc)
 			return (mini->err.malloc);
 		i++;
 	}
+	if (mini->pre_flag)
+		mini->env_flag = 0;
 	return (i);
 }

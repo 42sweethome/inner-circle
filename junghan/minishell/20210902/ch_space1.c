@@ -6,7 +6,7 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/08/23 12:17:18 by junghan          ###   ########.fr       */
+/*   Updated: 2021/09/02 16:20:39 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 			continue ;
 		if (mini->s_quo == 0 && str[idx] == '$')
 		{
-		printf("start %zu end %zu\n",start, end);
 			idx = copy_env(&new[start], str, idx, mini);
 			if (idx == mini->err.malloc)
 				return (mini->err.malloc);
@@ -37,12 +36,9 @@ static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 					start++;
 				continue ;
 			}
+			else
+				continue ;
 		}
-		//$뿐만아니라 다른거 들어올 수 있어서 special char2로 고쳐야 할 수도..
-		//$$두개 넣으면 무한루프 -> $가 하나면 문자열로 취급해야됨
-		//$를 어떻게 처리할지 정해보자
-		if (case_quo(str, &idx, mini) || str[idx] == '$')
-			continue ;
 		new[start++] = str[idx++];
 	}
 	return (0);
@@ -60,6 +56,7 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 	{			
 		if (s[i] && s[i] != space && s[i] != '|')
 		{
+			mini->pre_flag = 0;
 			mini->env_flag = 0;
 			mini->cnt_quo = 0;
 			mini->env_len = 0;
@@ -103,6 +100,7 @@ static size_t	countc(char *s, char space, t_mini *mini) //문자열의 총 길�
 	{
 		if (s[i] && s[i] != space && s[i] != '|') 
 		{
+			mini->pre_flag = 0;
 			mini->env_flag = 0;
 			count++;
 			i = quo_while(s, space, mini, i); // 내부적으로 큰따옴표와 작은따옴표에 관한 분류작업을함

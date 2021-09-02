@@ -49,6 +49,7 @@ typedef struct s_mini
 	int			odd_quo;
 	int			env_len;
 	int			env_flag;
+	int			pre_flag;
 	int			dollar;
 	int			first;
 	int			pipe;
@@ -65,6 +66,7 @@ int		check_cmd(char *cmd, t_mini *mini, char ***envp);
 char	ft_free(char **new);
 int		special_char(int c);
 int		special_char2(int c);
+int		special_char3(t_mini *mini, int c);
 int		check_env(char *env_str, int i, t_mini *mini);
 int		copy_env(char *new, char *env_str, int i, t_mini *mini);
 void	ft_echo(t_mini *mini);

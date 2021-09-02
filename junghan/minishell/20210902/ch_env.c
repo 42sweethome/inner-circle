@@ -42,8 +42,6 @@ int	copy_env(char *new, char *env_str, int i, t_mini *mini)
 	len = 0;
 	while (special_char(env_str[i + len + 1]))
 		len++;
-	if (len == 0)
-		return (i);
 	tmp = ft_calloc(len + 1, sizeof(char));
 	if (tmp == 0)
 		return (mini->err.malloc);
@@ -53,7 +51,10 @@ int	copy_env(char *new, char *env_str, int i, t_mini *mini)
 	ret = search_env(mini, &env, tmp, len);
 	if (ret == mini->err.malloc)
 		return (mini->err.malloc);
-	ft_strlcpy(new, env, ft_strlen(env) + 1);
+	if (len == 0 && !special_char(env_str[i + 1]))
+		*new = '$';
+	else
+		ft_strlcpy(new, env, ft_strlen(env) + 1);
 	return (i + len + 1);
 }
 
@@ -82,5 +83,7 @@ int	check_env(char *env_str, int i, t_mini *mini)
 	mini->env_len = mini->env_len + ft_strlen(env) - len;
 	if (len != 0)
 		mini->dollar++;
+	if (len == 0)
+		mini->pre_flag = 1;
 	return (i + len);
 }
