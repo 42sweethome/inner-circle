@@ -3,39 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/03 17:24:45 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/02 23:29:59 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/26 09:10:01 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:24:46 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+static int	check(char *str, int *i)
 {
-	long long int	flag;
+	int				a;
+	int				count;
+
+	a = 0;
+	count = 0;
+	while (str[a] && ((str[a] >= 9 && str[a] <= 13) || str[a] == ' '))
+		a++;
+	if (str[a] == '+' || str[a] == '-')
+	{
+		if (str[a] == '-')
+			count++;
+		a++;
+	}
+	*i = a;
+	return (count);
+}
+
+int	ft_atoi(char *str)
+{
+	int				i;
+	int				sign;
 	long long int	result;
 
-	while ((9 <= *str && *str <= 13) || (*str == ' '))
-		str++;
-	flag = 1;
-	if (*str == '+')
-		str++;
-	else if (*str == '-')
-	{
-		flag *= -1;
-		str++;
-	}
+	sign = 1;
+	i = 0;
 	result = 0;
-	while ('0' <= *str && *str <= '9')
+	if ((check(str, &i) % 2) != 0)
+		sign = -sign;
+	if (str[i] < '0' || str[i] > '9')
+		return (0);
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = result * 10 + *str - '0';
-		if (flag < 0 && result > 2147483648)
+		result = (result * 10) + (str[i] - 48);
+		i++;
+		if (sign < 0 && result > 2147483648)
 			return (0);
-		else if (flag > 0 && result > 2147483647)
+		else if (sign > 0 && result > 2147483647)
 			return (-1);
-		str++;
 	}
-	return ((int)(flag * result));
+	result = result * sign;
+	return (result);
 }

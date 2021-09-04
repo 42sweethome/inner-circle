@@ -3,29 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 20:11:38 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/02 23:17:06 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/28 10:56:15 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:12:17 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	power(int i)
+{
+	int				a;
+
+	a = 1;
+	while (i)
+	{
+		a = a * 10;
+		i--;
+	}
+	return (a);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned int	i;
+	int				i;
+	long long int	num;
+	char			c;
 
-	if (fd < 0)
-		return ;
-	if (n < 0)
+	i = 0;
+	num = n;
+	if (num < 0)
 	{
 		write(fd, "-", 1);
-		i = (unsigned int)(n * -1);
+		num = -num;
 	}
-	else
-		i = (unsigned int)n;
-	if (i >= 10)
-		ft_putnbr_fd(i / 10, fd);
-	ft_putchar_fd((char)(i % 10 + '0'), fd);
+	while (n < -9 || n > 9)
+	{
+		n = n / 10;
+		i++;
+	}
+	while (i)
+	{
+		c = (num / power(i)) + 48;
+		write(fd, &c, 1);
+		num = num % power(i);
+		i--;
+	}
+	c = num % 10 + 48;
+	write(fd, &c, 1);
 }

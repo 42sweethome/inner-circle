@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_only_digit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/11 20:15:53 by daekim            #+#    #+#             */
-/*   Updated: 2021/01/19 19:27:53 by daekim           ###   ########.fr       */
+/*   Created: 2020/12/26 09:13:52 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:13:01 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <fcntl.h>
+int	ft_only_digit(char *dig)
+{
+	int	i;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4231
-# endif
-
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(char *str);
-char	*ft_strdup(char *str);
-char	*ft_strjoin(char *s1, char *s2);
-
-#endif
+	i = 0;
+	while (dig[i])
+	{
+		if (dig[i] < '0' && dig[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}

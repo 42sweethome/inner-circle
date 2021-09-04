@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sercli.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/15 10:58:22 by sonkang           #+#    #+#             */
-/*   Updated: 2021/07/19 21:18:39 by sonkang          ###   ########.fr       */
+/*   Created: 2021/09/04 11:40:54 by daekim            #+#    #+#             */
+/*   Updated: 2021/09/04 11:40:55 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERCLI_H
+ifndef SERCLI_H
 # define SERCLI_H
 
 # include <unistd.h>

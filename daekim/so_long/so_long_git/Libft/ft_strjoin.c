@@ -3,39 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 15:29:41 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/02 23:15:02 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/28 10:35:42 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:09:09 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	int		str_len;
+	char	*new;
 	char	*str;
 
 	if (s1 == 0 || s2 == 0)
 		return (0);
-	str_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = (char *)malloc(str_len * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (*(s1 + i) != '\0')
+	new = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (!new)
+		return (0);
+	str = new;
+	while (*s1)
 	{
-		*(str + i) = *(s1 + i);
-		i++;
+		*str = *s1;
+		str++;
+		s1++;
 	}
-	i = 0;
-	while (*(s2 + i) != '\0')
+	while (*s2)
 	{
-		*(str + ft_strlen(s1) + i) = *(s2 + i);
-		i++;
+		*str = *s2;
+		str++;
+		s2++;
 	}
-	*(str + str_len - 1) = '\0';
-	return (str);
+	return (new);
 }
