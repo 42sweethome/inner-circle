@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 11:09:25 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/18 00:25:42 by sonkang          ###   ########.fr       */
+/*   Created: 2021/09/04 11:47:40 by daekim            #+#    #+#             */
+/*   Updated: 2021/09/04 11:56:26 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
-# include "../GNL/get_next_line.h"
-# include "../Libft/libft.h"
+# include "../gnl/get_next_line.h"
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include "../mlx/mlx.h"

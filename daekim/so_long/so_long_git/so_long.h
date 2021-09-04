@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/19 11:09:25 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/17 23:46:47 by sonkang          ###   ########.fr       */
+/*   Created: 2021/09/04 11:46:15 by daekim            #+#    #+#             */
+/*   Updated: 2021/09/04 11:54:22 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./GNL/get_next_line.h"
-# include "./Libft/libft.h"
+# include "./gnl/get_next_line.h"
+# include "./libft/libft.h"
 # include "./mlx/mlx.h"
 # include <unistd.h>
 # include <stdio.h>

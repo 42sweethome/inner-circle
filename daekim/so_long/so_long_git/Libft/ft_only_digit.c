@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_only_digit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/30 10:09:14 by daekim            #+#    #+#             */
-/*   Updated: 2021/01/01 15:36:13 by daekim           ###   ########.fr       */
+/*   Created: 2020/12/26 09:13:52 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:13:01 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+int	ft_only_digit(char *dig)
 {
-	if (lst == 0 || new == 0)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	int	i;
+
+	i = 0;
+	while (dig[i])
+	{
+		if (dig[i] < '0' && dig[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }

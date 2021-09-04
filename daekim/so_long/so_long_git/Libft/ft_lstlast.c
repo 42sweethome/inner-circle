@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/08 19:23:40 by sonkang           #+#    #+#             */
-/*   Updated: 2021/01/08 19:23:43 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/30 19:09:04 by daekim            #+#    #+#             */
+/*   Updated: 2020/12/31 20:03:40 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
+	while (lst)
+	{
+		if (lst->next == NULL)
+			return (lst);
 		lst = lst->next;
-	return (lst);
+	}
+	return (NULL);
 }

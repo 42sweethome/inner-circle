@@ -3,76 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 15:29:53 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/02 23:11:56 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/28 10:51:21 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:03:05 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	find_start(char const *s1, char const *set)
+static void	check2(char *s1, char *set, size_t *j)
 {
-	int		i;
-	int		j;
+	size_t	end;
+	size_t	i;
 
+	end = 0;
+	while (s1[end])
+		end++;
 	i = 0;
-	while (s1[i])
+	while (set[i])
 	{
-		j = 0;
-		while (set[j])
+		if (s1[end - 1] == set[i] && end > 0)
 		{
-			if (s1[i] == set[j])
-				break ;
-			j++;
+			i = -1;
+			end--;
 		}
-		if (set[j] == '\0')
-			break ;
 		i++;
 	}
-	return (i);
+	*j = end;
 }
 
-static int	find_end(char const *s1, char const *set, int len)
+static void	check1(char *s1, char *set, size_t *i)
 {
-	int		i;
+	size_t	begin;
+	size_t	j;
 
-	while (len)
+	begin = *i;
+	j = 0;
+	while (set[j] && s1[begin])
 	{
-		i = 0;
-		while (set[i])
+		if (s1[begin] == set[j])
 		{
-			if (s1[len] == set[i])
-				break ;
-			i++;
+			j = -1;
+			begin++;
 		}
-		if (set[i] == '\0')
-			break ;
-		len--;
+		j++;
 	}
-	return (len);
+	*i = begin;
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
-	int		start;
-	int		end;
-	int		len;
-	char	*str;
+	char	*new;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
 	if (s1 == 0)
 		return (0);
-	if (set == 0)
-		return (ft_strdup(s1));
-	start = find_start(s1, set);
-	end = find_end(s1, set, ft_strlen(s1) - 1);
-	len = end - start + 1;
-	if (start >= end)
+	i = 0;
+	check1(s1, set, &i);
+	if (s1[i] == 0)
 		return (ft_strdup(""));
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (!str)
+	j = 0;
+	check2(s1, set, &j);
+	if (i >= j)
+		i = 0;
+	new = malloc(sizeof(char) * (j - i + 1));
+	if (!new)
 		return (0);
-	ft_strlcpy(str, s1 + start, len + 1);
-	return (str);
+	k = -1;
+	while (++k + i < j)
+		new[k] = s1[k + i];
+	new[k] = '\0';
+	return (new);
 }

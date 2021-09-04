@@ -3,93 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 21:22:58 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/02 23:39:15 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:11:34 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count(char const *s, char c)
+static void	scpy(char *new, char *s, size_t i, size_t start)
 {
-	int		count;
-	int		i;
+	size_t		j;
 
-	if (!s[0])
-		return (0);
-	count = 0;
-	if (s[0] != c)
-		count++;
-	i = 1;
-	while (s[i])
-	{
-		if (s[i] != c && s[i - 1] == c)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static void	free_str(char **str, int j)
-{
-	int		i;
-
-	i = 0;
-	while (i < j)
-		free(str[i++]);
-	free(str);
-}
-
-static void	fill_str(char *str, char const *s, int start, int end)
-{
-	int		i;
-
-	i = 0;
-	while (start < end)
-		str[i++] = s[start++];
-}
-
-static void	ft_str(char **str, char const *s, char c)
-{
-	int		i;
-	int		j;
-	int		start;
-
-	i = 0;
-	while (s[i] && s[i] == c)
-		i++;
 	j = 0;
-	while (s[i])
+	while (start < i)
 	{
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		str[j] = (char *)ft_calloc((i - start + 1), sizeof(char));
-		if (!str[j])
-		{
-			free_str(str, j);
-			return ;
-		}
-		fill_str(str[j], s, start, i);
-		while (s[i] && s[i] == c)
-			i++;
+		new[j] = s[start];
+		start++;
 		j++;
 	}
 }
 
-char	**ft_split(char const *s, char c)
+static char	ft_free(char **new, size_t num)
 {
-	int		count;
-	char	**str;
+	size_t		i;
+
+	i = 0;
+	while (i < num)
+		free(new[i++]);
+	free(new);
+	return (0);
+}
+
+static void	spliting(char *s, char c, char **new)
+{
+	size_t		i;
+	size_t		count;
+	size_t		start;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] && s[i] != c)
+		{
+			start = i;
+			while (s[i] != c && s[i])
+				i++;
+			new[count] = (char *)ft_calloc((i - start + 1), sizeof(char));
+			if (!new[count])
+			{
+				ft_free(new, count);
+				return ;
+			}
+			scpy(new[count], s, i, start);
+			count++;
+		}
+		else if (s[i] == c)
+			i++;
+	}
+}
+
+static size_t	countc(char *s, char c)
+{
+	size_t		i;
+	size_t		count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		if (s[i] && s[i] != c)
+		{
+			count++;
+			while (s[i] && s[i] != c)
+				i++;
+		}
+		else
+			i++;
+	}
+	return (count);
+}
+
+char	**ft_split(char *s, char c)
+{
+	char		**new;
+	size_t		num;
 
 	if (s == 0)
 		return (0);
-	count = ft_count(s, c);
-	str = (char **)ft_calloc((count + 1), sizeof(char *));
-	if (!str)
-		return (NULL);
-	ft_str(str, s, c);
-	return (str);
+	num = countc(s, c);
+	new = (char **)ft_calloc((num + 1), sizeof(char *));
+	if (!new)
+		return (0);
+	spliting(s, c, new);
+	return (new);
 }

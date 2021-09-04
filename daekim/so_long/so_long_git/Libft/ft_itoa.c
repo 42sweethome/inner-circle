@@ -3,68 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 14:22:40 by sonkang           #+#    #+#             */
-/*   Updated: 2021/08/02 23:28:56 by sonkang          ###   ########.fr       */
+/*   Created: 2020/12/28 10:52:47 by daekim            #+#    #+#             */
+/*   Updated: 2021/08/02 09:22:22 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	itoa_count(int n)
+static int	nlen(long long int n)
 {
-	int			count;
-	long long	i;
+	int				i;
 
-	i = (long long)n;
-	count = 0;
-	if (i < 0)
+	if (n == 0)
+		return (1);
+	i = 0;
+	if (n < 0)
 	{
-		count++;
-		i *= -1;
+		n = -n;
+		i++;
 	}
-	while (i > 0)
+	while (n > 0)
 	{
-		i /= 10;
-		count++;
+		n = n / 10;
+		i++;
 	}
-	return (count);
-}
-
-static void	fill_str(char *str, int n, int count)
-{
-	int			flag;
-	long long	i;
-
-	i = (long long)n;
-	flag = 1;
-	if (i < 0)
-	{
-		flag = -1;
-		i *= -1;
-	}
-	count -= 1;
-	while (i > 0)
-	{
-		str[count--] = i % 10 + '0';
-		i /= 10;
-	}
-	if (flag == -1)
-		str[count] = '-';
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	int		count;
-	char	*str;
+	char			*num;
+	long long int	nu;
+	int				a;
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	count = itoa_count(n);
-	str = (char *)ft_calloc((count + 1), sizeof(char));
-	if (!str)
-		return (NULL);
-	fill_str(str, n, count);
-	return (str);
+	nu = n;
+	a = nlen(nu);
+	num = (char *)ft_calloc((a + 1), sizeof(char));
+	if (!num)
+		return (0);
+	if (nu < 0)
+	{
+		nu = -nu;
+		num[0] = '-';
+	}
+	a--;
+	while (nu > 0)
+	{
+		num[a] = (nu % 10) + 48;
+		nu = nu / 10;
+		if (--a == 0 && nu > 0)
+			num[a] = (nu % 10) + 48;
+	}
+	return (num);
 }
