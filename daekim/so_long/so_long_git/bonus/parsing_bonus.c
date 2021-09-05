@@ -23,9 +23,7 @@ int	get_newline(char *argv, t_map *map_info)
 		return (-1);
 	map_info->row = 0;
 	ret = read(fd, &buf, 1);
-	if (buf == '\n')
-		map_info->row++;
-	while (ret)
+	while (ret > 0)
 	{
 		if (buf == '\n')
 			map_info->row++;

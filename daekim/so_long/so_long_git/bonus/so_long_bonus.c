@@ -14,7 +14,7 @@
 
 void	print_error(int i)
 {
-	printf("Error\n");
+	printf("Error : ");
 	if (i == 0)
 		printf("number of arguments isn't right\n");
 	if (i == 1)
