@@ -1,3 +1,3 @@
 minishell
 
-update export
+update $$
