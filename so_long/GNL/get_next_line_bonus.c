@@ -84,6 +84,7 @@ int	get_next_line(int fd, char **line)
 		cut_idx = check_newline(content[fd]);
 		if (0 <= cut_idx)
 			return (split_line(&content[fd], cut_idx, line));
+		rd_size = read(fd, buf, BUFFER_SIZE);
 	}
 	return (return_all(&content[fd], line, rd_size));
 }

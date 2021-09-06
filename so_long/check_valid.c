@@ -54,8 +54,8 @@ int	check_map_valid(t_map *m_info)
 void	get_player_position(int *count, t_map *map, int row, int col)
 {
 	*count += 1;
-	map->player_x = col;
-	map->player_y = row;
+	map->player_x = row;
+	map->player_y = col;
 }
 
 void	get_collect_ea(int	*count, t_map *map)
