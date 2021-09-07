@@ -26,12 +26,13 @@ int	get_path(t_mini *mini)
 
 int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 역슬래쉬와 인용구의 갯수도 체크
 {
-	mini->s_quo = 0;
-	mini->d_quo = 0;
-	mini->cnt_quo = 0;
-	mini->odd_quo = 0;
 	mini->pipe = 0;
 	mini->first = 0;
+	mini->s_quo = 0;
+	mini->d_quo = 0;
+	mini->status = 0;
+	mini->cnt_quo = 0;
+	mini->odd_quo = 0;
 	mini->err.malloc = -1;
 	mini->err.cmd = -2;
 	mini->err.quo = -3;
