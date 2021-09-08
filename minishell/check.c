@@ -10,10 +10,17 @@ void	ft_execve(t_mini *mini, char *cmd, char ***envp)
 	{
 		if (execve(cmd, mini->buf, *envp) == -1)
 			printf("minishell: %s: %s\n", cmd, strerror(errno));
-		exit(0);
+		exit(errno);
 	}
 	if (pid > 0)
+	{
 		wait(&status);
+		printf("status : %d\n", status);
+		if (WIFEXITED(status)) {
+			printf("exited status = %d\n", WEXITSTATUS(status));
+			mini->exit_stat = WEXITSTATUS(status);
+		}
+	}
 	else if (pid == -1)
 		printf("minishell: %s\n", strerror(errno));
 }
@@ -33,19 +40,24 @@ int	check_path(t_mini *mini, char *cmd)
 		{
 			temp = ft_strjoin(mini->path[idx], cmd);
 			if (temp == NULL)
-				exit(2);
+				exit(errno);
 			//free(mini->path[idx]);
 			mini->path[idx] = temp;
 			execve(mini->path[idx], mini->buf, 0);
 		}
+	//	printf("minishell: %s: %s\n", cmd, strerror(errno));
 		cmd_err(cmd, mini->err.cmd, mini);
-		exit(0);
+		exit(errno);
 	}
 	else if (pid > 0)
 	{
 		wait(&status);
-		if (status == 512)
+		if (status == 3072)
 			return (mini->err.malloc);
+		if (WIFEXITED(status)) {
+	//		printf("exited status = %d\n", WEXITSTATUS(status));
+			mini->exit_stat = WEXITSTATUS(status);
+		}
 	}
 	else if (pid == -1)
 		printf("minishell: %s\n", strerror(errno));

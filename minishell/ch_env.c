@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+int	env_exit_stat(t_mini *mini, char **env, int *len)
+{
+	*env = ft_itoa(mini->exit_stat);
+	*len = 2;
+	return (0);
+}
+
 int	search_env(t_mini *mini, char **env, char *tmp, int len)
 {
 	int	idx;
@@ -36,7 +43,7 @@ void	only_quo(char *env_str, int i, t_mini *mini)
 	i++;
 	while (special_char3(env_str[i]))
 	{
-		if (env_str[i] == '\'' && env_str[i + 1] == '\'')
+		if (env_str[i] == '\'' && env_str[i + 1] == '\'' && mini->d_quo == 0)
 		{
 			mini->quo_flag = 1;
 			i += 2;
@@ -49,8 +56,8 @@ void	only_quo(char *env_str, int i, t_mini *mini)
 		else
 			break;
 	}
-//	if (special_char3(env_str[i]))
-//		mini->quo_flag = 0;
+	//	if (special_char3(env_str[i]))
+	//		mini->quo_flag = 0;
 }
 
 int	copy_env(char *new, char *env_str, int i, t_mini *mini)
@@ -70,16 +77,21 @@ int	copy_env(char *new, char *env_str, int i, t_mini *mini)
 	idx = -1;
 	while (++idx < len)
 		tmp[idx] = env_str[i + idx + 1];
-	ret = search_env(mini, &env, tmp, len);
+	if (env_str[i + 1] == '?')
+		ret = env_exit_stat(mini, &env, &len);
+	else
+		ret = search_env(mini, &env, tmp, len);
 	if (ret == mini->err.malloc)
 		return (mini->err.malloc);
-	if (len == 0 && !special_char(env_str[i + 1]))
-	{
-		if ((env_str[i + 1] != '\'' && env_str[i + 1] != '"' && mini->quo_flag == 0) || !special_char4(env_str[i + 1]))
-			*new = '$';
-	}
-	else
-		ft_strlcpy(new, env, ft_strlen(env) + 1);
+		if (len == 0 && !special_char(env_str[i + 1]))
+		{
+				if ((env_str[i + 1] != '\'' && env_str[i + 1] != '"' && mini->quo_flag == 0) || !special_char4(env_str[i + 1]))
+					*new = '$';
+				if (mini->d_quo == 1 || mini->s_quo == 1)
+					*new = '$';
+		}
+		else
+			ft_strlcpy(new, env, ft_strlen(env) + 1);
 	return (i + len + 1);
 }
 
@@ -101,7 +113,10 @@ int	check_env(char *env_str, int i, t_mini *mini)
 	idx = -1;
 	while (++idx < len)
 		tmp[idx] = env_str[i + idx + 1];
-	ret = search_env(mini, &env, tmp, len);
+	if (env_str[i + 1] == '?')
+		ret = env_exit_stat(mini, &env, &len);
+	else
+		ret = search_env(mini, &env, tmp, len);
 	if (ret == mini->err.malloc)
 	{
 		return (mini->err.malloc);

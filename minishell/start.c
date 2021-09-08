@@ -30,7 +30,6 @@ int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 �
 	mini->first = 0;
 	mini->s_quo = 0;
 	mini->d_quo = 0;
-	mini->status = 0;
 	mini->cnt_quo = 0;
 	mini->odd_quo = 0;
 	mini->err.malloc = -1;
@@ -135,6 +134,7 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 		cmd_err(argv[1], mini.err.argv, &mini);
 		return (0);
 	}
+	mini.exit_stat = 0;
 	while (1)
 	{
 		str = readline("minishell $ "); //표준입력

@@ -54,7 +54,7 @@ typedef struct s_mini
 	int			dollar;
 	int			first;
 	int			pipe;
-	int			status;
+	int			exit_stat;
 	t_err		err;
 	t_pipe		pipe_struct;
 }			t_mini;
