@@ -15,7 +15,6 @@ void	ft_execve(t_mini *mini, char *cmd, char ***envp)
 	if (pid > 0)
 	{
 		wait(&status);
-		printf("status : %d\n", status);
 		if (WIFEXITED(status)) {
 			printf("exited status = %d\n", WEXITSTATUS(status));
 			mini->exit_stat = WEXITSTATUS(status);

@@ -6,7 +6,7 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/09/02 16:20:40 by junghan          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:25:38 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,8 @@ int	quo_while(char *s, char space, t_mini *mini, int i)
 			i = check_quo(s, '"', i, mini);
 		else if (s[i] == '$')
 		{
-			printf("1\n");
 			check = i;
 			i = check_env(s, i, mini);
-			printf("2\n");
 			if (mini->env_flag == 0)
 				mini->pre_flag = 1;
 			if ((s[check + 1] == ' ' || s[check + 1] == 0) || (s[check + 1] != '?' && !special_char2(s[i + 1])))

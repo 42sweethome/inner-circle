@@ -6,8 +6,8 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 	{
 		if (execve(pi->temp[0], pi->temp, *mini->envp) == -1)
 		{
-			cmd_err(pi->temp[0], mini->err.cmd, mini);
-			exit(1);
+			//cmd_err(pi->temp[0], mini->err.cmd, mini);
+			exit(errno);
 		}
 	}
 	else
@@ -19,13 +19,13 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 			if (pi->cmd == NULL)
 			{
 				cmd_err(pi->temp[0], mini->err.malloc, mini);
-				exit(1);
+				exit(mini->err.malloc);
 			}
 			execve(pi->cmd, pi->temp, 0);
 		}
-		cmd_err(pi->temp[0], mini->err.cmd, mini);
+		//cmd_err(pi->temp[0], mini->err.cmd, mini);
 	}
-	exit(0);
+	exit(errno);
 }
 
 int	fork_pipe(t_mini *mini, t_pipe *pi)
@@ -53,7 +53,12 @@ int	fork_pipe(t_mini *mini, t_pipe *pi)
 		pipe(pi->fd2);
 	}
 	if (pi->status)
-		return (mini->err.malloc);
+	{	
+		if (pi->status == mini->err.malloc)
+			return (mini->err.malloc);
+		if (pi->status != 256)
+			cmd_err(pi->temp[0], mini->err.cmd, mini);
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/09/02 16:20:39 by junghan          ###   ########.fr       */
+/*   Updated: 2021/09/09 15:25:37 by junghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 	mini->d_quo = 0;
 	while (start < end)
 	{
-//		printf("start : %zu end : %zu\n", start, end);
+	//	printf("start : %zu end : %zu\n", start, end);
 		if (case_quo(str, &idx, mini))
 			continue ;
 		if (mini->s_quo == 0 && str[idx] == '$')
@@ -41,6 +41,7 @@ static int	scpy(char *new, char *str, size_t end, t_mini *mini)
 			else
 				continue ;
 		}
+		//printf("str = %c\n", str[idx]);
 		new[start++] = str[idx++];
 		if (str[idx - 1] == '\0')
 			break ;
@@ -71,9 +72,9 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 			if (mini->env_flag == 1)
 				continue ;
 		//	printf("count : %lu\n", i - start + 1 - mini->cnt_quo + mini->env_len - mini->dollar - mini->quo_flag);
-
-	//		printf("i      : %zu, start   : %zu, cnt_quo : %d, env_len	: %d\n", i, start, mini->cnt_quo, mini->env_len);
-	//		printf("dollar : %d, quo_flag : %d, env_flag : %d\n", mini->dollar, mini->quo_flag, mini->env_flag);
+/*
+			printf("i      : %zu, start   : %zu, cnt_quo  : %d, env_len	: %d\n", i, start, mini->cnt_quo, mini->env_len);
+			printf("dollar : %d, quo_flag : %d, env_flag : %d\n", mini->dollar, mini->quo_flag, mini->env_flag);*/
 			new[count] = (char *)ft_calloc((i - start + 1 \
 						- mini->cnt_quo + mini->env_len - mini->dollar - mini->quo_flag), sizeof(char)); //역슬래쉬와 따옴표의 갯수만큼 적게할당
 			if (!new[count] || i == (size_t)mini->err.malloc)
