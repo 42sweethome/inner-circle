@@ -59,5 +59,7 @@ int	cmd_err(char *cmd, int err_num, t_mini *mini)
 		printf("minishell: %s: Hanjungmyung error\n", cmd);
 	else if (err_num == mini->err.pipe)
 		printf("minishell: syntax error near unexpected token `|'\n");
+	else if (err_num == mini->err.redirect)
+		printf("minishell: syntax error near unexpected token `%.2s'\n", cmd);
 	return (-2);
 }

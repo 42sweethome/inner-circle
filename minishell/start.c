@@ -32,6 +32,7 @@ int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 �
 	mini->d_quo = 0;
 	mini->cnt_quo = 0;
 	mini->odd_quo = 0;
+	mini->redirect = 0;
 	mini->err.malloc = -1;
 	mini->err.cmd = -2;
 	mini->err.quo = -3;
@@ -39,6 +40,7 @@ int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 �
 	mini->err.split_malloc = -5;
 	mini->err.only_space = -6;
 	mini->err.pipe = -7;
+	mini->err.redirect = -8;
 	if (get_path(mini) == mini->err.malloc)
 		return (mini->err.malloc);
 	return (0);
@@ -83,6 +85,8 @@ int	func_split(t_mini *mini, char *str)
 		return (cmd_err("junghan zzang", mini->err.split_malloc, mini));
 	else if (ret == mini->err.pipe)
 		return (cmd_err("junghan zzang", mini->err.pipe, mini));
+	else if (ret == mini->err.redirect)
+		return (-2);
 	if (mini->buf[0] == NULL)
 		return (0);
 	if (mini->odd_quo == 1)

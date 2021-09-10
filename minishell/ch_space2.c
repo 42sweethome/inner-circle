@@ -65,7 +65,7 @@ int	quo_while(char *s, char space, t_mini *mini, int i)
 	int check;
 
 	check = 0;
-	while (s[i] && s[i] != space && s[i] != '|') //중복?
+	while (s[i] && s[i] != space && s[i] != '|' && s[i] != '<' && s[i] != '>') //중복?
 	{
 		if (s[i] == '\'') //최초 열린 따옴표가 작은따옴표인지 큰따옴표인지 구분
 			i = check_quo(s, '\'', i, mini);

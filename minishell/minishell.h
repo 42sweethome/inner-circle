@@ -21,6 +21,7 @@ typedef	struct s_err
 	int			cmd;
 	int			quo;
 	int			argv;
+	int			redirect;
 }			t_err;
 
 typedef struct s_pipe
@@ -54,6 +55,7 @@ typedef struct s_mini
 	int			dollar;
 	int			first;
 	int			pipe;
+	int			redirect;			
 	int			exit_stat;
 	t_err		err;
 	t_pipe		pipe_struct;
