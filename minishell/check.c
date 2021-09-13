@@ -84,7 +84,32 @@ int	check_cmd(char *cmd, t_mini *mini, char ***envp)
 	else if (!ft_strncmp("env", cmd, 4) || !ft_strncmp("ENV", cmd, 4))
 		ft_env(mini->envp);
 	else if (!ft_strncmp("exit", cmd, 5) || !ft_strncmp("EXIT", cmd, 5))
+	{
+		int	i;
+		if (mini->buf[1])
+		{
+			i = -1;
+			if (mini->buf[1][0] == '-' || mini->buf[1][0] == '+')
+				i++;
+			while (mini->buf[1][++i])
+			{
+				if ('0' > mini->buf[1][i] || mini->buf[1][i] > '9')
+				{
+						printf("exit\nminishell: exit: %s: numeric argument required\n", mini->buf[1]);
+						exit (255);
+				}
+			}
+			if (mini->buf[2] && *(mini->buf[2]))
+			{
+				printf("exit\nminishell: exit: too many arguments\n");
+				return (0);
+			}
+		printf("exit\n");
+		exit(ft_atoi(mini->buf[1]));
+		}
+		printf("exit\n");
 		exit(0);
+	}
 	else if (ft_strchr(cmd, '/') != 0)
 		ft_execve(mini, cmd, envp);	
 	else

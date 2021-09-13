@@ -214,6 +214,7 @@ int	rm_env(t_mini *mini, char ***envp)
 	char	**rm_arr;
 	int		idx;
 	int		jdx;
+	int		flag;
 	int		count;
 
 	count = -1;
@@ -227,13 +228,14 @@ int	rm_env(t_mini *mini, char ***envp)
 		{	
 			if (!ft_strncmp(mini->buf[jdx], (*envp)[idx], \
 						ft_strlen(mini->buf[jdx])))
-				count--;
+					count--;
 		}
 	}
 	rm_arr = (char **)ft_calloc(count + 1, sizeof(char *));
 	if (!rm_arr)
 		return (mini->err.malloc);
 	idx = -1;
+	flag = 0;
 	while ((*envp)[++idx])
 	{
 		jdx = 0;
@@ -241,12 +243,15 @@ int	rm_env(t_mini *mini, char ***envp)
 		{
 			if (!ft_strncmp(mini->buf[jdx], (*envp)[idx], \
 						ft_strlen(mini->buf[jdx])))
-				break ;
+				{
+					flag++;
+					break ;
+				}
 		}
-		if (!mini->buf[jdx])
+		if (mini->buf[jdx] == 0)
 		{
-			rm_arr[idx] = ft_strdup((*envp)[idx]);
-			if (rm_arr[idx] == 0)
+			rm_arr[idx - flag] = ft_strdup((*envp)[idx]);
+			if (rm_arr[idx - flag] == 0)
 			{
 				ft_free(rm_arr);
 				return (mini->err.malloc);
