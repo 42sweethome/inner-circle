@@ -37,14 +37,13 @@ int	is_inbase(char *base, char c)
 	return (1);
 }
 
-static int	ft_atoi2(char *str, char *base, int *sign, int len)
+static int	ft_atoi2(char *str, char *base, int len)
 {
 	int	i;
 	int	j;
 	int	sum;
 
 	sum = 0;
-	*sign = 1;
 	i = 0;
 	while (str[i])
 	{
@@ -66,13 +65,12 @@ int	ft_atoi_base(char *str, char *base)
 {
 	int	result;
 	int	len;
-	int	sign;
 
 	if (!(is_valid(base)))
 		return (0);
 	len = 0;
 	while (base[len])
 		len++;
-	result = ft_atoi2(str, base, &sign, len);
+	result = ft_atoi2(str, base, len);
 	return (result * sign);
 }
