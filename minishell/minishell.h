@@ -77,6 +77,7 @@ int		copy_env(char *new, char *env_str, int i, t_mini *mini);
 void	ft_echo(t_mini *mini);
 void	ft_pwd(void);
 void	ft_env(char ***envp);
+int		ft_getenv(t_mini *mini, char **env, char *str);
 int		ft_chdir(t_mini *mini);
 int		ft_export(t_mini *mini, char ***envp);
 int 	ft_unset(t_mini *mini, char ***envp);

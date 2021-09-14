@@ -10,11 +10,15 @@ int	env_exit_stat(t_mini *mini, char **env, int *len)
 
 int	search_env(t_mini *mini, char **env, char *tmp, int len)
 {
-	int	idx;
-	int	cmp;
+//	int	idx;
+//	int	cmp;
+	int	ret;
 
-	*env = getenv(tmp);
-	if (*env == 0)
+	len = 0;
+	ret = ft_getenv(mini, env, tmp);
+	if (ret == mini->err.malloc)
+		return (mini->err.malloc);
+/*	if (*env == 0)
 	{
 		idx = -1;
 		while ((*mini->envp)[++idx])
@@ -33,9 +37,9 @@ int	search_env(t_mini *mini, char **env, char *tmp, int len)
 				}
 			}
 		}
-		if ((*mini->envp)[idx] == 0)
+		if ((*mini->envp)[idx] == 0)}
+*/		if (ret == 0)
 			mini->env_flag = 1;
-	}
 	return (0);
 }
 /*

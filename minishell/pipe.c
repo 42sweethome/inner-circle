@@ -45,7 +45,7 @@ int	fork_pipe(t_mini *mini, t_pipe *pi)
 	}
 	else if (pi->pid > 0)
 	{
-		waitpid(pi->pid, &(pi->status), 0);
+	//	waitpid(pi->pid, &(pi->status), 0);
 		pipe(pi->fd);
 		dup2(pi->fd2[0], pi->fd[0]);
 		close(pi->fd2[0]);

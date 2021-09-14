@@ -67,13 +67,24 @@ int	change_pwd(t_mini *mini)
 int	ft_chdir(t_mini *mini)
 {
 	int		idx;
+	char	*dest;
+	int		ret;
 
 	idx = mini->first;
 	while (mini->buf[++idx] != 0 && *(mini->buf[idx]) == 0)
 		;
 	if (mini->buf[idx] == 0)
 	{
-		chdir(getenv("HOME"));// 클러스터랑 좀 다른 것 같다고함
+		ret = ft_getenv(mini, &dest, "HOME");
+		if (ret == mini->err.malloc)
+			return (mini->err.malloc);
+		else if (ret == 0)
+		{
+			printf("minishell: cd: HOME not set\n");
+			return (0);
+		}
+		chdir(dest);// 클러스터랑 좀 다른 것 같다고함
+		free(dest);
 		if (change_pwd(mini))
 			return (mini->err.malloc);
 	}

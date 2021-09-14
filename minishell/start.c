@@ -5,10 +5,12 @@ int	get_path(t_mini *mini)
 	char		*path;
 	char		*temp;
 	int			idx;
+	int			ret;
 //	static int	path_flag;
 
-	path = getenv("PATH");
-	printf("path : %s\n", path);
+	ret = ft_getenv(mini, &path, "PATH");
+	if (ret == 0)
+		return (mini->err.malloc);
 	mini->path = ft_split(path, ':');
 	idx = -1;
 	while (mini->path[++idx])

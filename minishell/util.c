@@ -1,5 +1,31 @@
 #include "minishell.h"
 
+int	ft_getenv(t_mini *mini, char **env, char *str)
+{
+	int		idx;
+	int		len;
+	int		cmp;
+
+	idx = -1;
+	len = ft_strlen(str);
+	*env = 0;
+	while ((*mini->envp)[++idx])
+	{	
+		cmp = ft_strncmp((*mini->envp)[idx], str, len);
+		if (cmp == 0)
+		{
+			if ((*mini->envp)[idx][len] == '=')
+			{
+				*env = ft_strdup(&(*mini->envp)[idx][len + 1]);
+				if (*env == 0)
+					return (-1);
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
 char	ft_free(char **new)
 {
 	size_t		i;
@@ -46,7 +72,7 @@ int	special_char(int c)
 int	cmd_err(char *cmd, int err_num, t_mini *mini)
 {
 	if (err_num == mini->err.malloc || err_num == mini->err.path_malloc || \
-		err_num == mini->err.split_malloc)
+			err_num == mini->err.split_malloc)
 	{
 		printf("minishell: malloc error\n");
 		return (err_num);
