@@ -28,12 +28,12 @@ typedef struct s_pipe
 {
 	char	**temp;
 	char	*cmd;
-	int		fd[2];
-	int		fd2[2];
+	int		**fd;
 	int		idx;
 	int		jdx;
 	int		count;
-	int		pid;
+	int		*pid;
+	int		pid_idx;
 	int		status;
 	int		initial;
 }			t_pipe;

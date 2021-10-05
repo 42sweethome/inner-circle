@@ -30,34 +30,27 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 
 int	fork_pipe(t_mini *mini, t_pipe *pi)
 {
-	pi->pid = fork();
-	if (pi->pid == 0)
+	pi->pid[pi->pid_idx] = fork();
+	if (pi->pid[pi->pid_idx] == 0)
 	{
 		if (pi->initial != mini->pipe)
 		{
-			dup2(pi->fd[0], 0);
-			close(pi->fd[0]);
-			close(pi->fd[1]);
+			dup2(pi->fd[pi->pid_idx - 1][0], 0);
+			close(pi->fd[pi->pid_idx - 1][0]);
+			close(pi->fd[pi->pid_idx - 1][1]);
 		}
 		if (mini->pipe != 0)
-			dup2(pi->fd2[1], 1);
+		{
+			dup2(pi->fd[pi->pid_idx][1], 1);
+			close(pi->fd[pi->pid_idx][0]);
+			close(pi->fd[pi->pid_idx][1]);
+		}
 		oper_pipe(mini, pi);
 	}
-	else if (pi->pid > 0)
+	else if (pi->pid_idx > 0)
 	{
-	//	waitpid(pi->pid, &(pi->status), 0);
-		pipe(pi->fd);
-		dup2(pi->fd2[0], pi->fd[0]);
-		close(pi->fd2[0]);
-		close(pi->fd2[1]);
-		pipe(pi->fd2);
-	}
-	if (pi->status)
-	{	
-		if (pi->status == mini->err.malloc)
-			return (mini->err.malloc);
-		if (pi->status != 256)
-			cmd_err(pi->temp[0], mini->err.cmd, mini);
+		close(pi->fd[pi->pid_idx - 1][0]);
+		close(pi->fd[pi->pid_idx - 1][1]);
 	}
 	return (0);
 }
@@ -85,17 +78,33 @@ int	parsing_pipe(t_mini *mini, t_pipe *pi)
 	return (0);
 }
 
+void pipe_wait(t_pipe *pi)
+{
+	int i;
+	int status;
+
+	i = -1;
+	while (++i <= pi->initial)
+		waitpid(pi->pid[i], &status, 0);
+}
+
 int	pipe_execve(t_mini *mini, t_pipe *pi)
 {
 	int		ret;
 
 	pi->initial = mini->pipe++;
-	pipe(pi->fd);
-	pipe(pi->fd2);
+	pi->pid = (int *)ft_calloc(mini->pipe, sizeof(int));
+	pi->fd = (int **)ft_calloc(pi->initial, sizeof(int *));
+	pi->pid_idx = -1;
+	while (++(pi->pid_idx) < pi->initial)
+		pi->fd[pi->pid_idx] = (int *)ft_calloc(2, sizeof(int));
+	pi->pid_idx = 0;
 	pi->idx = -1;
 	pi->count = -1;
 	while (mini->pipe--)
 	{
+		if (mini->pipe > 0)
+			pipe(pi->fd[pi->pid_idx]);
 		ret = parsing_pipe(mini, pi);
 		if (ret)
 			return (ret);
@@ -103,6 +112,9 @@ int	pipe_execve(t_mini *mini, t_pipe *pi)
 		if (ret)
 			return (ret);
 		ft_free(pi->temp);
+		pi->pid_idx++;
 	}
+	pipe_wait(pi);
+	mini->pipe = 1;
 	return (0);
 }
