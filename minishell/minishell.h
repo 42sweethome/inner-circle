@@ -24,6 +24,13 @@ typedef	struct s_err
 	int			redirect;
 }			t_err;
 
+typedef struct s_redir
+{
+	char	*file;
+	char	*redir;
+	//int		cnt;
+}			t_redir;
+
 typedef struct s_pipe
 {
 	char	**temp;
@@ -43,6 +50,8 @@ typedef struct s_mini
 	char		**buf;
 	char		***envp;
 	char		**path;
+	int			std_in;
+	int			std_out;
 	int			*pipe_idx;
 	int			s_quo;
 	int			d_quo;
@@ -57,8 +66,10 @@ typedef struct s_mini
 	int			pipe;
 	int			redirect;			
 	int			exit_stat;
+	int			*red_cnt;
 	t_err		err;
 	t_pipe		pipe_struct;
+	t_redir		**red;
 }			t_mini;
 
 int		space_split(char *s, char c, t_mini *mini);
@@ -81,7 +92,12 @@ int		ft_getenv(t_mini *mini, char **env, char *str);
 int		ft_chdir(t_mini *mini);
 int		ft_export(t_mini *mini, char ***envp);
 int 	ft_unset(t_mini *mini, char ***envp);
+void	ft_exit(t_mini *mini);
 int		pipe_execve(t_mini *mini, t_pipe *pi);
 int		check_pipe_pos(t_mini *mini);
-
+int     func_redir(t_mini *mini);
+void    tmp_heredoc(t_mini *mini);
+void	rm_tmpfile(int cnt);
+void    redirect_fd(t_redir *red, int cnt, int idx);
+int		my_execve(t_mini *mini, char *cmd, char ***envp);
 #endif

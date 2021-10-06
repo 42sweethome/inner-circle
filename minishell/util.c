@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+void	rm_tmpfile(int cnt)
+{
+	int		i;
+
+	i = -1;
+	while (++i <= cnt)
+		unlink(ft_strjoin("/tmp/.", ft_itoa(i)));
+}
+
 int	ft_getenv(t_mini *mini, char **env, char *str)
 {
 	int		idx;

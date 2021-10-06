@@ -46,6 +46,8 @@ int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 �
 	mini->err.redirect = -8;
 	if (get_path(mini) == mini->err.malloc)
 		return (mini->err.malloc);
+	mini->std_in = dup(0);
+	mini->std_out = dup(1);
 	return (0);
 }
 
@@ -116,6 +118,9 @@ int	mini_process(char *str, t_mini *mini)
 	ret = func_split(mini, &str[i]);
 	if (ret != 1)
 		return (ret);
+	ret = func_redir(mini);
+	if (ret != 1)
+		return (ret);
 	ret = func_pipe(mini);
 	if (ret != 1)
 		return (ret);
@@ -174,6 +179,7 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 		if (str == 0 || *str == 0)
 			continue ;
 		ret = mini_process(str, &mini);
+		rm_tmpfile(mini.pipe);
 		add_history(str);
 		ret = main_free(&mini, str, ret);
 		if (ret == mini.err.cmd)

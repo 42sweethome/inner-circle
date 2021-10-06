@@ -8,6 +8,7 @@ READ = -lreadline
 
 SRCS = start.c\
 	   ch_space1.c ch_space2.c ch_env.c util.c check.c command1.c command2.c pipe.c\
+	   redirection.c redirect_fd.c heredoc.c my_func.c\
 
 OBJS = $(SRCS:.c=.o)
 

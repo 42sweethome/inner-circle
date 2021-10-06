@@ -274,3 +274,32 @@ int ft_unset(t_mini *mini, char ***envp)
 			return (mini->err.malloc);
 	return (0);
 }
+
+void	ft_exit(t_mini *mini)
+{
+	int	i;
+
+		if (mini->buf[1])
+		{
+			i = -1;
+			if (mini->buf[1][0] == '-' || mini->buf[1][0] == '+')
+				i++;
+			while (mini->buf[1][++i])
+			{
+				if ('0' > mini->buf[1][i] || mini->buf[1][i] > '9')
+				{
+						printf("exit\nminishell: exit: %s: numeric argument required\n", mini->buf[1]);
+						exit (255);
+				}
+			}
+			if (mini->buf[2] && *(mini->buf[2]))
+			{
+				printf("exit\nminishell: exit: too many arguments\n");
+				return ;
+			}
+		printf("exit\n");
+		exit(ft_atoi(mini->buf[1]));
+		}
+		printf("exit\n");
+		exit(0);
+}

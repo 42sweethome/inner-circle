@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ch_space1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daekim <daekim@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/09/09 17:55:04 by junghan          ###   ########.fr       */
+/*   Updated: 2021/10/06 11:26:42 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,11 +172,16 @@ int	check_pipe_pos(t_mini *mini)
 
 int	check_redirect(t_mini *mini)
 {
-	int	idx;
+	int		idx;
+	int		pipe_idx;
 
+	mini->red_cnt = (int *)ft_calloc(mini->pipe + 1, sizeof(int));
 	idx = -1;
+	pipe_idx = 0;
 	while (mini->buf[++idx])
 	{
+		if (*(mini->buf[idx]) == '|')
+			pipe_idx++;
 		if (*(mini->buf[idx]) == '<')
 		{
 			if (mini->buf[idx][1] == '<' && mini->buf[idx][2] != '\0')
@@ -189,6 +194,7 @@ int	check_redirect(t_mini *mini)
 				cmd_err(&(mini->buf[idx][1]), mini->err.redirect, mini);
 				return (mini->err.redirect);
 			}
+			mini->red_cnt[pipe_idx]++;
 		}
 		else if (*(mini->buf[idx]) == '>')
 		{
@@ -202,6 +208,7 @@ int	check_redirect(t_mini *mini)
 				cmd_err(&(mini->buf[idx][1]), mini->err.redirect, mini);
 				return (mini->err.redirect);
 			}
+			mini->red_cnt[pipe_idx]++;
 		}
 	}
 	return (0);

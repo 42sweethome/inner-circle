@@ -45,6 +45,7 @@ int	fork_pipe(t_mini *mini, t_pipe *pi)
 			close(pi->fd[pi->pid_idx][0]);
 			close(pi->fd[pi->pid_idx][1]);
 		}
+		redirect_fd(mini->red[pi->pid_idx], mini->red_cnt[pi->pid_idx], pi->pid_idx);
 		oper_pipe(mini, pi);
 	}
 	else if (pi->pid_idx > 0)
@@ -115,6 +116,6 @@ int	pipe_execve(t_mini *mini, t_pipe *pi)
 		pi->pid_idx++;
 	}
 	pipe_wait(pi);
-	mini->pipe = 1;
+	mini->pipe = pi->initial;
 	return (0);
 }
