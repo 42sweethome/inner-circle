@@ -4,8 +4,8 @@ void    redirect_stdout(char *file)
 {
     int     fd;
 
-    fd = open(file, O_WRONLY | O_CREAT, 0666);
-    dup2(fd, 1);
+    fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+    dup2(fd, 1); 
     close(fd);
 }
 
@@ -23,6 +23,8 @@ void    redirect_stdin(char *file)
     int     fd;
 
     fd = open(file, O_RDONLY);
+    if (fd < 0)
+        exit(errno);
     dup2(fd, 0);
     close(fd);
 }
