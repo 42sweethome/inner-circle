@@ -4,11 +4,13 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
 
-READ = -lreadline
+READ_H = -I /usr/local/Cellar/readline/8.1.1/include 
+
+READ_L = -lreadline  -L /usr/local/Cellar/readline/8.1.1/lib 
 
 SRCS = start.c\
 	   ch_space1.c ch_space2.c ch_env.c util.c check.c command1.c command2.c pipe.c\
-	   redirection.c redirect_fd.c heredoc.c my_func.c\
+	   redirection.c redirect_fd.c heredoc.c my_func.c sig_handler.c term_init.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -19,7 +21,10 @@ LIBFT_A = $(addprefix $(LIBFT)/, libft.a)
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT_A)
-			$(CC) $(CFLAGS) $(READ) $(OBJS) -L$(LIBFT) -lft -o $@
+			$(CC) $(CFLAGS) $(OBJS) -o $@ $(READ_L) -L$(LIBFT) -lft
+
+.c.o :
+	$(CC) $(CFLAGS) $(READ_H) -c $< -o $@ 
 
 $(LIBFT_A) :
 			make -C $(LIBFT)

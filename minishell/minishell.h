@@ -6,10 +6,17 @@
 # include <string.h>
 # include <errno.h>
 # include <stdlib.h>
-//# include <readline/readline.h>
+# include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
+
+
+# include <fcntl.h>
+# include <termios.h>
+# include <curses.h>
+# include <term.h>
 
 typedef	struct s_err
 {
@@ -67,6 +74,8 @@ typedef struct s_mini
 	int			redirect;			
 	int			exit_stat;
 	int			*red_cnt;
+	struct termios ori_term;
+	struct termios mini_term;
 	t_err		err;
 	t_pipe		pipe_struct;
 	t_redir		**red;
@@ -100,4 +109,7 @@ void    tmp_heredoc(t_mini *mini);
 void	rm_tmpfile(int cnt);
 void    redirect_fd(t_redir *red, int cnt, int idx);
 int		my_execve(t_mini *mini, char *cmd, char ***envp);
+void	sig_handler(int	signum);
+void	ori_term_init(t_mini mini);
+void	mini_term_init(t_mini mini);
 #endif

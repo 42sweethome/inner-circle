@@ -115,7 +115,6 @@ int	mini_process(char *str, t_mini *mini)
 		;
 	if (str[i] == 0)
 		return (mini->err.only_space);
-
 	ret = func_split(mini, &str[i]);
 	if (ret != 1)
 		return (ret);
@@ -174,8 +173,12 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 	}
 	mini.exit_stat = 0;
 	mini.envp = &envp;
+	ori_term_init(mini);
 	while (1)
 	{
+		mini_term_init(mini);
+		signal(SIGINT, sig_handler);
+		signal(SIGQUIT, SIG_IGN);// SIG_ING 시그널 무시
 		str = readline("minishell $ "); //표준입력
 		if (str == 0 || *str == 0)
 			continue ;
