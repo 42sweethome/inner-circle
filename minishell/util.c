@@ -80,21 +80,36 @@ int	special_char(int c)
 
 int	cmd_err(char *cmd, int err_num, t_mini *mini)
 {
-	if (err_num == mini->err.malloc || err_num == mini->err.path_malloc || \
-			err_num == mini->err.split_malloc)
+	if (err_num == mini->err.malloc || err_num == mini->err.path_malloc)
 	{
+		mini->exit_stat = 12;
 		printf("minishell: malloc error\n");
 		return (err_num);
 	}
 	else if (err_num == mini->err.cmd)
+	{
+		mini->exit_stat = 127;	
 		printf("minishell: %s: command not found\n", cmd);
+	}
 	else if (err_num == mini->err.quo)
+	{
+		mini->exit_stat = 127;
 		printf("minishell: quotes are not closed\n");
+	}
 	else if (err_num == mini->err.argv)
+	{
+		mini->exit_stat = 1;
 		printf("minishell: %s: argument error\n", cmd);
+	}
 	else if (err_num == mini->err.pipe)
+	{
+		mini->exit_stat = 258;
 		printf("minishell: syntax error near unexpected token `|'\n");
+	}
 	else if (err_num == mini->err.redirect)
+	{
+		mini->exit_stat = 258;
 		printf("minishell: syntax error near unexpected token `%.2s'\n", cmd);
+	}
 	return (-2);
 }

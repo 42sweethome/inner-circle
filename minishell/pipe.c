@@ -7,7 +7,7 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 		if (execve(pi->temp[0], pi->temp, *mini->envp) == -1)
 		{
 			//cmd_err(pi->temp[0], mini->err.cmd, mini);
-			exit(45);
+			exit(127);
 		}
 	}
 	else
@@ -25,7 +25,7 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 		}
 		//cmd_err(pi->temp[0], mini->err.cmd, mini);
 	}
-	exit(45);
+	exit(127);
 }
 
 int	fork_pipe(t_mini *mini, t_pipe *pi)
@@ -94,14 +94,8 @@ int	case_of_status(t_mini *mini, char *cmd, int status)
 			printf("^\\");
 		else if (WEXITSTATUS(status) == 2) //????
 			printf("minishell: %s\n", strerror(WEXITSTATUS(status)));
-		else if (WEXITSTATUS(status) == 45) //????
-			cmd_err(cmd, mini->err.cmd, mini);		
-		/*if (status == 2 || status == 3 || WEXITSTATUS(status) == 2 \
-		|| (WEXITSTATUS(status) != 2 && WEXITSTATUS(status) != 0))
-		{
-			mini->exit_stat = WEXITSTATUS(status);
-			return (0);
-		}*/
+		else if (WEXITSTATUS(status) == 127) //????
+			cmd_err(cmd, mini->err.cmd, mini);
 		return (1);
 }
 

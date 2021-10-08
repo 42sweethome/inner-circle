@@ -21,7 +21,6 @@
 typedef	struct s_err
 {
 	int			path_malloc;
-	int			split_malloc;
 	int			malloc;
 	int			only_space;
 	int			pipe;
@@ -57,8 +56,6 @@ typedef struct s_mini
 	char		**buf;
 	char		***envp;
 	char		**path;
-	int			std_in;
-	int			std_out;
 	int			*pipe_idx;
 	int			s_quo;
 	int			d_quo;

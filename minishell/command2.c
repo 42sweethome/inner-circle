@@ -96,7 +96,11 @@ int	cmp_key(t_mini *mini, char **add_arr, int offset)
 		if (mini->buf[offset][idx] == '=')
 			break ;
 	if (!mini->buf[offset][idx])
+	{
+		mini->exit_stat = 1;
 		return (1);
+	}
+	mini->exit_stat = 0;
 	jdx = -1;
 	while (add_arr[++jdx])
 	{
@@ -193,7 +197,7 @@ int	add_env_alloc(t_mini *mini, char ***envp)
 	return (0);
 }
 
-int	ft_export(t_mini *mini, char ***envp)
+int	ft_export(t_mini *mini, char ***envp) //???? 입력으로 숫자만 들어오는 경우 bash는 에러, 우리는 정상처리
 {
 	int idx;
 
@@ -272,6 +276,7 @@ int ft_unset(t_mini *mini, char ***envp)
 	else
 		if (rm_env(mini, envp) == mini->err.malloc)
 			return (mini->err.malloc);
+	mini->exit_stat = 0;
 	return (0);
 }
 

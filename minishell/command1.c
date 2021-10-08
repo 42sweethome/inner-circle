@@ -81,6 +81,7 @@ int	ft_chdir(t_mini *mini)
 		else if (ret == 0)
 		{
 			printf("minishell: cd: HOME not set\n");
+			mini->exit_stat = 1;
 			return (0);
 		}
 		chdir(dest);// 클러스터랑 좀 다른 것 같다고함
@@ -94,6 +95,11 @@ int	ft_chdir(t_mini *mini)
 			return (mini->err.malloc);
 	}
 	else
+	{
 		printf("minishell: %s: %s\n", mini->buf[idx], strerror(errno));
+		mini->exit_stat = 1;
+		return (0);
+	}
+	mini->exit_stat = 0;
 	return (0);
 }
