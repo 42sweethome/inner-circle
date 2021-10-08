@@ -30,7 +30,7 @@ void     my_func(char *cmd, t_mini *mini)
 	else if (!ft_strncmp("exit", cmd, 5) || !ft_strncmp("EXIT", cmd, 5))
 		ft_exit(mini);
     else
-        exit(0);
+		exit(0);
     exit(1);
 }
 
@@ -48,7 +48,6 @@ int 	my_execve(t_mini *mini, char *cmd, char ***envp)
         my_func(cmd, mini);
 		/*if (my_func(cmd, mini, envp))
 			printf("minishell: %s: %s\n", cmd, strerror(errno));*/
-		exit(errno);
 	}
 	if (pid > 0)
 	{
@@ -63,7 +62,7 @@ int 	my_execve(t_mini *mini, char *cmd, char ***envp)
         else if (status == 0 || status == 256)
             return (status / 256);//printf("myexecve exited status = %d\n", WEXITSTATUS(status));
 		else if (WEXITSTATUS(status) == 2)
-				printf("minishell: %s\n", strerror(errno));
+				printf("minishell: %s\n", strerror(WEXITSTATUS(status)));
 		else if (WEXITSTATUS(status) != 2)
 				printf("minishell: bash error\n");
 		mini->exit_stat = WEXITSTATUS(status);

@@ -177,9 +177,13 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 	while (1)
 	{
 		mini_term_init(mini);
+		//mini.exit_stat = errno;
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);// SIG_ING 시그널 무시
+		mini.exit_stat = 9;
 		str = readline("minishell $ "); //표준입력
+		if (!str)
+			sig_ctrl_d(); // ????
 		if (str == 0 || *str == 0)
 			continue ;
 		ret = mini_process(str, &mini);

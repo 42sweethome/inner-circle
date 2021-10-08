@@ -91,7 +91,7 @@ int	cmd_err(char *cmd, int err_num, t_mini *mini)
 	else if (err_num == mini->err.quo)
 		printf("minishell: quotes are not closed\n");
 	else if (err_num == mini->err.argv)
-		printf("minishell: %s: Hanjungmyung error\n", cmd);
+		printf("minishell: %s: argument error\n", cmd);
 	else if (err_num == mini->err.pipe)
 		printf("minishell: syntax error near unexpected token `|'\n");
 	else if (err_num == mini->err.redirect)

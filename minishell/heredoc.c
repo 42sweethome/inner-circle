@@ -10,7 +10,11 @@ void    make_tmp(char *delimeter, int idx)
     fd = open(tmp, O_RDWR | O_CREAT, 0666);
     while(1)
     {
+        signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);// SIG_ING 시그널 무시
         line = readline("> ");
+        if (!line)
+			break; // ????
         if (!ft_strncmp(line, delimeter, ft_strlen(delimeter) + 1))
         {
             close(fd);

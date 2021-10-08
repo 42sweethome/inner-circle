@@ -9,6 +9,8 @@ void	ft_execve(t_mini *mini, char *cmd, char ***envp)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);// SIG_ING 시그널 무시
 		if (mini->red)
 			redirect_fd(mini->red[0], mini->red_cnt[0], 0);
 		if (execve(cmd, mini->buf, *envp) == -1)
@@ -17,14 +19,18 @@ void	ft_execve(t_mini *mini, char *cmd, char ***envp)
 	}
 	if (pid > 0)
 	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);// SIG_ING 시그널 무시
 		wait(&status);
-		if (status == 0 || status == 256)
-            return ;
-		else if (WEXITSTATUS(status) == 2)
-				printf("minishell: %s\n", strerror(errno));
-		else if (WEXITSTATUS(status) != 2)
-				printf("minishell: bash error\n");
 		mini->exit_stat = WEXITSTATUS(status);
+		if (status == 2)
+			printf("^C\n");
+		else if (status == 3)
+			printf("^\\Quit: %d\n", status);
+		else if (WEXITSTATUS(status) == 2) //????
+				printf("minishell: %s\n", strerror(errno));
+		else if (WEXITSTATUS(status) != 2 && WEXITSTATUS(status) != 0)
+				printf("minishell: bash error\n");
 	}
 	else if (pid == -1)
 		printf("minishell: %s\n", strerror(errno));
@@ -40,6 +46,8 @@ int	check_path(t_mini *mini, char *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);// SIG_ING 시그널 무시
 		if (mini->red)
 			redirect_fd(mini->red[0], mini->red_cnt[0], 0);
 		idx = -1;
@@ -54,20 +62,26 @@ int	check_path(t_mini *mini, char *cmd)
 			mini->path[idx] = temp;
 			execve(mini->path[idx], mini->buf, 0);
 		}
-		exit(errno);
+		exit(45);
 	}
 	else if (pid > 0)
 	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);// SIG_ING 시그널 무시
 		wait(&status);
+		//signal(SIGINT, sig_handler);
+		//signal(SIGQUIT, SIG_IGN);
+		mini->exit_stat = WEXITSTATUS(status);
 		if (status == 3072)
 			return (mini->err.malloc);
-		if (status == 0 || status == 256)
-            return (status / 256);
-		else if (WEXITSTATUS(status) == 2)
-				printf("minishell: %s\n", strerror(errno));
+		else if (status == 2)
+			printf("^C\n");
+		else if (status == 3)
+			printf("^\\Quit: %d\n", status);
+		else if (WEXITSTATUS(status) == 45) //????
+			cmd_err(cmd, mini->err.cmd, mini);
 		else if (WEXITSTATUS(status) != 2 && WEXITSTATUS(status) != 0)
-				printf("minishell: bash error\n");
-		mini->exit_stat = WEXITSTATUS(status);
+			printf("minishell: bash error\n");
 	}
 	else if (pid == -1)
 		printf("minishell: %s\n", strerror(errno));

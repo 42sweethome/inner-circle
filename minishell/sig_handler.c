@@ -10,3 +10,9 @@ void	sig_handler(int	signum)
 		rl_redisplay(); //비워진 새 newline을 출력
 	}
 }
+
+void	sig_ctrl_d(void)
+{
+	printf("exit\n");
+	exit(0); //???? 0인지 확실 x
+}

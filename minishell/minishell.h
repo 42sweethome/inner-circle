@@ -110,6 +110,9 @@ void	rm_tmpfile(int cnt);
 void    redirect_fd(t_redir *red, int cnt, int idx);
 int		my_execve(t_mini *mini, char *cmd, char ***envp);
 void	sig_handler(int	signum);
+void	sig_handler_2(int	signum);
+void	sig_ctrl_d(void);
 void	ori_term_init(t_mini mini);
 void	mini_term_init(t_mini mini);
+
 #endif
