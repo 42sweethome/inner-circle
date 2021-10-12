@@ -1,26 +1,62 @@
 #include "minishell.h"
 
+int	check_option_n(t_mini *mini)
+{
+	int i;
+	int j;
+
+	i = mini->first;
+	while (mini->buf[++i])
+	{
+		if (mini->buf[i][0] == '-')
+		{
+			j = 0;
+			while (mini->buf[i][++j] == 'n')
+				;
+			if (mini->buf[i][j] == 0)
+				mini->option_n++;
+			else
+				break ;
+		}
+		else
+			break ;
+	}
+	return (mini->option_n);
+}
+
 void	ft_echo(t_mini *mini)
 {
 	int idx;
-	int option;
 
 	idx = mini->first;
-	option = mini->first + 1;
-	while (mini->buf[++idx] != 0 && *(mini->buf[idx]) == 0) 
-		option++;
-	idx = mini->first;
-	while(mini->buf[++idx])
+	while (mini->buf[++idx])
 	{
-		if (idx == option && \
-				!ft_strncmp(mini->buf[option], "-n", 3))
-			idx++;
-		printf("%s", mini->buf[idx]);
-		if (mini->buf[idx + 1] != 0 /*&& *(mini->buf[idx]) != 0*/)
-			printf(" ");
-		if (mini->buf[idx + 1] == 0 && \
-				ft_strncmp(mini->buf[option], "-n", 3))
-			printf("\n");
+		if (mini->upper == 1)
+		{
+			if (idx == mini->first + 1 && \
+				!ft_strncmp(mini->buf[mini->first + 1], "-n", 3))
+				idx++;
+			if (mini->buf[idx] == 0)	
+				break ;
+			printf("%s", mini->buf[idx]);
+			if (mini->buf[idx + 1] != 0)
+				printf(" ");
+			if (mini->buf[idx + 1] == 0 && \
+				ft_strncmp(mini->buf[mini->first + 1], "-n", 3))
+				printf("\n");
+		}
+		else
+		{
+			if (idx == mini->first + 1)
+				idx += check_option_n(mini);
+			if (mini->buf[idx] == 0)
+				break ;
+			printf("%s", mini->buf[idx]);
+			if (mini->buf[idx + 1] != 0)
+				printf(" ");
+			if (mini->buf[idx + 1] == 0 && mini->option_n == 0)
+				printf("\n");
+		}
 	}	
 }
 
@@ -43,23 +79,29 @@ void	ft_env(char ***envp)
 int	change_pwd(t_mini *mini)
 {
 	char	pwd[1024];
+	char	*tmp;
 	int		idx;
 	int		jdx;
 
 	jdx = -1;
-	while ((*mini->envp)[++jdx])
-		if (!ft_strncmp((*mini->envp)[jdx], "PWD=", 4))
+	while (mini->envp[++jdx])
+		if (!ft_strncmp(mini->envp[jdx], "PWD=", 4))
 		{
 			idx = -1;
-			while ((*mini->envp)[++idx])
-				if (!ft_strncmp((*mini->envp)[idx], "OLDPWD=", 7))
+			while (mini->envp[++idx])
+				if (!ft_strncmp(mini->envp[idx], "OLDPWD=", 7))
 				{
-					(*mini->envp)[idx] = ft_strdup(ft_strjoin("OLD", (*mini->envp)[jdx]));
-					if (!(*mini->envp)[idx])
+					tmp = ft_strjoin("OLD", mini->envp[jdx]);
+					free(mini->envp[idx]);
+					mini->envp[idx] = ft_strdup(tmp);
+					free(tmp);
+					if (!mini->envp[idx])
 						return (mini->err.malloc);
 				}
-			(*mini->envp)[jdx] = ft_strdup(ft_strjoin("PWD=", getcwd(pwd, 1024)));
-			//leak check
+			tmp = ft_strjoin("PWD=", getcwd(pwd, 1024));//leak
+			free(mini->envp[jdx]);
+			mini->envp[jdx] = ft_strdup(tmp);
+			free(tmp);
 		}
 	return (0);
 }
@@ -70,6 +112,11 @@ int	ft_chdir(t_mini *mini)
 	char	*dest;
 	int		ret;
 
+	if (mini->upper == 1)
+	{
+		mini->exit_stat = 0;
+		return (0);
+	}
 	idx = mini->first;
 	while (mini->buf[++idx] != 0 && *(mini->buf[idx]) == 0)
 		;
@@ -81,6 +128,7 @@ int	ft_chdir(t_mini *mini)
 		else if (ret == 0)
 		{
 			printf("minishell: cd: HOME not set\n");
+			free(dest);
 			mini->exit_stat = 1;
 			return (0);
 		}

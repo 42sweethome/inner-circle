@@ -6,7 +6,6 @@ int	get_path(t_mini *mini)
 	char		*temp;
 	int			idx;
 	int			ret;
-//	static int	path_flag;
 
 	ret = ft_getenv(mini, &path, "PATH");
 	if (ret == mini->err.malloc)
@@ -25,23 +24,27 @@ int	get_path(t_mini *mini)
 		if (temp == NULL)
 		{
 			ft_free(mini->path);
+			free(path);
 			return (mini->err.malloc);
 		}
 		free(mini->path[idx]);
 		mini->path[idx] = temp;
 	}
+	free(path);
 	return (0);
 }
 
 int	mini_init(t_mini *mini) //mini구조체 안 single,double quo의 초기화 역슬래쉬와 인용구의 갯수도 체크
 {
+	mini->red = 0;
 	mini->pipe = 0;
 	mini->first = 0;
+	mini->upper = 0;
 	mini->s_quo = 0;
 	mini->d_quo = 0;
 	mini->cnt_quo = 0;
 	mini->odd_quo = 0;
-	mini->red = 0;
+	mini->option_n = 0;
 	mini->redirect = 0;
 	mini->err.malloc = -1;
 	mini->err.cmd = -2;
@@ -59,7 +62,7 @@ int	func_cmd(t_mini *mini)
 {
 	int cmd_ret;
 
-	cmd_ret = check_cmd(mini->buf[mini->first], mini, mini->envp);
+	cmd_ret = check_cmd(mini->buf[mini->first], mini, &mini->envp);
 	if (cmd_ret == mini->err.malloc)
 		return (cmd_err(mini->buf[mini->first], mini->err.malloc, mini));
 	return (1);
@@ -125,6 +128,11 @@ int	mini_process(char *str, t_mini *mini)
 
 int	main_free(t_mini *mini, char *str, int ret)
 {
+	if (mini->redirect)
+	{
+		ft_struct_free(mini, mini->red);
+		free(mini->red_cnt);
+	}
 	if (ret == mini->err.path_malloc || ret == mini->err.only_space)
 	{
 		ft_free(mini->path);
@@ -151,6 +159,19 @@ int	main_free(t_mini *mini, char *str, int ret)
 	return (0);
 }
 
+void init_env(char ***env, char **envp)
+{
+	int i;
+	
+	i = -1;
+	while (envp[++i])
+		;
+	*env = (char **)ft_calloc(i + 1, sizeof(char *));	
+	i = -1;
+	while (envp[++i])
+		(*env)[i] = ft_strdup(envp[i]);
+}
+
 int	main(int argc, char **argv, char **envp) //파싱작업
 {
 	char	*str;
@@ -164,7 +185,7 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 		return (0);
 	}
 	mini.exit_stat = 0;
-	mini.envp = &envp;
+	init_env(&mini.envp, envp);
 	ori_term_init(mini);
 	while (1)
 	{
@@ -175,7 +196,10 @@ int	main(int argc, char **argv, char **envp) //파싱작업
 		if (!str)
 			sig_ctrl_d();
 		if (str == 0 || *str == 0)
+		{
+			free(str);
 			continue ;
+		}
 		ret = mini_process(str, &mini);
 		rm_tmpfile(mini.pipe);
 		add_history(str);

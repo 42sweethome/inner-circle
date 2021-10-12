@@ -11,7 +11,7 @@ void	ft_execve(t_mini *mini, char *cmd, char ***envp)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		if (mini->red)
+		if (mini->redirect)
 			redirect_fd(mini->red[0], mini->red_cnt[0], 0);
 		execve(cmd, mini->buf, *envp);
 		exit(127);
@@ -45,7 +45,7 @@ int	check_path(t_mini *mini, char *cmd)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		if (mini->red)
+		if (mini->redirect)
 			redirect_fd(mini->red[0], mini->red_cnt[0], 0);
 		idx = -1;
 		if (cmd == 0)
@@ -83,7 +83,7 @@ int	check_path(t_mini *mini, char *cmd)
 int	check_cmd(char *cmd, t_mini *mini, char ***envp)
 {
 	int		ret;
-	//redirect_fd(mini->red[0], mini->red_cnt[0], 0);
+
 	ret = my_execve(mini, cmd, envp);
 	if (ret == mini->err.malloc)
 		return (mini->err.malloc);

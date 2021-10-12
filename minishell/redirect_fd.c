@@ -43,6 +43,8 @@ void    redirect_heredoc(char *file)
 void    redirect_fd(t_redir *red, int cnt, int idx)
 {
     int     i;
+    char    *str;
+    char    *tmp;
 
     i = -1;
     while (++i < cnt)
@@ -54,6 +56,12 @@ void    redirect_fd(t_redir *red, int cnt, int idx)
         else if (!ft_strncmp(red[i].redir, "<", 2))
             redirect_stdin(red[i].file);
         else if (!ft_strncmp(red[i].redir, "<<", 3))
-            redirect_heredoc(ft_strjoin("/tmp/.", ft_itoa(idx)));
+        {
+            str = ft_itoa(idx);
+            tmp = ft_strjoin("/tmp/.", str);
+            redirect_heredoc(tmp);
+            free(tmp);
+            free(str);
+        }
     }
 }

@@ -4,11 +4,8 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 {
 	if (ft_strchr(pi->temp[0], '/') != 0)
 	{
-		if (execve(pi->temp[0], pi->temp, *mini->envp) == -1)
-		{
-			//cmd_err(pi->temp[0], mini->err.cmd, mini);
+		if (execve(pi->temp[0], pi->temp, mini->envp) == -1)
 			exit(127);
-		}
 	}
 	else
 	{
@@ -23,7 +20,6 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 			}
 			execve(pi->cmd, pi->temp, 0);
 		}
-		//cmd_err(pi->temp[0], mini->err.cmd, mini);
 	}
 	exit(127);
 }
@@ -47,7 +43,7 @@ int	fork_pipe(t_mini *mini, t_pipe *pi)
 		}
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		if (mini->red)
+		if (mini->redirect)
 			redirect_fd(mini->red[pi->pid_idx], mini->red_cnt[pi->pid_idx], pi->pid_idx);
 		oper_pipe(mini, pi);
 	}
@@ -84,19 +80,18 @@ int	parsing_pipe(t_mini *mini, t_pipe *pi)
 
 int	case_of_status(t_mini *mini, char *cmd, int status)
 {
-		//printf("status = %d WST = %d\n", status, WEXITSTATUS(status));
-		mini->exit_stat = WEXITSTATUS(status);
-		if (status == 3072)
-			return (mini->err.malloc);
-		else if (status == 2)
-			printf("^C\n");
-		else if (status == 3)
-			printf("^\\");
-		else if (WEXITSTATUS(status) == 2) //????
-			printf("minishell: %s\n", strerror(WEXITSTATUS(status)));
-		else if (WEXITSTATUS(status) == 127) //????
-			cmd_err(cmd, mini->err.cmd, mini);
-		return (1);
+	mini->exit_stat = WEXITSTATUS(status);
+	if (status == 3072)
+		return (mini->err.malloc);
+	else if (status == 2)
+		printf("^C\n");
+	else if (status == 3)
+		printf("^\\");
+	else if (WEXITSTATUS(status) == 2) //????
+		printf("minishell: %s\n", strerror(WEXITSTATUS(status)));
+	else if (WEXITSTATUS(status) == 127) //????
+		cmd_err(cmd, mini->err.cmd, mini);
+	return (1);
 }
 
 void cmd_offset(t_mini *mini, int *j)
@@ -164,5 +159,6 @@ int	pipe_execve(t_mini *mini, t_pipe *pi)
 	}
 	ret = pipe_wait(mini, pi);
 	mini->pipe = pi->initial;
+	ft_int_free(pi->fd, pi->initial, pi->pid);
 	return (ret);
 }

@@ -34,7 +34,6 @@ typedef struct s_redir
 {
 	char	*file;
 	char	*redir;
-	//int		cnt;
 }			t_redir;
 
 typedef struct s_pipe
@@ -54,7 +53,7 @@ typedef struct s_pipe
 typedef struct s_mini
 {
 	char		**buf;
-	char		***envp;
+	char		**envp;
 	char		**path;
 	int			*pipe_idx;
 	int			s_quo;
@@ -68,9 +67,11 @@ typedef struct s_mini
 	int			dollar;
 	int			first;
 	int			pipe;
-	int			redirect;			
+	int			redirect;
 	int			exit_stat;
 	int			*red_cnt;
+	int			upper;
+	int			option_n;
 	struct termios ori_term;
 	struct termios mini_term;
 	t_err		err;
@@ -85,6 +86,8 @@ int		case_quo(char *str, int *idx, t_mini *mini);
 int		cmd_err(char *cmd, int err_num, t_mini *mini);
 int		check_cmd(char *cmd, t_mini *mini, char ***envp);
 char	ft_free(char **new);
+char	ft_int_free(int **fd, int n, int *pid);
+char	ft_struct_free(t_mini *mini, t_redir **new);
 int		special_char(int c);
 int		special_char2(int c);
 int		special_char3(int c);

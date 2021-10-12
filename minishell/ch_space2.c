@@ -14,9 +14,6 @@
 
 int	case_quo(char *str, int *idx, t_mini *mini)
 {
-//	printf("idx : %d, str : %c\n", *idx, str[*idx]);
-//	if ((mini->s_quo == 1 || mini->d_quo == 1) && str[*idx] == '\0')
-//		return (0);
 	if (str[*idx] == '\'' && mini->d_quo == 0)
 	{
 		if (mini->s_quo == 0)

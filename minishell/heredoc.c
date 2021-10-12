@@ -3,10 +3,13 @@
 void    make_tmp(char *delimeter, int idx)
 {
     int     fd;
+    char    *str;
     char    *tmp;
     char    *line;
 
-    tmp = ft_strjoin("/tmp/.", ft_itoa(idx));
+    str = ft_itoa(idx);
+    tmp = ft_strjoin("/tmp/.", str);
+    free(str);
     fd = open(tmp, O_RDWR | O_CREAT, 0666);
     while(1)
     {
@@ -18,11 +21,14 @@ void    make_tmp(char *delimeter, int idx)
         if (!ft_strncmp(line, delimeter, ft_strlen(delimeter) + 1))
         {
             close(fd);
+            free(line);
             break;
         }
         write(fd, line, ft_strlen(line));
         write(fd, "\n", 1);
+        free(line);
     }
+    free(tmp);
 }
 
 void    tmp_heredoc(t_mini *mini)

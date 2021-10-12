@@ -3,10 +3,18 @@
 void	rm_tmpfile(int cnt)
 {
 	int		i;
+	char	*str;
+	char	*tmp;
 
 	i = -1;
 	while (++i <= cnt)
-		unlink(ft_strjoin("/tmp/.", ft_itoa(i)));
+	{
+		str = ft_itoa(i);
+		tmp = ft_strjoin("/tmp/.", str);
+		unlink(tmp);
+		free(tmp);
+		free(str);
+	}
 }
 
 int	ft_getenv(t_mini *mini, char **env, char *str)
@@ -18,14 +26,14 @@ int	ft_getenv(t_mini *mini, char **env, char *str)
 	idx = -1;
 	len = ft_strlen(str);
 	*env = 0;
-	while ((*mini->envp)[++idx])
+	while (mini->envp[++idx])
 	{	
-		cmp = ft_strncmp((*mini->envp)[idx], str, len);
+		cmp = ft_strncmp(mini->envp[idx], str, len);
 		if (cmp == 0)
 		{
-			if ((*mini->envp)[idx][len] == '=')
+			if (mini->envp[idx][len] == '=')
 			{
-				*env = ft_strdup(&(*mini->envp)[idx][len + 1]);
+				*env = ft_strdup(&(mini->envp[idx][len + 1]));
 				if (*env == 0)
 					return (-1);
 				return (1);
@@ -42,6 +50,38 @@ char	ft_free(char **new)
 	i = 0;
 	while (new[i])
 		free(new[i++]);
+	free(new);
+	return (0);
+}
+
+char	ft_int_free(int **fd, int n, int *pid)
+{
+	int		i;
+
+	i = -1;
+	while (++i < n)
+		free(fd[i]);
+	free(fd);
+	free(pid);
+	return (0);
+}
+
+char	ft_struct_free(t_mini *mini, t_redir **new)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < mini->pipe + 1)
+	{
+		j = -1;
+		while (++j < mini->red_cnt[i])
+		{
+			free(new[i][j].file);
+			free(new[i][j].redir);
+		}
+		free(new[i]);
+	}
 	free(new);
 	return (0);
 }

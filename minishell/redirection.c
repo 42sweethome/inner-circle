@@ -65,13 +65,15 @@ int     func_redir(t_mini *mini)
     int     i;
     int     ret;
 
-    i = -1;
+/*    i = -1;
     while (++i < mini->pipe)
     {
         if(mini->red_cnt[i])
             break;
     }
     if (i == mini->pipe && mini->red_cnt[i] == 0)
+        return (1);*/
+    if (!mini->redirect)
         return (1);
     mini->red = (t_redir **)ft_calloc(mini->pipe + 1, sizeof(t_redir *));
     i = -1;
