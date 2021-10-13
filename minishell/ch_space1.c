@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/10/06 11:26:42 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/10/13 11:15:50 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,11 @@ int	space_split(char *s, char space, t_mini *mini)
 	if (check_pipe_pos(mini) == mini->err.pipe)
 		return (mini->err.pipe);
 	if (check_redirect(mini) == mini->err.redirect)
+	{
+		mini->redirect = 0;
+		if (!mini->redirect)
+			free(mini->red_cnt);
 		return (mini->err.redirect);
+	}
 	return (1);
 }
