@@ -59,7 +59,6 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 	{			
 		if (s[i] && s[i] != space && s[i] != '|' && s[i] != '<' && s[i] != '>')
 		{
-			mini->quo_flag = 0;
 			mini->pre_flag = 0;
 			mini->env_flag = 0;
 			mini->cnt_quo = 0;
@@ -70,11 +69,11 @@ static int	spliting(char *s, char space, char **new, t_mini *mini)
 			if (mini->env_flag == 1)
 				continue ;
 			new[count] = (char *)ft_calloc((i - start + 1 \
-						- mini->cnt_quo + mini->env_len - mini->dollar - mini->quo_flag), sizeof(char)); //역슬래쉬와 따옴표의 갯수만큼 적게할당
+						- mini->cnt_quo + mini->env_len - mini->dollar), sizeof(char)); //역슬래쉬와 따옴표의 갯수만큼 적게할당
 			if (!new[count] || i == (size_t)mini->err.malloc)
 				return (mini->err.malloc);
 			if (scpy(new[count], &s[start], (i - start \
-							- mini->cnt_quo + mini->env_len - mini->dollar - mini->quo_flag), mini))//구분된 문자열을 new라는 이중배열에 넣어줌
+							- mini->cnt_quo + mini->env_len - mini->dollar), mini))//구분된 문자열을 new라는 이중배열에 넣어줌
 				return (mini->err.malloc);
 			count++;
 		}

@@ -63,7 +63,6 @@ typedef struct s_mini
 	int			env_len;
 	int			env_flag;
 	int			pre_flag;
-	int			quo_flag;
 	int			dollar;
 	int			first;
 	int			pipe;
@@ -85,13 +84,17 @@ int		quo_while(char *s, char c, t_mini *mini, int i);
 int		case_quo(char *str, int *idx, t_mini *mini);
 int		cmd_err(char *cmd, int err_num, t_mini *mini);
 int		check_cmd(char *cmd, t_mini *mini, char ***envp);
+int		check_digit(char *arg);
 char	ft_free(char **new);
 char	ft_int_free(int **fd, int n, int *pid);
 char	ft_struct_free(t_mini *mini, t_redir **new);
+int		main_free(t_mini *mini, char *str, int ret);
+
 int		special_char(int c);
 int		special_char2(int c);
 int		special_char3(int c);
 int		special_char4(int c);
+
 int		check_env(char *env_str, int i, t_mini *mini);
 int		copy_env(char *new, char *env_str, int i, t_mini *mini);
 void	ft_echo(t_mini *mini);
@@ -99,12 +102,22 @@ void	ft_pwd(void);
 void	ft_env(char ***envp);
 int		ft_getenv(t_mini *mini, char **env, char *str);
 int		ft_chdir(t_mini *mini);
+
 int		ft_export(t_mini *mini, char ***envp);
+int		add_env_alloc(t_mini *mini, char ***envp);
+int		add_env_assign(t_mini *mini, int idx, char **add_arr);
+int		add_env_copy(t_mini *mini, char **add_arr, char ***envp);
 int 	ft_unset(t_mini *mini, char ***envp);
 void	ft_exit(t_mini *mini);
 int		pipe_execve(t_mini *mini, t_pipe *pi);
 int		check_pipe_pos(t_mini *mini);
-int     func_redir(t_mini *mini);
+void    redir_realloc(t_mini *mini, int cnt);
+int		mini_init(t_mini *mini);
+int		redir_init(t_mini *mini);
+int		mini_init(t_mini *mini);
+void	pipe_init(t_mini *mini, t_pipe *pi);
+void	init_env(char ***env, char **envp);
+int		mini_process(char *str, t_mini *mini);
 void    tmp_heredoc(t_mini *mini);
 void	rm_tmpfile(int cnt);
 void    redirect_fd(t_redir *red, int cnt, int idx);
@@ -114,5 +127,13 @@ void	sig_handler_2(int	signum);
 void	sig_ctrl_d(void);
 void	ori_term_init(t_mini mini);
 void	mini_term_init(t_mini mini);
-
+int		get_path(t_mini *mini);
+int		case_of_status(t_mini *mini, char *cmd, int status);
+int		case_of_exit(t_mini *mini, int status, char *cmd);
+void	cmd_offset(t_mini *mini, int *i);
+int		parsing_pipe(t_mini *mini, t_pipe *pi);
+int		fork_pipe(t_mini *mini, t_pipe *pi);
+void	connect_pipe(t_mini *mini, t_pipe *pi);
+void	oper_pipe(t_mini *mini, t_pipe *pi);
+void	swap(char **str1, char **str2);
 #endif

@@ -1,67 +1,67 @@
 #include "minishell.h"
 
-void    redirect_stdout(char *file)
+void	redirect_stdout(char *file)
 {
-    int     fd;
+	int	fd;
 
-    fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-    dup2(fd, 1); 
-    close(fd);
+	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	dup2(fd, 1);
+	close(fd);
 }
 
-void    redirect_append(char *file)
+void	redirect_append(char *file)
 {
-    int     fd;
+	int	fd;
 
-    fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
-    dup2(fd, 1);
-    close(fd);
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
+	dup2(fd, 1);
+	close(fd);
 }
 
-void    redirect_stdin(char *file)
+void	redirect_stdin(char *file)
 {
-    int     fd;
+	int	fd;
 
-    fd = open(file, O_RDONLY);
-    if (fd < 0)
-        exit(errno);
-    dup2(fd, 0);
-    close(fd);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		exit(errno);
+	dup2(fd, 0);
+	close(fd);
 }
 
-void    redirect_heredoc(char *file)
+void	redirect_heredoc(char *file)
 {
-    int     fd;
+	int		fd;
 
-    fd = open(file, O_RDONLY);
-    if (fd < 0)
-        exit(errno);
-    dup2(fd, 0);
-    close(fd);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		exit(errno);
+	dup2(fd, 0);
+	close(fd);
 }
 
-void    redirect_fd(t_redir *red, int cnt, int idx)
+void	redirect_fd(t_redir *red, int cnt, int idx)
 {
-    int     i;
-    char    *str;
-    char    *tmp;
+	int		i;
+	char	*str;
+	char	*tmp;
 
-    i = -1;
-    while (++i < cnt)
-    {
-        if (!ft_strncmp(red[i].redir, ">", 2))
-            redirect_stdout(red[i].file);
-        else if (!ft_strncmp(red[i].redir, ">>", 3))
-            redirect_append(red[i].file);
-        else if (!ft_strncmp(red[i].redir, "<", 2))
-            redirect_stdin(red[i].file);
-        else if (!ft_strncmp(red[i].redir, "<<", 3))
-        {
-            str = ft_itoa(idx);
-            tmp = ft_strjoin("/tmp/.", str);
-            redirect_heredoc(tmp);
-            free(tmp);
-            free(str);
-        }
-    }
+	i = -1;
+	while (++i < cnt)
+	{
+		if (!ft_strncmp(red[i].redir, ">", 2))
+			redirect_stdout(red[i].file);
+		else if (!ft_strncmp(red[i].redir, ">>", 3))
+			redirect_append(red[i].file);
+		else if (!ft_strncmp(red[i].redir, "<", 2))
+			redirect_stdin(red[i].file);
+		else if (!ft_strncmp(red[i].redir, "<<", 3))
+		{
+			str = ft_itoa(idx);
+			tmp = ft_strjoin("/tmp/.", str);
+			redirect_heredoc(tmp);
+			free(tmp);
+			free(str);
+		}
+	}
 }
