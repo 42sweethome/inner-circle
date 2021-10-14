@@ -2,18 +2,21 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3 
 
-READ_H = -I /usr/local/Cellar/readline/8.1.1/include #~/.brew/opt/readline/include 
+READ_H = -I ~/.brew/opt/readline/include
 
-READ_L = -lreadline  -L /usr/local/Cellar/readline/8.1.1/lib #~/.brew/opt/readline/lib 
+READ_L = -lreadline  -L ~/.brew/opt/readline/lib
 
-SRCS =	start.c\
-		space_split.c ch_space2.c check_env.c copy_env.c util.c util2.c check.c command1.c \
-		redirection.c redirect_fd.c heredoc.c my_func.c sig_handler.c init.c\
-		mini_process.c get_path.c special_char.c case_of_status.c free.c\
-		export_alloc.c export_add.c export_show.c unset.c cd.c echo.c\
-		pipe.c pipe_set.c count_arg.c split_copy.c spliting.c
+SRCS =	ft_echo.c ft_my_func.c ft_spliting.c\
+		ft_case_of_status.c ft_export_add.c ft_pipe.c ft_start.c\
+		ft_cd.c ft_export_alloc.c ft_pipe_set.c ft_term_init.c\
+		ft_ch_space2.c ft_export_show.c ft_redirect_fd.c ft_unset.c\
+		ft_check.c ft_free.c ft_redirection.c ft_util.c\
+		ft_check_env.c ft_get_path.c ft_sig_handler.c ft_util2.c\
+		ft_command1.c ft_heredoc.c ft_space_split.c\
+		ft_copy_env.c ft_init.c ft_special_char.c\
+		ft_count_arg.c ft_mini_process.c ft_split_copy.c\
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/10/14 18:12:55 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/10/14 18:23:04 by daekim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	check_redirect(t_mini *mini)
 	int		pipe_idx;
 	int		ret;
 
-	
 	if (!mini->redirect)
 		return (0);
 	mini->red_cnt = (int *)ft_calloc(mini->pipe + 1, sizeof(int));
