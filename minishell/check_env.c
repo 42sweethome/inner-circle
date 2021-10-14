@@ -55,7 +55,7 @@ int	check_env(char *env_str, int i, t_mini *mini)
 		return (mini->err.malloc);
 	}
 	mini->env_len = mini->env_len + ft_strlen(env) - len;
-	if (len != 0 || env_str[i + 1] == '"')
+	if (len != 0 || (env_str[i + 1] == '"' && mini->d_quo == 0))
 		mini->dollar++;
 	if (len == 0)
 		mini->pre_flag = 1;

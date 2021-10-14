@@ -9,6 +9,8 @@ void	oper_pipe(t_mini *mini, t_pipe *pi)
 	}
 	else
 	{
+		if (pi->temp[0] == 0)
+			exit(0);
 		pi->jdx = -1;
 		while (mini->path[++(pi->jdx)])
 		{

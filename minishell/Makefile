@@ -2,7 +2,7 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
 
 READ_H = -I /usr/local/Cellar/readline/8.1.1/include #~/.brew/opt/readline/include 
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ch_space1.c                                        :+:      :+:    :+:   */
+/*   space_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sonkang <sonkang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 09:05:42 by daekim            #+#    #+#             */
-/*   Updated: 2021/10/13 11:15:50 by sonkang          ###   ########.fr       */
+/*   Updated: 2021/10/14 18:12:55 by sonkang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	check_redirect(t_mini *mini)
 	int		pipe_idx;
 	int		ret;
 
+	
 	if (!mini->redirect)
 		return (0);
 	mini->red_cnt = (int *)ft_calloc(mini->pipe + 1, sizeof(int));
@@ -73,7 +74,7 @@ int	check_redirect(t_mini *mini)
 			ret = red_err_check(mini, idx, '<', pipe_idx);
 		else if (*(mini->buf[idx]) == '>')
 			ret = red_err_check(mini, idx, '>', pipe_idx);
-		if (ret == mini->err.malloc)
+		if (ret == mini->err.redirect)
 			return (ret);
 	}
 	return (0);

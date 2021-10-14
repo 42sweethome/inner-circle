@@ -50,7 +50,7 @@ int	add_env_assign(t_mini *mini, int idx, char **add_arr)
 	count = 0;
 	while (mini->buf[++jdx])
 	{
-		while (*(mini->buf[jdx]) == 0)
+		while (mini->buf[jdx] && *(mini->buf[jdx]) == 0)
 			jdx++;
 		count++;
 		if (mini->buf[jdx] == 0)

@@ -2,9 +2,9 @@
 
 void	check_after_dollar(t_mini *mini, char *env_str, char *new, int i)
 {
-	if ((env_str[i + 1] != '\'' && env_str[i + 1] != '"') \
-	|| !special_char4(env_str[i + 1]))
-		*new = '$';
+	if ((env_str[i + 1] != '\'' && env_str[i + 1] != '"') /*\
+	|| !special_char4(env_str[i + 1])*/)
+	 	*new = '$';
 	else if (mini->d_quo == 1 || mini->s_quo == 1)
 		*new = '$';
 }
