@@ -35,11 +35,11 @@ int	case_quo(char *str, int *idx, t_mini *mini)
 	return (0);
 }
 
-int	check_quo(char *s, char c, int i, t_mini *mini) // s: 주어진 문자열 c: 큰/작은 따옴표 i:인덱스 mini:정보꾸러미
+int	check_quo(char *s, char c, int i, t_mini *mini)
 {
 	mini->pre_flag = 1;
-	while (s[++i] && s[i] != c) //큰따옴표인 경우 역슬래시를 출력하지 않아야함 r_value 고로 mini꾸러미에 담아줌
-	{				//닫는 따옴표 혹은 null terminated가 되기 전까지 인덱스를 더함
+	while (s[++i] && s[i] != c)
+	{
 		if (c == '"' && s[i] == '$')
 		{
 			mini->d_quo = 1;
@@ -50,9 +50,9 @@ int	check_quo(char *s, char c, int i, t_mini *mini) // s: 주어진 문자열 c:
 		if (i == mini->err.malloc)
 			return (mini->err.malloc);
 	}
-	if (s[i] == c) // 닫는 따옴표가 나온경우
+	if (s[i] == c)
 		mini->cnt_quo += 2;
-	if (s[i] == 0) // 따옴표 갯수가 홀수로 끝나는 경우
+	if (s[i] == 0)
 	{
 		mini->odd_quo = 1;
 		i--;
@@ -60,26 +60,30 @@ int	check_quo(char *s, char c, int i, t_mini *mini) // s: 주어진 문자열 c:
 	return (i);
 }
 
+void	check_dollar(t_mini *mini, char *s, int i, int check)
+{
+	check = i;
+	i = check_env(s, i, mini);
+	if (mini->env_flag == 0)
+		mini->pre_flag = 1;
+	if ((s[check + 1] == ' ' || s[check + 1] == 0) \
+	|| (s[check + 1] != '?' && !special_char2(s[i + 1])))
+		mini->env_flag = 0;
+}
+
 int	quo_while(char *s, char space, t_mini *mini, int i)
 {
-	int check;
+	int	check;
 
 	check = 0;
-	while (s[i] && s[i] != space && s[i] != '|' && s[i] != '<' && s[i] != '>') //중복?
+	while (s[i] && s[i] != space && s[i] != '|' && s[i] != '<' && s[i] != '>')
 	{
-		if (s[i] == '\'') //최초 열린 따옴표가 작은따옴표인지 큰따옴표인지 구분
+		if (s[i] == '\'')
 			i = check_quo(s, '\'', i, mini);
 		else if (s[i] == '"')
 			i = check_quo(s, '"', i, mini);
 		else if (s[i] == '$')
-		{
-			check = i;
-			i = check_env(s, i, mini);
-			if (mini->env_flag == 0)
-				mini->pre_flag = 1;
-			if ((s[check + 1] == ' ' || s[check + 1] == 0) || (s[check + 1] != '?' && !special_char2(s[i + 1])))
-				mini->env_flag = 0;//할당할겨
-		}//$만 연속적으로 들어오는 부분에서 할당문제가 있음.
+			check_dollar(mini, s, i, check);
 		else
 			mini->pre_flag = 1;
 		if (i == mini->err.malloc)

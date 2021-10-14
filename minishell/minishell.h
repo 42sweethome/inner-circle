@@ -11,14 +11,12 @@
 # include <signal.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
-
-
 # include <fcntl.h>
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
 
-typedef	struct s_err
+typedef struct s_err
 {
 	int			path_malloc;
 	int			malloc;
@@ -52,33 +50,38 @@ typedef struct s_pipe
 
 typedef struct s_mini
 {
-	char		**buf;
-	char		**envp;
-	char		**path;
-	int			*pipe_idx;
-	int			s_quo;
-	int			d_quo;
-	int			cnt_quo;
-	int			odd_quo;
-	int			env_len;
-	int			env_flag;
-	int			pre_flag;
-	int			dollar;
-	int			first;
-	int			pipe;
-	int			redirect;
-	int			exit_stat;
-	int			*red_cnt;
-	int			upper;
-	int			option_n;
-	struct termios ori_term;
-	struct termios mini_term;
-	t_err		err;
-	t_pipe		pipe_struct;
-	t_redir		**red;
+	char			**buf;
+	char			**envp;
+	char			**path;
+	int				*pipe_idx;
+	int				split_size;
+	int				s_quo;
+	int				d_quo;
+	int				cnt_quo;
+	int				odd_quo;
+	int				env_len;
+	int				env_flag;
+	int				pre_flag;
+	int				dollar;
+	int				first;
+	int				pipe;
+	int				redirect;
+	int				exit_stat;
+	int				*red_cnt;
+	int				upper;
+	int				option_n;
+	struct termios	ori_term;
+	struct termios	mini_term;
+	t_err			err;
+	t_pipe			pipe_struct;
+	t_redir			**red;
 }			t_mini;
 
 int		space_split(char *s, char c, t_mini *mini);
+int		spliting(char *s, char space, char **new, t_mini *mini);
+int		split_copy(char *new, char *str, size_t end, t_mini *mini);
+size_t	count_arg(char *s, char space, t_mini *mini);
+
 int		check_quo(char *s, char c, int i, t_mini *mini);
 int		quo_while(char *s, char c, t_mini *mini, int i);
 int		case_quo(char *str, int *idx, t_mini *mini);
@@ -96,7 +99,10 @@ int		special_char3(int c);
 int		special_char4(int c);
 
 int		check_env(char *env_str, int i, t_mini *mini);
+int		search_env(t_mini *mini, char **env, char *tmp, int len);
+int		env_exit_stat(t_mini *mini, char **env, int *len);
 int		copy_env(char *new, char *env_str, int i, t_mini *mini);
+
 void	ft_echo(t_mini *mini);
 void	ft_pwd(void);
 void	ft_env(char ***envp);
@@ -107,20 +113,20 @@ int		ft_export(t_mini *mini, char ***envp);
 int		add_env_alloc(t_mini *mini, char ***envp);
 int		add_env_assign(t_mini *mini, int idx, char **add_arr);
 int		add_env_copy(t_mini *mini, char **add_arr, char ***envp);
-int 	ft_unset(t_mini *mini, char ***envp);
+int		ft_unset(t_mini *mini, char ***envp);
 void	ft_exit(t_mini *mini);
 int		pipe_execve(t_mini *mini, t_pipe *pi);
 int		check_pipe_pos(t_mini *mini);
-void    redir_realloc(t_mini *mini, int cnt);
+void	redir_realloc(t_mini *mini, int cnt);
 int		mini_init(t_mini *mini);
 int		redir_init(t_mini *mini);
 int		mini_init(t_mini *mini);
 void	pipe_init(t_mini *mini, t_pipe *pi);
 void	init_env(char ***env, char **envp);
 int		mini_process(char *str, t_mini *mini);
-void    tmp_heredoc(t_mini *mini);
+void	tmp_heredoc(t_mini *mini);
 void	rm_tmpfile(int cnt);
-void    redirect_fd(t_redir *red, int cnt, int idx);
+void	redirect_fd(t_redir *red, int cnt, int idx);
 int		my_execve(t_mini *mini, char *cmd, char ***envp);
 void	sig_handler(int	signum);
 void	sig_handler_2(int	signum);
