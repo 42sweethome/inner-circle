@@ -15,7 +15,7 @@ int	main(int argc, char **argv)
 	{
 		for (int i = 0; argv[idx][i] != 0; i++)
 		{
-			std::cout << (char)(toupper(argv[idx][i]));
+			std::cout << static_cast<char>(toupper(argv[idx][i]));
 		}
 	}
 	std::cout << std::endl;
