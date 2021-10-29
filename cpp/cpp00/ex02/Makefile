@@ -1,19 +1,21 @@
-NAME =		PhoneBook
+NAME =		Account
 
 CC =		clang++
 
 CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
-SRC =		PhoneBook.cpp
+SRC =		Account.cpp test.cpp
 
 OBJ = 		$(SRC:.cpp=.o)
+
+INC =		Account.hpp
 
 all :		$(NAME)
 
 $(NAME) : $(OBJ)
-		 $(CC) $(CXXFLAGS) -o $@ $^
+		 $(CC) $(CXXFLAGS) -I$(INC) -o $@ $^
 
-clean :	
+clean :
 			rm -f $(OBJ)
 
 fclean :	clean

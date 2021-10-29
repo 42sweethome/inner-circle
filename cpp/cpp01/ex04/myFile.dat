@@ -1,0 +1,21 @@
+this is new file.
+12345
+int main() {
+    fstream dataFile;
+    string buffer;
+
+    dataFile.open("myFile.dat", ios::out);
+    dataFile << "새로운 글자가 파일에 쓰여집니다" << endl;
+    dataFile.write("12345", 5);
+    dataFile.close();
+    dataFile.open("myFile.dat", ios::in);
+
+
+    getline(dataFile, buffer);
+    cout << buffer << endl;
+    char charbuff[10] = { 0 };
+    dataFile.read(charbuff, 5);
+    cout << charbuff << endl;
+    dataFile.close();
+
+}
