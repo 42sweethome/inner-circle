@@ -4,9 +4,9 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3 
 
-READ_H = -I ~/.brew/opt/readline/include
+READ_H = -I ~/.brew/opt/readline/include #-I /usr/local/Cellar/readline/8.1.1/include
 
-READ_L = -lreadline  -L ~/.brew/opt/readline/lib
+READ_L = -lreadline -L ~/.brew/opt/readline/lib-lreadline #-L /usr/local/Cellar/readline/8.1.1/lib
 
 SRCS =	ft_echo.c ft_my_func.c ft_spliting.c\
 		ft_case_of_status.c ft_export_add.c ft_pipe.c ft_start.c\
