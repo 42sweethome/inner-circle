@@ -153,7 +153,7 @@ float Fixed::toFloat(void) const
 	return ((float)point_value / (float)(1 << frac_bits));
 }
 
-Fixed & min(Fixed & src1, Fixed & src2)
+Fixed & Fixed::min(Fixed & src1, Fixed & src2)
 {
 	if (src1.toFloat() < src2.toFloat())
 		return (src1);
@@ -161,7 +161,7 @@ Fixed & min(Fixed & src1, Fixed & src2)
 		return (src2);
 }
 
-Fixed & max(Fixed & src1, Fixed & src2)
+Fixed & Fixed::max(Fixed & src1, Fixed & src2)
 {
 	if (src1.toFloat() > src2.toFloat())
 		return (src1);
@@ -169,7 +169,7 @@ Fixed & max(Fixed & src1, Fixed & src2)
 		return (src2);
 }
 
-const Fixed & min(Fixed const & src1, Fixed const & src2)
+const Fixed & Fixed::min(Fixed const & src1, Fixed const & src2)
 {
 	if (src1.toFloat() < src2.toFloat())
 		return (src1);
@@ -177,10 +177,11 @@ const Fixed & min(Fixed const & src1, Fixed const & src2)
 		return (src2);
 }
 
-const Fixed & max(Fixed const & src1, Fixed const & src2)
+const Fixed & Fixed::max(Fixed const & src1, Fixed const & src2)
 {
 	if (src1.toFloat() > src2.toFloat())
 		return (src1);
 	else
 		return (src2);
 }
+
