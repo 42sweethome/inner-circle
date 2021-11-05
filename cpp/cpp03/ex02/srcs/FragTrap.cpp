@@ -5,7 +5,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
    Hitpoints = 100;
    Energy_points = 100;
    Attack_damage = 30;
-   std::cout << "FragTrap <" << name << "> is called !"<< std::endl;
+   std::cout << "FragTrap <" << Name << "> is called !"<< std::endl;
 }
 
 FragTrap::~FragTrap()
@@ -15,5 +15,5 @@ FragTrap::~FragTrap()
 
 void FragTrap::highFiveGuys()
 {
-    std::cout << "HighFive !!"<< std::endl;
+    std::cout << "FragTrap " << "HighFive !!"<< std::endl;
 }

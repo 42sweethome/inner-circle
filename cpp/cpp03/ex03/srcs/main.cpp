@@ -4,7 +4,6 @@ int main()
 {
     DiamondTrap james("JAMES");
 
-
     james.attack("peter");
     james.beRepaired(1);
     james.takeDamage(2);

@@ -8,20 +8,17 @@ SRC =		ClapTrap.cpp ScavTrap.cpp main.cpp
 
 SRC_PATH =	$(addprefix ./srcs/, $(SRC))
 
-SRC_OBJ = 	$(SRC_PATH:.cpp=.o)
-
-OBJ =		$(SRC:.cpp=.o)
+OBJ = 	$(SRC_PATH:.cpp=.o)
 
 INC_PATH = 	./includes
 
 all :		$(NAME)
 
-$(NAME) : $(SRC_OBJ)
+$(NAME) : $(OBJ)
 		$(CC) $(CXXFLAGS) -I $(INC_PATH) -o $@ $^
-		mv $(SRC_OBJ) ./objects/
 
 clean :
-			rm -f $(addprefix ./objects/, $(OBJ))
+			rm -f $(OBJ)
 
 fclean :	clean
 			rm -f $(NAME)
