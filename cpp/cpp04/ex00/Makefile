@@ -1,10 +1,10 @@
-NAME =		FragTrap
+NAME =		Animal
 
 CC =		clang++
 
 CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
-SRC =		ClapTrap.cpp ScavTrap.cpp FragTrap.cpp main.cpp
+SRC =		main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 
 SRC_PATH =	$(addprefix ./srcs/, $(SRC))
 

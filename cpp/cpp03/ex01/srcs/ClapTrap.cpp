@@ -18,9 +18,26 @@ ClapTrap::ClapTrap(std::string name)
     std::cout << "ClapTrap <" << Name << "> is called !"<< std::endl;
 }
 
+ClapTrap::ClapTrap(const ClapTrap &src)
+{
+	*this = src;
+}
+
 ClapTrap::~ClapTrap()
 {
     std::cout << "ClapTrap <" << Name << "> is uncalled !"<< std::endl;
+}
+
+ClapTrap & ClapTrap::operator=(const ClapTrap &src)
+{
+	if (this != &src)
+	{
+		Name = src.Name;
+        Hitpoints = src.Hitpoints;
+        Energy_points = src.Energy_points;
+        Attack_damage = src.Attack_damage;
+	}
+	return (*this);
 }
 
 void ClapTrap::attack(std::string const & target)
