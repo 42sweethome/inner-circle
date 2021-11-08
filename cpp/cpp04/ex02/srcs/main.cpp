@@ -7,10 +7,10 @@ int main()
 {
     Animal* animal[4];
 
-    animal[0] = new Cat;
-    animal[1] = new Dog;
-    animal[2] = new Cat;
-    animal[3] = new Dog;
+    animal[0] = new Dog;
+    animal[1] = new Cat;
+    animal[2] = new Dog;
+    animal[3] = new Cat;
 
     animal[1]->addIdea("aaa", 0);
     animal[1]->addIdea("bbb", 1);

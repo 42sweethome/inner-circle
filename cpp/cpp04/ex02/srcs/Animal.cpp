@@ -30,21 +30,3 @@ std::string Animal::getType(void) const
 {
     return (type);
 }
-
-void Animal::addIdea(std::string idea, int i)
-{
-	idea = "";
-	i = 0;
-}
-
-std::string Animal::outputIdeas(int i) const
-{
-	i = 0;
-	return("");
-}
-
-void Animal::dupIdeas(const Animal &animal)
-{
-	Animal a;
-    a = animal;
-}

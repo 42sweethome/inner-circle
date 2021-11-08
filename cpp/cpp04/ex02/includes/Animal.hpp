@@ -15,12 +15,12 @@ class Animal
      	
         Animal & operator=(const Animal &src);
 
-        virtual void makeSound() const {};
+        virtual void makeSound() const = 0;
         std::string getType() const;
-        virtual void addIdea(std::string idea, int i);
-        virtual void showIdeas() const {};
-        virtual std::string outputIdeas(int i) const;
-        virtual void dupIdeas(const Animal &animal);
+        virtual void addIdea(std::string idea, int i) = 0;
+        virtual void showIdeas() const = 0;
+        virtual std::string outputIdeas(int i) const = 0;
+        virtual void dupIdeas(const Animal &animal) = 0;
 };
 
 #endif
