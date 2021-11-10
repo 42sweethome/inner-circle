@@ -4,21 +4,21 @@
 #include <iostream>
 #include <string>
 
-class GradeTooHighException : public std::exception
+class HighException : public std::exception
 {
     public:
-        const char *what() const
+        const char *what() const throw()
         {
-            return ("Too High !!!"); //?
+            return ("Too High !!!");
         }
 };
 
-class GradeTooLowException : public std::exception
+class LowException : public std::exception
 {
     public:
-        const char *what() const
+        const char *what() const throw()
         {
-            return("Too Low !!!"); //?
+            return("Too Low !!!");
         }
 };
 
@@ -26,16 +26,16 @@ class Bureaucrat
 {
     private:
         const std::string name;
-        int grade; //?
+        int grade;
     public:
-        //const int GradeTooHighException;
-        //const int GradeTooLowException;
         Bureaucrat();
         Bureaucrat(const Bureaucrat &src);
         Bureaucrat(const int grade);
         Bureaucrat& operator= (const Bureaucrat &src);
         ~Bureaucrat();
         
+        HighException GradeTooHighException;
+        LowException GradeTooLowException;
         std::string getName() const;
         int getGrade() const;
         void promotion();
@@ -43,5 +43,7 @@ class Bureaucrat
         void demotion();
         void demotion(int changetheworld);
 };
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat &src);
 
 #endif
