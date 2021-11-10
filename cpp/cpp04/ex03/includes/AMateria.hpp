@@ -39,6 +39,7 @@ class Cure : public AMateria
 {
 	public :
 		Cure();
+		Cure(const Cure& src);
 		Cure(std::string const &type);
 		Cure & operator=(const Cure& src);
 		virtual ~Cure();

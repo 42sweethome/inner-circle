@@ -2,12 +2,13 @@
 
 AMateria::AMateria()
 {
-
+	std::cout << "new AMateria!" << std::endl;
 }
 
 AMateria::AMateria(std::string const &type)
 {
 	this->type = type;
+	std::cout << "new AMateria!" << std::endl;
 }
 
 AMateria::AMateria(const AMateria& src)

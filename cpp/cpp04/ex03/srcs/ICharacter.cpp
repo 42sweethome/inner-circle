@@ -2,9 +2,10 @@
 
 Character::Character()
 {
-	Name = "ddjs";
+	Name = "doyun";
 	for (int i = 0; i < 4; i++)
-		materia[i] = NULL;//????NULL 값 들가지나?
+		materia[i] = NULL;
+	std::cout << "new Character!" << std::endl;
 }
 
 Character::Character(const Character& src)
@@ -15,6 +16,9 @@ Character::Character(const Character& src)
 Character::Character(std::string const &Name)
 {
 	this->Name = Name;
+	for (int i = 0; i < 4; i++)
+		materia[i] = NULL;
+	std::cout << "new Character!" << std::endl;
 }
 
 Character & Character::operator=(const Character& src)
@@ -55,20 +59,24 @@ void Character::equip(AMateria *m)
 	{
 		if (materia[i] == NULL)
 		{
+			std::cout << i <<"'s " << m->getType() << " is equiped !" <<std::endl;
 			materia[i] = m;
-			break ;
+			return ;
 		}
 	}
 }
 
 void Character::unequip(int idx)
 {
-	if (idx >= 0 && idx <= 3)
+	if (materia[idx] && (idx >= 0 && idx <= 3))
+	{
+		std::cout << idx <<"'s " << materia[idx]->getType() << " is unequiped !" <<std::endl;
 		materia[idx] = NULL;
+	}
 }
 
 void Character::use(int idx, ICharacter &target)
 {
-	if (idx >= 0 && idx <= 3)
+	if (materia[idx] && (idx >= 0 && idx <= 3))
 		materia[idx]->use(target);
 }

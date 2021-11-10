@@ -2,10 +2,11 @@
 
 Cure::Cure()
 {
-	type = "Cure";
+	type = "cure";
+	std::cout << "new Cure!" << std::endl;
 }
 
-Cure::Cure(const Cure& src)
+Cure::Cure(const Cure& src) : AMateria (src)
 {
 	*this = src;
 }

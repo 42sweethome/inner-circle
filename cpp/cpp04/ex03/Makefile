@@ -2,7 +2,7 @@ NAME =		Materia
 
 CC =		clang++
 
-CXXFLAGS =	-Wall -Wextra -Werror
+CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror #-fsanitize=address -g3
 
 SRC =		main.cpp AMateria.cpp Ice.cpp IMateriaSource.cpp Cure.cpp ICharacter.cpp
 
@@ -15,7 +15,7 @@ INC_PATH = 	./includes
 all :		$(NAME)
 
 $(NAME) : $(OBJ)
-		$(CC) $(CXXFLAGS) -I $(INC_PATH) -o $@ $(SRC_PATH)
+		$(CC) $(CXXFLAGS) -I $(INC_PATH) -o $@ $^
 
 clean :
 			rm -f $(OBJ)

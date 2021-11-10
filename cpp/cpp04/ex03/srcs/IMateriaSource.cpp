@@ -4,7 +4,7 @@ MateriaSource::MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 		materia[i] = NULL;
-	std::cout << "new materia!" << std::endl;
+	std::cout << "new materiaSource!" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& src)
@@ -24,7 +24,7 @@ MateriaSource & MateriaSource::operator=(const MateriaSource& src)
 				materia[i] = NULL;
 		}
 	}
-	std::cout << "new materia!" << std::endl;
+	std::cout << "new materiaSource!" << std::endl;
 	return (*this);
 }
 
@@ -35,7 +35,7 @@ MateriaSource::~MateriaSource()
 		if (materia[i] != NULL)
 			delete materia[i];
 	}
-	std::cout << "delete Character!" << std::endl;
+	std::cout << "delete MateriaSource!" << std::endl;
 }
 
 void MateriaSource::learnMateria(AMateria *src)
@@ -45,16 +45,17 @@ void MateriaSource::learnMateria(AMateria *src)
 		if (materia[i] == NULL)
 		{
 			materia[i] = src;
-			break ;
+			return ;
 		}
 	}
+	delete src;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (materia[i]->getType() == type)
+		if (materia[i] && materia[i]->getType() == type)
 		{
 			return (materia[i]->clone());
 		}

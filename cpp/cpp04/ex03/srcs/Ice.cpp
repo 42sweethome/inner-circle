@@ -3,9 +3,10 @@
 Ice::Ice()
 {
 	type = "ice";
+	std::cout << "new Ice!" << std::endl;
 }
 
-Ice::Ice(const Ice& src)
+Ice::Ice(const Ice& src) : AMateria (src)
 {
 	*this = src;
 }
