@@ -2,7 +2,7 @@ NAME =		Bureaucrat
 
 CC =		clang++
 
-CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
+CXXFLAGS =	-Wall -Wextra -Werror
 
 SRC =		main.cpp Bureaucrat.cpp
 
@@ -11,7 +11,7 @@ OBJ = 		$(SRC:.cpp=.o)
 all :		$(NAME)
 
 $(NAME) : $(OBJ)
-		 $(CC) $(CXXFLAGS) -o $@ $^
+		 $(CC) $(CXXFLAGS) $(SRC) -o $@
 
 clean :	
 			rm -f $(OBJ)

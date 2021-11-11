@@ -2,7 +2,7 @@ NAME =		Materia
 
 CC =		clang++
 
-CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror #-fsanitize=address -g3
+CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
 SRC =		main.cpp AMateria.cpp Ice.cpp IMateriaSource.cpp Cure.cpp ICharacter.cpp
 

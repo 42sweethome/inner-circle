@@ -8,7 +8,7 @@ SRC =		ClapTrap.cpp ScavTrap.cpp FragTrap.cpp main.cpp
 
 SRC_PATH =	$(addprefix ./srcs/, $(SRC))
 
-OBJ = 	$(SRC_PATH:.cpp=.o)
+OBJ = 		$(SRC_PATH:.cpp=.o)
 
 INC_PATH = 	./includes
 

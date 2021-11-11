@@ -31,7 +31,7 @@ FragTrap & FragTrap::operator=(const FragTrap &src)
 
 FragTrap::~FragTrap()
 {
-   std::cout << "FragTrap is uncalled !"<< std::endl;
+   std::cout << "FragTrap <" << Name << "> is uncalled !"<< std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
@@ -41,5 +41,5 @@ FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 
 void FragTrap::highFiveGuys()
 {
-    std::cout << "FragTrap " << "HighFive !!"<< std::endl;
+    std::cout << "FragTrap <" << Name << "> HighFive !!"<< std::endl;
 }

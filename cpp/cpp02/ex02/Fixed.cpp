@@ -98,7 +98,13 @@ Fixed Fixed::operator*(const Fixed &src) const
 
 Fixed Fixed::operator/(const Fixed &src) const
 {
-	return (Fixed (toFloat() / src.toFloat()));
+	if (src.toFloat() == 0)
+	{
+		std::cout << "can't divide by ";
+		return (0);
+	}
+	else
+		return (Fixed (toFloat() / src.toFloat()));
 }
 
 Fixed& Fixed::operator++()
@@ -155,6 +161,7 @@ float Fixed::toFloat(void) const
 
 Fixed & Fixed::min(Fixed & src1, Fixed & src2)
 {
+	std::cout << "(min)";
 	if (src1.toFloat() < src2.toFloat())
 		return (src1);
 	else
@@ -163,25 +170,27 @@ Fixed & Fixed::min(Fixed & src1, Fixed & src2)
 
 Fixed & Fixed::max(Fixed & src1, Fixed & src2)
 {
+	std::cout << "(max)";
 	if (src1.toFloat() > src2.toFloat())
 		return (src1);
 	else
 		return (src2);
 }
 
-const Fixed & Fixed::min(Fixed const & src1, Fixed const & src2)
+const Fixed & Fixed::min(const Fixed & src1, const Fixed & src2)
 {
+	std::cout << "(const min)";
 	if (src1.toFloat() < src2.toFloat())
 		return (src1);
 	else
 		return (src2);
 }
 
-const Fixed & Fixed::max(Fixed const & src1, Fixed const & src2)
+const Fixed & Fixed::max(const Fixed & src1, const Fixed & src2)
 {
+	std::cout << "(const max)";
 	if (src1.toFloat() > src2.toFloat())
 		return (src1);
 	else
 		return (src2);
 }
-

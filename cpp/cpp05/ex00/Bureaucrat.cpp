@@ -57,7 +57,7 @@ void Bureaucrat::promotion()
     if (grade - 1 < 1)
         throw GradeTooHighException;
     grade--;
-    std::cout << *this;  
+    std::cout << *this;
 }
 
 void Bureaucrat::promotion(int changetheworld)

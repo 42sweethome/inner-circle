@@ -55,7 +55,7 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria *m)
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4 && m != NULL; i++)
 	{
 		if (materia[i] == NULL)
 		{
@@ -68,7 +68,7 @@ void Character::equip(AMateria *m)
 
 void Character::unequip(int idx)
 {
-	if (materia[idx] && (idx >= 0 && idx <= 3))
+	if ((idx >= 0 && idx <= 3) && materia[idx])
 	{
 		std::cout << idx <<"'s " << materia[idx]->getType() << " is unequiped !" <<std::endl;
 		materia[idx] = NULL;
@@ -77,6 +77,6 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter &target)
 {
-	if (materia[idx] && (idx >= 0 && idx <= 3))
+	if ((idx >= 0 && idx <= 3) && materia[idx])
 		materia[idx]->use(target);
 }

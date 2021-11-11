@@ -35,11 +35,13 @@ void Animal::addIdea(std::string idea, int i)
 {
 	idea = "";
 	i = 0;
+	std::cout << idea << i << std::endl;
 }
 
 std::string Animal::outputIdeas(int i) const
 {
 	i = 0;
+	std::cout << i << std::endl;
 	return("");
 }
 
