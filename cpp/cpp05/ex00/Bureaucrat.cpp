@@ -6,7 +6,7 @@ Bureaucrat::Bureaucrat() : name("cheolsoo")
     std::cout << "Create Bureaucrat!" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src) : name("cheolsoo")
+Bureaucrat::Bureaucrat(const Bureaucrat &src) : name(src.name)
 {
     *this = src;
 }    
