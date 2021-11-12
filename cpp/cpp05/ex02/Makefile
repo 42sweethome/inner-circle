@@ -4,7 +4,7 @@ CC =		clang++
 
 CXXFLAGS =	-fsanitize=address -g3 -Wall -Wextra -Werror
 
-SRC =		main.cpp Bureaucrat.cpp Form.cpp
+SRC =		main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp
 
 SRC_PATH =	$(addprefix ./srcs/, $(SRC))
 

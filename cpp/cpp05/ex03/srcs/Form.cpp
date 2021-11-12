@@ -1,6 +1,12 @@
 #include "../includes/Form.hpp"
 
-Form::Form(void) : name("paper"), signGrade(120), executeGrade(80)
+Form::Form() : name("paper"), signGrade(120), executeGrade(80)
+{
+    sign = false;
+    std::cout << "Create Form!" << std::endl;
+}
+
+Form::Form(std::string name, int signGrade, int executeGrade, std::string target) : name(name), signGrade(signGrade), executeGrade(executeGrade), target(target)
 {
     sign = false;
     std::cout << "Create Form!" << std::endl;
@@ -66,6 +72,11 @@ int Form::getExecuteGrade() const
 bool Form::getSign() const
 {
     return (sign);
+}
+
+std::string Form::getTarget() const
+{
+    return (target);
 }
 
 void Form::beSigned(const Bureaucrat &bur)
