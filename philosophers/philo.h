@@ -6,7 +6,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
-# include "./Libft/libft.h"
 
 typedef struct s_info
 {
@@ -42,5 +41,6 @@ int				ph_sleep(t_ph *ph);
 int				ph_eat(t_ph *ph);
 int				ph_init(int argc, char **argv, t_info **info, t_ph **ph);
 int				check_eatcount(t_ph *ph);
+int				ft_atoi(const char *str);
 
 #endif

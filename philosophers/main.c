@@ -104,7 +104,12 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		if (ph[++idx].die == 1 || check_eatcount(ph))
-			return (ft_free(info, ph));
+		{
+			idx = -1;
+			while (++idx < info->ph_num)
+				ph[idx].die = 1;
+			return (0);
+		}
 		if (idx == info->ph_num - 1)
 			idx = -1;
 	}
