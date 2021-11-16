@@ -4,7 +4,7 @@ CC = gcc -fsanitize=address -g3
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c action.c utils.c ft_atoi.c #ft_free.c
+SRCS = main.c action.c utils.c ft_atoi.c ft_free.c
 
 OBJS = $(SRCS:.c=.o)
 

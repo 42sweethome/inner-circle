@@ -42,5 +42,6 @@ int				ph_eat(t_ph *ph);
 int				ph_init(int argc, char **argv, t_info **info, t_ph **ph);
 int				check_eatcount(t_ph *ph);
 int				ft_atoi(const char *str);
+int				ft_free(t_info *info, t_ph *ph);
 
 #endif

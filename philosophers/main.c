@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 			idx = -1;
 			while (++idx < info->ph_num)
 				ph[idx].die = 1;
-			return (0);
+			return (ft_free(info, ph));
 		}
 		if (idx == info->ph_num - 1)
 			idx = -1;
