@@ -4,31 +4,22 @@ CC = gcc -fsanitize=address -g3
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c action.c utils.c
+SRCS = main.c action.c utils.c ft_atoi.c ft_free.c
 
 OBJS = $(SRCS:.c=.o)
 
-LIBFT = ./Libft
-
-LIBFT_A = $(addprefix $(LIBFT)/, libft.a)
-
 all : $(PHILO)
 
-$(PHILO) : $(OBJS) $(LIBFT_A)
-			$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT) -lft -o $@
+$(PHILO) : $(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $@
 
-$(LIBFT_A) : 
-				make -C $(LIBFT)
-
-clean : 
+clean :
 			rm -f $(OBJS)
-			make clean -C $(LIBFT)
 
 fclean : clean
 			rm -f $(PHILO)
-			make fclean -C $(LIBFT)
-			
+
 re :	fclean all
 
-.PHONY : all clean fclean re 
+.PHONY : all clean fclean re
 

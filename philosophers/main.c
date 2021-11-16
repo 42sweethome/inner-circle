@@ -51,6 +51,9 @@ int	info_parsing(t_info **info)
 	int		idx;
 
 	idx = -1;
+	check = pthread_mutex_init(&(*info)->ifdie, NULL);
+	if (check != 0)
+		return (print_error());
 	while (++idx < (*info)->ph_num)
 	{
 		check = pthread_mutex_init(&(*info)->fork[idx], NULL);
@@ -62,6 +65,25 @@ int	info_parsing(t_info **info)
 	return (0);
 }
 
+int	check_argument(char **argv)
+{
+	int idx;
+	int jdx;
+
+	idx = 0;
+	while (argv[++idx])
+	{
+		jdx = 0;
+		while (argv[idx][jdx])
+		{
+			if (argv[idx][jdx] < '0' || argv[idx][jdx] > '9')
+				return (-1);
+			jdx++;
+		}
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int			idx;
@@ -69,7 +91,7 @@ int	main(int argc, char **argv)
 	t_info		*info;
 	t_ph		*ph;
 
-	if (argc != 5 && argc != 6)
+	if ((argc != 5 && argc != 6) || check_argument(argv) == -1)
 		return (print_error());
 	check = ph_init(argc, argv, &info, &ph);
 	if (check == -1)
@@ -82,7 +104,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		if (ph[++idx].die == 1 || check_eatcount(ph))
-			break ;
+			return (ft_free(info, ph));
 		if (idx == info->ph_num - 1)
 			idx = -1;
 	}

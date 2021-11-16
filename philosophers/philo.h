@@ -11,6 +11,7 @@
 typedef struct s_info
 {
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	ifdie;
 	int				ph_num;
 	struct timeval	st;
 	unsigned int	st_t;

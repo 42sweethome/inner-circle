@@ -4,7 +4,8 @@ int	ph_die(t_ph *ph)
 {
 	if (present(ph) - ph->last_eat >= ph->in->die_t)
 	{
-		printf("time : %u, philo%d is died\n", present(ph), ph->id);
+		pthread_mutex_lock(&(ph->in->ifdie));
+		printf("%u %d died\n", present(ph), ph->id);
 		ph->die = 1;
 		return (1);
 	}
@@ -13,13 +14,17 @@ int	ph_die(t_ph *ph)
 
 int	ph_think(t_ph *ph)
 {
-	printf("time : %u, philo%d is thinking\n", present(ph), ph->id);
+	pthread_mutex_lock(&(ph->in->ifdie));
+	printf("%u %d is thinking\n", present(ph), ph->id);
+	pthread_mutex_unlock(&(ph->in->ifdie));
 	return (0);
 }
 
 int	ph_sleep(t_ph *ph)
 {
-	printf("time : %u, philo%d is sleeping\n", present(ph), ph->id);
+	pthread_mutex_lock(&(ph->in->ifdie));
+	printf("%u %d is sleeping\n", present(ph), ph->id);
+	pthread_mutex_unlock(&(ph->in->ifdie));
 	ph->sl_st = present(ph);
 	doing(ph, ph->in->sleep_t, ph->sl_st);
 	if (ph_die(ph))
@@ -43,10 +48,13 @@ int	fork_mutex(t_ph *ph)
 		pthread_mutex_unlock(&(ph->in->fork[ph->id - 1]));
 		return (1);
 	}
-	printf("time : %u, philo%d has taken a fork\n", present(ph), ph->id);
-	printf("time : %u, philo%d is %d eating\n", present(ph), ph->id, ++ph->eat);
+	pthread_mutex_lock(&(ph->in->ifdie));
+	printf("%u %d has taken a fork\n", present(ph), ph->id);
+	printf("%u %d is eating\n", present(ph), ph->id);
+	pthread_mutex_unlock(&(ph->in->ifdie));
 	ph->eat_st = present(ph);
 	doing(ph, ph->in->eat_t, ph->eat_st);
+	++ph->eat;
 	pthread_mutex_unlock(&(ph->in->fork[fork]));
 	pthread_mutex_unlock(&(ph->in->fork[ph->id - 1]));
 	return (0);
