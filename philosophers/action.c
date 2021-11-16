@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 18:23:13 by doyun             #+#    #+#             */
+/*   Updated: 2021/11/16 19:27:20 by doyun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./philo.h"
 
 int	ph_die(t_ph *ph)
@@ -6,7 +18,7 @@ int	ph_die(t_ph *ph)
 	{
 		pthread_mutex_lock(&(ph->in->ifdie));
 		if (ph->die == 1)
-		return (1);
+			return (1);
 		printf("%u %d died\n", present(ph), ph->id);
 		ph->die = 1;
 		return (1);
@@ -57,8 +69,7 @@ int	fork_mutex(t_ph *ph)
 	pthread_mutex_lock(&(ph->in->ifdie));
 	if (ph->die == 1)
 		return (1);
-	printf("%u %d has taken a fork\n", present(ph), ph->id);
-	printf("%u %d is eating %d\n", present(ph), ph->id, ph->eat);
+	print_eatting(ph);
 	pthread_mutex_unlock(&(ph->in->ifdie));
 	ph->eat_st = present(ph);
 	doing(ph, ph->in->eat_t, ph->eat_st);

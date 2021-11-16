@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: doyun <doyun@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/16 18:23:45 by doyun             #+#    #+#             */
+/*   Updated: 2021/11/16 19:22:26 by doyun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./philo.h"
 
 void	*ph_life(void *ph_info)
@@ -67,8 +79,8 @@ int	info_parsing(t_info **info)
 
 int	check_argument(char **argv)
 {
-	int idx;
-	int jdx;
+	int	idx;
+	int	jdx;
 
 	idx = 0;
 	while (argv[++idx])
@@ -86,7 +98,6 @@ int	check_argument(char **argv)
 
 int	main(int argc, char **argv)
 {
-	int			idx;
 	int			check;
 	t_info		*info;
 	t_ph		*ph;
@@ -100,18 +111,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	if (birth_philo(ph, &info))
 		return (-1);
-	idx = -1;
-	while (1)
-	{
-		if (ph[++idx].die == 1 || check_eatcount(ph))
-		{
-			idx = -1;
-			while (++idx < info->ph_num)
-				ph[idx].die = 1;
-			return (ft_free(info, ph));
-		}
-		if (idx == info->ph_num - 1)
-			idx = -1;
-	}
+	check_fin(info, ph);
 	return (0);
 }
