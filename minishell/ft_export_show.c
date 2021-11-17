@@ -45,6 +45,8 @@ void	print_env(char **sort_arr)
 			{
 				v_flag = 1;
 				printf("\"");
+				if (sort_arr[idx][jdx] == '=' && sort_arr[idx][jdx + 1] == 0)
+					printf("\"");
 			}
 		}
 		printf("\n");

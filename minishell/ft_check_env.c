@@ -3,7 +3,7 @@
 int	env_exit_stat(t_mini *mini, char **env, int *len)
 {
 	*env = ft_itoa(mini->exit_stat);
-	*len = 1;
+	*len = ft_strlen(*env);
 	return (0);
 }
 

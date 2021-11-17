@@ -13,7 +13,7 @@ int	main_loop(t_mini *mini)
 		str = readline("minishell $ ");
 		if (!str)
 			sig_ctrl_d();
-		if (str == 0 || *str == 0)
+		if (*str == 0)
 		{
 			free(str);
 			continue ;
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_mini	mini;
 
-	if (argc != 1 || argv[1] != 0)
+	if (argc != 1)
 	{
 		mini.err.argv = -4;
 		cmd_err(argv[1], mini.err.argv, &mini);

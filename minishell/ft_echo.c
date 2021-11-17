@@ -59,6 +59,8 @@ void	ft_echo(t_mini *mini)
 	int	idx;
 
 	idx = mini->first;
+	if (mini->buf[idx + 1] == 0)
+		printf("\n");
 	while (mini->buf[++idx])
 	{
 		if (mini->upper == 1)
@@ -71,5 +73,5 @@ void	ft_echo(t_mini *mini)
 			if (echo_lower(mini, &idx))
 				break ;
 		}
-	}	
+	}
 }

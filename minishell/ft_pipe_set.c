@@ -91,7 +91,7 @@ void	cmd_offset(t_mini *mini, int *i)
 	while (mini->buf[(*i)++])
 	{
 		if (ft_strncmp(mini->buf[*i], "|", 2) == 0)
-		{	
+		{
 			(*i)++;
 			break ;
 		}

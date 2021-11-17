@@ -68,7 +68,7 @@ int	spliting(char *s, char space, char **new, t_mini *mini)
 	i = 0;
 	count = 0;
 	while (s[i])
-	{			
+	{
 		if (s[i] && s[i] != space && s[i] != '|' && s[i] != '<' && s[i] != '>')
 		{
 			split_init(mini);
