@@ -12,16 +12,18 @@
 	int sign;
 	int point;
 	int isfloat;
-	int pseudo; //
-	int isstring; //
-	int ischar; //
-	int isprint; //
-	int p_zero;
+	int pseudo;
+	int isstring;
+	int ischar;
+	int isprint;
+	int d_zero;
+	int f_zero;
+	float fnum;
 	double dounum;
 } t_info;
 
 
-class conversion
+class conversion // canonical form check????
 {
 	public:
 	int	i;
@@ -35,5 +37,13 @@ class conversion
 	conversion(float src);
 	conversion(double src);
 };
+
+int ft_strlen(char *argv);
+void check_isprint(char *argv, t_info *conv_info);
+int check_pseudo(char **argv);
+void check_string(char **argv, t_info *conv_info);
+int get_num_info(char *argv , int idx, t_info *conv_info);
+int check_num(char c);
+void classify_type(char *argv, t_info *conv_info);
 
 #endif
