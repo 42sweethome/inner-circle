@@ -4,16 +4,20 @@ CC =		clang++
 
 CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
-SRC =		PhoneBook.cpp
+SRC =		PhoneBook.cpp Contact.cpp
 
-OBJ = 		$(SRC:.cpp=.o)
+SRC_PATH =	$(addprefix ./srcs/, $(SRC))
+
+OBJ = 	$(SRC_PATH:.cpp=.o)
+
+INC_PATH = 	./includes
 
 all :		$(NAME)
 
 $(NAME) : $(OBJ)
-		 $(CC) $(CXXFLAGS) -o $@ $^
+		$(CC) $(CXXFLAGS) -I $(INC_PATH) -o $@ $^
 
-clean :	
+clean :
 			rm -f $(OBJ)
 
 fclean :	clean

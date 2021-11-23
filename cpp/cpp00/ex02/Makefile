@@ -4,7 +4,7 @@ CC =		clang++
 
 CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
-SRC =		Account.cpp test.cpp
+SRC =		Account.cpp tests.cpp
 
 OBJ = 		$(SRC:.cpp=.o)
 

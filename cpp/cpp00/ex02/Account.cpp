@@ -73,8 +73,7 @@ Account::~Account()
 	_displayTimestamp();
 	std::cout << " index:" << _accountIndex << \
 	";amount:" << _amount << ";closed";
-	if (_accountIndex != 7)
-		std::cout << std::endl;
+	std::cout << std::endl;
 }
 
 void	Account::makeDeposit( int deposit )
