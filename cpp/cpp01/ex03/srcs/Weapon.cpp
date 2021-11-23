@@ -2,8 +2,7 @@
 
 const std::string& Weapon::getType()
 {
-	const std::string& type = this->type;
-	return (type);
+	return (this->type);
 }
 
 void Weapon::setType(std::string type)

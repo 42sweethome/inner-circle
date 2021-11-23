@@ -17,7 +17,12 @@ void    Zombie::announce(void)
 
 void    Zombie::set_name(std::string name, int i)
 {
-    this->name = name + std::to_string(i);
+    std::string str;
+    std::stringstream num;
+    
+    num << i;
+    str = num.str();
+    this->name = name + str;
 }
 
 Zombie::~Zombie()

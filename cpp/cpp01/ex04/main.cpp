@@ -30,12 +30,11 @@ int main(int argc, char **argv)
 	try
 	{
 		newFile.open(name + ".replace", std::ios::out);
-		if (newFile.fail())
-			throw newFile.fail();
 	}
-	catch (int error)
+	catch (std::fstream::failure e)
 	{
 		std::cout << "Error : open" << std::endl;
+		dataFile.close();
 		return (-1);
 	}
 	try
@@ -66,5 +65,7 @@ int main(int argc, char **argv)
 		if(!dataFile.eof())
 			std::cout << "Error : getline" << std::endl;
 	}
+	dataFile.close();
+	newFile.close();
 	return (0);
 }
