@@ -20,6 +20,7 @@ void	ft_free(t_info *info, t_ph *ph)
 	while (++idx < info->ph_num)
 		pthread_mutex_destroy(&info->fork[idx]);
 	pthread_mutex_destroy(&info->ifdie);
+	free(info->fork);
 	free(info);
 	free(ph);
 }
