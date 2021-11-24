@@ -30,16 +30,13 @@ int main( void )
 
 	std::cout << "b	= " << b << std::endl;
 
-	Fixed *c = new Fixed();
-	Fixed *d = new Fixed(123);
+	Fixed c;
+	Fixed d(123);
 
 	std::cout << "max( a, b ) = " << Fixed::max( a, b ) << std::endl;
 	std::cout << "min( a, b ) = " << Fixed::min( a, b ) << std::endl;
-	std::cout << "max( *c, *d ) = " << Fixed::max( *c, *d ) << std::endl;
-	std::cout << "min( *c, *d ) = " << Fixed::min( *c, *d ) << std::endl;
+	std::cout << "max( c, d ) = " << Fixed::max( c, d ) << std::endl;
+	std::cout << "min( c, d ) = " << Fixed::min( c, d ) << std::endl;
 
-	delete c;
-	delete d;
-
-	return 0;
+	return (0);
 }
