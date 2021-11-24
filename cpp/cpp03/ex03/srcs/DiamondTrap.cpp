@@ -9,7 +9,7 @@ DiamondTrap::DiamondTrap(void)
     std::cout << "DiamondTrap <" << Name << "> is called !"<< std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name) 
+DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name)
 {
     this->Name = name;
     ClapTrap::Name = name + "_clap_name";
