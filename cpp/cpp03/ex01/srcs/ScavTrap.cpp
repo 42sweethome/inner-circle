@@ -37,6 +37,7 @@ ScavTrap::~ScavTrap()
 ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src)
 {
 	*this = src;
+    std::cout << "ScavTrap <" << Name << "> is copy called !"<< std::endl;
 }
 
 void ScavTrap::guardGate()

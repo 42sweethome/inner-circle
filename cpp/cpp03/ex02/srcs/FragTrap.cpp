@@ -37,6 +37,7 @@ FragTrap::~FragTrap()
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 {
 	*this = src;
+   std::cout << "FragTrap <" << Name << "> is copy called !"<< std::endl;
 }
 
 void FragTrap::highFiveGuys()

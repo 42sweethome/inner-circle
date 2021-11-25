@@ -38,6 +38,7 @@ ClapTrap & ClapTrap::operator=(const ClapTrap &src)
 ClapTrap::ClapTrap(const ClapTrap &src)
 {
 	*this = src;
+    std::cout << "ClapTrap <" << Name << "> is copy called !"<< std::endl;
 }
 
 void ClapTrap::attack(std::string const & target)

@@ -10,7 +10,7 @@ ScavTrap::ScavTrap(void)
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
-{ 
+{
     Hitpoints = 100;
     Energy_points = 50;
     Attack_damage = 20;
@@ -37,6 +37,7 @@ ScavTrap::~ScavTrap()
 ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src)
 {
 	*this = src;
+    std::cout << "ScavTrap <" << Name << "> is copy called !"<< std::endl;
 }
 
 void ScavTrap::guardGate()
