@@ -17,6 +17,7 @@ int main(void)
     delete j;
     delete meta;
 
+    std::cout << std::endl;
 
     const WrongAnimal* alpha = new WrongAnimal();
     const WrongAnimal* k = new WrongCat();
