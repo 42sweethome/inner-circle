@@ -79,6 +79,7 @@ int main()
 	me->unequip(5);
 	delete tmp7;
 
+
 	delete bob;
 	delete me;
 	delete src;

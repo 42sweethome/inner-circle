@@ -2,6 +2,7 @@
 
 AMateria::AMateria()
 {
+	type = "";
 	std::cout << "new AMateria!" << std::endl;
 }
 
@@ -14,6 +15,7 @@ AMateria::AMateria(std::string const &type)
 AMateria::AMateria(const AMateria& src)
 {
 	*this = src;
+	std::cout << "copy AMateria!" << std::endl;
 }
 
 AMateria & AMateria::operator=(const AMateria& src)
@@ -22,7 +24,6 @@ AMateria & AMateria::operator=(const AMateria& src)
 	{
 		type = src.getType();
 	}
-	std::cout << "new AMateria!" << std::endl;
 	return (*this);
 }
 

@@ -44,13 +44,6 @@ std::string Brain::outputIdeas(int i) const
 void Brain::showIdeas() const
 {
     for(int i = 0; i < 100; i++)
-        std::cout << i << " : " << ideas[i] << std::endl;
-}
-
-void Brain::dupIdeas(const Animal &animal)
-{
-    for (int i = 0; i < 100; i++)
-    {
-        ideas[i] = animal.outputIdeas(i);
-    }
+        if (ideas[i] != "")
+            std::cout << i << " : " << ideas[i] << std::endl;
 }

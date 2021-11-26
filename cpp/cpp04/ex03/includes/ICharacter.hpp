@@ -20,6 +20,7 @@ class Character : public ICharacter
 	private:
 		std::string Name;
 		AMateria *materia[4];
+		
 	public:
 		Character();
 		Character(std::string const &Name);

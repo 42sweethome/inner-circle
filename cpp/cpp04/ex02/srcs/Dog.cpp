@@ -10,6 +10,7 @@ Dog::Dog(void)
 Dog::Dog(const Dog &src) : Animal(src)
 {
 	*this = src;
+	std::cout << "Dog copy Born!" << std::endl;
 }
 
 Dog::~Dog(void)
@@ -27,7 +28,6 @@ Dog & Dog::operator=(const Dog &src)
 		for (int i = 0; i < 100; i++)
 			brain->copyIdeas(src.brain->outputIdeas(i), i);
 	}
-	std::cout << "Dog copy Born!" << std::endl;
 	return (*this);
 }
 
@@ -50,9 +50,4 @@ void Dog::showIdeas() const
 std::string Dog::outputIdeas(int i) const
 {
     return (brain->outputIdeas(i));
-}
-
-void Dog::dupIdeas(const Animal &animal)
-{
-    brain->dupIdeas(animal);
 }

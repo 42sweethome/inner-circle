@@ -2,7 +2,7 @@
 
 Character::Character()
 {
-	Name = "doyun";
+	Name = "";
 	for (int i = 0; i < 4; i++)
 		materia[i] = NULL;
 	std::cout << "new Character!" << std::endl;
@@ -11,6 +11,7 @@ Character::Character()
 Character::Character(const Character& src)
 {
 	*this = src;
+	std::cout << "copy Character!" << std::endl;
 }
 
 Character::Character(std::string const &Name)
@@ -34,7 +35,6 @@ Character & Character::operator=(const Character& src)
 				materia[i] = NULL;
 		}
 	}
-	std::cout << "new Character!" << std::endl;
 	return (*this);
 }
 

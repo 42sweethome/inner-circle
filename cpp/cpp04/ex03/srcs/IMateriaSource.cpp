@@ -10,6 +10,7 @@ MateriaSource::MateriaSource()
 MateriaSource::MateriaSource(const MateriaSource& src)
 {
 	*this = src;
+	std::cout << "copy materiaSource!" << std::endl;
 }
 
 MateriaSource & MateriaSource::operator=(const MateriaSource& src)
@@ -24,7 +25,6 @@ MateriaSource & MateriaSource::operator=(const MateriaSource& src)
 				materia[i] = NULL;
 		}
 	}
-	std::cout << "new materiaSource!" << std::endl;
 	return (*this);
 }
 

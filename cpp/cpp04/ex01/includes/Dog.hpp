@@ -6,6 +6,9 @@
 
 class Dog : public Animal
 {
+    private:
+        Brain *brain;
+
     public:
         Dog();
         Dog(const Dog & src);
@@ -17,9 +20,6 @@ class Dog : public Animal
         void addIdea(std::string idea, int i);
         void showIdeas() const;
         std::string outputIdeas(int i) const;
-        void dupIdeas(const Animal &animal);
-    private:
-        Brain *brain;
 };
 
 #endif

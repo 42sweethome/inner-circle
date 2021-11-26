@@ -8,7 +8,7 @@ Ice::Ice()
 
 Ice::Ice(const Ice& src) : AMateria (src)
 {
-	*this = src;
+	std::cout << "new Ice!" << std::endl;
 }
 
 Ice & Ice::operator=(const Ice& src)
@@ -17,7 +17,6 @@ Ice & Ice::operator=(const Ice& src)
 	{
 		type = src.getType();
 	}
-	std::cout << "new Ice!" << std::endl;
 	return (*this);
 }
 

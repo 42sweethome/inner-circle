@@ -5,6 +5,9 @@
 
 class Brain
 {
+    private:
+        std::string ideas[100];
+
     public:
         Brain();
         Brain(const Brain & src);
@@ -15,9 +18,6 @@ class Brain
         void copyIdeas(std::string idea, int i);
         std::string outputIdeas(int i) const;
         void showIdeas() const;
-        void dupIdeas(const Animal &animal);
-    private:
-        std::string ideas[100];
 };
 
 #endif

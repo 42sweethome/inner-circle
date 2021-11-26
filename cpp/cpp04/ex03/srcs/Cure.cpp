@@ -8,7 +8,7 @@ Cure::Cure()
 
 Cure::Cure(const Cure& src) : AMateria (src)
 {
-	*this = src;
+	std::cout << "copy Cure!" << std::endl;
 }
 
 Cure & Cure::operator=(const Cure& src)
@@ -17,7 +17,6 @@ Cure & Cure::operator=(const Cure& src)
 	{
 		type = src.getType();
 	}
-	std::cout << "new Cure!" << std::endl;
 	return (*this);
 }
 

@@ -8,8 +8,8 @@ Animal::Animal(void)
 
 Animal::Animal(const Animal &src)
 {
-	std::cout << "Animal copy Born!" << std::endl;
 	*this = src;
+	std::cout << "Animal copy Born!" << std::endl;
 }
 
 Animal::~Animal(void)

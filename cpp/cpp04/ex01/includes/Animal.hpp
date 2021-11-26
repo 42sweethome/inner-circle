@@ -8,6 +8,7 @@ class Animal
 {
     protected:
         std::string type;
+
     public:
         Animal();
         Animal(const Animal & src);
@@ -15,12 +16,10 @@ class Animal
      	
         Animal & operator=(const Animal &src);
 
-        virtual void makeSound() const {};
         std::string getType() const;
+        virtual void makeSound() const {};
         virtual void addIdea(std::string idea, int i);
         virtual void showIdeas() const {};
-        virtual std::string outputIdeas(int i) const;
-        virtual void dupIdeas(const Animal &animal);
 };
 
 #endif
