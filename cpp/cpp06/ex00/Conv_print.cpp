@@ -49,8 +49,8 @@ void classify_type(char *argv, t_info *conv_info)
 	{
 		std::cout << "char: " << argv[0] << std::endl;
 		std::cout << "int: " << static_cast<int> (argv[0]) <<std::endl;
-		std::cout << "float: " << static_cast<float> (argv[0]) << std::endl;
-		std::cout << "double: " << static_cast<double> (argv[0]) << std::endl;
+		std::cout << "float: " << static_cast<float> (argv[0]) << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double> (argv[0]) << ".0" << std::endl;
 		return ;
 	}
 	classify_ntype(conv_info);

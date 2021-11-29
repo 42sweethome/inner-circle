@@ -19,7 +19,7 @@ void check_param(char *argv, t_info *conv_info)
 		else
 			break ;
 	}
-	if (ret)
+	if (ret && argv[0])
 		check_string(&argv, conv_info);
 	else
 		check_isprint(argv, conv_info);

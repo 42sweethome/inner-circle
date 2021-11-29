@@ -28,7 +28,7 @@ void check_isprint(char *argv, t_info *conv_info)
 	if (round(abs(conv_info->fnum - atoi(argv)) * pow(10, 6 - conv_info->point))\
 						/ pow(10, 6 - conv_info->point) <= f_tmp)
 		conv_info->f_zero = 1;
-	if ((conv_info->dounum >= 0 && conv_info->dounum <= 31) \
+	if ((conv_info->dounum > -1 && conv_info->dounum < 32) \
 	|| conv_info->dounum == 127)
 		conv_info->isprint = 1;
 }
