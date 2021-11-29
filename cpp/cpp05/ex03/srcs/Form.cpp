@@ -1,6 +1,6 @@
 #include "../includes/Form.hpp"
 
-Form::Form() : name("paper"), signGrade(120), executeGrade(80)
+Form::Form() : name("paper"), signGrade(120), executeGrade(80), target("")
 {
     sign = false;
     std::cout << "Create Form!" << std::endl;
@@ -8,19 +8,7 @@ Form::Form() : name("paper"), signGrade(120), executeGrade(80)
 
 Form::Form(std::string name, int signGrade, int executeGrade, std::string target) : name(name), signGrade(signGrade), executeGrade(executeGrade), target(target)
 {
-    sign = false;
-    std::cout << "Create Form!" << std::endl;
-}
-
-Form::Form(const Form &src) : name(src.name), signGrade(120), executeGrade(80)
-{
-    *this = src;
-}
-
-Form::Form(const int signGrade, const int executeGrade) : \
-    name("paper"), signGrade(signGrade), executeGrade(executeGrade)
-{
-    if (signGrade < 1 || executeGrade < 1)
+	if (signGrade < 1 || executeGrade < 1)
         throw GradeTooHighException;
     else if (signGrade > 150 || executeGrade > 150)
         throw GradeTooLowException;
@@ -28,14 +16,16 @@ Form::Form(const int signGrade, const int executeGrade) : \
     std::cout << "Create Form!" << std::endl;
 }
 
+Form::Form(const Form &src) : name(src.getName()), signGrade(src.signGrade), executeGrade(src.getExecuteGrade()), target(src.getTarget())
+{
+    std::cout << "Create Copy Form!" << std::endl;
+    *this = src;
+}
 
 Form& Form::operator=(const Form &src)
 {
     if (this != &src)
-    {
         sign = src.sign;
-        std::cout << "Create Form!" << std::endl;
-    }
     return (*this);
 }
 
@@ -87,4 +77,9 @@ void Form::beSigned(const Bureaucrat &bur)
         throw *GradeTooLowException;
     }
     sign = true;
+}
+
+const char *IsSignedException::what() const throw()
+{
+	return ("Not signed");
 }

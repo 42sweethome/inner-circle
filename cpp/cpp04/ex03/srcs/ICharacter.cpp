@@ -8,7 +8,7 @@ Character::Character()
 	std::cout << "new Character!" << std::endl;
 }
 
-Character::Character(const Character& src)
+Character::Character(Character& src)
 {
 	*this = src;
 	std::cout << "copy Character!" << std::endl;
@@ -22,7 +22,7 @@ Character::Character(std::string const &Name)
 	std::cout << "new Character!" << std::endl;
 }
 
-Character & Character::operator=(const Character& src)
+Character & Character::operator=(Character& src)
 {
 	if (this != &src)
 	{
@@ -30,7 +30,11 @@ Character & Character::operator=(const Character& src)
 		for (int i = 0; i < 4; i++)
 		{
 			if (src.materia[i] != NULL)
-				materia[i] = src.materia[i];
+			{
+				materia[i] = src.materia[i]->clone();
+				delete src.materia[i];
+				src.materia[i] = 0;
+			}
 			else
 				materia[i] = NULL;
 		}
@@ -43,7 +47,9 @@ Character::~Character()
 	for (int i = 0; i < 4; i++)
 	{
 		if (materia[i] != NULL)
+		{
 			delete materia[i];
+		}
 	}
 	std::cout << "delete Character!" << std::endl;
 }

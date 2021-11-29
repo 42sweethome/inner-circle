@@ -6,10 +6,11 @@ Bureaucrat::Bureaucrat() : name("cheolsoo")
     std::cout << "Create Bureaucrat!" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src) : name("cheolsoo")
+Bureaucrat::Bureaucrat(const Bureaucrat &src) : name(src.name)
 {
     *this = src;
-}    
+	std::cout << "Create Copy Bureaucrat!" << std::endl;
+}
 
 Bureaucrat::Bureaucrat(const int grade) : name("cheolsoo")
 {
@@ -19,15 +20,12 @@ Bureaucrat::Bureaucrat(const int grade) : name("cheolsoo")
         throw GradeTooLowException;
     this->grade = grade;
     std::cout << "Create Bureaucrat!" << std::endl;
-}  
+}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &src)
 {
     if (this != &src)
-    {
         grade = src.getGrade();
-        std::cout << "Create Bureaucrat!" << std::endl;
-    }
     return (*this);
 }
 
@@ -86,6 +84,14 @@ void Bureaucrat::demotion(int changetheworld)
 
 void Bureaucrat::signForm(Form &src)
 {
+	try
+    {
+        src.beSigned(*this);
+    }
+    catch (std::exception & e)
+    {
+        std::cout << e.what() << std::endl;
+    }
     if (src.getSign() == true)
     {
         std::cout << "<" << getName() << \
@@ -100,7 +106,33 @@ void Bureaucrat::signForm(Form &src)
     }
 }
 
-/*void Bureaucrat::executeForm(Form const & form)
+void Bureaucrat::executeForm(Form const & form)
 {
-    
-}*/
+    if (form.getSign() != true)
+    {
+        std::cout << "<" << getName() << \
+        "> cannot excute <" << form.getName() << \
+        "> because <Not signed !!!>" << std::endl;
+    }
+    else if (form.getExecuteGrade() < grade)
+    {
+        std::cout << "<" << getName() << \
+        "> cannot excute <" << form.getName() << \
+        "> because <Too Low !!!>" << std::endl;
+    }
+    else
+    {
+        form.execute(*this);
+        std::cout << "<" << getName() << "> executes <" << form.getName() << ">" << std::endl;
+    }
+}
+
+const char *HighException::what() const throw()
+{
+	return ("Too High !!!");
+}
+
+const char *LowException::what() const throw()
+{
+	return ("Too Low !!!");
+}

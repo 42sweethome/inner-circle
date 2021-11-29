@@ -7,17 +7,17 @@ Intern::Intern()
 
 Intern::Intern(const Intern &src)
 {
+	std::cout << "Create Copy Intern!" << std::endl;
     *this = src;
 }
 
 Intern& Intern::operator=(const Intern &src)
 {
     if (this != &src)
-    {
-        std::cout << "Create Intern!" << std::endl;
-    }
+    	;
     return (*this);
 }
+
 Intern::~Intern()
 {
     std::cout << "Delete Intern!" << std::endl;
@@ -28,7 +28,7 @@ Form *Intern::makeForm(std::string form, std::string target) const
     Form *ret;
     int idx;
 	std::string	arr[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
-    
+
 	idx = -1;
 	while (++idx < 3 && form.compare(arr[idx]))
 		;

@@ -10,11 +10,9 @@ class Bureaucrat;
 class IsSignedException : public std::exception
 {
     public:
-        const char *what() const throw()
-        {
-            return ("Not signed");
-        }
-}; 
+        const char *what() const throw();
+};
+
 class Form
 {
     private:
@@ -23,6 +21,7 @@ class Form
         const int executeGrade;
         bool sign;
         std::string target;
+
     public:
         Form();
         Form(const Form &src);

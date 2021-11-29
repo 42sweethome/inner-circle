@@ -5,8 +5,9 @@ RobotomyRequestForm::RobotomyRequestForm() : Form("Robotomy Form", 72, 45, "Robo
     std::cout << "Create RobotomyRequestForm!" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : Form(src)
 {
+    std::cout << "Create Copy RobotomyRequestForm!" << std::endl;
     *this = src;
 }
 
@@ -18,10 +19,8 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string target) : Form("Robot
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &src)
 {
     if (this != &src)
-        {
-            std::cout << "Create RobotomyRequestForm!" << std::endl;
-        }
-        return (*this);
+        ;
+    return (*this);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

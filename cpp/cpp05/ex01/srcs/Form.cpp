@@ -8,28 +8,25 @@ Form::Form(void) : name("paper"), signGrade(120), executeGrade(80)
 
 Form::Form(const Form &src) : name(src.name), signGrade(120), executeGrade(80)
 {
+    std::cout << "Create Copy Form!" << std::endl;
     *this = src;
 }
 
-Form::Form(const int signGrade, const int executeGrade) : \
-    name("paper"), signGrade(signGrade), executeGrade(executeGrade)
+Form::Form(const std::string name, const int signGrade, const int executeGrade) : \
+    name(name), signGrade(signGrade), executeGrade(executeGrade)
 {
     if (signGrade < 1 || executeGrade < 1)
         throw GradeTooHighException;
     else if (signGrade > 150 || executeGrade > 150)
         throw GradeTooLowException;
     sign = false;
-    std::cout << "Create Form!" << std::endl;
-}
 
+}
 
 Form& Form::operator=(const Form &src)
 {
     if (this != &src)
-    {
         sign = src.sign;
-        std::cout << "Create Form!" << std::endl;
-    }
     return (*this);
 }
 

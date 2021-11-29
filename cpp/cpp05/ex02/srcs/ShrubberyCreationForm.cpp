@@ -5,8 +5,9 @@ ShrubberyCreationForm::ShrubberyCreationForm() : Form("Shrubbery Form", 145, 137
     std::cout << "Create ShrubberyCreationForm!" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : Form(src)
 {
+    std::cout << "Create Copy ShrubberyCreationForm!" << std::endl;
     *this = src;
 }
 
@@ -18,10 +19,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) : Form("S
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &src)
 {
     if (this != &src)
-        {
-            std::cout << "Create ShrubberyCreationForm!" << std::endl;
-        }
-        return (*this);
+        ;
+    return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
@@ -33,7 +32,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
     std::fstream file;
     std::string shrubbery;
-    
+
     if (getSign() == false)
         throw NotSignedException;
     if (executor.getGrade() > getExecuteGrade())

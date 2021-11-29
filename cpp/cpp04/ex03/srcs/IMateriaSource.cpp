@@ -33,7 +33,9 @@ MateriaSource::~MateriaSource()
 	for (int i = 0; i < 4; i++)
 	{
 		if (materia[i] != NULL)
+		{
 			delete materia[i];
+		}
 	}
 	std::cout << "delete MateriaSource!" << std::endl;
 }

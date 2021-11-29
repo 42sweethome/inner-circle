@@ -9,16 +9,17 @@ int main()
     try
     {
         Bureaucrat cheolsoo(2);
+		Bureaucrat zzanggoo(2);
         ShrubberyCreationForm sh("warrr_Mansion");
         PresidentialPardonForm pr("cheolsoo");
         RobotomyRequestForm ro("robo");
-    
-        sh.beSigned(cheolsoo);
-        sh.execute(cheolsoo);
-        ro.beSigned(cheolsoo);
-        ro.execute(cheolsoo);
-        pr.beSigned(cheolsoo);
-        pr.execute(cheolsoo);
+
+        zzanggoo.signForm(sh);
+        cheolsoo.executeForm(sh);
+		zzanggoo.signForm(ro);
+        cheolsoo.executeForm(ro);
+        zzanggoo.signForm(pr);
+        cheolsoo.executeForm(pr);
     }
     catch (std::exception & e)
     {
@@ -37,8 +38,8 @@ int main()
 
         try
         {
-            sh.beSigned(cheolsoo);
-            sh.execute(cheolsoo);
+            cheolsoo.signForm(sh);
+            cheolsoo.executeForm(sh);
         }
         catch(std::exception& e)
         {
@@ -46,8 +47,8 @@ int main()
         }
         try
         {
-            ro.beSigned(yuri);
-            ro.execute(yuri);
+            yuri.signForm(ro);
+            yuri.executeForm(ro);
         }
         catch(std::exception& e)
         {
@@ -55,14 +56,13 @@ int main()
         }
         try
         {
-            pr.beSigned(hoon);
-            pr.execute(hoon);
+            hoon.signForm(pr);
+            hoon.executeForm(pr);
         }
         catch(std::exception& e)
         {
             std::cout << e.what() << std::endl;
         }
-        
     }
     catch (std::exception & e)
     {
