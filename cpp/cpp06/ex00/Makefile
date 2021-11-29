@@ -4,7 +4,7 @@ CC =		clang++
 
 CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
-SRC =		Conversion.cpp Conv_print.cpp Conv_check.cpp
+SRC =		Conversion.cpp main.cpp
 
 OBJ = 		$(SRC:.cpp=.o)
 
