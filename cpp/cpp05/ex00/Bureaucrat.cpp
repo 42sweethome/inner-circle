@@ -12,7 +12,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &src) : name(src.name)
     *this = src;
 }
 
-Bureaucrat::Bureaucrat(const int grade) : name("cheolsoo")
+Bureaucrat::Bureaucrat(const std::string name, const int grade) : name(name)
 {
     if (grade < 1)
         throw GradeTooHighException;

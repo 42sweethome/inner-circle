@@ -19,8 +19,8 @@ Form::Form(const std::string name, const int signGrade, const int executeGrade) 
         throw GradeTooHighException;
     else if (signGrade > 150 || executeGrade > 150)
         throw GradeTooLowException;
+    std::cout << "Create Form!" << std::endl;
     sign = false;
-
 }
 
 Form& Form::operator=(const Form &src)
