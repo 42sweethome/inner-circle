@@ -10,19 +10,13 @@ class Form;
 class HighException : public std::exception
 {
     public:
-        const char *what() const throw()
-        {
-            return ("Too High !!!");
-        }
+        const char *what() const throw();
 };
 
 class LowException : public std::exception
 {
     public:
-        const char *what() const throw()
-        {
-            return("Too Low !!!");
-        }
+        const char *what() const throw();
 };
 
 class Bureaucrat

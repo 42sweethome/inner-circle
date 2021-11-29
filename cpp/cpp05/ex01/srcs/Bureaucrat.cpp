@@ -105,3 +105,13 @@ void Bureaucrat::signForm(Form &src)
         "> because <Too Low !!!>" << std::endl;
     }
 }
+
+const char *HighException::what() const throw()
+{
+    return ("Too High !!!");
+}
+
+const char *LowException::what() const throw()
+{
+    return("Too Low !!!");
+}
