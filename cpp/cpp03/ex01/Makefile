@@ -4,7 +4,7 @@ CC =		clang++
 
 CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
 
-SRC =		ClapTrap.cpp ScavTrap.cpp main.cpp 
+SRC =		ClapTrap.cpp ScavTrap.cpp main.cpp
 
 SRC_PATH =	$(addprefix ./srcs/, $(SRC))
 

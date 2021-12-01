@@ -4,14 +4,14 @@ FragTrap::FragTrap(void)
 {
    Name = "noname";
    Hitpoints = 100;
-   Attack_damage = 30;
+   AttackDamage = 30;
    std::cout << "FragTrap <" << Name << "> is called !"<< std::endl;
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
    Hitpoints = 100;
-   Attack_damage = 30;
+   AttackDamage = 30;
    std::cout << "FragTrap <" << Name << "> is called !"<< std::endl;
 }
 
@@ -21,7 +21,7 @@ FragTrap & FragTrap::operator=(const FragTrap &src)
 	{
 		Name = src.Name;
       Hitpoints = src.Hitpoints;
-      Attack_damage = src.Attack_damage;
+      AttackDamage = src.AttackDamage;
 	}
 	return (*this);
 }

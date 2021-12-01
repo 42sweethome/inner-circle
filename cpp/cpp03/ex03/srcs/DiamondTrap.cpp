@@ -4,8 +4,8 @@ DiamondTrap::DiamondTrap(void)
 {
     Name = "noname";
     Hitpoints = FragTrap::Hitpoints;
-    Energy_points = ScavTrap::Energy_points;
-    Attack_damage = FragTrap::Attack_damage;
+    EnergyPoints = ScavTrap::EnergyPoints;
+    AttackDamage = FragTrap::AttackDamage;
 }
 
 DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name)
@@ -13,8 +13,8 @@ DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name)
     this->Name = name;
     ClapTrap::Name = Name + "_clap_name";
     Hitpoints = FragTrap::Hitpoints;
-    Energy_points = ScavTrap::Energy_points;
-    Attack_damage = FragTrap::Attack_damage;
+    EnergyPoints = ScavTrap::EnergyPoints;
+    AttackDamage = FragTrap::AttackDamage;
     std::cout << "DiamondTrap <" << Name << "> is called !"<< std::endl;
 }
 
@@ -24,8 +24,8 @@ DiamondTrap & DiamondTrap::operator=(const DiamondTrap &src)
 	{
 		Name = src.Name;
         Hitpoints = src.Hitpoints;
-        Energy_points = src.Energy_points;
-        Attack_damage = src.Attack_damage;
+        EnergyPoints = src.EnergyPoints;
+        AttackDamage = src.AttackDamage;
 	}
 	return (*this);
 }
