@@ -1,7 +1,5 @@
-#include <iostream>
-#include <Array.hpp>
+#include "Array.hpp"
 
-#define MAX_VAL 750
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -15,10 +13,34 @@ int main(int, char**)
     }
     //SCOPE
     {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+        Array<int> copy1 = numbers;
+        Array<int> copy2(copy1);
+        Array<int> assign;
+        assign = copy2;
+        std::cout << std::endl;
 
+        copy1[10] = 10;
+        copy1[100] = 100;
+        for (int i = 0; i < MAX_VAL; i++)
+        {
+            if (copy1[i] != numbers[i])
+            {
+                std::cerr << "didn't save the same value!!" << std::endl;
+                std::cerr << "copy1 : " << copy1[i] << " numbers : " << numbers[i] << std::endl;
+            }
+            if (copy1[i] != copy2[i])
+            {
+                std::cerr << "didn't save the same value!!" << std::endl;
+                std::cerr << "copy1 : " << copy1[i] << " copy2 : " << copy2[i] << std::endl;
+            }
+            if (copy1[i] != assign[i])
+            {
+                std::cerr << "didn't save the same value!!" << std::endl;
+                std::cerr << "copy1 : " << copy1[i] << " assign : " << assign[i] << std::endl;
+            }
+        }
+        std::cout << std::endl;
+    }
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
@@ -29,7 +51,8 @@ int main(int, char**)
     }
     try
     {
-        numbers[-2] = 0;
+        numbers[-2] = 127;
+        std::cout << numbers[-2] <<std::endl;
     }
     catch(const std::exception& e)
     {
@@ -43,11 +66,7 @@ int main(int, char**)
     {
         std::cerr << e.what() << '\n';
     }
-
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
+    std::cout << std::endl;
     delete [] mirror;//
     return 0;
 }

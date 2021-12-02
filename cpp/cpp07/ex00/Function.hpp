@@ -3,16 +3,35 @@
 
 #include <iostream>
 
-class function
+template <typename function>
+void swap(function &a, function &b)
 {
+	function temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
 
-};
+template <typename function>
+function min(function a, function b)
+{
+	if (a == b)
+		return (b);
+	else if (a < b)
+		return (a);
+	else
+		return (b);
+}
 
-//template <class function>
-void swap(function &a, function &b); //왜 &로 받아야 하고 class 로 다른 자료형을 받는 template구현되는가?
-//template <class function>
-function min(function a, function b);
-//template <class function>
-function max(function a, function b);
+template <typename function>
+function max(function a, function b)
+{
+	if (a == b)
+		return (b);
+	else if (a < b)
+		return (b);
+	else
+		return (a);
+}
 
 #endif

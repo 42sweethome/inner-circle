@@ -64,6 +64,8 @@
 		"unordered_map": "cpp",
 		"utility": "cpp",
 		"vector": "cpp",
-		"clocale": "cpp"
+		"clocale": "cpp",
+		"__functional_03": "cpp",
+		"filesystem": "cpp"
 	}
 }
