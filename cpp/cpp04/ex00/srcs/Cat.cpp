@@ -28,6 +28,6 @@ Cat & Cat::operator=(const Cat &src)
 
 void Cat::makeSound() const
 {
-	std::cout << "ya ya" << std::endl;
+	std::cout << "meow meow" << std::endl;
 	return ;
 }
