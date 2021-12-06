@@ -2,7 +2,7 @@ NAME =		ScavTrap
 
 CC =		clang++
 
-CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 
 SRC =		ClapTrap.cpp ScavTrap.cpp main.cpp
 
@@ -15,7 +15,7 @@ INC_PATH = 	./includes
 all :		$(NAME)
 
 $(NAME) : $(OBJ)
-		$(CC) $(CXXFLAGS) -I $(INC_PATH) -o $@ $(SRC_PATH)
+		$(CC) $(CXXFLAGS) -I $(INC_PATH) -o $@ $^
 
 clean :
 			rm -f $(OBJ)
