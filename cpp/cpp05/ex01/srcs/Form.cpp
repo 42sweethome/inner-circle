@@ -6,7 +6,7 @@ Form::Form(void) : name("paper"), signGrade(120), executeGrade(80)
     std::cout << "Create Form!" << std::endl;
 }
 
-Form::Form(const Form &src) : name(src.name), signGrade(120), executeGrade(80)
+Form::Form(const Form &src) : name(src.getName()), signGrade(src.getSignGrade()), executeGrade(src.getExecuteGrade())
 {
     std::cout << "Create Copy Form!" << std::endl;
     *this = src;
