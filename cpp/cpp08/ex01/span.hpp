@@ -4,6 +4,7 @@
 # include <iostream>
 # include <vector>
 # include <sstream>
+# include <limits>
 
 
 class Span
@@ -23,6 +24,7 @@ class Span
         Span & operator=(const Span &src);
 		
 		void addNumber(long long int n);
+		void addNumber(std::vector<int>::const_iterator first, std::vector<int>::const_iterator last);
 		long long int shortestSpan();
     	long long int longestSpan();
 		std::vector<int>::iterator ret_begin();

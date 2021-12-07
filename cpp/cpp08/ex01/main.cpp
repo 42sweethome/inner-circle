@@ -3,7 +3,6 @@
 int main()
 {
     Span sp = Span(5);
-    Span man = Span(10000);
 
     try
     {
@@ -19,8 +18,25 @@ int main()
     {
         std::cerr << e.what() << '\n';
     }
-    /*std::for_each( man.ret_begin(), man.ret_begin() + 10000, std::mem_fn( Span::addNumber));
+
+    Span man = Span(10000);
+    
+    try
     {
-        for()
-    }*/
+        std::vector<int> v;
+        int x = 0;
+        for (int i = 0; i < 10000; i++)
+        {
+            x += i;
+            v.push_back(x);
+        }
+        man.addNumber(v.begin(), v.end());
+        std::cout << man.shortestSpan() << std::endl;
+        std::cout << man.longestSpan() << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
 }
