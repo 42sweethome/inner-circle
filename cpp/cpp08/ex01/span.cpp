@@ -41,7 +41,7 @@ void Span::addNumber(long long int num)
     std::string str;
     std::stringstream tmp;
 	long long int gap;
-    
+
 	if (arr.size() == N)
 	{
 		tmp << N;
@@ -71,7 +71,7 @@ void Span::addNumber(std::vector<int>::const_iterator first, std::vector<int>::c
 	std::string str;
     std::stringstream tmp;
 	long long int gap;
-    
+
 	while (first < last)
 	{
 		if (arr.size() == N)

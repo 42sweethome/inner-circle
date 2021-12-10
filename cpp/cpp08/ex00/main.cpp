@@ -8,7 +8,7 @@ int main()
     std::vector<int>::iterator it1;
     try
     {
-        it1 = easyfind(myarr1, 10);
+        it1 = easyfind(myarr1, 5);
         std::cout << "Element found in myvector: " << *it1 << '\n';
     }
 	catch (std::exception& e)
