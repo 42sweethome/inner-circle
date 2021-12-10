@@ -129,6 +129,7 @@ int Conversion::ft_strlen()
 
 void Conversion::check_isprint()
 {
+	std::stringstream  ss;
 	double d_tmp = 0;
 	float f_tmp = 0;
 
@@ -137,13 +138,14 @@ void Conversion::check_isprint()
 	if (point <= 15)
 		d_tmp = pow(0.1, 15 - point);
 	dounum = strtod(argv, NULL);
-	fnum = strtof(argv, NULL);
-	if (round(abs(dounum - atoi(argv)) * pow(10, 15 - point))\
-						/ pow(10, 15 - point) <= d_tmp)
-		d_zero = 1;
+	ss << argv;
+	ss >> fnum;
 	if (round(abs(fnum - atoi(argv)) * pow(10, 6 - point))\
 						/ pow(10, 6 - point) <= f_tmp)
 		f_zero = 1;
+	if (round(abs(dounum - atoi(argv)) * pow(10, 15 - point))\
+						/ pow(10, 15 - point) <= d_tmp)
+		d_zero = 1;
 	if ((dounum > -1 && dounum < 32) \
 	|| dounum == 127)
 		isprint = 1;

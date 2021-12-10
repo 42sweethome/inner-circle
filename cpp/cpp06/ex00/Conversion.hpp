@@ -3,10 +3,11 @@
 
 # include <iostream>
 # include <string>
-# include <cctype>
 # include <cstdlib>
 # include <climits>
 # include <iomanip>
+# include <cmath>
+# include<sstream> 
 
 class Conversion
 {
@@ -26,10 +27,11 @@ class Conversion
 
 	public:
 		Conversion();
+		Conversion(char *argv);
         Conversion(const Conversion &src);
-        Conversion(char *argv);
         Conversion& operator= (const Conversion &src);
         ~Conversion();
+
 		void check_param();
 		int check_num(int i);
 		int get_num_info(int idx);

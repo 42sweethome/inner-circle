@@ -66,6 +66,9 @@
 		"vector": "cpp",
 		"clocale": "cpp",
 		"__functional_03": "cpp",
-		"filesystem": "cpp"
-	}
+		"filesystem": "cpp",
+		"__bits": "cpp",
+		"list": "cpp"
+	},
+	"C_Cpp.dimInactiveRegions": false
 }
