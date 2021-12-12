@@ -52,23 +52,27 @@ Array<T>::Array(const Array &src)
 }
 
 template <typename T> 
+Array<T>& Array<T>::operator=(const Array &src)
+{
+    if (this != &src)
+    {
+        delete[] this->arr;
+        arr_size = src.size();
+        this->arr = new T[arr_size];
+        for (size_t i = 0; i < arr_size; i++)
+        {
+            arr[i] = src.arr[i];
+        }
+    }
+    std::cout << "Create copy assign Array" << std::endl;
+    return (*this);
+}
+
+template <typename T> 
 Array<T>::~Array()
 {
     delete[] arr;
     std::cout << "Delete Array" << std::endl;   
-}
-
-template <typename T> 
-Array<T>& Array<T>::operator=(const Array &src)
-{
-    arr_size = src.size();
-    this->arr = new T[arr_size];
-    for (size_t i = 0; i < arr_size; i++)
-    {
-        arr[i] = src.arr[i];
-    }
-    std::cout << "Create copy assign Array" << std::endl;
-    return (*this);
 }
 
 template <typename T> 
