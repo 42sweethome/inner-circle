@@ -2,13 +2,13 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 MLXFLAG = -L./mlx -lmlx -framework OpenGL -framework AppKit
 
 
 SRCS = GNL/get_next_line.c GNL/get_next_line_utils.c\
-	   cub3d.c
+	   cub3d.c check_map_valid.c get_element.c get_texture.c map_config.c utils.c\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -26,13 +26,13 @@ $(NAME) : $(OBJS) $(LIBFT_A) $(MLX_LIB)
 			cp $(MLX_LIB) ./
 			$(CC) $(CFLAGS) $(MLXFLAG) -L$(LIBFT) -lft $(OBJS) -o $@
 
-$(LIBFT_A) : 
+$(LIBFT_A) :
 			make -C $(LIBFT)
 
-$(MLX_LIB) : 
+$(MLX_LIB) :
 			make -C $(MLX)
 
-clean : 
+clean :
 		rm -f $(OBJS)
 		make clean -C $(MLX)
 		make clean -C $(LIBFT)
