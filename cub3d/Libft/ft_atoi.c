@@ -28,13 +28,16 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	result = 0;
-	while ('0' <= *str && *str <= '9')
-	{
+	while (*str)
+	{	
+		if (*str < '0' || *str > '9')
+			return (-1);
 		result = result * 10 + *str - '0';
 		if (flag < 0 && result > 2147483648)
-			return (0);
+			return (-1);
 		else if (flag > 0 && result > 2147483647)
 			return (-1);
+	
 		str++;
 	}
 	return ((int)(flag * result));

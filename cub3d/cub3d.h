@@ -14,6 +14,7 @@ typedef struct s_map
     int	    row;
     int		player_x;
 	int		player_y;
+    char    direction;
     char    **path;
     int     floor;
     int     ceilling;

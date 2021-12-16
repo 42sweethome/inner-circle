@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 int	check_newline(char *content)
 {
@@ -31,7 +32,9 @@ int	split_line(char **content, int i, char **line)
 	char	*temp;
 
 	(*content)[i] = '\0';
+	printf("ptr: %p    ", *content);
 	*line = ft_strdup(*content);
+	printf("line : %s\n", *line);
 	if (*content + i + 1)
 	{
 		temp = ft_strdup(*content + i + 1);
