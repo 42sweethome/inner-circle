@@ -1,24 +1,68 @@
 #include "cub3d.h"
 
-void	ver_line(t_info *info, int x, int color)
+void	paint_f_c(t_info *info, int x)
 {
-	int		dot;
+	int y;
 
-	dot = info->dda.draw_start - 1;
-	while (++dot <= info->dda.draw_end)
-		mlx_pixel_put(info->win.mlx, info->win.mlx_win, x, dot, color);
+	y = -1;
+	while (++y < info->dda.draw_start)
+		info->fimg.addr[info->win.win_w * y + x] = info->map.ceilling;
+	y = info->dda.draw_end - 1;
+	while (++y < info->win.win_h)
+		info->fimg.addr[info->win.win_w * y + x] = info->map.floor;
+}
+
+void	affine_texture_mapping(t_info *info, int x)
+{
+	int		y;
+
+	paint_f_c(info, x);
+	if (info->dda.side == 0)
+		info->graphic.obj_x = info->user.pos_y + info->dda.perpwalldist * info->dda.raydir_y;
+	else
+		info->graphic.obj_x = info->user.pos_x + info->dda.perpwalldist * info->dda.raydir_x;
+	info->graphic.img_x = (int)(info->tex[0].img_width * (info->graphic.obj_x - floor(info->graphic.obj_x)));
+	info->graphic.obj_y = 0;
+	if (info->dda.draw_start == 0)
+		info->graphic.obj_y = info->dda.line_height / 2 - info->win.win_h / 2;
+	y =info->dda.draw_start - 1;
+	while (++y < info->dda.draw_end)
+	{
+		info->graphic.img_y = (int)(info->graphic.img_height * info->graphic.obj_y / info->dda.line_height);
+		info->graphic.tex_point = info->graphic.size_l / (info->graphic.bpp / 8) * info->graphic.img_y + info->graphic.img_x;
+		if (info->dda.side == 0)
+		{
+			if (info->dda.raydir_x > 0)
+				info->graphic.text_num = 0;
+			else
+				info->graphic.text_num = 1;
+		}
+		else
+		{
+			if (info->dda.raydir_y > 0)
+				info->graphic.text_num = 2;
+			else
+				info->graphic.text_num = 3;
+		}
+		info->fimg.addr[info->win.win_w * y + x] = \
+		info->tex[info->graphic.text_num].addr[info->tex[info->graphic.text_num].img_width * \
+			info->graphic.img_y + info->graphic.img_x];
+		info->graphic.obj_y++;
+	}
 }
 
 void	win_init(t_win *win)
 {
-	win->win_w = 256;
-	win->win_h = 256;
+	win->win_w = 768;
+	win->win_h = 768;
 }
 
 void	user_init(t_info *info)
 {
-	info->user.pos_x = info->map.player_x;
-	info->user.pos_y = info->map.player_y;
+	info->user.move_speed = 0.1;
+	info->user.rot_speed = 0.1;
+	info->user.pos_x = info->map.player_x + 0.5;
+	info->user.pos_y = info->map.player_y + 0.5;
 	info->user.plane_x = 0.0;
 	info->user.plane_y = 0.66;
 	if (info->map.direction == 'N' || info->map.direction == 'S')
@@ -32,17 +76,22 @@ void	user_init(t_info *info)
 	else
 	{
 		if (info->map.direction == 'E')
-			info->user.dir_y = 1;
-		else
 			info->user.dir_y = -1;
+		else
+			info->user.dir_y = 1;
 		info->user.dir_x = 0;
 	}
+	info->map.map[info->map.player_y][info->map.player_x] = '0';
 }
 
 void	graphic_init(t_info *info)
 {
 	user_init(info);
 	win_init(&(info->win));
+	info->graphic.img_width = 64;
+	info->graphic.img_height = 64;
+	info->graphic.size_l = 256;
+	info->graphic.bpp = 32;
 }
 
 void	paint_floor_ceiling(t_info *info)
@@ -57,19 +106,24 @@ void	paint_floor_ceiling(t_info *info)
 		while (++x < info->win.win_w)
 		{
 			if (y < info->win.win_h / 2)
-				mlx_pixel_put(info->win.mlx, info->win.mlx_win, x, y, info->map.ceilling);
+				info->fimg.addr[info->win.win_w * y + x] = info->map.ceilling;
 			else
-				mlx_pixel_put(info->win.mlx, info->win.mlx_win, x, y, info->map.floor);
+				info->fimg.addr[info->win.win_w * y + x] = info->map.floor;
 		}
 	}
+}
+
+void	draw(t_info *info)
+{
+	mlx_put_image_to_window(info->win.mlx, info->win.mlx_win, \
+	info->fimg.img, 0, 0);
 }
 
 int	img_conv(t_info *info)
 {
 	int		x;
 
-	paint_floor_ceiling(info);
-	printf("posX : %f posY %f\n", info->user.pos_x, info->user.pos_y);
+	//paint_floor_ceiling(info);
 	x = -1;
 	while (++x < info->win.win_w)
 	{
@@ -130,8 +184,9 @@ int	img_conv(t_info *info)
 		info->dda.draw_end = info->win.win_h / 2 + info->dda.line_height / 2;
 		if (info->dda.draw_end >= info->win.win_h)
 			info->dda.draw_end = info->win.win_h - 1;
-		ver_line(info, x, 65280);
+		affine_texture_mapping(info, x);
 	}
+	draw(info);
 	return (0);
 }
 
@@ -141,26 +196,64 @@ int	img_conv(t_info *info)
 // 	return (0);
 // }
 
-void	move(t_info *info, int x, int y)
-{
-	if (info->map.map[(int)(info->user.pos_x + x)][(int)(info->user.pos_y + y)] != '1' &&\
-		info->map.map[(int)(info->user.pos_x + x)][(int)(info->user.pos_y + y)] != ' ')
-	{
-		info->user.pos_x += x;
-		info->user.pos_y += y;
-	}
-}
-
 int	check_keypress(int key, t_info *info)
 {
+	double		old;
+
 	if (key == 13)
-		move(info, 1, 0);
+	{
+		if (info->map.map[(int)(info->user.pos_x + info->user.dir_x * info->user.move_speed)]\
+			[(int)info->user.pos_y] == '0')
+			info->user.pos_x += info->user.dir_x * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_x]\
+			[(int)(info->user.pos_y + info->user.dir_y * info->user.move_speed)] == '0')
+			info->user.pos_y += info->user.dir_y * info->user.move_speed;
+	}
 	else if (key == 1)
-		move(info, -1, 0);
+	{
+		if (info->map.map[(int)(info->user.pos_x - info->user.dir_x * info->user.move_speed)]\
+			[(int)info->user.pos_y] == '0')
+			info->user.pos_x -= info->user.dir_x * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_x]\
+			[(int)(info->user.pos_y - info->user.dir_y * info->user.move_speed)] == '0')
+			info->user.pos_y -= info->user.dir_y * info->user.move_speed;
+	}
 	else if (key == 0)
-		move(info, 0, -1);
+	{
+		if (info->map.map[(int)(info->user.pos_x - info->user.plane_x * info->user.move_speed)]\
+			[(int)info->user.pos_y] == '0')
+			info->user.pos_x -= info->user.plane_x * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_x]\
+			[(int)(info->user.pos_y - info->user.plane_y * info->user.move_speed)] == '0')
+			info->user.pos_y -= info->user.plane_y * info->user.move_speed;
+	}
 	else if (key == 2)
-		move(info, 0, 1);
+	{
+		if (info->map.map[(int)(info->user.pos_x + info->user.plane_x * info->user.move_speed)]\
+			[(int)info->user.pos_y] == '0')
+			info->user.pos_x += info->user.plane_x * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_x]\
+			[(int)(info->user.pos_y + info->user.plane_y * info->user.move_speed)] == '0')
+			info->user.pos_y += info->user.plane_y * info->user.move_speed;
+	}
+	else if (key == 123)
+	{
+		old = info->user.dir_x;
+		info->user.dir_x = info->user.dir_x * cos(-info->user.rot_speed) - info->user.dir_y * sin(-info->user.rot_speed);
+		info->user.dir_y = old * sin(-info->user.rot_speed) + info->user.dir_y * cos(-info->user.rot_speed);
+		old = info->user.plane_x;
+		info->user.plane_x = info->user.plane_x * cos(-info->user.rot_speed) - info->user.plane_y * sin(-info->user.rot_speed);
+		info->user.plane_y = old * sin(-info->user.rot_speed) + info->user.plane_y * cos(-info->user.rot_speed);
+	}
+	else if (key == 124)
+	{
+		old = info->user.dir_x;
+		info->user.dir_x = info->user.dir_x * cos(info->user.rot_speed) - info->user.dir_y * sin(info->user.rot_speed);
+		info->user.dir_y = old * sin(info->user.rot_speed) + info->user.dir_y * cos(info->user.rot_speed);
+		old = info->user.plane_x;
+		info->user.plane_x = info->user.plane_x * cos(info->user.rot_speed) - info->user.plane_y * sin(info->user.rot_speed);
+		info->user.plane_y = old * sin(info->user.rot_speed) + info->user.plane_y * cos(info->user.rot_speed);
+	}
 	// else if (key == 53)
 	// 	ft_exit(info);
 	return (0);
@@ -198,7 +291,7 @@ void	show_win(t_info *info)
 	info->fimg.img = mlx_new_image(info->win.mlx, info->win.win_w, info->win.win_h);
 	info->fimg.addr = (unsigned int *)mlx_get_data_addr(info->fimg.img, \
 	&info->fimg.bits_per_pixel, &info->fimg.line_length, &info->fimg.endian);
-	//get_texture(info);
+	get_texture(info);
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
 	//mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
 	mlx_loop_hook(info->win.mlx, img_conv, info);

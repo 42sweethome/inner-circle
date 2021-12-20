@@ -4,7 +4,7 @@ char	check_element(t_map *map, char c, int idx, int jdx)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		printf("player : %d %d\n", idx, jdx);
+		//printf("player : %d %d\n", idx, jdx);
 		if (map->direction != 0)
 			return (ft_error("player is only one"));
 		map->player_x = jdx;
