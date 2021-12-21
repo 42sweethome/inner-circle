@@ -25,6 +25,3 @@ int get_element(char *argv, t_map *map)
 		return (ft_error("**check_map_valid**"));
 	return (0);
 }
-
-
-

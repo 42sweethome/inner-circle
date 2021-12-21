@@ -21,6 +21,7 @@ int get_rgb(t_map *map, char **split)
 			return (ft_error("Out of RGB range"));
 		sum = sum * 256 + num;
 	}
+	ft_free(rgb);
 	if (idx != 3)
 		return (ft_error("Not RGB"));
 	if (*(split[0]) == 'F')
@@ -72,27 +73,6 @@ int check_form(t_map *map, char **split)
 			return (ft_error("Unnecessary information"));
 	if (get_ele(map, split))
 		return (ft_error("wrong input wfc"));
-	
-	/*if (i < 4)
-	{
-		if (!split[0] || !get_ele(i))
-			return (ft_error("Invalid element"));
-		if(ft_strncmp(split[0], get_ele(i), 3))
-			return (ft_error("Invalid element"));
-		if (check_extention(split[1], ".xpm"))
-			return (ft_error("Invaild extention(xpm)"));
-		map->path[i] = ft_strdup(split[1]);
-	}
-	else
-	{
-		printf("split %p get_ele %s\n", split[0], get_ele(i));
-		if (!split[0] || !get_ele(i))
-			return (ft_error("Invalid element"));
-		if (ft_strncmp(split[0], get_ele(i), 2))
-			return (ft_error("Invalid element"));
-		if (get_rgb(map, split[1], i))
-			return (ft_error("**get_rgb**"));
-	}*/
 	return (0);
 }
 
@@ -126,10 +106,15 @@ int get_path_color(t_map *map, int fd)
 		if (ret == -1)
 			return (ft_error("GNL error"));
 		if (!*buf)
+		{
+			free(buf);
 			continue;
+		}
 		split = ft_split(buf, ' ');
+		free(buf);
 		if (check_form(map, split))
 			return(ft_error("**check_form**"));
+		ft_free(split);
 	}
 	return (0);
 }

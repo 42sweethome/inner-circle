@@ -34,6 +34,8 @@ int 	map_parsing(char *argv, t_map *map);
 int		check_extention(char *argv, char *str);
 void	ft_printf(t_map map);
 int		ft_error(char *str);
+void	ft_free(char **str);
+void	ft_exit(t_info *info);
 
 
 #endif

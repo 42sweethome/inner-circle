@@ -50,7 +50,11 @@ int	return_all(char **content, char **line, int rd_size)
 	int		cut_idx;
 
 	if (rd_size < 0)
+	{
+		free(*content);
+		*content = 0;
 		return (-1);
+	}
 	cut_idx = check_newline(*content);
 	if (*content && 0 <= cut_idx)
 		return (split_line(content, cut_idx, line));
@@ -76,6 +80,8 @@ int	get_next_line(int fd, char **line)
 	if (BUFFER_SIZE <= 0 || line == 0 || fd < 0)
 		return (-1);
 	rd_size = read(fd, buf, BUFFER_SIZE);
+	if (rd_size < 0)
+		return (-1);
 	while (0 < rd_size)
 	{
 		buf[rd_size] = '\0';

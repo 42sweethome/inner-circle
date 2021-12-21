@@ -64,6 +64,7 @@ int map_parsing(char *argv, t_map *map)
 	while (++i < map->cnt_wfc + map->cnt_nl)
 	{
 		get_next_line(fd, &buf);
+		free(buf);
 	}
 	if (row_parsing(map, fd))
 		return (ft_error("**row_parsing**"));
@@ -84,9 +85,11 @@ int get_newline(t_map *map, int fd)
 		if (*buff != '\0')
 		{
 			map->row += 1;
+			free(buff);
 			break ;
 		}
 		map->cnt_nl += 1;
+		free(buff);
 	}
 	ret = read(fd, &buf, 1);
 	while (ret > 0)

@@ -65,7 +65,7 @@ B_OBJS = $(B_SRCS:.c=.o)
 all: $(NAME)
 
 CC = gcc
-CFLAGS = -fsanitize=address -g3 -Wall -Wextra -Werror -I. -c
+CFLAGS = -Wall -Wextra -Werror -I. -c
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ $^

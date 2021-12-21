@@ -78,7 +78,7 @@ static void	ft_str(char **str, char const *s, char c)
 		j++;
 	}
 }
-#include <stdio.h>
+
 char	**ft_split(char const *s, char c)
 {
 	int		count;

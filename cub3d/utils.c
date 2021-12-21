@@ -15,6 +15,13 @@ int	check_extention(char *argv, char *str)
 	return (0);
 }
 
+int	ft_exit(t_info *info)
+{
+	mlx_destroy_window(info->win.mlx, info->win.mlx_win);
+	mlx_destroy_image(info->win.mlx, info->fimg.img);
+	exit(0);
+}
+
 void    ft_printf(t_map map)
 {
 	int i = -1;
@@ -31,9 +38,19 @@ void    ft_printf(t_map map)
 	}
 }
 
+void ft_free(char **str)
+{
+	int i;
 
+	i = -1;
+	while (str[++i])
+	{
+		free(str[i]);
+	}
+	free(str);
+}
 int ft_error(char *str)
 {
 	printf("Error\n%s\n", str);
-	return (1);
+	exit(0);
 }

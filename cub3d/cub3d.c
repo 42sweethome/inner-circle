@@ -53,7 +53,7 @@ void	affine_texture_mapping(t_info *info, int x)
 
 void	win_init(t_win *win)
 {
-	win->win_w = 768;
+	win->win_w = 1024;
 	win->win_h = 768;
 }
 
@@ -63,23 +63,38 @@ void	user_init(t_info *info)
 	info->user.rot_speed = 0.1;
 	info->user.pos_x = info->map.player_x + 0.5;
 	info->user.pos_y = info->map.player_y + 0.5;
-	info->user.plane_x = 0.0;
-	info->user.plane_y = 0.66;
 	if (info->map.direction == 'N' || info->map.direction == 'S')
 	{
 		if (info->map.direction == 'N')
-			info->user.dir_x = 1;
+		{
+			info->user.dir_y = -1;
+			info->user.plane_y = 0.0;
+			info->user.plane_x = 0.66;
+		}
 		else
-			info->user.dir_x = -1;
-		info->user.dir_y = 0;
+		{
+			info->user.dir_y = 1;
+			info->user.plane_y = 0.0;
+			info->user.plane_x = -0.66;
+		}
+		info->user.dir_x = 0;
 	}
 	else
 	{
 		if (info->map.direction == 'E')
-			info->user.dir_y = -1;
+		{
+			info->user.dir_x = 1;
+			info->user.plane_y = 0.66;
+			info->user.plane_x = 0.0;
+		}
 		else
-			info->user.dir_y = 1;
-		info->user.dir_x = 0;
+		{
+			info->user.dir_x = -1;
+			info->user.plane_y = -0.66;
+			info->user.plane_x = 0.0;
+		}
+	
+		info->user.dir_y = 0;
 	}	
 	info->map.map[info->map.player_y][info->map.player_x] = '0';
 }
@@ -169,8 +184,8 @@ int	img_conv(t_info *info)
 				info->dda.map_y += info->dda.step_y;
 				info->dda.side = 1;
 			}
-			if (info->map.map[info->dda.map_x][info->dda.map_y] == '1' || \
-				info->map.map[info->dda.map_x][info->dda.map_y] == ' ')
+			if (info->map.map[info->dda.map_y][info->dda.map_x] == '1' || \
+				info->map.map[info->dda.map_y][info->dda.map_x] == ' ')
 				info->dda.hit = 1;
 		}
 		if (info->dda.side == 0)
@@ -191,11 +206,13 @@ int	img_conv(t_info *info)
 	return (0);
 }
 
-// int	check_button(t_info *info)
-// {
-// 	ft_exit(info);
-// 	return (0);
-// }
+
+
+int	check_button(t_info *info)
+{
+ 	ft_exit(info);
+ 	return (0);
+}
 
 int	check_keypress(int key, t_info *info)
 {
@@ -203,39 +220,39 @@ int	check_keypress(int key, t_info *info)
 
 	if (key == 13)
 	{
-		if (info->map.map[(int)(info->user.pos_x + info->user.dir_x * info->user.move_speed)]\
-			[(int)info->user.pos_y] == '0')
-			info->user.pos_x += info->user.dir_x * info->user.move_speed;
-		if (info->map.map[(int)info->user.pos_x]\
-			[(int)(info->user.pos_y + info->user.dir_y * info->user.move_speed)] == '0')
+		if (info->map.map[(int)(info->user.pos_y + info->user.dir_y * info->user.move_speed)]\
+			[(int)info->user.pos_x] == '0')
 			info->user.pos_y += info->user.dir_y * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_y]\
+			[(int)(info->user.pos_x + info->user.dir_x * info->user.move_speed)] == '0')
+			info->user.pos_x += info->user.dir_x * info->user.move_speed;
 	}
 	else if (key == 1)
 	{
-		if (info->map.map[(int)(info->user.pos_x - info->user.dir_x * info->user.move_speed)]\
-			[(int)info->user.pos_y] == '0')
-			info->user.pos_x -= info->user.dir_x * info->user.move_speed;
-		if (info->map.map[(int)info->user.pos_x]\
-			[(int)(info->user.pos_y - info->user.dir_y * info->user.move_speed)] == '0')
+		if (info->map.map[(int)(info->user.pos_y - info->user.dir_y * info->user.move_speed)]\
+			[(int)info->user.pos_x] == '0')
 			info->user.pos_y -= info->user.dir_y * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_y]\
+			[(int)(info->user.pos_x - info->user.dir_x * info->user.move_speed)] == '0')
+			info->user.pos_x -= info->user.dir_x * info->user.move_speed;
 	}
 	else if (key == 0)
 	{
-		if (info->map.map[(int)(info->user.pos_x - info->user.plane_x * info->user.move_speed)]\
-			[(int)info->user.pos_y] == '0')
-			info->user.pos_x -= info->user.plane_x * info->user.move_speed;
-		if (info->map.map[(int)info->user.pos_x]\
-			[(int)(info->user.pos_y - info->user.plane_y * info->user.move_speed)] == '0')
+		if (info->map.map[(int)(info->user.pos_y - info->user.plane_y * info->user.move_speed)]\
+			[(int)info->user.pos_x] == '0')
 			info->user.pos_y -= info->user.plane_y * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_y]\
+			[(int)(info->user.pos_x - info->user.plane_x * info->user.move_speed)] == '0')
+			info->user.pos_x -= info->user.plane_x * info->user.move_speed;
 	}
 	else if (key == 2)
 	{
-		if (info->map.map[(int)(info->user.pos_x + info->user.plane_x * info->user.move_speed)]\
-			[(int)info->user.pos_y] == '0')
-			info->user.pos_x += info->user.plane_x * info->user.move_speed;
-		if (info->map.map[(int)info->user.pos_x]\
-			[(int)(info->user.pos_y + info->user.plane_y * info->user.move_speed)] == '0')
+		if (info->map.map[(int)(info->user.pos_y + info->user.plane_y * info->user.move_speed)]\
+			[(int)info->user.pos_x] == '0')
 			info->user.pos_y += info->user.plane_y * info->user.move_speed;
+		if (info->map.map[(int)info->user.pos_y]\
+			[(int)(info->user.pos_x + info->user.plane_x * info->user.move_speed)] == '0')
+			info->user.pos_x += info->user.plane_x * info->user.move_speed;
 	}
 	else if (key == 123)
 	{
@@ -255,8 +272,8 @@ int	check_keypress(int key, t_info *info)
 		info->user.plane_x = info->user.plane_x * cos(info->user.rot_speed) - info->user.plane_y * sin(info->user.rot_speed);
 		info->user.plane_y = old * sin(info->user.rot_speed) + info->user.plane_y * cos(info->user.rot_speed);
 	}
-	// else if (key == 53)
-	// 	ft_exit(info);
+	else if (key == 53)
+	 	ft_exit(info);
 	return (0);
 }
 
@@ -294,7 +311,7 @@ void	show_win(t_info *info)
 	&info->fimg.bits_per_pixel, &info->fimg.line_length, &info->fimg.endian);
 	get_texture(info);
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
-	//mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
+	mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
 	mlx_loop_hook(info->win.mlx, img_conv, info);
 	mlx_loop(info->win.mlx);
 }
@@ -306,7 +323,7 @@ int parsing(char *argv, t_map *map)
 	if (check_extention(argv, ".cub"))
 		return (ft_error("Invaild extention(cub)"));
 	if (get_element(argv, map))
-		return (ft_error("**get_element**"));
+		return (1);
 	ft_printf(*map);
 	return (0);
 }
@@ -332,7 +349,9 @@ int main(int argc, char **argv)
 	{
 		init_struct(&info);
 		if (parsing(argv[1], &info.map))
+		{
 			return(1);
+		}
 		show_win(&info);
 	}
 	else
