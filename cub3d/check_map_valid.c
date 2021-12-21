@@ -42,8 +42,10 @@ int check_map_valid(t_map *map)
 		j++;
 	if (map->map[map->row - 1][j] != '\0')
 		return (ft_error("wall have hole"));
-	while (is_wall(*(map->map[i])))
+	while (i < map->row)
 	{
+		if (*(map->map[i]) && !is_wall(*(map->map[i])))
+			return (ft_error("is not wall"));
 		len1 = ft_strlen(map->map[i]);
 		if (i == map->row - 1)
 			return (0);

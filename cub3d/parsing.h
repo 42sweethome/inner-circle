@@ -9,6 +9,9 @@ typedef struct s_map
 	int		player_y;
 	char    direction;
 	char    **path;
+	int		wfc[6];
+	int		cnt_wfc;
+	int		cnt_nl;
 	int     floor;
 	int     ceilling;
 }       t_map;

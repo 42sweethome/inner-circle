@@ -25,7 +25,7 @@ void    ft_printf(t_map map)
 	printf("floor : %d ceilling : %d\n", map.floor, map.ceilling);
 	printf("row : %d\n", map.row);
 	i = -1;
-	while (i++ < map.row)
+	while (++i < map.row)
 	{
 		printf("%s\n", map.map[i]);
 	}

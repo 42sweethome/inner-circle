@@ -80,7 +80,7 @@ void	user_init(t_info *info)
 		else
 			info->user.dir_y = 1;
 		info->user.dir_x = 0;
-	}
+	}	
 	info->map.map[info->map.player_y][info->map.player_x] = '0';
 }
 
@@ -186,6 +186,7 @@ int	img_conv(t_info *info)
 			info->dda.draw_end = info->win.win_h - 1;
 		affine_texture_mapping(info, x);
 	}
+	printf("pos x : %f pos y :  %f\n", info->user.pos_x, info->user.pos_y);
 	draw(info);
 	return (0);
 }
@@ -295,9 +296,7 @@ void	show_win(t_info *info)
 	mlx_hook(info->win.mlx_win, 2, 0, check_keypress, info);
 	//mlx_hook(info->win.mlx_win, 17, 0, check_button, info);
 	mlx_loop_hook(info->win.mlx, img_conv, info);
-	printf("show_win 7\n");
 	mlx_loop(info->win.mlx);
-	printf("show_win 8\n");
 }
 
 int parsing(char *argv, t_map *map)
@@ -311,10 +310,18 @@ int parsing(char *argv, t_map *map)
 	ft_printf(*map);
 	return (0);
 }
+
 void	init_struct(t_info *info)
 {
+	int i;
+
+	i = -1;
+	while (++i < 6)
+		info->map.wfc[i] = 0;
+	info->map.cnt_wfc = 0;
 	info->map.direction = 0;
 	info->map.row = 0;
+	info->map.cnt_nl = 0;
 }
 
 int main(int argc, char **argv)
