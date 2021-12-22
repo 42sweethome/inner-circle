@@ -16,14 +16,12 @@ char	check_element(t_map *map, char c, int idx, int jdx)
 	return (ft_error("wrong element"));
 }
 
-int row_parsing(t_map *map, int fd)
+int	row_parsing(t_map *map, int fd)
 {
-	int     ret;
-	int     idx;
+	int		ret;
+	int		idx;
 	int		jdx;
 
-
-	printf("row : %d\n", map->row);
 	idx = -1;
 	ret = 1;
 	while (ret > 0)
@@ -39,8 +37,7 @@ int row_parsing(t_map *map, int fd)
 			if (check_element(map, map->map[idx][jdx], idx, jdx))
 				return (ft_error("**check element**"));
 		}
-	}	
-	
+	}
 	if (map->direction == 0)
 	{
 		return (ft_error("no where player"));
@@ -48,10 +45,10 @@ int row_parsing(t_map *map, int fd)
 	return (0);
 }
 
-int map_parsing(char *argv, t_map *map)
+int	map_parsing(char *argv, t_map *map)
 {
-	int     fd;
-	char    *buf;
+	int		fd;
+	char	*buf;
 	int		i;
 
 	fd = open(argv, O_RDONLY);
@@ -71,11 +68,10 @@ int map_parsing(char *argv, t_map *map)
 	return (0);
 }
 
-int get_newline(t_map *map, int fd)
+int	count_newline(t_map *map, int fd)
 {
-	int ret;
-	char buf;
-	char *buff;
+	int		ret;
+	char	*buff;
 
 	while (42)
 	{
@@ -91,13 +87,21 @@ int get_newline(t_map *map, int fd)
 		map->cnt_nl += 1;
 		free(buff);
 	}
+	return (0);
+}
+
+int	get_newline(t_map *map, int fd)
+{
+	int		ret;
+	char	buf;
+
+	if (count_newline(map, fd))
+		return (1);
 	ret = read(fd, &buf, 1);
 	while (ret > 0)
 	{
 		if (buf == '\n')
-		{
 			map->row++;
-		}
 		ret = read(fd, &buf, 1);
 		if (ret == 0)
 			map->row += 1;

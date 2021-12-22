@@ -1,19 +1,15 @@
-NO ./texture/0.xpm
+NO ./texture/ghost.xpm
 
-SO ./texture/1.xpm
+SO ./texture/wall.xpm
 
-WE ./texture/2.xpm
+WE ./texture/exit.xpm
 
-EA ./texture/3.xpm
+EA ./texture/cake.xpm
 
 F 100,100,5
 
 C 8,8,8
 
-11111111111111
-1100000000111
-1000000000001
-100000N000001
-1000000000001
-1111100001111
-11111111111111
+111111111111111111111111
+10000000000000000000W001
+111111111111111111111111
