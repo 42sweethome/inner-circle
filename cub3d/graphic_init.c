@@ -61,6 +61,4 @@ void	grap_init(t_info *info)
 	win_init(&(info->win));
 	info->grap.img_width = 64;
 	info->grap.img_height = 64;
-	info->grap.size_l = 256;
-	info->grap.bpp = 32;
 }

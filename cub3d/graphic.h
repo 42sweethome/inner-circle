@@ -11,12 +11,8 @@ typedef struct s_graphic
 	int				img_x;
 	double			obj_y;
 	int				img_y;
-	int				tex_point;
-
 	int				img_width;
 	int				img_height;
-	int				size_l;
-	int				bpp;
 }					t_graphic;
 
 typedef struct s_dda

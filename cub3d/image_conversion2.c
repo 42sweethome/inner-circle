@@ -16,8 +16,6 @@ void	draw_column(t_info *info, int x, int y)
 {
 	info->grap.img_y = (int)(info->grap.img_height * \
 		info->grap.obj_y / info->dda.line_height);
-	info->grap.tex_point = info->grap.size_l / \
-		(info->grap.bpp / 8) * info->grap.img_y + info->grap.img_x;
 	if (info->dda.side == 1)
 	{
 		if (info->dda.raydir_y < 0)
