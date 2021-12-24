@@ -1,14 +1,14 @@
 
-NO ./texture/ghost.xpm
-EA ./texture/cake.xpm
-SO ./texture/wall.xpm
+NO ./texture/jjangoo.xpm
+EA ./texture/choco.xpm
+SO ./texture/cloth.xpm
 
-C 8,8,8
+C 0,182,255 
 
 
 
 F 100,100,5
-WE ./texture/exit.xpm
+WE ./texture/suji.xpm
 
 
 
