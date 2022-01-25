@@ -2,68 +2,10 @@
 # define RBTREE_HPP
 
 # include <iostream>
+# include "MapIterator.hpp"
 
 namespace ft
 {
-
-	enum Color
-	{
-		RED,
-		BLACK,
-		DBLACK
-	};
-
-	template<class T>
-	struct RBnode
-	{
-		typedef T		value_type;
-		typedef Color	color_type;
-
-		value_type	value;
-		RBnode*		parent;
-		RBnode*		left;
-		RBnode*		right;
-		color_type	color;
-
-		RBnode() : value(), parent(NULL), left(NULL), right(NULL), color(RED) {}; // NULL?? nullptr????
-
-		RBnode(const value_type& val, RBnode *parent = NULL, RBnode *left = NULL, RBnode *right = NULL, color_type color = RED)
-			: value(val), parent(parent), left(left), right(right), color(color) {};
-
-		RBnode(const RBnode &other) : value(other.value), parent(other.parent), left(other.left), right(other.right), color(other.color) {};
-
-		virtual ~RBnode() {}; // ????
-
-		RBnode& operator= (const RBnode &other)
-		{
-			if(this == &other)
-				return (*this);
-			this->value = other.value;
-			this->parent = other.parent;
-			this->left = other.left;
-			this->right = other.right;
-			this->color = other.color;
-			return (*this);
-		}
-
-		// bool operator== (const RBnode &other)
-		// {
-		// 	if (this->value == other.value)
-		// 		return (true);
-		// 	return (false);
-		// }
-
-		// bool operator!= (const RBnode &other)
-		// {
-		// 	if (this->value != other.value)
-		// 		return (true);
-		// 	return (false);
-		// }
-
-	};
-
-
-
     template <class T, class Compare, class Alloc = std::allocator<T> >
     class RBTree
     {
@@ -108,9 +50,70 @@ namespace ft
 			{
 				_meta_node = _node_alloc.allocate(1);
 				_node_alloc.construct(_meta_node, node_type());
-				if (ref.getRoot() != NULL)
-					copyTree(ref.getRoot());
+				//if (ref.getRoot() != NULL)
+				copyTree(ref.getRoot()); //
 			}
+
+			RBtree& operator=(const red_black_tree &ref)
+			{
+				if (this == &ref)
+					return (*this);
+				this->clear();
+				this->_comp = ref._comp;
+				this->_alloc = ref._alloc;
+				this->_node_alloc = ref._node_alloc;
+				copyTree(ref.getRoot());
+				this->size = ref._size;
+				return (*this);
+			}
+
+			void clear()
+			{
+				deleteTree(getRoot());
+				setRoot(NULL);
+				this->_size = 0;
+			}
+
+			void deleteTree(node_pointer node)
+			{
+				if (node != NULL)
+				{
+					deleteTree(node->left);
+					deleteTree(node->right);
+					_node_alloc.destroy(node);
+					_node_alloc.deallocate(node, 1);
+				}	
+			}
+
+			void copyTree(node_pointer node)
+			{
+				if (node != NULL) //base con
+				{
+					insertValue(node->value);
+					copyTree(node->left);
+					copyTree(node->right);
+				}
+			}
+
+			iterator 			begin() { return (iterator(minValueNode(_meta_node))); }
+			const_iterator		begin() const { return (const_iterator(minValueNode(_meta_node))); }
+			iterator			end() { return (iterator(_meta_node)); }
+			const_iterator		end() const { return ( const_iterator(_meta_node)); }
+			
+			bool				empty() const { return (this->_size == 0); }
+			size_type			size() const { return (this->_size); }
+			size_type			max_size() const { return(_node_alloc.max_size()); }
+
+			node_pointer minValueNode(node_pointer node) const
+			{
+				// if (node == NULL) //delete할때 쓰는 것 같음
+				// 	return (node);
+				while (node->left != NULL)
+					node = node->left;
+				return (node);
+			}
+
+			//node_pointer maxValueNode() 없네?
 
 			node_pointer getRoot(void) const
 			{
@@ -124,8 +127,7 @@ namespace ft
 				if (node != NULL)
 					node->parent = _meta_node;
 			}
-
-
+	
 			pair<iterator,bool> insert (const value_type& val)
 			{
 				return (insertValue(val));
@@ -133,15 +135,19 @@ namespace ft
 
 			iterator insert (iterator position, const value_type& val)
 			{
-				
+				(void)positon;
+				return (insertValue(val).first);
 			}
 
 			template <class InputIterator>
 			void insert (InputIterator first, InputIterator last)
 			{
-				
+				while (first != last)
+				{
+					this->insert(*first);
+					++first;
+				}
 			}
-
 
 			pair<iterator, bool> insertValue(const value_type &val)
 			{
@@ -200,6 +206,35 @@ namespace ft
 				return (make_pair(iterator(node), true));
 			}
 
+			iterator find (const value_type& k) const
+			{
+				node_pointer tmp;
+
+				tmp = getRoot();
+				while (tmp != NULL) // <
+				{
+					if (!_comp(tmp->value, k) && !_comp(k, tmp->value))
+						break;
+					else if (_comp(tmp->value, k))
+						tmp = tmp->right;
+					else
+						tmp = tmp->left;
+				}
+				if (tmp == NULL)
+					return (iterator(this->_meta_node));
+				return (iterator(tmp));
+			}
+
+			size_type count(const value_type& k) const
+			{
+				iterator tmp;
+
+				tmp = find(k);
+				if (tmp == end())
+					return (0);
+				return (1);
+			}
+
 			Color getColor(node_pointer node) //????
 			{
 				if (node == NULL)
@@ -252,12 +287,80 @@ namespace ft
 				return (getSibling(pr));
 			}
 
+			void rotateLeft(node_pointer node)
+			{
+				node_pointer rightChild;
+				
+				rightChild = node->right; //부모의 오른쪽 자식
+				if (rightChild == NULL) // ????
+					return ;
+				node->right = rightChild->left;
+				if (node->right != NULL)
+					node->right->parent = node;
+				rightChild->parent = node->parent;
+				if (getParent(node) == NULL)
+					setRoot(rightChild);
+				else if (node == node->parent->left)
+					node->parent->left = rightChild;
+				else
+					node->parent->right = rightChild;
+				rightChild->left = node;
+				node->parent = rightChild;
+			}
+		
+			void rotateRight(node_pointer node)
+			{
+				node_pointer leftChild;
+
+				leftChild = node->left;
+				if (leftChild == NULL)
+					return ;
+				node->left = leftChild->right;
+				if (node->left != NULL)
+					node->left->parent = node;
+				leftChild->parent = node->parent;
+				if (getParent(node) == NULL)
+					setRoot(leftChild);
+				else if (node == node->parent->left)
+					node->parent->left = leftChild;
+				else
+					node->parent->right = leftChild;
+				leftChild->right = node;
+				node->parent = leftChild;
+			}
+
 			void insertCase1(node_pointer& node)
 			{
 				setColor(getParent(node), BLACK);
 				setColor(getUncle(node), BLACK);
 				setColor(getGrandparent(node), RED);
 				node = getGrandparent(node);
+			}
+
+			void insertCase2(node_pointer& node, node_pointer &p)
+			{
+				if (p == getGrandparent(node)->left)
+				{
+					rotateLeft(p);
+					node = p;
+					p = getParent(node);
+				}
+				else if (p == getGrandparent(node)->right)
+				{
+					rotateRight(p);
+					node = p;
+					p = getParent(node);
+				}
+			}
+
+			void insertCase3(node_pointer& node, node_pointer p, node_pointer g)
+			{
+				if (p == g->left)
+					rotateRight(g);
+				else if (p == g->right)
+					rotateLeft(g);
+				std::swap(p->color, g->color);
+				node = p;		
 			}
 
 			void fixAfterInsert(node_pointer node)
@@ -280,16 +383,20 @@ namespace ft
 					{ // recoloring
 						insertCase1(node);
 					}
-					else if ()
+					else if (parent == grandparent->left) //부모 left
 					{
-
+						if (node == parent->right)//lr
+							insertCase2(node, parent);
+						insertCase3(node, parent, grandparent); //ll
 					}
-					else if ()
+					else if (parent == grandparent->right) //부모 right
 					{
-
+						if (node == parent->left) //rl
+							insertCase2(node, parent);
+						insertCase3(node, parent, grandparent); //rr
 					}
-
 				}
+				setColor(getRoot(), BLACK);
 			}
     };
 
