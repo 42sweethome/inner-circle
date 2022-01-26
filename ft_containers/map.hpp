@@ -71,8 +71,13 @@ namespace ft
                 this->_tree = x.tree;
                 return (*this);
             }
-
             iterator begin() { return (_tree.begin()); }   
+
+            bool empty() const { return (this->_tree.empty()); }
+            size_type size() const { return (this->_tree.size()); }
+            size_type max_size() const { return (_tree.max_size()); }
+
+            mapped_type& operator[] (const key_type& k) { return (insert(ft::make_pair(key, mapped_type())).first->second); } //???? reference 참조함
 
 			pair<iterator,bool> insert (const value_type& val)
 			{
@@ -90,6 +95,23 @@ namespace ft
 				return (_tree.insert(first, last));
 			}
 
+            void erase (iterator position)
+            {
+                return (_tree.erase(position));
+            }
+
+            size_type erase (const key_type& k)
+            {
+                return (_tree.erase(ft::make_pair(k, mapped_type())));
+            }
+
+            void erase (iterator first, iterator last)
+            {
+                return (_tree.erase(first, last));
+            }
+
+            void            swap (map& x) { return (_tree.swap()); }
+            void            clear() { return (_tree.clear()); }
             iterator        find (const key_type& k) { return (_tree.find(ft::make_pair(k, mapped_type()))); }
             const_iterator  find (const key_type& k) const { return (_tree.find(ft::make_pair(k, mapped_type()))); }
             size_type       count (const key_type& k) const { return (_tree.count(ft::make_pair(k, mapped_type()))); }
