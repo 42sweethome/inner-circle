@@ -2,7 +2,7 @@ NAME =		Array
 
 CC =		clang++
 
-CXXFLAGS =	-std=c++98 -Wall -Wextra -Werror
+CXXFLAGS =	-Wall -Wextra -Werror
 
 SRC =		main.cpp
 

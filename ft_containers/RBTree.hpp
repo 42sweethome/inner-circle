@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include "MapIterator.hpp"
+# include "ReverseIterator.hpp"
 
 namespace ft
 {
@@ -27,9 +28,9 @@ namespace ft
 			typedef	typename allocate_type::pointer						pointer;
 			typedef	typename allocate_type::const_pointer				const_pointer;
 			typedef	ft::map_iterator<value_type>						iterator;
-			//typedef	ft::const_map_iterator<value_type>					const_iterator;
-			// typedef	ft::reverse_iterator<iterator>						reverse_iterator;
-			// typedef	ft::reverse_iterator<const_iterator>				const_reverse_iterator;
+			typedef	ft::map_const_iterator<value_type>					const_iterator;
+			typedef	ft::reverse_iterator<iterator>						reverse_iterator;
+			typedef	ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
 		private:
 			value_compare	_comp;
@@ -39,14 +40,14 @@ namespace ft
 			size_type		_size;
 
 		public:
-			RBtree(value_compare const &comp, allocate_type const &alloc, node_alloc const &node = node_alloc_type())
-				: _comp(comp), _alloc(alloc), _node_alloc(node_alloc), _meta_node(NULL), _size(0)
+			RBTree(value_compare const &comp, allocate_type const &alloc, node_alloc_type const &node = node_alloc_type())
+				: _comp(comp), _alloc(alloc), _node_alloc(node), _meta_node(NULL), _size(0)
 			{
 				_meta_node = _node_alloc.allocate(1);
 				_node_alloc.construct(_meta_node, node_type());
 			}
 
-			RBtree(const RBnode &ref) : _comp(ref._comp), _alloc(ref._alloc), _node_alloc(ref._node_alloc), _meta_node(NULL), _size(0)
+			RBTree(const RBTree &ref) : _comp(ref._comp), _alloc(ref._alloc), _node_alloc(ref._node_alloc), _meta_node(NULL), _size(0)
 			{
 				_meta_node = _node_alloc.allocate(1);
 				_node_alloc.construct(_meta_node, node_type());
@@ -105,7 +106,7 @@ namespace ft
 					deleteTree(node->right);
 					_node_alloc.destroy(node);
 					_node_alloc.deallocate(node, 1);
-				}	
+				}
 			}
 
 			void copyTree(node_pointer node)
@@ -118,14 +119,18 @@ namespace ft
 				}
 			}
 
-			iterator 			begin() { return (iterator(minValueNode(_meta_node))); }
-			const_iterator		begin() const { return (const_iterator(minValueNode(_meta_node))); }
-			iterator			end() { return (iterator(_meta_node)); }
-			const_iterator		end() const { return ( const_iterator(_meta_node)); }
-			
-			bool				empty() const { return (this->_size == 0); }
-			size_type			size() const { return (this->_size); }
-			size_type			max_size() const { return(_node_alloc.max_size()); }
+			iterator 					begin() { return (iterator(minValueNode(_meta_node))); }
+			const_iterator				begin() const { return (const_iterator(minValueNode(_meta_node))); }
+			iterator					end() { return (iterator(_meta_node)); }
+			const_iterator				end() const { return ( const_iterator(_meta_node)); }
+			reverse_iterator 			rbegin() { return (reverse_iterator(end())); }
+			const_reverse_iterator		rbegin() const { return ( const_reverse_iterator(end())); }
+			reverse_iterator			rend() { return (reverse_iterator(_meta_node)); }
+			const_reverse_iterator		rend() const { return (const_reverse_iterator(_meta_node)); }
+
+			bool						empty() const { return (this->_size == 0); }
+			size_type					size() const { return (this->_size); }
+			size_type					max_size() const { return(_node_alloc.max_size()); }
 
 			node_pointer minValueNode(node_pointer node) const
 			{
@@ -150,7 +155,7 @@ namespace ft
 				if (node != NULL)
 					node->parent = _meta_node;
 			}
-	
+
 			pair<iterator,bool> insert (const value_type& val)
 			{
 				return (insertValue(val));
@@ -178,7 +183,7 @@ namespace ft
 				_node_alloc.construct(node, node_type(val));
 				pair<iterator, bool> ret = insertNode(node);
 
-				if (ret.seconde == false)
+				if (ret.second == false)
 				{
 					_node_alloc.destroy(node);
 					_node_alloc.deallocate(node, 1);
@@ -228,7 +233,7 @@ namespace ft
 				}
 				return (make_pair(iterator(node), true));
 			}
-			
+
 			// void erase (const_iterator position) { deleteValue(*position); }
 			size_type erase (const value_type &k) { return (deleteValue(k)); }
 			// void erase (const_iterator first, const_iterator last)
@@ -292,8 +297,8 @@ namespace ft
 			node_pointer getGrandparent(node_pointer node) // const????
 			{
 				node_pointer pr = getParent(node);
-				
-				if (pr = NULL)
+
+				if (pr == NULL)
 					return (NULL);
 				return (getParent(pr));
 			}
@@ -321,7 +326,7 @@ namespace ft
 			void rotateLeft(node_pointer node)
 			{
 				node_pointer rightChild;
-				
+
 				rightChild = node->right; //부모의 오른쪽 자식
 				if (rightChild == NULL) // ????
 					return ;
@@ -338,7 +343,7 @@ namespace ft
 				rightChild->left = node;
 				node->parent = rightChild;
 			}
-		
+
 			void rotateRight(node_pointer node)
 			{
 				node_pointer leftChild;
@@ -391,23 +396,23 @@ namespace ft
 				else if (p == g->right)
 					rotateLeft(g);
 				std::swap(p->color, g->color);
-				node = p;		
+				node = p;
 			}
 
 			void fixAfterInsert(node_pointer node)
 			{
 				node_pointer	parent;
-				node_pointer	grandParent;
+				node_pointer	grandparent;
 				node_pointer	uncle;
 
-				while (node != getRoot() && getColor(node) == RED && getColor(getParent) == RED))
+				while (node != getRoot() && getColor(node) == RED && getColor(getParent(node)) == RED)
 				{
 					parent = getParent(node);
-					grandparent = getGrandparent(node)
+					grandparent = getGrandparent(node);
 
 					if (grandparent == NULL)
 						break;
-					
+
 					uncle = getUncle(node);
 
 					if(getColor(uncle) == RED)
@@ -617,7 +622,7 @@ namespace ft
 				return (1);
 			}
 
-			
+
     };
 
 }
