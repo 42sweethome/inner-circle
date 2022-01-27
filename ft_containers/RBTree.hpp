@@ -64,13 +64,13 @@ namespace ft
 				this->_alloc = ref._alloc;
 				this->_node_alloc = ref._node_alloc;
 				copyTree(ref.getRoot());
-				this->size = ref._size;
+				this->_size = ref._size;
 				return (*this);
 			}
 
 			void swap(RBTree &other)
 			{
-				if (this == &x)
+				if (this == &other)
 					return ;
 				value_compare	tmp_comp = other._comp;
 				allocate_type	tmp_alloc = other._alloc;
@@ -125,8 +125,8 @@ namespace ft
 			const_iterator				end() const { return ( const_iterator(_meta_node)); }
 			reverse_iterator 			rbegin() { return (reverse_iterator(end())); }
 			const_reverse_iterator		rbegin() const { return ( const_reverse_iterator(end())); }
-			reverse_iterator			rend() { return (reverse_iterator(_meta_node)); }
-			const_reverse_iterator		rend() const { return (const_reverse_iterator(_meta_node)); }
+			reverse_iterator			rend() { return (reverse_iterator(begin())); }
+			const_reverse_iterator		rend() const { return (const_reverse_iterator(begin())); }
 
 			bool						empty() const { return (this->_size == 0); }
 			size_type					size() const { return (this->_size); }
@@ -163,7 +163,7 @@ namespace ft
 
 			iterator insert (iterator position, const value_type& val)
 			{
-				(void)positon;
+				(void)position;
 				return (insertValue(val).first);
 			}
 
@@ -204,7 +204,7 @@ namespace ft
 				if (tmp == NULL)
 				{
 					setRoot(node);
-					return (make_pair(iterator(node), true));
+					return (ft::make_pair(iterator(node), true));
 				}
 				while (tmp)
 				{
@@ -219,7 +219,7 @@ namespace ft
 						tmp = tmp->left;
 					}
 					else
-						return (make_pair(iterator(tmp), false));
+						return (ft::make_pair(iterator(tmp), false));
 				}
 				if (_comp(parent->value, node->value))
 				{
@@ -231,27 +231,27 @@ namespace ft
 					parent->left = node;
 					node->parent = parent;
 				}
-				return (make_pair(iterator(node), true));
+				return (ft::make_pair(iterator(node), true));
 			}
 
-			// void erase (const_iterator position) { deleteValue(*position); }
-			size_type erase (const value_type &k) { return (deleteValue(k)); }
-			// void erase (const_iterator first, const_iterator last)
-			// {
-			// 	for (const_iterator it = first; it != last; )
-			// 		erase(it++);
-			// }
+			void erase (const_iterator position) { deleteValue(*position); }
+			size_type erase (const value_type &key) { return (deleteValue(key)); }
+			void erase (const_iterator first, const_iterator last)
+			{
+				for (const_iterator it = first; it != last; )
+					erase(it++);
+			}
 
-			iterator find (const value_type& k) const
+			iterator find (const value_type& key) const
 			{
 				node_pointer tmp;
 
 				tmp = getRoot();
 				while (tmp != NULL) // <
 				{
-					if (!_comp(tmp->value, k) && !_comp(k, tmp->value))
+					if (!_comp(tmp->value, key) && !_comp(key, tmp->value))
 						break;
-					else if (_comp(tmp->value, k))
+					else if (_comp(tmp->value, key))
 						tmp = tmp->right;
 					else
 						tmp = tmp->left;
@@ -261,11 +261,11 @@ namespace ft
 				return (iterator(tmp));
 			}
 
-			size_type count(const value_type& k) const
+			size_type count(const value_type& key) const
 			{
 				iterator tmp;
 
-				tmp = find(k);
+				tmp = find(key);
 				if (tmp == end())
 					return (0);
 				return (1);
@@ -441,7 +441,7 @@ namespace ft
 					setRoot(root->right);
 				else
 					setRoot(root->left);
-				_node_alloc.destory(root);
+				_node_alloc.destroy(root);
 				_node_alloc.deallocate(root, 1);
 				setColor(getRoot(), BLACK);
 				return ;
@@ -556,7 +556,7 @@ namespace ft
 					node->parent->left = NULL;
 				else
 					node->parent->right = NULL;
-				_node_alloc.destory(node);
+				_node_alloc.destroy(node);
 				_node_alloc.deallocate(node, 1);
 				setColor(getRoot(), BLACK);
 			}
@@ -614,15 +614,13 @@ namespace ft
 
 			size_type	deleteValue(const value_type &val)
 			{
-				node_pointer target = deleteNode(getRoot((), val);
+				node_pointer target = deleteNode(getRoot(), val);
 				if (target == NULL)
 					return (0);
 				fixAfterDelete(target);
 				this->_size--;
 				return (1);
 			}
-
-
     };
 
 }

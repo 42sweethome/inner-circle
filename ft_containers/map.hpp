@@ -60,7 +60,7 @@ namespace ft
 				this->insert(first, last);
 			}
 
-			map (const map& x) : _tree(x.tree), _alloc(x._alloc), _comp(x._comp)
+			map (const map& x) : _tree(x._tree), _comp(x._comp), _alloc(x._alloc)
 			{}
 
 			~map () {}
@@ -69,23 +69,23 @@ namespace ft
 			{
 				if (this == &x)
 					return (*this);
-				this->_tree = x.tree;
+				this->_tree = x._tree;
 				return (*this);
 			}
 			iterator begin() { return (_tree.begin()); }
 			const_iterator begin() const { return (_tree.begin()); }
 			iterator end() {  return (_tree.end()); }
 			const_iterator end() const {  return (_tree.end()); }
-			iterator rbegin() { return (_tree.rbegin()); }
-			const_iterator rbegin() const { return (_tree.rbegin()); }
-			iterator rend() {  return (_tree.rend()); }
-			const_iterator rend() const {  return (_tree.rend()); }
+			reverse_iterator rbegin() { return (_tree.rbegin()); }
+			const_reverse_iterator rbegin() const { return (_tree.rbegin()); }
+			reverse_iterator rend() {  return (_tree.rend()); }
+			const_reverse_iterator rend() const {  return (_tree.rend()); }
 
 			bool empty() const { return (this->_tree.empty()); }
 			size_type size() const { return (this->_tree.size()); }
 			size_type max_size() const { return (_tree.max_size()); }
 
-			mapped_type& operator[] (const key_type& k) { return (insert(ft::make_pair(key, mapped_type())).first->second); } //???? reference 참조함
+			mapped_type& operator[] (const key_type& key) { return (insert(ft::make_pair(key, mapped_type())).first->second); } //???? reference 참조함
 
 			pair<iterator,bool> insert (const value_type& val)
 			{
@@ -118,8 +118,12 @@ namespace ft
 				return (_tree.erase(first, last));
 			}
 
-			void            swap (map& x) { return (_tree.swap()); }
+			void            swap (map& x) { return (_tree.swap(x._tree)); }
 			void            clear() { return (_tree.clear()); }
+
+			key_compare		key_comp() const { return (key_compare()); }
+			value_compare	value_comp() const { return (value_compare(key_compare())); }
+
 			iterator        find (const key_type& k) { return (_tree.find(ft::make_pair(k, mapped_type()))); }
 			const_iterator  find (const key_type& k) const { return (_tree.find(ft::make_pair(k, mapped_type()))); }
 			size_type       count (const key_type& k) const { return (_tree.count(ft::make_pair(k, mapped_type()))); }
@@ -187,6 +191,43 @@ namespace ft
 			allocator_type get_allocator() const
 			{ return (allocator_type()); }
 
+		friend bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
+			const ft::map<Key,T,Compare,Alloc>& rhs )
+		{
+			if (lhs.size() != rhs.size())
+				return (false);
+			return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		}
+		
+		friend bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
+			const ft::map<Key,T,Compare,Alloc>& rhs )
+		{
+			return (!(lhs == rhs));
+		}		
+
+		friend bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
+						const ft::map<Key,T,Compare,Alloc>& rhs )
+		{
+			return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+		}
+
+		friend bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
+						const ft::map<Key,T,Compare,Alloc>& rhs )
+		{
+			return(!(rhs < lhs));
+		}
+
+		friend bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
+						const ft::map<Key,T,Compare,Alloc>& rhs )
+		{
+			return (rhs < lhs);
+		}
+
+		friend bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
+						const ft::map<Key,T,Compare,Alloc>& rhs )
+		{
+			return (!(lhs < rhs));	
+		}
 	};
 
 }

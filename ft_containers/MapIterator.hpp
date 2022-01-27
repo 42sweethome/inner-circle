@@ -89,6 +89,7 @@ namespace ft
 					_node = _node->parent;
 				else
 					_node = NULL;
+				return(*this);
 			}
 
 			map_iterator operator++(int)
@@ -149,9 +150,9 @@ namespace ft
 		public:
 			typedef bidirectional_iterator_tag  iterator_category;
 			typedef T                           value_type;
-			typedef value_type&                 reference;
+			typedef const value_type&                 reference; 
 			typedef std::ptrdiff_t              difference_type;
-			typedef T*                          pointer;
+			typedef const T*                          pointer;
 
 		private:
 			node_pointer 	_node;
@@ -184,6 +185,9 @@ namespace ft
 					this->_node = ref._node;
 				return (*this);
 			}
+			
+			map_const_iterator(const map_iterator<T>& other) : _node(other.getnode())
+			{}
 
 	        node_pointer		getnode() const { return (this->_node); }
 
@@ -216,6 +220,7 @@ namespace ft
 					_node = _node->parent;
 				else
 					_node = NULL;
+				return (*this);
 			}
 
 			 map_const_iterator operator++(int)
@@ -241,7 +246,7 @@ namespace ft
 				return (_node->value);
 			}
 
-			pointer operator->() const
+			pointer operator->() const //return 시, const 형을 반환
 			{
 				return (&(_node->value));
 			}

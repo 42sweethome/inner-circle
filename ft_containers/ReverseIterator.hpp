@@ -42,10 +42,10 @@ namespace	ft{
 				iterator_type tmp;
 
 				tmp = base();
-				return (--tmp);
+				return (&(*--tmp));
 			}
 			//reverse_iterator	operator+ (difference_type n) const ;
-			reverse_iterator&	operator++() { return (--_iter); }
+			reverse_iterator&	operator++() { --_iter; return (*this); }
 			reverse_iterator  	operator++(int)
 			{
 				reverse_iterator	tmp;
@@ -55,7 +55,7 @@ namespace	ft{
 				return (tmp);
 			}
 			//reverse_iterator 	operator- (difference_type n) const;
-			reverse_iterator& 	operator--() { return (++_iter); }
+			reverse_iterator& 	operator--() {++_iter; return (*this); }
 			reverse_iterator  	operator--(int)
 			{
 				reverse_iterator	tmp;
@@ -72,32 +72,32 @@ namespace	ft{
 
 			friend bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				retrun (lhs._iter == rhs._iter);
+				return (lhs.base() == rhs.base());
 			}
 
 			friend bool operator!= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				retrun (lhs._iter != rhs._iter);
+				return (lhs.base() != rhs.base());
 			}
 
 			friend bool operator<  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				retrun (lhs._iter > rhs._iter);
+				return (lhs.base() > rhs.base());
 			}
 
 			friend bool operator<= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				retrun (lhs._iter >= rhs._iter);
+				return (lhs.base() >= rhs.base());
 			}
 
 			friend bool operator>  (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				retrun (lhs._iter < rhs._iter);
+				return (lhs.base() < rhs.base());
 			}
 
 			friend bool operator>= (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
-				retrun (lhs._iter <= rhs._iter);
+				return (lhs.base() <= rhs.base());
 			}
 
 			// template <class Iterator>
