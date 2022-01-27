@@ -18,13 +18,10 @@ namespace ft
         color_type	color;
 
         RBnode() : value(), parent(NULL), left(NULL), right(NULL), color(RED) {}; // NULL?? nullptr????
-
         RBnode(const value_type& val, RBnode *parent = NULL, RBnode *left = NULL, RBnode *right = NULL, color_type color = RED)
             : value(val), parent(parent), left(left), right(right), color(color) {};
-
         RBnode(const RBnode &other) : value(other.value), parent(other.parent), left(other.left), right(other.right), color(other.color) {};
-
-        virtual ~RBnode() {}; // ???? 
+        virtual ~RBnode() {}; // ????
 
         RBnode& operator= (const RBnode &other)
         {
@@ -45,12 +42,12 @@ namespace ft
             return (false);
         }
 
-        // bool operator!= (const RBnode &other)
-        // {
-        // 	if (this->value != other.value)
-        // 		return (true);
-        // 	return (false);
-        // }
+        bool operator!= (const RBnode &other)
+        {
+        	if (this->value != other.value)
+        		return (true);
+        	return (false);
+        }
 
     };
 }

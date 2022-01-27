@@ -9,7 +9,7 @@ namespace ft
 {
 
     template <typename T>
-	class map_const_iterator;
+	class const_map_iterator;
 
 	template <class T>
 	class map_iterator : public ft::iterator<ft::bidirectional_iterator_tag, T>
@@ -29,8 +29,6 @@ namespace ft
 
 			node_pointer	minValueNode(node_pointer node)
 			{
-				// if (node == NULL)
-				//     return (node);
 				while (node->left != NULL)
 					node = node->left;
 				return (node);
@@ -38,8 +36,6 @@ namespace ft
 
 			node_pointer	maxValueNode(node_pointer node)
 			{
-				// if (node == NULL)
-				//     return (node);
 				while (node->right != NULL)
 					node = node->right;
 				return (node);
@@ -130,19 +126,19 @@ namespace ft
 				return (this->_node != lhs.getnode());
 			}
 
-			bool operator== (const map_const_iterator<T>& lhs)
+			bool operator== (const const_map_iterator<T>& lhs)
 			{
 				return (this->_node == lhs.getnode());
 			}
 
-			bool operator!= (const map_const_iterator<T>& lhs)
+			bool operator!= (const const_map_iterator<T>& lhs)
 			{
 				return (this->_node != lhs.getnode());
 			}
 	};
 
 	template <class T>
-	class map_const_iterator : public ft::iterator<ft::bidirectional_iterator_tag, const T>
+	class const_map_iterator : public ft::iterator<ft::bidirectional_iterator_tag, const T>
 	{
 		private:
 			typedef ft::RBnode<T>               node;
@@ -150,7 +146,7 @@ namespace ft
 		public:
 			typedef bidirectional_iterator_tag  iterator_category;
 			typedef T                           value_type;
-			typedef const value_type&                 reference; 
+			typedef const value_type&                 reference;
 			typedef std::ptrdiff_t              difference_type;
 			typedef const T*                          pointer;
 
@@ -158,8 +154,6 @@ namespace ft
 			node_pointer 	_node;
 			node_pointer	minValueNode(node_pointer node)
 			{
-				// if (node == NULL)
-				//     return (node);
 				while (node->left != NULL)
 					node = node->left;
 				return (node);
@@ -167,31 +161,29 @@ namespace ft
 
 			node_pointer	maxValueNode(node_pointer node)
 			{
-				// if (node == NULL)
-				//     return (node);
 				while (node->right != NULL)
 					node = node->right;
 				return (node);
 			}
 
 		public:
-			map_const_iterator(): _node(NULL) {}
-			map_const_iterator(const map_const_iterator &ref) : _node(ref._node) {}
-			map_const_iterator(node_pointer node) : _node(node) {}
-			virtual ~map_const_iterator() {}
-			map_const_iterator& operator=(const map_const_iterator& ref)
+			const_map_iterator(): _node(NULL) {}
+			const_map_iterator(const const_map_iterator &ref) : _node(ref._node) {}
+			const_map_iterator(node_pointer node) : _node(node) {}
+			virtual ~const_map_iterator() {}
+			const_map_iterator& operator=(const const_map_iterator& ref)
 			{
 				if (this != &ref)
 					this->_node = ref._node;
 				return (*this);
 			}
-			
-			map_const_iterator(const map_iterator<T>& other) : _node(other.getnode())
+
+			const_map_iterator(const map_iterator<T>& other) : _node(other.getnode())
 			{}
 
 	        node_pointer		getnode() const { return (this->_node); }
 
-			map_const_iterator& operator++()
+			const_map_iterator& operator++()
 			{
 				if (_node->parent == NULL)
 					_node = NULL;
@@ -207,7 +199,7 @@ namespace ft
 				return (*this);
 			}
 
-			map_const_iterator& operator--()
+			const_map_iterator& operator--()
 			{
 				if (_node->left != NULL)
 				{
@@ -223,18 +215,18 @@ namespace ft
 				return (*this);
 			}
 
-			 map_const_iterator operator++(int)
+			 const_map_iterator operator++(int)
 			{
-				 map_const_iterator tmp;
+				 const_map_iterator tmp;
 
 				tmp = *this;
 				++(*this);
 				return (tmp);
 			}
 
-			 map_const_iterator operator--(int)
+			 const_map_iterator operator--(int)
 			{
-				 map_const_iterator tmp;
+				 const_map_iterator tmp;
 
 				tmp = *this;
 				--(*this);
@@ -251,12 +243,12 @@ namespace ft
 				return (&(_node->value));
 			}
 
-			bool operator== (const  map_const_iterator& lhs)
+			bool operator== (const  const_map_iterator& lhs)
 			{
 				return (this->_node == lhs.getnode());
 			}
 
-			bool operator!= (const  map_const_iterator& lhs)
+			bool operator!= (const  const_map_iterator& lhs)
 			{
 				return (this->_node !=lhs.getnode());
 			}

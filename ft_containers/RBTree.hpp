@@ -14,7 +14,6 @@ namespace ft
             typedef RBTree												tree;
             typedef ft::RBnode<T>										node_type;
             typedef ft::RBnode<T>*										node_pointer;
-            //typedef typename Alloc::template rebind<node_type>::other	node_alloc_type;
 			typedef std::allocator<node_type>							node_alloc_type;
 
         public:
@@ -28,7 +27,7 @@ namespace ft
 			typedef	typename allocate_type::pointer						pointer;
 			typedef	typename allocate_type::const_pointer				const_pointer;
 			typedef	ft::map_iterator<value_type>						iterator;
-			typedef	ft::map_const_iterator<value_type>					const_iterator;
+			typedef	ft::const_map_iterator<value_type>					const_iterator;
 			typedef	ft::reverse_iterator<iterator>						reverse_iterator;
 			typedef	ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
@@ -151,7 +150,7 @@ namespace ft
 			void	setRoot(node_pointer node) const
 			{
 				this->_meta_node->left = node;
-				this->_meta_node->right = node; //???? right는 필요한가????
+				//this->_meta_node->right = node; //???? right는 필요한가????
 				if (node != NULL)
 					node->parent = _meta_node;
 			}
@@ -163,7 +162,7 @@ namespace ft
 
 			iterator insert (iterator position, const value_type& val)
 			{
-				(void)position;
+				(void)position; //맘에 안들어????!
 				return (insertValue(val).first);
 			}
 
@@ -177,6 +176,44 @@ namespace ft
 				}
 			}
 
+			void erase (const_iterator position) { deleteValue(*position); }
+			size_type erase (const value_type &key) { return (deleteValue(key)); }
+			void erase (const_iterator first, const_iterator last)
+			{
+				for (const_iterator it = first; it != last; )
+					erase(it++);
+			}
+
+			iterator find (const value_type& key) const
+			{
+				node_pointer tmp;
+
+				tmp = getRoot();
+				while (tmp != NULL) // <
+				{
+					if (!_comp(tmp->value, key) && !_comp(key, tmp->value))
+						break;
+					else if (_comp(tmp->value, key))
+						tmp = tmp->right;
+					else
+						tmp = tmp->left;
+				}
+				if (tmp == NULL)
+					return (iterator(this->_meta_node));
+				return (iterator(tmp));
+			}
+
+			size_type count(const value_type& key) const
+			{
+				iterator tmp;
+
+				tmp = find(key);
+				if (tmp == end())
+					return (0);
+				return (1);
+			}
+
+		private:
 			pair<iterator, bool> insertValue(const value_type &val)
 			{
 				node_pointer node =	_node_alloc.allocate(1);
@@ -234,44 +271,9 @@ namespace ft
 				return (ft::make_pair(iterator(node), true));
 			}
 
-			void erase (const_iterator position) { deleteValue(*position); }
-			size_type erase (const value_type &key) { return (deleteValue(key)); }
-			void erase (const_iterator first, const_iterator last)
-			{
-				for (const_iterator it = first; it != last; )
-					erase(it++);
-			}
 
-			iterator find (const value_type& key) const
-			{
-				node_pointer tmp;
 
-				tmp = getRoot();
-				while (tmp != NULL) // <
-				{
-					if (!_comp(tmp->value, key) && !_comp(key, tmp->value))
-						break;
-					else if (_comp(tmp->value, key))
-						tmp = tmp->right;
-					else
-						tmp = tmp->left;
-				}
-				if (tmp == NULL)
-					return (iterator(this->_meta_node));
-				return (iterator(tmp));
-			}
-
-			size_type count(const value_type& key) const
-			{
-				iterator tmp;
-
-				tmp = find(key);
-				if (tmp == end())
-					return (0);
-				return (1);
-			}
-
-			Color getColor(node_pointer node) //????
+			Color getColor(node_pointer node)
 			{
 				if (node == NULL)
 					return (BLACK);
@@ -294,7 +296,7 @@ namespace ft
 				return (node->parent);
 			}
 
-			node_pointer getGrandparent(node_pointer node) // const????
+			node_pointer getGrandparent(node_pointer node)
 			{
 				node_pointer pr = getParent(node);
 
@@ -409,10 +411,6 @@ namespace ft
 				{
 					parent = getParent(node);
 					grandparent = getGrandparent(node);
-
-					if (grandparent == NULL)
-						break;
-
 					uncle = getUncle(node);
 
 					if(getColor(uncle) == RED)

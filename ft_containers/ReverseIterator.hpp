@@ -44,7 +44,6 @@ namespace	ft{
 				tmp = base();
 				return (&(*--tmp));
 			}
-			//reverse_iterator	operator+ (difference_type n) const ;
 			reverse_iterator&	operator++() { --_iter; return (*this); }
 			reverse_iterator  	operator++(int)
 			{
@@ -54,7 +53,6 @@ namespace	ft{
 				--_iter;
 				return (tmp);
 			}
-			//reverse_iterator 	operator- (difference_type n) const;
 			reverse_iterator& 	operator--() {++_iter; return (*this); }
 			reverse_iterator  	operator--(int)
 			{
@@ -64,11 +62,6 @@ namespace	ft{
 				++_iter;
 				return (tmp);
 			}
-			//reverse_iterator& 	operator+= (difference_type n);
-			//reverse_iterator& 	operator-= (difference_type n);
-			//reference 			operator[] (difference_type n) const;
-
-
 
 			friend bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
 			{
@@ -99,12 +92,6 @@ namespace	ft{
 			{
 				return (lhs.base() <= rhs.base());
 			}
-
-			// template <class Iterator>
-  			// reverse_iterator<Iterator> operator+ (typename reverse_iterator<Iterator>::difference_type n, const reverse_iterator<Iterator>& rev_it);
-
-			// template <class Iterator>
-  			// typename reverse_iterator<Iterator>::difference_type operator- (const reverse_iterator<Iterator>& lhs,const reverse_iterator<Iterator>& rhs);
 	};
 }
 
