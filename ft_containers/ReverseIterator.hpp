@@ -1,7 +1,7 @@
 #ifndef REVERSEITERATOR_HPP
 # define REVERSEITERATOR_HPP
 
-# include "MapIterator.hpp"
+# include "TreeIterator.hpp"
 
 namespace	ft{
 	template<class Iterator>
@@ -21,15 +21,18 @@ namespace	ft{
 		public:
 			reverse_iterator() : _iter() {};
 			explicit reverse_iterator (iterator_type it) : _iter(it) {};
-			template <class Iter>
+			template<class Iter>
   			reverse_iterator (const reverse_iterator<Iter>& other) : _iter(other.base()) {};
-			template< class Iter >
-			reverse_iterator& operator=( const reverse_iterator<Iter>& other )
+			
+			template<class Iter>
+			reverse_iterator& operator=(const reverse_iterator<Iter>& other)
 			{
 				_iter = other.base();
 				return (*this);
 			}
+
 			iterator_type		base() const { return (_iter); }
+
 			reference 			operator*() const
 			{
 				iterator_type tmp;
@@ -37,6 +40,7 @@ namespace	ft{
 				tmp = base();
 				return (*(--tmp));
 			}
+
 			pointer 			operator->() const
 			{
 				iterator_type tmp;
@@ -44,7 +48,13 @@ namespace	ft{
 				tmp = base();
 				return (&(*--tmp));
 			}
-			reverse_iterator&	operator++() { --_iter; return (*this); }
+
+			reverse_iterator&	operator++()
+			{
+				--_iter;
+				return (*this);
+			}
+
 			reverse_iterator  	operator++(int)
 			{
 				reverse_iterator	tmp;
@@ -53,7 +63,13 @@ namespace	ft{
 				--_iter;
 				return (tmp);
 			}
-			reverse_iterator& 	operator--() {++_iter; return (*this); }
+
+			reverse_iterator& 	operator--()
+			{
+				++_iter;
+				return (*this);
+			}
+
 			reverse_iterator  	operator--(int)
 			{
 				reverse_iterator	tmp;
