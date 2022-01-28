@@ -52,6 +52,8 @@ namespace ft
 				return (*this);
 			}
 
+			//tree_iterator(const const_tree_iterator<T>& other) : _node(other.getnode()) {}
+
 	        node_pointer getnode() const { return (this->_node); }
 
 			tree_iterator& operator++()

@@ -21,7 +21,7 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::pointer			poiner;
 			typedef typename allocator_type::const_pointer		const_pointer;
-			typedef ft::tree_iterator<value_type>				iterator;
+			typedef ft::const_tree_iterator<value_type>			iterator;
 			typedef ft::const_tree_iterator<value_type>			const_iterator;
 			typedef ft::reverse_iterator<iterator>				reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
@@ -73,7 +73,7 @@ namespace ft
 			size_type 				max_size() const { return (_tree.max_size()); }
 
 			pair<iterator,bool> 	insert (const value_type& val) { return (_tree.insert(val)); }
-			iterator 				insert (iterator position, const value_type& val) { return (_tree.insert(position, val)); }
+			iterator 				insert (iterator position, const value_type& val) {	(void)position; return (_tree.insert(val).first); }
 			template <class InputIterator>
 			void 					insert (InputIterator first, InputIterator last) {	return (_tree.insert(first, last));	}
 			void 					erase (iterator position) { return (_tree.erase(position)); }
@@ -95,7 +95,9 @@ namespace ft
 			const_iterator			lower_bound (const value_type& val) const {	return (const_iterator(_tree.lower_bound(val))); }
 			const_iterator			upper_bound (const value_type& val) const {	return (const_iterator(_tree.upper_bound(val))); }
 			
-			pair<iterator, iterator> equal_range (const value_type& val) const
+			pair<iterator, iterator> equal_range (const value_type& val)
+			{ return (ft::make_pair(this->lower_bound(val), this->upper_bound(val))); }
+			pair<const_iterator,const_iterator> equal_range( const value_type& val) const
 			{ return (ft::make_pair(this->lower_bound(val), this->upper_bound(val))); }
 
 			allocator_type get_allocator() const

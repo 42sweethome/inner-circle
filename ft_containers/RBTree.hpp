@@ -159,7 +159,7 @@ namespace ft
 
 			iterator insert (iterator position, const value_type& val)
 			{
-				(void)position; //맘에 안들어????!
+				(void)position;
 				return (insertValue(val).first);
 			}
 
