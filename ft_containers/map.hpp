@@ -82,7 +82,6 @@ namespace ft
 			reverse_iterator 		rend() {  return (_tree.rend()); }
 			const_reverse_iterator 	rend() const {  return (_tree.rend()); }
 
-
 			bool 					empty() const { return (this->_tree.empty()); }
 			size_type 				size() const { return (this->_tree.size()); }
 			size_type 				max_size() const { return (_tree.max_size()); }
