@@ -106,61 +106,14 @@ namespace ft
 			key_compare				key_comp() const { return (key_compare()); }
 			value_compare			value_comp() const { return (value_compare(key_compare())); }
 
-			iterator				find (const key_type& key) { return (_tree.find(ft::make_pair(key, mapped_type()))); }
-			const_iterator			find (const key_type& key) const { return (_tree.find(ft::make_pair(key, mapped_type()))); }
+			iterator				find (const key_type& key) { return (iterator(_tree.find(ft::make_pair(key, mapped_type())))); }
+			const_iterator			find (const key_type& key) const { return (const_iterator(_tree.find(ft::make_pair(key, mapped_type())))); }
 			size_type				count (const key_type& key) const { return (_tree.count(ft::make_pair(key, mapped_type()))); }
 
-			iterator        lower_bound (const key_type& key) {	return (iterator(_tree.lower_bound(ft::make_pair(key, mapped_type())))); }
-				// iterator it1 = this->begin();
-				// iterator it2 = this->end();
-
-				// while (it1 != it2)
-				// {
-				// 	if (_comp(it1->first, key) == false)
-				// 		break;
-				// 	++it1;
-				// }
-				// return (it1);
-			// }
-
-			iterator        upper_bound (const key_type& key) {	return (iterator(_tree.upper_bound(ft::make_pair(key, mapped_type())))); }
-				// iterator it1 = this->begin();
-				// iterator it2 = this->end();
-
-				// while (it1 != it2)
-				// {
-				// 	if (_comp(key, it1->first) == true)
-				// 		break;
-				// 	++it1;
-				// }
-				// return (it1);
-			// }
-
-			const_iterator        lower_bound (const key_type& key) const {	return (const_iterator(_tree.lower_bound(ft::make_pair(key, mapped_type())))); }
-				// const_iterator it1 = this->begin();
-				// const_iterator it2 = this->end();
-
-				// while (it1 != it2)
-				// {
-				// 	if (_comp(it1->first, key) == false)
-				// 		break;
-				// 	++it1;
-				// }
-				// return (it1);
-			// }
-
-			const_iterator        upper_bound (const key_type& key) const {	return (const_iterator(_tree.upper_bound(ft::make_pair(key, mapped_type())))); }
-				// const_iterator it1 = this->begin();
-				// const_iterator it2 = this->end();
-
-				// while (it1 != it2)
-				// {
-				// 	if (_comp(key, it1->first) == true)
-				// 		break;
-				// 	++it1;
-				// }
-				// return (it1);
-			// }
+			iterator        		lower_bound (const key_type& key) {	return (iterator(_tree.lower_bound(ft::make_pair(key, mapped_type())))); }
+			iterator        		upper_bound (const key_type& key) {	return (iterator(_tree.upper_bound(ft::make_pair(key, mapped_type())))); }
+			const_iterator			lower_bound (const key_type& key) const {	return (const_iterator(_tree.lower_bound(ft::make_pair(key, mapped_type())))); }
+			const_iterator			upper_bound (const key_type& key) const {	return (const_iterator(_tree.upper_bound(ft::make_pair(key, mapped_type())))); }
 
 			pair<const_iterator, const_iterator> equal_range (const key_type& key) const
 			{ return (ft::make_pair(this->lower_bound(key), this->upper_bound(key))); }

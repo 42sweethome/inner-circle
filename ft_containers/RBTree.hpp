@@ -181,7 +181,7 @@ namespace ft
 					erase(it++);
 			}
 
-			iterator find (const value_type& val) // find tester 확인 필요
+			node_pointer find (const value_type& val) const// find tester 확인 필요
 			{
 				node_pointer tmp;
 
@@ -196,27 +196,8 @@ namespace ft
 						tmp = tmp->left;
 				}
 				if (tmp == NULL)
-					return (iterator(this->_meta_node));
-				return (iterator(tmp));
-			}
-
-			const_iterator find (const value_type& val) const
-			{
-				node_pointer tmp;
-
-				tmp = getRoot();
-				while (tmp != NULL) // <
-				{
-					if (!_comp(tmp->value, val) && !_comp(val, tmp->value))
-						break;
-					else if (_comp(tmp->value, val))
-						tmp = tmp->right;
-					else
-						tmp = tmp->left;
-				}
-				if (tmp == NULL)
-					return (const_iterator(this->_meta_node));
-				return (const_iterator(tmp));
+					return (this->_meta_node);
+				return (tmp);
 			}
 
 			size_type count(const value_type& val) const

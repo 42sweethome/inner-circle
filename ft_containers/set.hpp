@@ -86,12 +86,15 @@ namespace ft
 			key_compare				key_comp() const { return (key_compare()); }
 			value_compare			value_comp() const { return (value_compare()); }
 
-			iterator				find (const value_type& val) { return (_tree.find(val)); }
+			iterator				find (const value_type& val) { return (iterator(_tree.find(val))); }
+			const_iterator			find (const value_type& val) const { return (const_iterator(_tree.find(val))); }
 			size_type				count (const value_type& val) const { return (_tree.count(val)); }
 
-			iterator				lower_bound (const value_type& val) const {	return (iterator(_tree.lower_bound(val))); }
-			iterator				upper_bound (const value_type& val) const {	return (iterator(_tree.upper_bound(val))); }
-
+			iterator				lower_bound (const value_type& val) { return (iterator(_tree.lower_bound(val))); }
+			iterator				upper_bound (const value_type& val) { return (iterator(_tree.upper_bound(val))); }
+			const_iterator			lower_bound (const value_type& val) const {	return (const_iterator(_tree.lower_bound(val))); }
+			const_iterator			upper_bound (const value_type& val) const {	return (const_iterator(_tree.upper_bound(val))); }
+			
 			pair<iterator, iterator> equal_range (const value_type& val) const
 			{ return (ft::make_pair(this->lower_bound(val), this->upper_bound(val))); }
 
