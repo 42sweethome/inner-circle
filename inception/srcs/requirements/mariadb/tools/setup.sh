@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "/var/lib/mysql/wordpress" ]; then 
-    
+	chown -R /var/lib/mysql    
     mysql_install_db
     service mysql start
     
@@ -12,6 +12,11 @@ if [ ! -d "/var/lib/mysql/wordpress" ]; then
 	mysql -e "UPDATE mysql.user SET Password = PASSWORD('${MARIA_PW}') WHERE User = 'root'"
 	mysql -e "FLUSH PRIVILEGES;"
     mysqladmin -uroot -p${MARIA_PW} shutdown
+#sevice mysql stop
 fi
 
-mysqld
+#mysqld
+#mysql -u root -p${MARIA_PW} -S /var/run/mysqld/mysqld.sock
+#chmod -R 755 /var/run/mysqld
+#ln -s /run/mysqld/mysqld.sock /var/run/mysqld/mysqld.sock
+exec mysqld_safe
