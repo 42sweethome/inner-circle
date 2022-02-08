@@ -10,5 +10,11 @@ RUN chmod +x setup.sh
 
 EXPOSE 3306
 RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf 
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d 
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/ 
+
+RUN rm /etc/mysql/mariadb.conf.d/50-client.cnf 
+COPY conf/50-client.cnf /etc/mysql/mariadb.conf.d/
+
+RUN rm /etc/mysql/mariadb.conf.d/50-mysqld_safe.cnf 
+COPY conf/50-mysqld_safe.cnf /etc/mysql/mariadb.conf.d/
 ENTRYPOINT ["bash", "/setup.sh"]

@@ -1,6 +1,6 @@
 FROM debian:buster
 
-MAINTAINER doyun@student.42seoul.kr
+MAINTAINER doyun@student.42seoul.fr
 
 RUN apt-get update 
 RUN apt-get install -y nginx openssl vim
@@ -14,8 +14,8 @@ RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 RUN mkdir /etc/nginx/ssl
 RUN openssl req -newkey rsa:4096 -x509 -days 365 -nodes \
-    -out /etc/nginx/ssl/www.doyun.42.kr.crt \
-    -keyout /etc/nginx/ssl/www.doyun.42.kr.key \
+    -out /etc/nginx/ssl/www.doyun.42.fr.crt \
+    -keyout /etc/nginx/ssl/www.doyun.42.fr.key \
     -subj "/C=KR/ST=SEOUL/O=42/OU=GUN/CN=doyun"
 RUN chmod 777 /etc/nginx/ssl/*
 RUN chmod 777 -R /var/www
