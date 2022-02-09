@@ -2,21 +2,15 @@
 
 for ((i=100; i>=0; i--))
 do
-#	loop_cnt=0
 	echo -e "\e[31mloading...\e[0m\n"
-#	for (( j=100; i>=0; i--))
-#	do
-#		loop_cnt+=1
-#	done
-
 done
 
 if  [ ! -f /var/www/wordpress/wp-config.php ]; then 
     
-#	for ((i=10000; i>=0; i--))
-#	do
-#		echo -e "\e[31mloading123...\e[0m\n"
-#	done
+	for ((i=10000; i>=0; i--))
+	do
+		echo -e "\e[31mloading123...\e[0m\n"
+	done
 
     wp core --allow-root download --locale=ko_KR --force 
     while  [ ! -f /var/www/wordpress/wp-config.php ]; do
